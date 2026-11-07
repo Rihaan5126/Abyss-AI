@@ -41,17 +41,36 @@ Then open <http://localhost:8000>. The first command runs real missions and rewr
 share a clock in energy units, so they are always compared at equal spend. Reveal files
 are only fetched when the viewer presses Reveal.
 
-While only the random planner exists, the second panel shows a second random run with a
-different planner seed.
+Press **Guided demo** for the five-stage walkthrough. The benchmark section appears once
+`ui/logs/benchmark.json` exists.
+
+## Results
+
+See [docs/results.md](docs/results.md) for findings, limitations and full tables.
+
+```bash
+python -m abyss.evaluation.full_run
+```
+
+```bash
+python -m abyss.evaluation.report
+```
+
+```bash
+python -m abyss.evaluation.plots --csv results/benchmark.csv --out results/figures
+```
+
+`full_run` uses the frozen weights in `abyss/planners/adaptive.py` on evaluation seeds (1000+).
+Tuning stays on development seeds (0-999). See
+[abyss/evaluation/README.md](abyss/evaluation/README.md) for the benchmark itself.
 
 ## Status
 
 | Area | Owner | State |
 | --- | --- | --- |
 | Contract, GEBCO terrain, worlds, environment, mission runner, logs | Rihaan | Working |
-| Replay UI | Rihaan | Working; belief layers tested only with temporary data until the adaptive planner logs them |
-| Random baseline | Shared | Working |
-| Learner, adaptive planner, other baselines, benchmark | Cam | Not started |
+| Replay UI, guided demo, benchmark view | Rihaan | Working |
+| Learner, adaptive planner, baselines, ablations, benchmark | Cam | Working |
 | Real perception flow in the simulator | Rihaan | Working; tested through the pipeline's real classes with a fake encoder, not yet with DINOv2 |
 | Perception pipeline | Ammar | Working; only smoke-test results so far |
 

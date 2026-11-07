@@ -34,6 +34,7 @@ const UTILITY_LABELS = {
   coverage: "Coverage incentive",
   energy_cost: "Energy cost",
   utility: "Utility",
+  candidates: "Safe targets considered",
 };
 
 const $ = (id) => document.getElementById(id);
@@ -386,7 +387,8 @@ function updatePaneText(pane, mission) {
   }
   el.status.textContent = status;
 
-  const utility = mission.current ? mission.current.step.planner_diagnostics?.target_utility : null;
+  const logged = mission.current ? mission.current.step.planner_diagnostics?.target_utility : null;
+  const utility = logged && Object.keys(logged).length ? logged : null;
   el.why.hidden = !utility;
   if (utility) {
     el.why.replaceChildren();
@@ -789,8 +791,8 @@ const PLANNER_NAMES = {
   heuristic: "Heuristic",
   lawnmower: "Lawnmower",
   random: "Random",
-  abyss_no_info: "No uncertainty",
-  abyss_no_learning: "No learning",
+  "abyss-noinfo": "No uncertainty",
+  "abyss-nolearn": "No learning",
 };
 const TERRAIN_LABELS = { gebco: "GEBCO Monterey crop", synthetic: "Synthetic (one per seed)" };
 
@@ -936,7 +938,7 @@ const TOUR_STAGES = [
     body: () => {
       const line = abyssPane().timeline;
       const terms = line[Math.min(5, line.length - 2)].step.planner_diagnostics?.target_utility;
-      const numbers = terms
+      const numbers = terms?.utility !== undefined
         ? ` For this target: predicted richness ${fmt(terms.expected_richness, 2)}, information gain ${fmt(terms.information_gain, 2)}, ` +
           `coverage ${fmt(terms.coverage, 2)}, energy ${fmt(terms.energy_cost, 2)}.`
         : "";
