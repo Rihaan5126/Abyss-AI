@@ -46,7 +46,7 @@ def test_supplied_terrain_is_named_in_the_world_id_and_default_is_unchanged():
 
 def test_demo_manifest_lists_landforms_after_the_real_terrain():
     entries = json.loads(Path("ui/logs/index.json").read_text(encoding="utf-8"))["entries"]
-    assert entries[0]["world_id"] == "ridge-rho0.5-seed1000"
+    assert entries[0]["world_id"] == "ridge-rho1-seed1000"
     landforms = {e["terrain"] for e in entries if e["terrain"].startswith("synthetic_")}
     assert landforms == {f"synthetic_{name}" for name in LANDFORMS}
     assert all(Path("ui", e["log"]).is_file() for e in entries)

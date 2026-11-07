@@ -87,6 +87,10 @@ Open <http://localhost:8000/?missions=logs/index.json>.
 - Novelty is a cosine distance, not a probability. Unfamiliar means unlike our references, not a
   new species.
 - The 6,300-mission benchmark uses ideal perception, so vision errors are not in those numbers.
+- The demo opens on ridge-associated ecology at signal 1, where the 50-seed benchmark shows
+  ABYSS's largest gain (+4.70 categories against Frontier). Say so: the world type was chosen
+  from the benchmark to show the effect clearly, and the seed was fixed in advance. On other
+  worlds the gain is smaller or absent, and on flat-associated worlds the lawnmower wins.
 - One mission settles nothing. All GEBCO results share one terrain crop, so they do not show
   performance across other ocean regions.
 
