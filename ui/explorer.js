@@ -458,7 +458,12 @@ export function createExplorer(api) {
     const grid = overlayGrid(pane, pane.mission);
     if (colourKey === (grid || "terrain")) return;
     colourKey = grid || "terrain";
-    causticStrength.value = grid ? 0 : CAUSTIC_STRENGTH; // nothing may distort a data layer
+    // Nothing decorative may distort a data layer.
+    causticStrength.value = grid ? 0 : CAUSTIC_STRENGTH;
+    const seabed = terrain.mesh.material;
+    seabed.map = grid ? null : sedimentColour;
+    seabed.bumpMap = grid ? null : sedimentBump;
+    seabed.needsUpdate = true;
     recolour(grid, !grid ? seafloorRamp : app.layer === "hidden" ? HIDDEN_RAMP : BELIEF_RAMP);
     if (grid) {
       const [low, high] = gridExtent(grid);
