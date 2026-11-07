@@ -1,8 +1,16 @@
-.venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
 *.egg-info/
-data/
+.claude/
 .cache/
+.venv/
+venv/
+
+# Large or regenerated data
+data/*
+!data/gebco/
 results/
+*.nc
+*.pt
+*.pth
