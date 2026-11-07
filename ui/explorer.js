@@ -1,11 +1,14 @@
 // 3D view of logged missions. Everything shown comes from the mission and reveal logs:
 // it adds no results, and the robots don't "see" this scene. The vision model works on
 // real photographs. Terrain is smoothed between grid cells, with its height exaggerated.
+// Between cell centres it also gets small decorative relief and boulders, so it reads as
+// seafloor. The relief fades to zero at every cell centre, so each logged depth is exact,
+// and boulders are hidden whenever a data layer is shown.
 
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/OrbitControls.js";
 
-const SUBDIVISIONS = 4;
+const SUBDIVISIONS = 8;
 const VERTICAL_EXAGGERATION = 3;
 const ALTITUDE = 0.9;
 const BACKGROUND = 0x020b12;
@@ -25,6 +28,8 @@ const SPOTLIGHT_ON = 64;
 const SPOTLIGHT_PARKED = 7;
 const BEAM_ON = 0.055;
 const BEAM_PARKED = 0.012;
+const DETAIL_M = 26; // decorative relief between cell centres, in metres before exaggeration
+const ROCK_COUNT = 900;
 
 const ease = (t) => t * t * (3 - 2 * t);
 
@@ -57,6 +62,60 @@ function upsample(grid) {
     }
   }
   return { values: out, height, width };
+}
+
+// Deterministic hash noise, so the decorative detail is identical on every load.
+function hash(x, y, seed) {
+  let h = (x * 374761393 + y * 668265263 + seed * 2147483647) | 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+}
+
+function valueNoise(x, y, seed) {
+  const x0 = Math.floor(x);
+  const y0 = Math.floor(y);
+  const u = x - x0;
+  const v = y - y0;
+  const su = u * u * (3 - 2 * u);
+  const sv = v * v * (3 - 2 * v);
+  const top = hash(x0, y0, seed) * (1 - su) + hash(x0 + 1, y0, seed) * su;
+  const bottom = hash(x0, y0 + 1, seed) * (1 - su) + hash(x0 + 1, y0 + 1, seed) * su;
+  return (top * (1 - sv) + bottom * sv) * 2 - 1;
+}
+
+// Ridged fractal noise: sharp crests and gullies, like eroded rock and sediment.
+function relief(x, y) {
+  let total = 0;
+  let amplitude = 1;
+  let frequency = 1.3;
+  for (let octave = 0; octave < 4; octave += 1) {
+    const n = 1 - Math.abs(valueNoise(x * frequency, y * frequency, 11 + octave));
+    total += (n * n - 0.45) * amplitude;
+    amplitude *= 0.5;
+    frequency *= 2.1;
+  }
+  return total;
+}
+
+// Adds decorative relief between cell centres, scaled by local steepness. The weight is zero
+// at every cell centre, so the mesh still passes exactly through each logged depth.
+function addDetail(fine, slope) {
+  const rows = slope.length;
+  const cols = slope[0].length;
+  let maxSlope = 1;
+  for (const row of slope) for (const value of row) maxSlope = Math.max(maxSlope, value);
+  for (let i = 0; i < fine.height; i += 1) {
+    const fr = i / SUBDIVISIONS;
+    const wr = Math.sin(Math.PI * (fr - Math.floor(fr))) ** 2;
+    for (let j = 0; j < fine.width; j += 1) {
+      const fc = j / SUBDIVISIONS;
+      const weight = wr * Math.sin(Math.PI * (fc - Math.floor(fc))) ** 2;
+      if (!weight) continue;
+      const steep = slope[Math.min(rows - 1, Math.round(fr))][Math.min(cols - 1, Math.round(fc))] / maxSlope;
+      // Depth grows downward, so subtracting raises crests.
+      fine.values[i * fine.width + j] -= DETAIL_M * (0.45 + 1.1 * steep) * weight * relief(fc, fr);
+    }
+  }
 }
 
 class Polyline extends THREE.Curve {
@@ -182,8 +241,135 @@ function waterBackground() {
   return texture;
 }
 
-// A torpedo-shaped survey vehicle. Forward is +z. Only the band carries the panel colour.
-function buildVehicle(color, label, index) {
+// Shared by both vehicles: a seafloor spotlight, a faint beam and the name tag.
+function addLightsAndTag(group, color, label, index, lampY, lampZ) {
+  const spot = new THREE.SpotLight(0xffe8c4, SPOTLIGHT_ON, 11, 0.75, 0.85, 1.5);
+  spot.position.set(0, lampY, lampZ);
+  spot.target.position.set(0, -2.2, 1.35);
+  group.add(spot, spot.target);
+  const beam = new THREE.Mesh(
+    new THREE.ConeGeometry(0.72, 1.45, 24, 1, true),
+    new THREE.MeshBasicMaterial({
+      color: 0xfff0d0,
+      transparent: true,
+      opacity: BEAM_ON,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    }),
+  );
+  beam.position.set(0, lampY - 0.62, lampZ + 0.32);
+  beam.rotation.x = -0.46;
+  group.add(beam);
+  group.userData.spot = spot;
+  group.userData.beam = beam;
+  const tag = labelSprite(label, `#${new THREE.Color(color).getHexString()}`);
+  tag.position.y += index * 0.5; // so labels don't overlap while the robots are side by side
+  group.add(tag);
+}
+
+// ABYSS: a hovering survey drone, unlike the conventional submarine. A flat pod carries a
+// glowing sensor eye, four ducted thrusters on swept arms, and two folded sampling arms.
+// Forward is +z. The accent colour is the panel colour.
+function buildRobot(color, label, index) {
+  const group = new THREE.Group();
+  const shell = new THREE.MeshStandardMaterial({ color: 0x1d2a33, roughness: 0.38, metalness: 0.6 });
+  const plate = new THREE.MeshStandardMaterial({ color: 0xc9d6da, roughness: 0.3, metalness: 0.35 });
+  const glow = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 1.6, roughness: 0.3 });
+  const metal = new THREE.MeshStandardMaterial({ color: 0x5a6872, roughness: 0.3, metalness: 0.9 });
+
+  const pod = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 20), shell);
+  pod.scale.set(1.15, 0.5, 1.45);
+  group.add(pod);
+  const canopy = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), plate);
+  canopy.scale.set(0.95, 0.42, 1.2);
+  canopy.position.y = 0.02;
+  group.add(canopy);
+
+  // Accent light strip around the waist of the pod.
+  const strip = new THREE.Mesh(new THREE.TorusGeometry(0.335, 0.012, 8, 48), glow);
+  strip.rotation.x = Math.PI / 2;
+  strip.scale.set(1.04, 1.32, 1);
+  group.add(strip);
+
+  // Sensor eye: a dark lens ringed in colour, looking forward and down.
+  const eyeRing = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.018, 10, 32), glow);
+  eyeRing.position.set(0, -0.03, 0.42);
+  eyeRing.rotation.x = 0.35;
+  group.add(eyeRing);
+  const lens = new THREE.Mesh(
+    new THREE.SphereGeometry(0.075, 20, 14),
+    new THREE.MeshStandardMaterial({ color: 0x050b10, emissive: color, emissiveIntensity: 0.35, roughness: 0.05, metalness: 0.2 }),
+  );
+  lens.position.set(0, -0.03, 0.41);
+  group.add(lens);
+
+  // Four ducted thrusters on swept arms. Their rotors spin while it travels.
+  const rotors = [];
+  for (const [x, z] of [[0.48, 0.3], [-0.48, 0.3], [0.48, -0.32], [-0.48, -0.32]]) {
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(Math.abs(x) * 0.95, 0.035, 0.07), shell);
+    arm.position.set(x / 2, 0, z * 0.85);
+    arm.rotation.y = Math.atan2(z * 0.15, x);
+    group.add(arm);
+    const duct = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.028, 10, 28), plate);
+    duct.position.set(x, 0, z);
+    duct.rotation.x = Math.PI / 2;
+    group.add(duct);
+    const tip = new THREE.Mesh(new THREE.TorusGeometry(0.121, 0.006, 6, 28), glow);
+    tip.position.set(x, 0.03, z);
+    tip.rotation.x = Math.PI / 2;
+    group.add(tip);
+    const rotor = new THREE.Group();
+    for (let n = 0; n < 3; n += 1) {
+      const blade = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.006, 0.1), metal);
+      blade.position.z = 0.05;
+      const holder = new THREE.Group();
+      holder.rotation.y = (n * Math.PI * 2) / 3;
+      holder.add(blade);
+      rotor.add(holder);
+    }
+    rotor.position.set(x, 0, z);
+    group.add(rotor);
+    rotors.push({ object: rotor, axis: "y" });
+  }
+
+  // Folded sampling arms under the nose.
+  for (const x of [-0.1, 0.1]) {
+    const upper = new THREE.Mesh(new THREE.CylinderGeometry(0.014, 0.014, 0.2, 8), metal);
+    upper.position.set(x, -0.15, 0.24);
+    upper.rotation.x = 0.9;
+    group.add(upper);
+    const claw = new THREE.Mesh(new THREE.ConeGeometry(0.025, 0.07, 8), glow);
+    claw.position.set(x, -0.21, 0.33);
+    claw.rotation.x = Math.PI * 0.55;
+    group.add(claw);
+  }
+
+  // Sensor fin with a blinking tip.
+  const fin = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.14, 0.18), shell);
+  fin.position.set(0, 0.2, -0.12);
+  fin.rotation.x = -0.35;
+  group.add(fin);
+  const beacon = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 8), glow);
+  beacon.position.set(0, 0.28, -0.17);
+  group.add(beacon);
+  group.userData.beacon = beacon;
+
+  for (const x of [-0.16, 0.16]) {
+    const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.02, 10, 8), new THREE.MeshBasicMaterial({ color: 0xfff6dc }));
+    lamp.position.set(x, -0.1, 0.36);
+    group.add(lamp);
+  }
+
+  group.userData.rotors = rotors;
+  addLightsAndTag(group, color, label, index, -0.1, 0.3);
+  group.scale.setScalar(1.25);
+  return group;
+}
+
+// The conventional robot: a torpedo-shaped submarine with a sail and dive planes.
+// Forward is +z. Only the band carries the panel colour.
+function buildSubmarine(color, label, index) {
   const group = new THREE.Group();
   const paint = new THREE.MeshStandardMaterial({ color: 0xdfe8ea, roughness: 0.34, metalness: 0.25 });
   const band = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.5, roughness: 0.4 });
@@ -224,10 +410,9 @@ function buildVehicle(color, label, index) {
   }
   propeller.position.z = -0.63;
   group.add(propeller);
-  group.userData.propeller = propeller;
 
   const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.2, 6), dark);
-  mast.position.set(0, 0.28, -0.05);
+  mast.position.set(0, 0.38, 0.08);
   group.add(mast);
   const camera = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.05, 0.13), dark);
   camera.position.set(0, -0.2, 0.28);
@@ -242,31 +427,21 @@ function buildVehicle(color, label, index) {
     group.add(lamp);
   }
 
-  // A seafloor spotlight, plus a faint visible beam where light scatters in the water.
-  const spot = new THREE.SpotLight(0xffe8c4, SPOTLIGHT_ON, 11, 0.75, 0.85, 1.5);
-  spot.position.set(0, -0.2, 0.3);
-  spot.target.position.set(0, -2.2, 1.35);
-  group.add(spot, spot.target);
-  const beam = new THREE.Mesh(
-    new THREE.ConeGeometry(0.72, 1.45, 24, 1, true),
-    new THREE.MeshBasicMaterial({
-      color: 0xfff0d0,
-      transparent: true,
-      opacity: BEAM_ON,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    }),
-  );
-  beam.position.set(0, -0.82, 0.62);
-  beam.rotation.x = -0.46;
-  group.add(beam);
-  group.userData.spot = spot;
-  group.userData.beam = beam;
+  // Conning tower (sail) with its own small dive planes, like a classic submarine.
+  const sail = new THREE.Mesh(new THREE.CapsuleGeometry(0.05, 0.16, 6, 14), paint);
+  sail.rotation.x = Math.PI / 2;
+  sail.scale.set(1, 1, 2.2);
+  sail.position.set(0, 0.24, 0.12);
+  group.add(sail);
+  const sailPlanes = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.012, 0.06), dark);
+  sailPlanes.position.set(0, 0.27, 0.16);
+  group.add(sailPlanes);
+  const bowPlanes = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.012, 0.07), dark);
+  bowPlanes.position.set(0, 0, 0.38);
+  group.add(bowPlanes);
 
-  const tag = labelSprite(label, `#${new THREE.Color(color).getHexString()}`);
-  tag.position.y += index * 0.5; // so labels don't overlap while the robots are side by side
-  group.add(tag);
+  group.userData.rotors = [{ object: propeller, axis: "z" }];
+  addLightsAndTag(group, color, label, index, -0.2, 0.3);
   group.scale.setScalar(1.25);
   return group;
 }
@@ -369,6 +544,7 @@ export function createExplorer(api) {
   function terrainData(log) {
     const depth = log.terrain.depth_m;
     const fine = upsample(depth);
+    addDetail(fine, log.terrain.slope_deg);
     const [lo, hi] = gridExtent(depth);
     const scale = VERTICAL_EXAGGERATION / log.terrain.cell_size_m;
     const middle = (lo + hi) / 2;
@@ -492,6 +668,45 @@ export function createExplorer(api) {
       new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.16 }),
     );
     world.add(terrain.contours);
+    buildRocks(pane.log.terrain.slope_deg);
+  }
+
+  // Decorative boulders, denser on steep ground. Placement is seeded, so it never changes.
+  function buildRocks(slope) {
+    const { rows, cols } = terrain;
+    let maxSlope = 1;
+    for (const row of slope) for (const value of row) maxSlope = Math.max(maxSlope, value);
+    const geometry = new THREE.DodecahedronGeometry(1, 0);
+    const material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, flatShading: true });
+    const rocks = new THREE.InstancedMesh(geometry, material, ROCK_COUNT);
+    const matrix = new THREE.Matrix4();
+    const rotation = new THREE.Quaternion();
+    const euler = new THREE.Euler();
+    const size = new THREE.Vector3();
+    const tint = new THREE.Color();
+    let placed = 0;
+    for (let n = 0; placed < ROCK_COUNT && n < ROCK_COUNT * 12; n += 1) {
+      const r = hash(n, 1, 7) * (rows - 1);
+      const c = hash(n, 2, 7) * (cols - 1);
+      const steep = slope[Math.round(r)][Math.round(c)] / maxSlope;
+      if (hash(n, 3, 7) > 0.18 + 0.82 * steep) continue; // keep more boulders on steep ground
+      const radius = 0.035 + 0.13 * hash(n, 4, 7) ** 2.2 * (0.6 + steep);
+      euler.set(hash(n, 5, 7) * 6.3, hash(n, 6, 7) * 6.3, hash(n, 8, 7) * 6.3);
+      rotation.setFromEuler(euler);
+      size.set(radius * (0.8 + 0.5 * hash(n, 9, 7)), radius * (0.45 + 0.35 * hash(n, 10, 7)), radius);
+      matrix.compose(toWorld(r, c, -radius * 0.2), rotation, size); // half-buried in sediment
+      rocks.setMatrixAt(placed, matrix);
+      // Match the seabed's colour and darkness at this depth, a little darker, so boulders
+      // read as part of the floor rather than floating debris.
+      const t = (depthAt(r, c) - terrain.lo) / (terrain.hi - terrain.lo || 1);
+      const light = (1 - (1 - DEEP_LIGHT) * t) * (0.5 + 0.25 * hash(n, 12, 7));
+      const [cr, cg, cb] = seafloorRamp(t);
+      rocks.setColorAt(placed, tint.setRGB((cr * light) / 255, (cg * light) / 255, (cb * light) / 255, THREE.SRGBColorSpace));
+      placed += 1;
+    }
+    rocks.count = placed;
+    terrain.rocks = rocks;
+    world.add(rocks);
   }
 
   function recolour(grid, ramp) {
@@ -541,6 +756,7 @@ export function createExplorer(api) {
     colourKey = grid || "terrain";
     // Nothing decorative may distort a data layer.
     causticStrength.value = grid ? 0 : CAUSTIC_STRENGTH;
+    if (terrain.rocks) terrain.rocks.visible = !grid;
     const seabed = terrain.mesh.material;
     seabed.map = grid ? null : sedimentColour;
     seabed.bumpMap = grid ? null : sedimentBump;
@@ -594,7 +810,7 @@ export function createExplorer(api) {
       pane,
       index,
       color,
-      vehicle: buildVehicle(color, pane.entry.label, index),
+      vehicle: (pane === abyssPane() ? buildRobot : buildSubmarine)(color, pane.entry.label, index),
       trailMaterial: new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.72 }),
       completed: new THREE.Group(),
       markers: new THREE.Group(),
@@ -824,7 +1040,11 @@ export function createExplorer(api) {
     vehicle.position.copy(position);
     if (!reducedMotion) {
       vehicle.position.y += Math.sin(time * 1.1 + view.index) * 0.025 * (1 - view.rest);
-      if (mission.phase === "travel" || dive) vehicle.userData.propeller.rotation.z += delta * 24;
+      if (mission.phase === "travel" || dive) {
+        for (const { object, axis } of vehicle.userData.rotors) object.rotation[axis] += delta * 24;
+      }
+      const { beacon } = vehicle.userData;
+      if (beacon) beacon.visible = view.rest > 0.5 || Math.sin(time * 3.2) > -0.2;
     }
     vehicle.rotation.y = view.heading;
     vehicle.rotation.x = dive ? 0.55 * (1 - descent) : 0;
