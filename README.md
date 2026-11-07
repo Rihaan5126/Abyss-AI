@@ -28,6 +28,11 @@ This writes a mission log and a `.reveal.json` file to `results/missions/`.
 
 ## Replay UI
 
+For the integrated **3D view with real image perception**, follow
+[Watch the full system in 3D](docs/vision-3d.md). It generates a local paired
+replay using your existing expanded image dataset and model, with actual photos
+in the discovery feed. Computed missions finish before browser playback.
+
 ```bash
 python -m scripts.build_ui_logs
 ```

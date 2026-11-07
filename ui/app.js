@@ -1058,8 +1058,14 @@ async function loadExplorer() {
 
 async function init() {
   bindControls();
+  const manifestPath = new URLSearchParams(location.search).get("missions") || "logs/index.json";
+  if (!/^[a-zA-Z0-9_/-]+\/index\.json$/.test(manifestPath) || manifestPath.includes("..")) {
+    throw new Error("Choose a local mission index inside the UI directory.");
+  }
   try {
-    app.entries = (await getJson("logs/index.json")).entries;
+    const manifest = await getJson(manifestPath);
+    app.entries = manifest.entries;
+    if (manifest.notice) showNotice(manifest.notice);
   } catch (error) {
     const hint = location.protocol === "file:"
       ? "Browsers block loading logs from file:// pages. Run: python -m http.server 8000 --directory ui"
@@ -1075,7 +1081,7 @@ async function init() {
     select.append(option);
   }
   await selectWorld(select.value);
-  await loadBenchmark();
+  if (manifestPath === "logs/index.json") await loadBenchmark();
   await loadExplorer();
 }
 

@@ -11,6 +11,7 @@ venv/
 data/*
 !data/gebco/
 results/
+ui/vision-logs/
 *.nc
 *.pt
 *.pth
