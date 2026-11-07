@@ -59,6 +59,7 @@ const app = {
   lastFrame: 0,
   loadToken: 0,
   tourIndex: -1,
+  manifestNotice: "",
   benchmark: null,
 };
 
@@ -788,7 +789,9 @@ async function selectWorld(worldId) {
   if (token !== app.loadToken) return;
 
   app.panes = panes;
-  showNotice(count === 1 ? "Only one mission has been logged for this world." : "");
+  // A manifest's notice can carry licence terms, so it stays up for every world.
+  const single = count === 1 ? "Only one mission has been logged for this world." : "";
+  showNotice([app.manifestNotice, single].filter(Boolean).join(" "));
   app.energy = 0;
   updateClockRange();
   updateLayerControls();
@@ -1107,7 +1110,7 @@ async function init() {
   try {
     const manifest = await getJson(manifestPath);
     app.entries = manifest.entries;
-    if (manifest.notice) showNotice(manifest.notice);
+    app.manifestNotice = manifest.notice || "";
   } catch (error) {
     const hint = location.protocol === "file:"
       ? "Browsers block loading logs from file:// pages. Run: python -m http.server 8000 --directory ui"
