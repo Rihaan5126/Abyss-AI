@@ -1,0 +1,573 @@
+{
+ "provenance": {
+  "status": "Experimental planner, separate from the official benchmark.",
+  "biology": "simulated",
+  "perception": "ideal: labels come directly from the simulator",
+  "metric": "true distinct categories within the energy budget"
+ },
+ "seeds": [
+  2000,
+  2001,
+  2002,
+  2003,
+  2004,
+  2005,
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026,
+  2027,
+  2028,
+  2029,
+  2030,
+  2031,
+  2032,
+  2033,
+  2034,
+  2035,
+  2036,
+  2037,
+  2038,
+  2039,
+  2040,
+  2041,
+  2042,
+  2043,
+  2044,
+  2045,
+  2046,
+  2047,
+  2048,
+  2049
+ ],
+ "frozen_config": {
+  "forgetting": 0.9
+ },
+ "safety": {
+  "missions": 3600,
+  "safe_returns": 3600
+ },
+ "worlds": [
+  {
+   "terrain": "gebco",
+   "scenario": "random",
+   "rho": 0.0,
+   "means": {
+    "abyss-novelty": 11.52,
+    "abyss": 12.2,
+    "frontier": 12.68,
+    "lawnmower": 12.56
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.68,
+     "ci95_low": -1.2,
+     "ci95_high": -0.18
+    },
+    "frontier": {
+     "mean_difference": -1.16,
+     "ci95_low": -1.7,
+     "ci95_high": -0.58
+    },
+    "lawnmower": {
+     "mean_difference": -1.04,
+     "ci95_low": -1.56,
+     "ci95_high": -0.52
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "means": {
+    "abyss-novelty": 11.22,
+    "abyss": 11.3,
+    "frontier": 10.54,
+    "lawnmower": 12.6
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.08,
+     "ci95_low": -0.78,
+     "ci95_high": 0.62
+    },
+    "frontier": {
+     "mean_difference": 0.68,
+     "ci95_low": -0.2,
+     "ci95_high": 1.58
+    },
+    "lawnmower": {
+     "mean_difference": -1.38,
+     "ci95_low": -2.26,
+     "ci95_high": -0.5
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "ridge",
+   "rho": 0.25,
+   "means": {
+    "abyss-novelty": 12.62,
+    "abyss": 13.48,
+    "frontier": 12.92,
+    "lawnmower": 12.76
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.86,
+     "ci95_low": -1.38,
+     "ci95_high": -0.36
+    },
+    "frontier": {
+     "mean_difference": -0.3,
+     "ci95_low": -0.78,
+     "ci95_high": 0.18
+    },
+    "lawnmower": {
+     "mean_difference": -0.14,
+     "ci95_low": -0.66,
+     "ci95_high": 0.34
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "means": {
+    "abyss-novelty": 13.98,
+    "abyss": 14.6,
+    "frontier": 12.8,
+    "lawnmower": 12.34
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.62,
+     "ci95_low": -1.18,
+     "ci95_high": -0.08
+    },
+    "frontier": {
+     "mean_difference": 1.18,
+     "ci95_low": 0.58,
+     "ci95_high": 1.78
+    },
+    "lawnmower": {
+     "mean_difference": 1.64,
+     "ci95_low": 1.12,
+     "ci95_high": 2.16
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "means": {
+    "abyss-novelty": 15.58,
+    "abyss": 15.78,
+    "frontier": 11.06,
+    "lawnmower": 10.32
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.2,
+     "ci95_low": -0.38,
+     "ci95_high": -0.02
+    },
+    "frontier": {
+     "mean_difference": 4.52,
+     "ci95_low": 4.04,
+     "ci95_high": 4.98
+    },
+    "lawnmower": {
+     "mean_difference": 5.26,
+     "ci95_low": 4.76,
+     "ci95_high": 5.74
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "reversed",
+   "rho": 0.25,
+   "means": {
+    "abyss-novelty": 11.28,
+    "abyss": 12.0,
+    "frontier": 12.4,
+    "lawnmower": 12.68
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.72,
+     "ci95_low": -1.22,
+     "ci95_high": -0.26
+    },
+    "frontier": {
+     "mean_difference": -1.12,
+     "ci95_low": -1.62,
+     "ci95_high": -0.64
+    },
+    "lawnmower": {
+     "mean_difference": -1.4,
+     "ci95_low": -1.86,
+     "ci95_high": -0.96
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "means": {
+    "abyss-novelty": 11.22,
+    "abyss": 11.42,
+    "frontier": 11.8,
+    "lawnmower": 12.38
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.2,
+     "ci95_low": -0.74,
+     "ci95_high": 0.3
+    },
+    "frontier": {
+     "mean_difference": -0.58,
+     "ci95_low": -1.1,
+     "ci95_high": -0.1
+    },
+    "lawnmower": {
+     "mean_difference": -1.16,
+     "ci95_low": -1.72,
+     "ci95_high": -0.6
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "reversed",
+   "rho": 1.0,
+   "means": {
+    "abyss-novelty": 11.2,
+    "abyss": 10.22,
+    "frontier": 9.98,
+    "lawnmower": 12.44
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": 0.98,
+     "ci95_low": 0.34,
+     "ci95_high": 1.64
+    },
+    "frontier": {
+     "mean_difference": 1.22,
+     "ci95_low": 0.38,
+     "ci95_high": 2.02
+    },
+    "lawnmower": {
+     "mean_difference": -1.24,
+     "ci95_low": -1.96,
+     "ci95_high": -0.48
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "means": {
+    "abyss-novelty": 12.04,
+    "abyss": 12.28,
+    "frontier": 9.86,
+    "lawnmower": 11.86
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.24,
+     "ci95_low": -0.96,
+     "ci95_high": 0.5
+    },
+    "frontier": {
+     "mean_difference": 2.18,
+     "ci95_low": 1.1,
+     "ci95_high": 3.28
+    },
+    "lawnmower": {
+     "mean_difference": 0.18,
+     "ci95_low": -0.88,
+     "ci95_high": 1.2
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "random",
+   "rho": 0.0,
+   "means": {
+    "abyss-novelty": 11.18,
+    "abyss": 11.68,
+    "frontier": 12.52,
+    "lawnmower": 12.44
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.5,
+     "ci95_low": -1.12,
+     "ci95_high": 0.12
+    },
+    "frontier": {
+     "mean_difference": -1.34,
+     "ci95_low": -1.88,
+     "ci95_high": -0.84
+    },
+    "lawnmower": {
+     "mean_difference": -1.26,
+     "ci95_low": -1.82,
+     "ci95_high": -0.72
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "means": {
+    "abyss-novelty": 11.38,
+    "abyss": 11.18,
+    "frontier": 11.34,
+    "lawnmower": 12.48
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": 0.2,
+     "ci95_low": -0.42,
+     "ci95_high": 0.86
+    },
+    "frontier": {
+     "mean_difference": 0.04,
+     "ci95_low": -0.68,
+     "ci95_high": 0.8
+    },
+    "lawnmower": {
+     "mean_difference": -1.1,
+     "ci95_low": -2.02,
+     "ci95_high": -0.14
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "ridge",
+   "rho": 0.25,
+   "means": {
+    "abyss-novelty": 12.54,
+    "abyss": 13.16,
+    "frontier": 11.06,
+    "lawnmower": 12.16
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.62,
+     "ci95_low": -1.14,
+     "ci95_high": -0.1
+    },
+    "frontier": {
+     "mean_difference": 1.48,
+     "ci95_low": 0.82,
+     "ci95_high": 2.18
+    },
+    "lawnmower": {
+     "mean_difference": 0.38,
+     "ci95_low": -0.3,
+     "ci95_high": 1.02
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "means": {
+    "abyss-novelty": 14.2,
+    "abyss": 14.46,
+    "frontier": 9.26,
+    "lawnmower": 12.22
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.26,
+     "ci95_low": -0.68,
+     "ci95_high": 0.16049999999999273
+    },
+    "frontier": {
+     "mean_difference": 4.94,
+     "ci95_low": 4.34,
+     "ci95_high": 5.520499999999992
+    },
+    "lawnmower": {
+     "mean_difference": 1.98,
+     "ci95_low": 1.44,
+     "ci95_high": 2.52
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "means": {
+    "abyss-novelty": 15.1,
+    "abyss": 15.6,
+    "frontier": 6.0,
+    "lawnmower": 12.5
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.5,
+     "ci95_low": -0.78,
+     "ci95_high": -0.24
+    },
+    "frontier": {
+     "mean_difference": 9.1,
+     "ci95_low": 8.22,
+     "ci95_high": 9.92
+    },
+    "lawnmower": {
+     "mean_difference": 2.6,
+     "ci95_low": 1.98,
+     "ci95_high": 3.22
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "reversed",
+   "rho": 0.25,
+   "means": {
+    "abyss-novelty": 11.22,
+    "abyss": 11.88,
+    "frontier": 12.12,
+    "lawnmower": 12.32
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.66,
+     "ci95_low": -1.18,
+     "ci95_high": -0.14
+    },
+    "frontier": {
+     "mean_difference": -0.9,
+     "ci95_low": -1.44,
+     "ci95_high": -0.36
+    },
+    "lawnmower": {
+     "mean_difference": -1.1,
+     "ci95_low": -1.62,
+     "ci95_high": -0.56
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "means": {
+    "abyss-novelty": 12.04,
+    "abyss": 12.84,
+    "frontier": 11.74,
+    "lawnmower": 12.4
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -0.8,
+     "ci95_low": -1.32,
+     "ci95_high": -0.3
+    },
+    "frontier": {
+     "mean_difference": 0.3,
+     "ci95_low": -0.34,
+     "ci95_high": 0.92
+    },
+    "lawnmower": {
+     "mean_difference": -0.36,
+     "ci95_low": -0.84,
+     "ci95_high": 0.12
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "reversed",
+   "rho": 1.0,
+   "means": {
+    "abyss-novelty": 13.48,
+    "abyss": 13.42,
+    "frontier": 10.32,
+    "lawnmower": 12.4
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": 0.06,
+     "ci95_low": -0.4,
+     "ci95_high": 0.56
+    },
+    "frontier": {
+     "mean_difference": 3.16,
+     "ci95_low": 2.48,
+     "ci95_high": 3.86
+    },
+    "lawnmower": {
+     "mean_difference": 1.08,
+     "ci95_low": 0.52,
+     "ci95_high": 1.64
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "means": {
+    "abyss-novelty": 12.58,
+    "abyss": 13.6,
+    "frontier": 12.74,
+    "lawnmower": 11.9
+   },
+   "novelty_vs": {
+    "abyss": {
+     "mean_difference": -1.02,
+     "ci95_low": -1.7,
+     "ci95_high": -0.36
+    },
+    "frontier": {
+     "mean_difference": -0.16,
+     "ci95_low": -1.04,
+     "ci95_high": 0.76
+    },
+    "lawnmower": {
+     "mean_difference": 0.68,
+     "ci95_low": -0.18049999999999983,
+     "ci95_high": 1.54
+    }
+   }
+  }
+ ]
+}

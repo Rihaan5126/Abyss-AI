@@ -259,7 +259,10 @@ function buildVehicle(color, label) {
 }
 
 export function createExplorer(api) {
-  const { app, overlayGrid, abyssPane, gridExtent, BELIEF_RAMP, HIDDEN_RAMP, LAYER_LABELS, categoryLabel } = api;
+  const {
+    app, overlayGrid, abyssPane, gridExtent, BELIEF_RAMP, HIDDEN_RAMP, LAYER_LABELS, categoryLabel,
+    HABITAT_COLOURS, fillHabitatLegend, habitatChip,
+  } = api;
   const stage = document.getElementById("stage");
   const canvas = document.getElementById("stage-canvas");
   const legend = document.getElementById("stage-legend");
@@ -452,6 +455,22 @@ export function createExplorer(api) {
     colours.needsUpdate = true;
   }
 
+  // Classes are categories, so each vertex takes its nearest cell's class with no blending.
+  function recolourHabitats(classes) {
+    const { fine } = terrain;
+    const colours = terrain.mesh.geometry.getAttribute("color");
+    const colour = new THREE.Color();
+    for (let i = 0; i < fine.height; i += 1) {
+      const row = classes[Math.round(i / SUBDIVISIONS)];
+      for (let j = 0; j < fine.width; j += 1) {
+        const [r, g, b] = HABITAT_COLOURS[row[Math.round(j / SUBDIVISIONS)]];
+        colour.setRGB(r / 255, g / 255, b / 255, THREE.SRGBColorSpace);
+        colours.setXYZ(i * fine.width + j, colour.r, colour.g, colour.b);
+      }
+    }
+    colours.needsUpdate = true;
+  }
+
   function updateColours() {
     const pane = abyssPane();
     if (!pane?.mission || !terrain) return;
@@ -464,6 +483,11 @@ export function createExplorer(api) {
     seabed.map = grid ? null : sedimentColour;
     seabed.bumpMap = grid ? null : sedimentBump;
     seabed.needsUpdate = true;
+    if (grid && app.layer === "habitat") {
+      recolourHabitats(grid);
+      fillHabitatLegend(legend, pane.log.terrain.habitat.names);
+      return;
+    }
     recolour(grid, !grid ? seafloorRamp : app.layer === "hidden" ? HIDDEN_RAMP : BELIEF_RAMP);
     if (grid) {
       const [low, high] = gridExtent(grid);
@@ -545,9 +569,21 @@ export function createExplorer(api) {
     const found = new THREE.MeshBasicMaterial({ color: view.color });
     const empty = new THREE.MeshStandardMaterial({ color: NO_FINDS_COLOR, roughness: 0.8 });
     const post = new THREE.MeshStandardMaterial({ color: 0x2c3841, roughness: 0.7 });
+    const column = new THREE.MeshBasicMaterial({
+      color: 0xcfe9ff,
+      transparent: true,
+      opacity: 0.28,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
     for (const { step } of mission.completed) {
       if (!step.observation) continue;
       const [r, c] = step.observation.waypoint;
+      if (step.observation.habitat?.new_class) {
+        const beacon = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.075, 2.6, 10, 1, true), column.clone());
+        beacon.position.copy(toWorld(r, c, 1.3));
+        view.markers.add(beacon);
+      }
       const richness = step.observation.richness;
       const radius = richness ? 0.05 + Math.sqrt(richness) * 0.04 : 0.04;
       const height = 0.2 + radius;
@@ -618,6 +654,13 @@ export function createExplorer(api) {
       });
       if (!chips.childElementCount) chips.textContent = "No organisms in this survey";
       body.append(chips);
+      const habitat = habitatChip(obs);
+      if (habitat) {
+        const line = document.createElement("p");
+        line.className = "hud-chips";
+        line.append(habitat);
+        body.append(line);
+      }
       const note = document.createElement("p");
       note.className = "hud-note";
       const model = pane.log.provenance.perception;

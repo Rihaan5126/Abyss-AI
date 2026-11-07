@@ -23,7 +23,10 @@ const PERCEPTION_NAMES = {
   stub: "Stub perception: a fake model with made-up error rates.",
 };
 const GEBCO_CREDIT =" GEBCO Compilation Group (2025) GEBCO 2025 Grid (doi:10.5285/37c52e96-24ea-67ce-e063-7086abc05f29).";
+// Differ in lightness as well as hue, and each class is also named in the legend.
+const HABITAT_COLOURS = [[233, 205, 130], [231, 111, 81], [116, 62, 158], [64, 170, 160], [146, 196, 245]];
 const LAYER_LABELS = {
+  habitat: "Habitat classes",
   predicted_richness: "Predicted richness",
   uncertainty: "Model uncertainty",
   hidden: "Hidden expected richness (simulated)",
@@ -56,6 +59,7 @@ const app = {
   lastFrame: 0,
   loadToken: 0,
   tourIndex: -1,
+  manifestNotice: "",
   benchmark: null,
 };
 
@@ -226,6 +230,7 @@ function latestDiagnostics(mission) {
 function overlayGrid(pane, mission) {
   if (app.layer === "hidden") return app.revealed ? pane.reveal.expected_richness_map : null;
   if (app.layer === "terrain") return null;
+  if (app.layer === "habitat") return pane.log.terrain.habitat?.classes || null;
   return latestDiagnostics(mission)[app.layer] || null;
 }
 
@@ -241,7 +246,14 @@ function drawMap(pane, mission) {
 
   const grid = overlayGrid(pane, mission);
   let legend = "";
-  if (grid) {
+  const isHabitat = app.layer === "habitat" && grid;
+  if (isHabitat) {
+    // Classes are categories, so they are drawn without blending between neighbours.
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(fieldImage(grid, (v) => HABITAT_COLOURS[v]), 0, 0, width, rows * cell);
+    ctx.imageSmoothingEnabled = true;
+    fillHabitatLegend(pane.el.legend, pane.log.terrain.habitat.names);
+  } else if (grid) {
     const [lo, hi] = gridExtent(grid);
     const color = app.layer === "hidden" ? HIDDEN_RAMP : BELIEF_RAMP;
     const span = hi - lo || 1;
@@ -255,7 +267,7 @@ function drawMap(pane, mission) {
   } else {
     legend = `${LAYER_LABELS[app.layer] || "Layer"}: this planner has no model, so it logs no map.`;
   }
-  pane.el.legend.textContent = legend;
+  if (!isHabitat) pane.el.legend.textContent = legend;
 
   ctx.lineWidth = 0.8;
   ctx.strokeStyle = grid ? "rgba(0,0,0,.28)" : "rgba(255,255,255,.2)";
@@ -378,6 +390,9 @@ function updatePaneText(pane, mission) {
     el.found.append(small);
   }
   el.surveys.textContent = surveys;
+  const lastSurvey = mission.completed.filter((s) => s.step.observation).at(-1);
+  const classCount = log.terrain.habitat?.names.length || 0;
+  el.habitats.textContent = `${lastSurvey?.step.observation.habitat?.classes_sampled || 0} of ${classCount}`;
   el.left.textContent = fmt(budget - Math.max(used, shown));
   el.energyBar.style.width = `${(100 * (budget - shown)) / budget}%`;
   el.reserve.style.width = `${(100 * log.energy.reserve) / budget}%`;
@@ -421,11 +436,35 @@ function readout(pane, cell) {
     `${Math.round(terrain.depth_m[r][c])} m`,
     `slope ${fmt(terrain.slope_deg[r][c])}°`,
     `BPI ${Math.round(terrain.bpi_m[r][c])} m`,
+    ...(terrain.habitat ? [terrain.habitat.names[terrain.habitat.classes[r][c]]] : []),
   ];
   if (app.revealed) {
     parts.push(`hidden: ${pane.reveal.encounter_richness_map[r][c]} categories here`);
   }
   pane.el.readout.textContent = parts.join("  |  ");
+}
+
+function habitatChip(obs) {
+  if (!obs.habitat) return null;
+  const chip = document.createElement("span");
+  const unfamiliar = obs.unknown_flags.some(Boolean);
+  chip.className = obs.habitat.new_class ? "chip habitat-new" : "chip habitat";
+  chip.textContent = obs.habitat.new_class
+    ? `New habitat class: ${obs.habitat.name}${unfamiliar ? ", with an unfamiliar organism" : ""}`
+    : `Habitat: ${obs.habitat.name}`;
+  return chip;
+}
+
+function fillHabitatLegend(element, names) {
+  const keys = names.map((name, index) => {
+    const key = document.createElement("span");
+    key.className = "habitat-key";
+    const swatch = document.createElement("i");
+    swatch.style.background = `rgb(${HABITAT_COLOURS[index].join(",")})`;
+    key.append(swatch, name);
+    return key;
+  });
+  element.replaceChildren(...keys);
 }
 
 function categoryLabel(name) {
@@ -463,6 +502,8 @@ function renderFeed(pane, mission) {
       chip.textContent = `Unfamiliar, novelty ${fmt(obs.novelty_scores[index], 2)}`;
       item.append(chip);
     });
+    const habitat = habitatChip(obs);
+    if (habitat) item.append(habitat);
     for (const ref of obs.image_refs) {
       if (ref.includes("://")) continue; // opaque IDs, not image URLs
       const image = document.createElement("img");
@@ -628,6 +669,7 @@ function createPane(index) {
     readout: node.querySelector(".readout"),
     legend: node.querySelector(".legend"),
     found: node.querySelector(".found"),
+    habitats: node.querySelector(".habitats"),
     foundLabel: node.querySelector(".found-label"),
     unknown: node.querySelector(".unknown-count"),
     unknownStat: node.querySelector(".unknown-stat"),
@@ -667,7 +709,7 @@ function updateLayerControls() {
   const hasBelief = (key) => app.panes.some((pane) =>
     pane.timeline.some((s) => s.step.planner_diagnostics && s.step.planner_diagnostics[key]));
   for (const input of document.querySelectorAll('input[name="layer"]')) {
-    if (input.value === "terrain") continue;
+    if (input.value === "terrain" || input.value === "habitat") continue;
     input.disabled = input.value === "hidden" ? !app.revealed : !hasBelief(input.value);
     input.parentElement.title = input.disabled
       ? (input.value === "hidden" ? "Reveal the hidden world first" : "This mission's planner does not log this map")
@@ -747,7 +789,9 @@ async function selectWorld(worldId) {
   if (token !== app.loadToken) return;
 
   app.panes = panes;
-  showNotice(count === 1 ? "Only one mission has been logged for this world." : "");
+  // A manifest's notice can carry licence terms, so it stays up for every world.
+  const single = count === 1 ? "Only one mission has been logged for this world." : "";
+  showNotice([app.manifestNotice, single].filter(Boolean).join(" "));
   app.energy = 0;
   updateClockRange();
   updateLayerControls();
@@ -1044,6 +1088,7 @@ async function loadExplorer() {
     $("stage").hidden = false; // the renderer needs a real size to start
     app.explorer = createExplorer({
       app, overlayGrid, abyssPane, gridExtent, BELIEF_RAMP, HIDDEN_RAMP, LAYER_LABELS, categoryLabel,
+      HABITAT_COLOURS, fillHabitatLegend, habitatChip,
     });
     document.querySelector('input[name="view"][value="3d"]').disabled = false;
     app.explorer.loadWorld();
@@ -1065,7 +1110,7 @@ async function init() {
   try {
     const manifest = await getJson(manifestPath);
     app.entries = manifest.entries;
-    if (manifest.notice) showNotice(manifest.notice);
+    app.manifestNotice = manifest.notice || "";
   } catch (error) {
     const hint = location.protocol === "file:"
       ? "Browsers block loading logs from file:// pages. Run: python -m http.server 8000 --directory ui"

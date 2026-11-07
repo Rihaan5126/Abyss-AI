@@ -10,6 +10,9 @@ that to choose where to survey next, within a fixed energy budget.
 always simulated and energy is in abstract units. It is not a validated AUV or a model
 of a real ecosystem.
 
+**Full definition:** [docs/PROJECT_BRIEF.md](docs/PROJECT_BRIEF.md) sets out what we are
+building, the research questions, roles, evaluation rules and what we are not claiming.
+
 ## Quick start
 
 ```bash
@@ -52,12 +55,19 @@ internet. It's a visualisation: robots don't see this scene, and the vision mode
 real photographs. Terrain is smoothed between grid cells, and its height is exaggerated 3×.
 If WebGL isn't available, the app falls back to the **2D maps** view.
 
+The **Habitats** layer shows five classes clustered from public depth, slope and bathymetric
+position, and the feed flags a robot's first survey of each class. This is display-only:
+planners never receive it, and all routes and results are unchanged. These are terrain-based
+classes, not biomes, because we have no temperature, oxygen or substrate data at this scale.
+
 Press **Guided demo** for the five-stage walkthrough. The benchmark section appears once
 `ui/logs/benchmark.json` exists.
 
 ## Results
 
 See [docs/results.md](docs/results.md) for findings, limitations and full tables.
+[docs/novelty-experiment.md](docs/novelty-experiment.md) records a separate experiment on
+targeting new categories, which did not improve on ABYSS.
 
 ```bash
 python -m abyss.evaluation.full_run

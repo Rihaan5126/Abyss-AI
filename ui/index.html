@@ -27,6 +27,7 @@
     <fieldset class="layers" id="layers">
       <legend>Map layer</legend>
       <label><input type="radio" name="layer" value="terrain" checked><span>Terrain</span></label>
+      <label><input type="radio" name="layer" value="habitat"><span>Habitats</span></label>
       <label><input type="radio" name="layer" value="predicted_richness"><span>Predicted</span></label>
       <label><input type="radio" name="layer" value="uncertainty"><span>Uncertainty</span></label>
       <label><input type="radio" name="layer" value="hidden"><span>Hidden</span></label>
@@ -60,7 +61,7 @@
         <p id="stage-legend"></p>
       </div>
     </section>
-    <p class="stage-note" id="stage-note" hidden>Visualisation of logged missions, not real footage. Terrain is smoothed between grid cells and its height is exaggerated 3×. Sediment texture, lighting, marine snow and vehicle models are decorative, and vehicles aren't to scale. Camera feed cards show simulated encounters.</p>
+    <p class="stage-note" id="stage-note" hidden>Visualisation of logged missions, not real footage. Terrain is smoothed between grid cells and its height is exaggerated 3×. Sediment texture, lighting, marine snow and vehicle models are decorative, and vehicles aren't to scale. Camera feed cards show simulated encounters. Light columns mark a robot's first survey of a habitat class. Habitat classes are clustered from terrain for display only: they aren't biomes, and planners never see them.</p>
     <section class="panes" id="panes"></section>
     <section class="lower">
       <figure class="chart-card">
@@ -116,6 +117,7 @@
       <dl class="stats">
         <div class="stat-main"><dt class="found-label">Categories found</dt><dd class="found">0</dd></div>
         <div><dt>Surveys</dt><dd class="surveys">0</dd></div>
+        <div><dt>Habitat classes</dt><dd class="habitats">0</dd></div>
         <div class="unknown-stat" hidden><dt>Unfamiliar images</dt><dd class="unknown-count">0</dd></div>
         <div><dt>Energy left</dt><dd class="left">0</dd></div>
       </dl>

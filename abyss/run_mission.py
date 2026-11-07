@@ -29,6 +29,7 @@ from .contract import (
 )
 from .env import Environment
 from .fathomnet_perception import load_fathomnet
+from .habitat import annotate_surveys, habitat_classes
 from .planners import PLANNERS
 from .planners.base import Planner
 from .stub_perception import StubImagePool, StubPerception
@@ -154,6 +155,10 @@ def run_mission(
         steps.append(_step_payload(result, planned, planner.diagnostics(), len(history)))
         state = result.state
 
+    # Computed after the mission from public data, so it can't influence the planner.
+    habitat = habitat_classes(public_map)
+    annotate_surveys(steps, habitat, public_map)
+
     energy_ok = state.energy_remaining >= config.energy_reserve - 1e-9
     log = {
         "schema_version": SCHEMA_VERSION,
@@ -179,7 +184,7 @@ def run_mission(
             "reserve": config.energy_reserve,
             "terrain_cost_factor": config.terrain_cost_factor,
         },
-        "terrain": _terrain_payload(public_map),
+        "terrain": {**_terrain_payload(public_map), "habitat": habitat},
         "steps": steps,
         "outcome": {
             "status": state.status.value,
