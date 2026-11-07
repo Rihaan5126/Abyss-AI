@@ -1,0 +1,1704 @@
+[
+  {
+    "sample_id": "432660d6-31ce-454a-a037-a1f0983e8fde_d0641777-8be0-47c5-9997-c12396e465e3",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/432660d6-31ce-454a-a037-a1f0983e8fde_d0641777-8be0-47c5-9997-c12396e465e3.png",
+    "image_uuid": "432660d6-31ce-454a-a037-a1f0983e8fde",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1114",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1114/16_24_43_26.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/432660d6-31ce-454a-a037-a1f0983e8fde",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "0c17e198-c0ca-4f46-9c0e-cdf2cf61dcfc",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "a03ac392-8291-44d9-8eb3-84d6e5ac04b7",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 90,
+      "y": 64,
+      "width": 256,
+      "height": 230
+    },
+    "original_sha256": "9962d083457344c4186e9a3e9275436741ba92a3664da27a4f7121a92478648c",
+    "crop_sha256": "680fb025d188af5323e115501ee57d3537c4e2c40199f40485741bf45471720a",
+    "retrieved_at": "2026-11-07T14:09:05.999054+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "4729ba3f-52e4-46fd-a52a-a14a8111bef0_476f9b1d-d533-4e54-84c6-15ef0829c581",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/4729ba3f-52e4-46fd-a52a-a14a8111bef0_476f9b1d-d533-4e54-84c6-15ef0829c581.png",
+    "image_uuid": "4729ba3f-52e4-46fd-a52a-a14a8111bef0",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1113",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1113/02_02_35_05.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/4729ba3f-52e4-46fd-a52a-a14a8111bef0",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "4517d969-a1dd-45b6-957c-a85c3a8f2c2e",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "22ec7484-355f-46e6-9bca-7def4602e9a3",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 473,
+      "y": 273,
+      "width": 49,
+      "height": 41
+    },
+    "original_sha256": "1b49a928402ea57ebdc1dc1982c004e46d7401e4bd286f2c01b197851e0755b5",
+    "crop_sha256": "15bb06305c212cb6494ad7c087f6fec50a3ed4a52c6825c768af374b4a8d8ac7",
+    "retrieved_at": "2026-11-07T14:09:07.113017+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "9c09f90a-4d14-40bc-a68a-7a127790b97f_ca2a3cdc-c837-4e23-8917-3f68de357a35",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/9c09f90a-4d14-40bc-a68a-7a127790b97f_ca2a3cdc-c837-4e23-8917-3f68de357a35.png",
+    "image_uuid": "9c09f90a-4d14-40bc-a68a-7a127790b97f",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/161",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/161/04_52_51_00.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/9c09f90a-4d14-40bc-a68a-7a127790b97f",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "72746689-533d-4a66-b745-ee6025b86139",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "a1038bcc-03da-4353-b913-65c40a1ed32d",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 156,
+      "y": 193,
+      "width": 133,
+      "height": 132
+    },
+    "original_sha256": "d2d8f8e4229ac461a734910f8745fc5de54f4273573737ab742c35df1f2e9c79",
+    "crop_sha256": "cd8b4965d2fd58f845441f7acb91a8f7eaa8a1a8cff7b8252f2cb5d8d6d0b0db",
+    "retrieved_at": "2026-11-07T14:09:07.716133+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "bd5bd7da-16cd-4016-9077-94f9db2964d4_5c0df4ee-367b-42dc-85d1-28d945d27473",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/bd5bd7da-16cd-4016-9077-94f9db2964d4_5c0df4ee-367b-42dc-85d1-28d945d27473.png",
+    "image_uuid": "bd5bd7da-16cd-4016-9077-94f9db2964d4",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/161",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/161/04_33_49_21.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/bd5bd7da-16cd-4016-9077-94f9db2964d4",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "8b59a4f4-95ba-4f57-a0e7-2cbb1a49e4b6",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "6203f20e-344c-4632-ad36-ca3ae693f322",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 218,
+      "y": 104,
+      "width": 117,
+      "height": 99
+    },
+    "original_sha256": "a6b7fb26572582883f47493d81522cdb0a520206c59effca443c607e63b44d2d",
+    "crop_sha256": "3c0aa64ce5725a71208d28c4191da88e1166b53ba0eb8f2a55c900f84cf825bf",
+    "retrieved_at": "2026-11-07T14:09:08.035910+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "acced663-7179-47ff-b194-ed361516ece5_cc09a790-abcb-4a23-b126-af3b33de679e",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/acced663-7179-47ff-b194-ed361516ece5_cc09a790-abcb-4a23-b126-af3b33de679e.png",
+    "image_uuid": "acced663-7179-47ff-b194-ed361516ece5",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/0836",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/0836/02_50_02_04.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/acced663-7179-47ff-b194-ed361516ece5",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "b1f75136-d27b-4228-9cb7-e207ce25b2eb",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "4d85d132-6b53-4199-8d85-3fd390164f87",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 479,
+      "y": 126,
+      "width": 15,
+      "height": 15
+    },
+    "original_sha256": "76d1745b1c82de87318e2328be1b45fbfc6b0327544b395dd059d06914840dd9",
+    "crop_sha256": "6000688bef201052b027931aed81b15d4627f0a2f4faf0448ec7cee4332d5c3b",
+    "retrieved_at": "2026-11-07T14:09:08.451979+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "dd1374f4-aa54-4408-a590-5b5aea182623_7615f80d-4b85-4b5f-b70c-d99c6a706e93",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/dd1374f4-aa54-4408-a590-5b5aea182623_7615f80d-4b85-4b5f-b70c-d99c6a706e93.png",
+    "image_uuid": "dd1374f4-aa54-4408-a590-5b5aea182623",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/0623",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/0623/06_03_38_01.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/dd1374f4-aa54-4408-a590-5b5aea182623",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "e7d39380-e10b-4fac-9031-da7adfc43810",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "862b530d-7b0d-4fbf-9f2f-490711971992",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 97,
+      "y": 369,
+      "width": 23,
+      "height": 18
+    },
+    "original_sha256": "bdf1e2467e27660a31537a70c15413e00b18432c2d8f7dc28cab3e82094ba9f4",
+    "crop_sha256": "d3f1673ddcd3bcdecb4fc6260d0746b74e8f069b5608279aedf42800ee3cccdb",
+    "retrieved_at": "2026-11-07T14:09:08.811774+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "6c5b13a9-555b-4b40-b272-efb10718314b_c868f5b7-8520-494d-918c-7b730a2267d1",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/6c5b13a9-555b-4b40-b272-efb10718314b_c868f5b7-8520-494d-918c-7b730a2267d1.png",
+    "image_uuid": "6c5b13a9-555b-4b40-b272-efb10718314b",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0231",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0231/11_34_33_16.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/6c5b13a9-555b-4b40-b272-efb10718314b",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "38dcb6d7-2173-4dca-a4f2-0eab150a5581",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "796f5964-b781-4b09-b14e-da8dd3c648a8",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 168,
+      "y": 255,
+      "width": 38,
+      "height": 34
+    },
+    "original_sha256": "e56caaf46943fd60a3db67ac854e4db8300970b31ade91228e7fdd854eabd331",
+    "crop_sha256": "0dc7fe9b8b1fac7dac5558c35b6b1517163bba451e33e4f6bcc040cd2b4e4e37",
+    "retrieved_at": "2026-11-07T14:09:09.234460+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "fce423fd-d99a-40fb-818e-5c6bc8ca3abe_a0b03dc6-a370-461a-8c88-7c4f29393c1b",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/fce423fd-d99a-40fb-818e-5c6bc8ca3abe_a0b03dc6-a370-461a-8c88-7c4f29393c1b.png",
+    "image_uuid": "fce423fd-d99a-40fb-818e-5c6bc8ca3abe",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/772",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/772/06-31-22-40.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/fce423fd-d99a-40fb-818e-5c6bc8ca3abe",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "639fa076-3fd3-4181-aa88-aa59f212ce56",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "fb77cab7-e11a-4761-9408-d3e4affc1512",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 1083,
+      "y": 22,
+      "width": 117,
+      "height": 94
+    },
+    "original_sha256": "ada098b82240a159ff3a076ed25b18fe5129bb59e57a91703ca781739178b682",
+    "crop_sha256": "272b3307640d5d45fd80a314473e097ae583bc40f09fddad8c9f4f067390d157",
+    "retrieved_at": "2026-11-07T14:09:10.321654+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "8b6658b3-97fe-487c-9d59-7b0ea63acde4_179de335-6909-4890-a8ff-bb1ac6a7deb4",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/8b6658b3-97fe-487c-9d59-7b0ea63acde4_179de335-6909-4890-a8ff-bb1ac6a7deb4.png",
+    "image_uuid": "8b6658b3-97fe-487c-9d59-7b0ea63acde4",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/177",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/177/02_01_00_05.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/8b6658b3-97fe-487c-9d59-7b0ea63acde4",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "d0f70edf-eed6-4cbf-8bd0-8bc922f02a30",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "d5974689-e2ca-4d98-94fc-a14187281df6",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 309,
+      "y": 103,
+      "width": 28,
+      "height": 21
+    },
+    "original_sha256": "833732d7115418f6d1d6469bee5d2852ea4d959e29c935034ad24cd966423fae",
+    "crop_sha256": "a875168ee07333a6d852793bb65c5e2f2cf0be6b654383f176144699d1b801b0",
+    "retrieved_at": "2026-11-07T14:09:10.606008+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "5e4f63d0-5f21-408a-9b7c-2e63b471008a_dcbdcab6-f439-4418-a67e-1335876c39a6",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/5e4f63d0-5f21-408a-9b7c-2e63b471008a_dcbdcab6-f439-4418-a67e-1335876c39a6.png",
+    "image_uuid": "5e4f63d0-5f21-408a-9b7c-2e63b471008a",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0486",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0486/04_28_38_12.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/5e4f63d0-5f21-408a-9b7c-2e63b471008a",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "03688eac-ac71-4fff-baa5-ec1713bf9012",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "25cb7c62-6ab8-4e68-8e0c-006d050754b8",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 1871,
+      "y": 907,
+      "width": 40,
+      "height": 46
+    },
+    "original_sha256": "a08f6b34589d62cd71f32f3561270e103b9b9bc06c57ba4d0df044fdb3409cd1",
+    "crop_sha256": "9a1fc5016f8cad00bf242af35541c266e23582a880d6b0b4210e52ece3f22b1f",
+    "retrieved_at": "2026-11-07T14:09:11.044084+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "6948aa75-0fb8-4f19-8234-03b95f566051_726789fa-8017-4b78-a2b7-e7710df555f3",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/6948aa75-0fb8-4f19-8234-03b95f566051_726789fa-8017-4b78-a2b7-e7710df555f3.png",
+    "image_uuid": "6948aa75-0fb8-4f19-8234-03b95f566051",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1147",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1147/19_52_04_16.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/6948aa75-0fb8-4f19-8234-03b95f566051",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "34dcab18-1b19-4b27-8ff3-4f17b481b940",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "badd9624-7906-4142-a55b-613abe331f08",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 347,
+      "y": 186,
+      "width": 143,
+      "height": 72
+    },
+    "original_sha256": "df1b234d742fa54bd4c416634c3c418c64d202a470ae87f3fb509ac75c65ffeb",
+    "crop_sha256": "d6e176ab8e8e6f01401022466b91551a8c86575552bae9464450d7ecb44a1bd7",
+    "retrieved_at": "2026-11-07T14:09:11.384216+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "91f04a25-884d-405c-8d6c-4fe0b54922b0_63a0e5ca-476b-44f2-baa6-0b561ba8c1a8",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/91f04a25-884d-405c-8d6c-4fe0b54922b0_63a0e5ca-476b-44f2-baa6-0b561ba8c1a8.png",
+    "image_uuid": "91f04a25-884d-405c-8d6c-4fe0b54922b0",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0230",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0230/10_48_49_06.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/91f04a25-884d-405c-8d6c-4fe0b54922b0",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "3572bfdf-b94d-4c3f-bc55-fcb50156fe13",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "7682df91-88a7-463b-9450-c1cfc0de4cdf",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 256,
+      "y": 323,
+      "width": 15,
+      "height": 18
+    },
+    "original_sha256": "2b76bacae424353ee3c1bbf451f4aee9ce252b233e2bcb439acb585f0145034c",
+    "crop_sha256": "49ee4ce07c46771b5cfcebd0c0d8ff033e02416335b4dc8c88fc2d940f656fcf",
+    "retrieved_at": "2026-11-07T14:09:11.635126+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "fb46e33a-d9e0-4478-bc31-f88a22c4b2d8_8fb0f31d-9fa6-4b55-9654-da7a2cf55c7d",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/fb46e33a-d9e0-4478-bc31-f88a22c4b2d8_8fb0f31d-9fa6-4b55-9654-da7a2cf55c7d.png",
+    "image_uuid": "fb46e33a-d9e0-4478-bc31-f88a22c4b2d8",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/177",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/177/02_03_11_17.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/fb46e33a-d9e0-4478-bc31-f88a22c4b2d8",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "0b39ed28-2914-448f-9e1b-8a5da41a1c87",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "a9544295-5d51-4925-bdd7-6911a6374d46",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 470,
+      "y": 296,
+      "width": 33,
+      "height": 25
+    },
+    "original_sha256": "e3acfda90748c9453ccf7045bd8df43e39736d6c3dcdcadc9defabc97d04c7fd",
+    "crop_sha256": "d30c3fdb3b63ffd2eeaa3dade8e27c7122e05b6ab04e952f3513be6310cd8cbc",
+    "retrieved_at": "2026-11-07T14:09:11.920666+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "c2f9cc1b-4aef-4a87-924d-cbd6dd1efd17_05e3ab33-9b06-44a8-af65-a6b1f7d0c070",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/c2f9cc1b-4aef-4a87-924d-cbd6dd1efd17_05e3ab33-9b06-44a8-af65-a6b1f7d0c070.png",
+    "image_uuid": "c2f9cc1b-4aef-4a87-924d-cbd6dd1efd17",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/1339",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/1339/20210601T155950Z--23b8d966-ab47-4938-8242-1064ecb92447.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/c2f9cc1b-4aef-4a87-924d-cbd6dd1efd17",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "4d7d33bf-e825-41c1-9f13-1d96dd27db6c",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "bf1ff6c2-7927-4471-a63b-5463c721cfa4",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 1785,
+      "y": 393,
+      "width": 49,
+      "height": 42
+    },
+    "original_sha256": "5657b74e7af35861a936f52929d8bfd9e4cde93022a77373fc9fcbc0eec19cf0",
+    "crop_sha256": "8f46915bacd51ef4f83aa9a68a7b2b9a863c4f1009325237b00531d7b6b97597",
+    "retrieved_at": "2026-11-07T14:09:12.355421+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "d3b6c552-93e3-4c3d-aa5b-9e6e1c987715_864d16c0-7a8f-441f-a9c1-82aaf4ecf272",
+    "category": "Benthocodon",
+    "image_path": "../data/perception-smoke/crops/d3b6c552-93e3-4c3d-aa5b-9e6e1c987715_864d16c0-7a8f-441f-a9c1-82aaf4ecf272.png",
+    "image_uuid": "d3b6c552-93e3-4c3d-aa5b-9e6e1c987715",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0671",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0671/03_31_12_27.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/d3b6c552-93e3-4c3d-aa5b-9e6e1c987715",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "c733b152-9989-4077-a263-bdc3e721634c",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "df1e292f-e00c-4ca2-b88e-0ef877015fe0",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 1052,
+      "y": 810,
+      "width": 40,
+      "height": 45
+    },
+    "original_sha256": "3bb3fa32039113ee5d38114557331aa2ccb70661df52114089832fe6d7f695e2",
+    "crop_sha256": "da0260b58c8022a834557b595dd5be05a6a02a3ca643c41b9b8e70cf06b472cf",
+    "retrieved_at": "2026-11-07T14:09:12.833949+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "7ae05844-38b7-4a68-a9e6-73381cc7d845_54aaa7ee-2abd-4170-bccd-1465526bbedf",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/7ae05844-38b7-4a68-a9e6-73381cc7d845_54aaa7ee-2abd-4170-bccd-1465526bbedf.png",
+    "image_uuid": "7ae05844-38b7-4a68-a9e6-73381cc7d845",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0334",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0334/00_11_31_23.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/7ae05844-38b7-4a68-a9e6-73381cc7d845",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "5f00069d-cab2-41da-ab4f-e675a041528a",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "e0329e29-4230-4f9e-b841-96dfb135714b",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 287,
+      "y": 181,
+      "width": 13,
+      "height": 38
+    },
+    "original_sha256": "135aeefc22063231948447d03bb265c2f326729a9cbe648e40c637cd6737bacb",
+    "crop_sha256": "af1d9c30cd669056b72ca751b1d4fa46af4fc804638a0e7172cf39ad78196bfe",
+    "retrieved_at": "2026-11-07T14:09:14.732782+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "72e735c6-a357-4c5f-a35d-1b78d2eb721b_2ca5e483-2e09-4bf5-944a-f2bbccb136b0",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/72e735c6-a357-4c5f-a35d-1b78d2eb721b_2ca5e483-2e09-4bf5-944a-f2bbccb136b0.png",
+    "image_uuid": "72e735c6-a357-4c5f-a35d-1b78d2eb721b",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/stills/2002/227",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/stills/2002/227/00_14_14_00.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/72e735c6-a357-4c5f-a35d-1b78d2eb721b",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "7fd4a6fa-6198-413b-8e72-d55f152d8d54",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "4587d6ab-1533-40f7-a8f7-8ee28f606972",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 273,
+      "y": 157,
+      "width": 128,
+      "height": 99
+    },
+    "original_sha256": "e5ff6123dad13bd3aae6f002138b6b528ad86acbb6d515173fcced6ef5a7b9bf",
+    "crop_sha256": "5ba57060a42faf4ec15b5860ab574f766964f261860cb527992416b1a8fd0362",
+    "retrieved_at": "2026-11-07T14:09:15.016722+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "044ce705-9a22-43dc-96e7-eff0efa79ee0_991b9c0b-2aa1-4896-a5b5-f162b7af01b1",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/044ce705-9a22-43dc-96e7-eff0efa79ee0_991b9c0b-2aa1-4896-a5b5-f162b7af01b1.png",
+    "image_uuid": "044ce705-9a22-43dc-96e7-eff0efa79ee0",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0053",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0053/10_52_24_26.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/044ce705-9a22-43dc-96e7-eff0efa79ee0",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "7ebb96cf-95d7-4e04-bdf7-56bccad24245",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "76065720-f7c8-4d11-b980-fa793454c97c",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 333,
+      "y": 209,
+      "width": 32,
+      "height": 77
+    },
+    "original_sha256": "b29195f5aa3383b7ab8e4900d47c93a891440871418438f15def1cc59bad4631",
+    "crop_sha256": "2a9e62563e6c96efdffe861e79f79bd1facab11bb482b49435ac6916db6eab9b",
+    "retrieved_at": "2026-11-07T14:09:15.392833+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "4a68226f-8db2-4523-bb2d-e22d0f0a9538_0da84c11-6e5c-4002-97a5-0a65f8d01356",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/4a68226f-8db2-4523-bb2d-e22d0f0a9538_0da84c11-6e5c-4002-97a5-0a65f8d01356.png",
+    "image_uuid": "4a68226f-8db2-4523-bb2d-e22d0f0a9538",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/3419",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/3419/02_30_03_24.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/4a68226f-8db2-4523-bb2d-e22d0f0a9538",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "75087be3-f8aa-430c-8047-fe19c1a78a32",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "d5e652c8-9137-4b6a-aa2f-37542aad332a",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 470,
+      "y": 241,
+      "width": 36,
+      "height": 15
+    },
+    "original_sha256": "51cda9435c9b088197fef2736613f7c930e13a765c43785c95be41deb3634cc7",
+    "crop_sha256": "aab40dece6d2ce317a69af6c298df72b6ef38f95286df6519746220dbc222a42",
+    "retrieved_at": "2026-11-07T14:09:15.770045+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "0c811718-b5a4-4b83-b87f-77ad14da9473_a708ff88-377f-4531-bab5-c2799c271d65",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/0c811718-b5a4-4b83-b87f-77ad14da9473_a708ff88-377f-4531-bab5-c2799c271d65.png",
+    "image_uuid": "0c811718-b5a4-4b83-b87f-77ad14da9473",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2002/328",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2002/328/00_26_42_18.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/0c811718-b5a4-4b83-b87f-77ad14da9473",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "bf56f1e7-bd63-44c2-9f00-b7dc266bae8a",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "72305536-b68d-478c-931b-b3a7f4377851",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 151,
+      "y": 109,
+      "width": 82,
+      "height": 96
+    },
+    "original_sha256": "2578c15dd00e8c5a2fe24e0332c8a0976dd3442061e39a64c605e3be43af704b",
+    "crop_sha256": "76b6316b8f620ae9eface63776f17ee398615503d8020cc49c20fffa6a9af65f",
+    "retrieved_at": "2026-11-07T14:09:16.087669+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "a6e8c6a6-030a-493f-af27-d3aaa53ebaab_cac5fac5-1f37-4756-95a7-15ce59dd0988",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/a6e8c6a6-030a-493f-af27-d3aaa53ebaab_cac5fac5-1f37-4756-95a7-15ce59dd0988.png",
+    "image_uuid": "a6e8c6a6-030a-493f-af27-d3aaa53ebaab",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1112",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1112/00_20_57_04.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/a6e8c6a6-030a-493f-af27-d3aaa53ebaab",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "4abab98a-48c7-490c-acc5-4c6637c85df3",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "62b2a92c-31eb-4342-94f0-a32f185f7630",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 297,
+      "y": 140,
+      "width": 143,
+      "height": 173
+    },
+    "original_sha256": "ccc5eeaa5deca5bb0bb8ec6089a1f33a0f7868172af62314280c5a6c3ff91f51",
+    "crop_sha256": "53a91493826b6dd7b1cee0cbc92e0221d66c04924be54d58794bc8567e546431",
+    "retrieved_at": "2026-11-07T14:09:16.376108+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "1a4964fe-ea78-4873-bd69-0541699c899b_eac1aca4-7283-4bb8-8976-ce3af6853338",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/1a4964fe-ea78-4873-bd69-0541699c899b_eac1aca4-7283-4bb8-8976-ce3af6853338.png",
+    "image_uuid": "1a4964fe-ea78-4873-bd69-0541699c899b",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/3963",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/3963/00_04_03_13.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/1a4964fe-ea78-4873-bd69-0541699c899b",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "6d737578-6746-4c4a-8e19-a9af36bf4223",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "a4527c96-7c8c-47a7-9da4-2f88f47fec39",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 865,
+      "y": 528,
+      "width": 353,
+      "height": 345
+    },
+    "original_sha256": "d0984cbe99c58284ea08d0ddb28877d5e3b31c78aaa4a16bf7e33c6f943bff78",
+    "crop_sha256": "fe78e8bcf60a21d3a1f0ac5e10b216cce9efde921d777aae1b0a5071161b64a1",
+    "retrieved_at": "2026-11-07T14:09:16.940470+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "d1f2950b-0b94-43cb-b3ff-a3fc88b5addd_6915d451-e07e-43f6-a033-741fa9be488c",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/d1f2950b-0b94-43cb-b3ff-a3fc88b5addd_6915d451-e07e-43f6-a033-741fa9be488c.png",
+    "image_uuid": "d1f2950b-0b94-43cb-b3ff-a3fc88b5addd",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0029",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0029/00_30_35_26.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/d1f2950b-0b94-43cb-b3ff-a3fc88b5addd",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "029d632a-8727-428c-a8a0-5344e757f3aa",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "eedbbe78-e2ca-4c10-ab5c-e2a719bf6f65",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 317,
+      "y": 197,
+      "width": 27,
+      "height": 28
+    },
+    "original_sha256": "21307c6179380b23ae8db3a7c653cbc50bc57cf0f30489d000f9e503461373a3",
+    "crop_sha256": "3fc495df4ec0b2e1b96f1777e9f587f0857397274a07f09efa6427a4da0ae03d",
+    "retrieved_at": "2026-11-07T14:09:17.219639+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "e0977d9a-a473-40c8-817b-d29400e478c2_2ae42a19-6bcd-463c-a39a-ae44e5f4f15f",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/e0977d9a-a473-40c8-817b-d29400e478c2_2ae42a19-6bcd-463c-a39a-ae44e5f4f15f.png",
+    "image_uuid": "e0977d9a-a473-40c8-817b-d29400e478c2",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/100036",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/100036/04_33_23_09.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/e0977d9a-a473-40c8-817b-d29400e478c2",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "57a3a183-26ab-4e67-9089-78670bcc4e0d",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "1c4b4042-45b5-48ac-9e35-dd3d965e74ad",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 458,
+      "y": 547,
+      "width": 142,
+      "height": 65
+    },
+    "original_sha256": "330714ddd583df3c472952503ab9db0a17b2f0120b635d63982a6feed41814a9",
+    "crop_sha256": "b09c004ca3d44cc518aaecce70131429bfcd18b294222fccb3f89b922924ace6",
+    "retrieved_at": "2026-11-07T14:09:17.647310+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "454a7c72-11ed-4b48-9cca-2553bd89c929_42ac9916-bc4b-4cfa-b902-8fab1cb9e417",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/454a7c72-11ed-4b48-9cca-2553bd89c929_42ac9916-bc4b-4cfa-b902-8fab1cb9e417.png",
+    "image_uuid": "454a7c72-11ed-4b48-9cca-2553bd89c929",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2003/198",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2003/198/00_44_42_02.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/454a7c72-11ed-4b48-9cca-2553bd89c929",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "866220bc-98b0-4dcf-82bf-e2442f1b4849",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "cdea2b92-2cd7-4655-b552-47394e30605b",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 191,
+      "y": 133,
+      "width": 218,
+      "height": 69
+    },
+    "original_sha256": "6f82e5caabb8494f0667a1dd7dc5c7be7f70f20ee3ac758c7f52a69a7e8a9357",
+    "crop_sha256": "49a7d2bd08b89237d8dc1b08daeed9788e446452e684f20a7a0ed31c1c277252",
+    "retrieved_at": "2026-11-07T14:09:17.946518+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "c3f35f3b-ca86-4e94-be5f-fd7dd10e1b20_a13d1df7-b91d-40e4-acda-7f17fdcc101b",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/c3f35f3b-ca86-4e94-be5f-fd7dd10e1b20_a13d1df7-b91d-40e4-acda-7f17fdcc101b.png",
+    "image_uuid": "c3f35f3b-ca86-4e94-be5f-fd7dd10e1b20",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/3614",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/3614/01_08_10_24.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/c3f35f3b-ca86-4e94-be5f-fd7dd10e1b20",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "25738db6-0694-46be-bf7d-79b21c5634e8",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "fc4a3965-5601-4c27-a8d6-dedbf4718618",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 402,
+      "y": 1,
+      "width": 118,
+      "height": 144
+    },
+    "original_sha256": "9cd130fd1a4632f25de7105bf56eead1b1bde3ddb7ba47a6afffcf4b4db7a227",
+    "crop_sha256": "f7131d8beeb8911f4cad815565547f16f25112e945a425fa26c62723ff1db17d",
+    "retrieved_at": "2026-11-07T14:09:18.207454+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "197350bb-f462-4e69-a41c-c04a5ef2e461_4e6fe4aa-13f4-4a6f-b856-9822bd9f95c5",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/197350bb-f462-4e69-a41c-c04a5ef2e461_4e6fe4aa-13f4-4a6f-b856-9822bd9f95c5.png",
+    "image_uuid": "197350bb-f462-4e69-a41c-c04a5ef2e461",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/100034",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/100034/01_02_02_26.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/197350bb-f462-4e69-a41c-c04a5ef2e461",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "c07f5be5-4432-4ac3-a80d-2d17bb76aa54",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "fa5494da-5ee6-4ba5-b90d-ec9614b82d90",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 815,
+      "y": 797,
+      "width": 103,
+      "height": 51
+    },
+    "original_sha256": "a79cbba4db185b3250bba70b5150cbb68f26cde40fa6bcba2ad756131dffb3e6",
+    "crop_sha256": "857360222e3f28862fe0e85dbdf1da5838bb4c88084a847837b20a693dbe18dc",
+    "retrieved_at": "2026-11-07T14:09:18.652384+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "dd63c8cc-a542-4bc5-ac60-8250986e08ca_4d1e8694-d699-4b69-bdd9-bc34cd296322",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/dd63c8cc-a542-4bc5-ac60-8250986e08ca_4d1e8694-d699-4b69-bdd9-bc34cd296322.png",
+    "image_uuid": "dd63c8cc-a542-4bc5-ac60-8250986e08ca",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/3945",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/3945/02_46_24_13.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/dd63c8cc-a542-4bc5-ac60-8250986e08ca",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "251318ab-6b80-442e-8aa9-1ef4efb92358",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "59a16830-464e-48f5-8a7c-f43cc906bce4",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 1228,
+      "y": 854,
+      "width": 45,
+      "height": 51
+    },
+    "original_sha256": "f0ed9dc08af1590860448a6cb76f196e44fc75f3221994a8e5ba83a2fc2566a5",
+    "crop_sha256": "97b56819e1bcf2c6c34720bf57561567052de99cdc7d4fe67689ac6ca3662d0c",
+    "retrieved_at": "2026-11-07T14:09:19.222833+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "542c6692-209d-4579-a61d-0c4fcadfc1a0_26e4ca82-d75d-42c0-ac41-3fdad3570f0d",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/542c6692-209d-4579-a61d-0c4fcadfc1a0_26e4ca82-d75d-42c0-ac41-3fdad3570f0d.png",
+    "image_uuid": "542c6692-209d-4579-a61d-0c4fcadfc1a0",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0973",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0973/02_43_47_08.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/542c6692-209d-4579-a61d-0c4fcadfc1a0",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "7ae7bb3d-c1ce-46a7-b459-7ea416d0969a",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "e2b52667-6097-4552-b628-97eee6acc476",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 620,
+      "y": 107,
+      "width": 746,
+      "height": 699
+    },
+    "original_sha256": "8a2a78fff38de9bfece1ee66c865d410a96cc533ce06cd329adc129e4f97e3f4",
+    "crop_sha256": "4bf89d742ff9133ef171d5c747c44d2331fc09dbaff2ca930876a66ba235e38c",
+    "retrieved_at": "2026-11-07T14:09:19.845044+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "8684d2de-5876-46f0-8fc3-e44486fb211a_e9a3d39c-a6e3-4058-921d-5d99cca9efd9",
+    "category": "Bathochordaeus",
+    "image_path": "../data/perception-smoke/crops/8684d2de-5876-46f0-8fc3-e44486fb211a_e9a3d39c-a6e3-4058-921d-5d99cca9efd9.png",
+    "image_uuid": "8684d2de-5876-46f0-8fc3-e44486fb211a",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/2586",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/2586/03_45_44_17.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/8684d2de-5876-46f0-8fc3-e44486fb211a",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "8b614502-b26e-45e8-801b-9cd3b255111c",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "8cd107b3-d516-4893-94ff-2cd1ab935641",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 316,
+      "y": 124,
+      "width": 14,
+      "height": 10
+    },
+    "original_sha256": "6b8f2cd9c139549fce1ae2cc07308e9ae6e0a15671e90782dc1eed005deca5a9",
+    "crop_sha256": "8e5386713bdd473e7a7f44e39691f633cc239093cd55866494bd15a8c3acde9c",
+    "retrieved_at": "2026-11-07T14:09:20.221424+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "66962c58-1def-49dd-901a-c651ff243a31_fa9c1686-f801-4201-aa36-4a0ba762bbcf",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/66962c58-1def-49dd-901a-c651ff243a31_fa9c1686-f801-4201-aa36-4a0ba762bbcf.png",
+    "image_uuid": "66962c58-1def-49dd-901a-c651ff243a31",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/124",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2004/124/11_02_17_08.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/66962c58-1def-49dd-901a-c651ff243a31",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "818d08b7-c77b-4035-ad3e-b286994840bf",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "5d96b516-50e9-4ba4-9714-f6548caff811",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 290,
+      "y": 216,
+      "width": 148,
+      "height": 118
+    },
+    "original_sha256": "303bcde9a0a2288e130f81aad104d754a281868a577ce3f1074f6772f9a90772",
+    "crop_sha256": "e72cc95b8b961f43c6c6357f614bd01d64ba68937c31143c6d376844fdf69b81",
+    "retrieved_at": "2026-11-07T14:09:21.709402+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "42fad5d2-7569-42e8-89ed-a546b2bfd63f_3bad9a80-e9f6-4671-9edb-77513f73a7e0",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/42fad5d2-7569-42e8-89ed-a546b2bfd63f_3bad9a80-e9f6-4671-9edb-77513f73a7e0.png",
+    "image_uuid": "42fad5d2-7569-42e8-89ed-a546b2bfd63f",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1111",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1111/09_18_43_17.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/42fad5d2-7569-42e8-89ed-a546b2bfd63f",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "57333e27-92e1-4b24-81cb-f33069424594",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "baac87c4-14e3-4b4d-afcf-a4c585d98039",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 283,
+      "y": 57,
+      "width": 235,
+      "height": 258
+    },
+    "original_sha256": "7f9660369cfd6b679141ee0d586c7d7c86296abe7cf595c916f0d9d2a187759d",
+    "crop_sha256": "1662158818685658d6814f30fd80f7fcbba6e1744b914fa928230b225831918c",
+    "retrieved_at": "2026-11-07T14:09:22.148402+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "485de079-3ef8-4499-b936-dbc794ea9bca_a998a1c5-1d53-41bf-99a1-eb6eaa1745e0",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/485de079-3ef8-4499-b936-dbc794ea9bca_a998a1c5-1d53-41bf-99a1-eb6eaa1745e0.png",
+    "image_uuid": "485de079-3ef8-4499-b936-dbc794ea9bca",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/1369",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/1369/20210730T144026Z--2a72decb-d3dd-4b31-9adb-8124b8739ff8.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/485de079-3ef8-4499-b936-dbc794ea9bca",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "fdc86cf0-4e78-404a-b83e-5e84e381b387",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "f5b09148-41c5-4d97-8460-0dc981344582",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 913,
+      "y": 5,
+      "width": 583,
+      "height": 560
+    },
+    "original_sha256": "7ab5e96b0fdee042542b3f195038545eabbe8665ff1fde70d3263565199ee48b",
+    "crop_sha256": "04b270c7667769e10e9045a1d4814cd2cdf10a5d0c87a46c58a0026bff8676e0",
+    "retrieved_at": "2026-11-07T14:09:22.551779+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "aea7ffdf-00aa-4221-8d00-e3ae4ef313fc_3702bae5-fa41-448e-a7e8-042b4197c847",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/aea7ffdf-00aa-4221-8d00-e3ae4ef313fc_3702bae5-fa41-448e-a7e8-042b4197c847.png",
+    "image_uuid": "aea7ffdf-00aa-4221-8d00-e3ae4ef313fc",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2001/075",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2001/075/05_38_53_22.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/aea7ffdf-00aa-4221-8d00-e3ae4ef313fc",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "07b73f19-f310-4219-9d3e-2b96d2398b6a",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "a0c3a474-424a-493a-b152-fc817c5e4b47",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 71,
+      "y": 1,
+      "width": 640,
+      "height": 437
+    },
+    "original_sha256": "19cfb779d07543780abc5c596765650ffaadc11f89e0a733a13a3d9862e85140",
+    "crop_sha256": "44f42dbff4fd44f56ac60e879c527f186dcb0a92a940a9fb72d5cb800ebb2a0c",
+    "retrieved_at": "2026-11-07T14:09:23.026813+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "5da5a699-17fc-40ed-a7f9-d34bedba7869_4325d1c0-1bd1-409d-8180-ecd0522e4407",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/5da5a699-17fc-40ed-a7f9-d34bedba7869_4325d1c0-1bd1-409d-8180-ecd0522e4407.png",
+    "image_uuid": "5da5a699-17fc-40ed-a7f9-d34bedba7869",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0482",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0482/01_23_42_27.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/5da5a699-17fc-40ed-a7f9-d34bedba7869",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "f9c6d908-20c7-4c6b-b3a0-577f30485060",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "a3e31864-bc18-4a1b-a997-cf4911598510",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 1,
+      "y": 88,
+      "width": 649,
+      "height": 275
+    },
+    "original_sha256": "823221246dc0d0cc848cfcfcc5bc1eb41375c6ce0f8025c8379ecb4655fa2206",
+    "crop_sha256": "27ee2799bdbc2eb0cdbc502b51f8e094f7bb1a7174e99d509f3eb0916ba00afc",
+    "retrieved_at": "2026-11-07T14:09:23.369981+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "9c676213-cc6d-43b5-9eac-6f96a025c26c_aea74047-bf30-4b29-9cb1-e1cf09fdde82",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/9c676213-cc6d-43b5-9eac-6f96a025c26c_aea74047-bf30-4b29-9cb1-e1cf09fdde82.png",
+    "image_uuid": "9c676213-cc6d-43b5-9eac-6f96a025c26c",
+    "source_id": "https://search.mbari.org/ARCHIVE/frameGrabs/Ventana/images/2812",
+    "source_url": "https://search.mbari.org/ARCHIVE/frameGrabs/Ventana/images/2812/03_07_00_17.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/9c676213-cc6d-43b5-9eac-6f96a025c26c",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "ef19d36a-76ae-4b36-a2d1-da03fb73d750",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "399be399-983e-41da-9828-a48c1185a9eb",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 57,
+      "y": 83,
+      "width": 597,
+      "height": 334
+    },
+    "original_sha256": "b935811e60ea1b46249e95d6ccb74b0b285dd177ae17508af0e92b4b18f82628",
+    "crop_sha256": "db8dc811b688accee4bafef220821320f286badd8c38db91c7ea17522051abf3",
+    "retrieved_at": "2026-11-07T14:09:25.113777+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "66be834b-4121-4ac7-b5af-7bce8d858e55_df143044-6eb4-4aef-8681-9072b9026e3c",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/66be834b-4121-4ac7-b5af-7bce8d858e55_df143044-6eb4-4aef-8681-9072b9026e3c.png",
+    "image_uuid": "66be834b-4121-4ac7-b5af-7bce8d858e55",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2002/327",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2002/327/00_34_35_02.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/66be834b-4121-4ac7-b5af-7bce8d858e55",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "70220cc0-9fa6-4947-a051-cad4e5490c42",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "705dc132-6d1f-4636-9843-073259148ebb",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 177,
+      "y": 108,
+      "width": 278,
+      "height": 218
+    },
+    "original_sha256": "b3659d181f064b947cc6f91152c30db99669e2755c1ab3a621c16f009e90daf8",
+    "crop_sha256": "e4f0227046c4235e3d90c68da3c664290150de93dadf880b4f5a842cfa82a6a7",
+    "retrieved_at": "2026-11-07T14:09:25.475940+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "bf4a0714-7f52-4215-ba08-95d5d0b13373_b36dfc22-bc63-4121-8298-170757aee3e5",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/bf4a0714-7f52-4215-ba08-95d5d0b13373_b36dfc22-bc63-4121-8298-170757aee3e5.png",
+    "image_uuid": "bf4a0714-7f52-4215-ba08-95d5d0b13373",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/2698",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/2698/04_24_14_03.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/bf4a0714-7f52-4215-ba08-95d5d0b13373",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "81ed8798-386c-453b-b49a-58fe5fb78262",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "458a1f97-304a-4f64-9a0b-7e8533934919",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 248,
+      "y": 93,
+      "width": 179,
+      "height": 259
+    },
+    "original_sha256": "86bf9d17c3d921c62a73558ed694fe0e73e6a0c37c34e280536ebc0cfb552a5d",
+    "crop_sha256": "b3a9927f332ff5973f9cb41aa8225fbebf099fe58edd15a511d79812e8c294d5",
+    "retrieved_at": "2026-11-07T14:09:25.802876+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "d61d1a44-1281-4376-b341-3988811cdb0b_b7068dda-ed1f-4d23-8b78-5a2c0c276398",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/d61d1a44-1281-4376-b341-3988811cdb0b_b7068dda-ed1f-4d23-8b78-5a2c0c276398.png",
+    "image_uuid": "d61d1a44-1281-4376-b341-3988811cdb0b",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2001/058",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/stills/2001/058/01_44_48_22.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/d61d1a44-1281-4376-b341-3988811cdb0b",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "6f7924c4-e2a8-49d5-9fd7-c6694d3e5f72",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "09624f7f-c157-4e5d-9096-4f02d7fba45e",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 91,
+      "y": 2,
+      "width": 618,
+      "height": 464
+    },
+    "original_sha256": "0d000be96da694149a7aba48034856990da0b054ef3b89e50221c987071d91af",
+    "crop_sha256": "8b3790f9cf46c9a4d52b06a31e8f5bd884166012d39edadced55482d537e156e",
+    "retrieved_at": "2026-11-07T14:09:26.257837+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "ae0d4324-7d0c-46b7-9a31-19f7f00897fc_a05c7da5-06f2-49e9-9950-f4aa9cc0d11c",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/ae0d4324-7d0c-46b7-9a31-19f7f00897fc_a05c7da5-06f2-49e9-9950-f4aa9cc0d11c.png",
+    "image_uuid": "ae0d4324-7d0c-46b7-9a31-19f7f00897fc",
+    "source_id": "https://search.mbari.org/ARCHIVE/framegrabs/Doc%20Ricketts/images/1369",
+    "source_url": "https://search.mbari.org/ARCHIVE/framegrabs/Doc%20Ricketts/images/1369/20210730T143811Z--2a72decb-d3dd-4b31-9adb-8124b8739ff8.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/ae0d4324-7d0c-46b7-9a31-19f7f00897fc",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "0d05e566-5849-4b63-ad33-42d8ae2143d7",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "a28d4179-a4d4-4248-a41a-8d67f0b6557f",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 552,
+      "y": 287,
+      "width": 887,
+      "height": 786
+    },
+    "original_sha256": "aac096d136556b9b4f6a604da38209d3ff67cc6e3ae95240bf5ebb33bdd2d8d1",
+    "crop_sha256": "dadaf7d65cf15ecdb9b01e1fbece7a34dbf4c4f903bea65f622d2db86676f49f",
+    "retrieved_at": "2026-11-07T14:09:27.563403+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "bab61c5e-2705-4f00-9dd7-bd51b3f50dc2_b46a1579-f880-4d3a-8c80-130d9aab0e7d",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/bab61c5e-2705-4f00-9dd7-bd51b3f50dc2_b46a1579-f880-4d3a-8c80-130d9aab0e7d.png",
+    "image_uuid": "bab61c5e-2705-4f00-9dd7-bd51b3f50dc2",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0614",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0614/05_58_05_07.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/bab61c5e-2705-4f00-9dd7-bd51b3f50dc2",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "53b806c9-07c0-4b13-8e35-30c65602bcb5",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "1fbf32f9-1d97-47c5-806a-05290439b78a",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 332,
+      "y": 79,
+      "width": 1129,
+      "height": 919
+    },
+    "original_sha256": "d00a8c8ae1e2e36c070f198d250b0fee659953485c66d41ae99fc7cdd3ec10b5",
+    "crop_sha256": "918fddeb99bb9adddc2a15aa521a63235b37e98a10d967b1fee0538ce46674de",
+    "retrieved_at": "2026-11-07T14:09:28.646610+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "8f136464-038f-4900-a19c-485667f9e472_c6144e65-f7f3-453c-bba6-20c29a17dc4d",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/8f136464-038f-4900-a19c-485667f9e472_c6144e65-f7f3-453c-bba6-20c29a17dc4d.png",
+    "image_uuid": "8f136464-038f-4900-a19c-485667f9e472",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0153",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0153/03_32_12_22.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/8f136464-038f-4900-a19c-485667f9e472",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "c2cfc354-90c5-4c4e-8c44-70e498ed1eb2",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "1fe9d4b6-3d5d-49ac-b572-14037b1a7882",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 339,
+      "y": 56,
+      "width": 40,
+      "height": 32
+    },
+    "original_sha256": "2ec3f6669fa4ddf21a4f9916302bcd68a2d8b31a43be57604576fcb68e250ca0",
+    "crop_sha256": "38c176b41c95d3a36dc5dc6e4b9e90bbf25190f27244638c993ca6f264d7ccbe",
+    "retrieved_at": "2026-11-07T14:09:28.954512+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "f790bff2-8756-4734-b69f-2e80d529e1dc_32c7950b-8238-4d94-aaff-18db2d1f30fc",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/f790bff2-8756-4734-b69f-2e80d529e1dc_32c7950b-8238-4d94-aaff-18db2d1f30fc.png",
+    "image_uuid": "f790bff2-8756-4734-b69f-2e80d529e1dc",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0778",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0778/00_56_12_11.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/f790bff2-8756-4734-b69f-2e80d529e1dc",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "61d589d8-b19d-4991-b6a9-729ccd4eb21b",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "fc3ee494-cb43-4c1f-8cd8-c0b10a956511",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 867,
+      "y": 166,
+      "width": 602,
+      "height": 676
+    },
+    "original_sha256": "6b29d6c7e36a7c963af17668557f54f3526ff227e1e42a07eaba69253d87276f",
+    "crop_sha256": "2eebc78eeb0b40620699275723920c6ffa921e943ecde497535a3ddbccb27426",
+    "retrieved_at": "2026-11-07T14:09:29.799692+00:00",
+    "local_analysis_only": true,
+    "split": "reference"
+  },
+  {
+    "sample_id": "590dcd40-97ce-4427-af2f-8ac29ee8a985_4b7eaab8-c7d2-469e-8550-bed2efa2b555",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/590dcd40-97ce-4427-af2f-8ac29ee8a985_4b7eaab8-c7d2-469e-8550-bed2efa2b555.png",
+    "image_uuid": "590dcd40-97ce-4427-af2f-8ac29ee8a985",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0333",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Doc%20Ricketts/images/0333/01_35_12_02.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/590dcd40-97ce-4427-af2f-8ac29ee8a985",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "b4325b7b-16a2-47f2-844a-11f2ad82004f",
+        "key": "platform",
+        "value": "Doc Ricketts",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "1fe5ee9f-197a-4630-b515-2cd2bafef045",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 158,
+      "y": 87,
+      "width": 241,
+      "height": 223
+    },
+    "original_sha256": "251c23b9de522e617ece22500fbefc59688aab04f0b637ef5525053f06a4c1e9",
+    "crop_sha256": "daba78e39f074d023c825c5076805ce7cbebe076f7d515d8b78adaef32788782",
+    "retrieved_at": "2026-11-07T14:09:30.077000+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  },
+  {
+    "sample_id": "660584a7-6627-47f9-8fe8-fab7cddc4fe7_1ef0870f-11ee-41e8-8ee3-fa07cbd3b83e",
+    "category": "Vampyroteuthis infernalis",
+    "image_path": "../data/perception-smoke/crops/660584a7-6627-47f9-8fe8-fab7cddc4fe7_1ef0870f-11ee-41e8-8ee3-fa07cbd3b83e.png",
+    "image_uuid": "660584a7-6627-47f9-8fe8-fab7cddc4fe7",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1152",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Tiburon/images/1152/15_57_56_06.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/660584a7-6627-47f9-8fe8-fab7cddc4fe7",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "5feaf9b6-28f0-49be-b222-07ed8ad233a1",
+        "key": "platform",
+        "value": "Tiburon",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "e84dec89-93d6-439c-a7ce-476b05a7c291",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 360,
+      "y": 129,
+      "width": 119,
+      "height": 154
+    },
+    "original_sha256": "9a9ffdc5207238468fc0357dc6298a1ec89d34efe7fbe3a70cdfc6411dd01781",
+    "crop_sha256": "085d98b0dd3097c979984180b785b5e3e8e86ce56fa4b5c31f4819aae60ae8c2",
+    "retrieved_at": "2026-11-07T14:09:30.362478+00:00",
+    "local_analysis_only": true,
+    "split": "validation"
+  },
+  {
+    "sample_id": "dccb9866-98a9-46e0-97e1-335a48995c79_ef3eb221-02ff-47c7-8377-b55938b3f9e8",
+    "category": "Grimpoteuthis",
+    "image_path": "../data/perception-smoke/crops/dccb9866-98a9-46e0-97e1-335a48995c79_ef3eb221-02ff-47c7-8377-b55938b3f9e8.png",
+    "image_uuid": "dccb9866-98a9-46e0-97e1-335a48995c79",
+    "source_id": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/4100",
+    "source_url": "https://database.fathomnet.org/static/m3/framegrabs/Ventana/images/4100/20180322T230607Z-946161a7-4f4a-4ee9-8b26-242edb8b4060.png",
+    "fathomnet_url": "https://database.fathomnet.org/imagery/dccb9866-98a9-46e0-97e1-335a48995c79",
+    "image_license": "CC-BY-NC-ND-4.0",
+    "annotation_license": "CC-BY-NC-4.0",
+    "attribution": "brian@mbari.org",
+    "source_tags": [
+      {
+        "uuid": "0ea6a01a-109f-42fc-9653-480ae5d762f8",
+        "key": "platform",
+        "value": "Ventana",
+        "mediaType": "text/plain"
+      },
+      {
+        "uuid": "b389d20d-393e-4157-983f-4f966fa242bd",
+        "key": "source",
+        "value": "MBARI/VARS",
+        "mediaType": "text/plain"
+      }
+    ],
+    "bbox": {
+      "x": 393,
+      "y": 548,
+      "width": 212,
+      "height": 188
+    },
+    "original_sha256": "6262a15283120987c6de86fafe298be9ed2ab15aaa37b3ee006f46939941fee9",
+    "crop_sha256": "8c3ee15defd36c75167627e9c4d98e1477fedf2e810472fe6d112d78e23228ee",
+    "retrieved_at": "2026-11-07T14:09:38.708983+00:00",
+    "local_analysis_only": true,
+    "split": "test"
+  }
+]

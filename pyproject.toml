@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "abyss-perception"
+version = "0.1.0"
+description = "ABYSS marine image recognition and reference-unfamiliarity pipeline"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26,<3", "Pillow>=10,<13", "scikit-learn>=1.4,<2"]
+
+[project.optional-dependencies]
+vision = ["torch>=2.4,<3", "transformers>=4.45,<5"]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+abyss-perception = "perception.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["perception*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
