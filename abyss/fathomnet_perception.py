@@ -64,6 +64,8 @@ class FathomNetPerception:
     def __init__(self, model) -> None:
         self._model = model
         self.name = model.encoder.identity
+        if getattr(model, 'neighbors', 1) != 1:
+            self.name += f':weighted-knn{model.neighbors}'
 
     def predict(self, image: str) -> PerceptionResult:
         result = self._model.predict(image)

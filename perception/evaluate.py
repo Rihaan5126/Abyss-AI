@@ -31,7 +31,9 @@ def evaluate(perception: Perception, rows: list[dict], familiar: list[str]) -> d
         predictions.append({"sample_id": row["sample_id"], "true_category": row["category"],
                             "true_unknown": row["category"] not in familiar,
                             "source_url": row.get("source_url"),
+                            "source_id": row.get("source_id"),
                             "image_license": row.get("image_license"),
+                            "annotation_license": row.get("annotation_license"),
                             "attribution": row.get("attribution"), **result})
     known = [r for r in predictions if not r["true_unknown"]]
     unknown = [r for r in predictions if r["true_unknown"]]

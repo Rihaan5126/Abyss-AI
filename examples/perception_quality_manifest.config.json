@@ -1,0 +1,47 @@
+{
+  "seed": 20261107,
+  "familiar": [
+    "Benthocodon",
+    "Bathochordaeus",
+    "Vampyroteuthis infernalis",
+    "Atolla",
+    "Solmissus",
+    "Scotoplanes",
+    "Chiroteuthis calyx",
+    "Nanomia bijuga"
+  ],
+  "withheld": [
+    "Periphylla periphylla",
+    "Crossota rufobrunnea",
+    "Gonatus onyx"
+  ],
+  "requested_familiar_per_category": 60,
+  "requested_withheld_per_category": 30,
+  "max_per_source": 2,
+  "excluded_old_source_directories": 186,
+  "counts": {
+    "Benthocodon": 60,
+    "Bathochordaeus": 60,
+    "Vampyroteuthis infernalis": 60,
+    "Atolla": 60,
+    "Solmissus": 60,
+    "Scotoplanes": 56,
+    "Chiroteuthis calyx": 60,
+    "Nanomia bijuga": 60,
+    "Periphylla periphylla": 30,
+    "Crossota rufobrunnea": 11,
+    "Gonatus onyx": 30
+  },
+  "splits": {
+    "test": 164,
+    "reference": 285,
+    "validation": 98
+  },
+  "selection": "Source metadata and conservative thumbnail duplicate grouping only; no model predictions inspected",
+  "allowed_licenses": [
+    "CC-BY-NC-ND-4.0",
+    "CC-BY-NC-4.0",
+    "CC-BY-4.0",
+    "CC0-1.0"
+  ]
+}
