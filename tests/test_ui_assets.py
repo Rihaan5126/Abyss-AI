@@ -36,6 +36,12 @@ def test_hidden_layer_guards_against_negative_smoothed_values():
     assert "Math.max(0, t) ** 0.55" in (UI / "explorer.js").read_text(encoding="utf-8")
 
 
+def test_hidden_world_is_not_shown_on_the_map():
+    html = (UI / "index.html").read_text(encoding="utf-8")
+    assert 'value="hidden"' not in html
+    assert "Reveal" not in html
+
+
 def test_mode_is_always_shown_and_narration_handles_unfamiliar_images():
     app = (UI / "app.js").read_text(encoding="utf-8")
     assert 'id="mode-badge"' in (UI / "index.html").read_text(encoding="utf-8")
