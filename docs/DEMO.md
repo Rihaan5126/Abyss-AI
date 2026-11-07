@@ -71,6 +71,9 @@ Open <http://localhost:8000/?missions=logs/index.json>.
 2. Use **Play**, the timeline, the arrows and the **Speed** menu. **Slow** suits narration.
 3. Use **Step through** to control each stage by hand.
 4. Use the layers: **Habitats**, **Predicted** and **Uncertainty**. **Charts** is the 2D view.
+   In ideal mode, the **World** menu also lists synthetic landforms: a seamount, abyssal hills,
+   a trench and a basin. They show other seafloor shapes, but they are not real places and are
+   not in the benchmark. Regenerate them with `python -m scripts.build_ui_logs`.
 5. Press **Reveal the hidden world** at the end. Hidden data is not loaded before you choose it,
    or before you request the report.
 6. Press **Download findings report**, open the file and use **Print / save as PDF**.

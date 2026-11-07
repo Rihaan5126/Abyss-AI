@@ -22,6 +22,16 @@ const TERRAIN_NAMES = {
   gebco_2025: "Real bathymetry: GEBCO 2025, Monterey Canyon area, 30 x 30 planning grid.",
   synthetic: "Synthetic procedural terrain.",
 };
+// Extra demo landforms from abyss/landforms.py. Illustrative shapes, not real places.
+const LANDFORM_NAMES = {
+  synthetic_seamount: "Seamount",
+  synthetic_abyssal_hills: "Abyssal hills",
+  synthetic_trench: "Trench",
+  synthetic_basin: "Basin",
+};
+for (const [source, name] of Object.entries(LANDFORM_NAMES)) {
+  TERRAIN_NAMES[source] = `Synthetic landform: ${name.toLowerCase()}. Not a real place, and not part of the benchmark.`;
+}
 const PERCEPTION_NAMES = {
   ideal: "Ideal perception: labels come directly from the simulator.",
   stub: "Stub perception: a fake model with made-up error rates.",
@@ -947,12 +957,13 @@ function updateProvenance() {
   $("chart-title").textContent = `Distinct categories ${isReal ? "perceived" : "found"} against energy used`;
   const stub = app.panes.some((p) => p.log.provenance.perception === "stub");
   if (stub) showNotice("Stub perception: a fake model for testing, with no real images. Not a vision result.");
+  const landform = LANDFORM_NAMES[source];
   $("inset-caption").textContent = source === "gebco_2025"
     ? "GEBCO 2025 chart. Contours every 250 m."
-    : "Synthetic terrain, not a real location.";
+    : `Synthetic ${landform ? landform.toLowerCase() : "terrain"}, not a real location.`;
   $("intro-place").textContent = source === "gebco_2025"
     ? "Monterey Canyon · 36°45′N 122°04′W"
-    : "Synthetic seafloor";
+    : landform ? `${landform} · synthetic seafloor` : "Synthetic seafloor";
 }
 
 // Nautical chart ---------------------------------------------------------------
@@ -1637,11 +1648,24 @@ async function init() {
     return;
   }
   const select = $("world");
+  const groups = new Map();
   for (const world of worlds()) {
+    const landform = LANDFORM_NAMES[world.terrain];
+    const group = landform ? "Synthetic landforms" : "Monterey Canyon, real terrain";
+    if (!groups.has(group)) groups.set(group, []);
     const option = document.createElement("option");
     option.value = world.world_id;
-    option.textContent = `${SCENARIO_NAMES[world.scenario] || world.scenario}, seed ${world.seed}`;
-    select.append(option);
+    const scenario = `${SCENARIO_NAMES[world.scenario] || world.scenario}, seed ${world.seed}`;
+    option.textContent = landform ? `${landform} · ${scenario}` : scenario;
+    groups.get(group).push(option);
+  }
+  // Group only when there is more than one kind of terrain, such as in the ideal logs.
+  for (const [label, options] of groups) {
+    if (groups.size === 1) { select.append(...options); continue; }
+    const optgroup = document.createElement("optgroup");
+    optgroup.label = label;
+    optgroup.append(...options);
+    select.append(optgroup);
   }
   await selectWorld(select.value);
   if (manifestPath === "logs/index.json") await loadBenchmark();
