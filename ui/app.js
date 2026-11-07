@@ -416,8 +416,8 @@ function updatePaneText(pane, mission) {
   el.why.hidden = !utility;
   if (utility) {
     el.why.replaceChildren();
-    const title = document.createElement("h3");
-    title.textContent = "Why this target";
+    const title = document.createElement("summary");
+    title.textContent = "The numbers behind this choice";
     el.why.append(title);
     for (const [key, value] of Object.entries(utility)) {
       const row = document.createElement("div");
@@ -429,6 +429,163 @@ function updatePaneText(pane, mission) {
       el.why.append(row);
     }
   }
+}
+
+// Plain-English story ----------------------------------------------------------
+// Turns the logged mission into short sentences for viewers with no background.
+// Every fact comes from the public mission log; nothing here reads hidden data.
+
+const STORY_HOLD_MS = 4000;
+const STRATEGY_TEXT = {
+  frontier: "This robot doesn't learn. It simply moves to the nearest unexplored spot next to where it has already been.",
+  lawnmower: "This robot doesn't learn. It follows a back-and-forth pattern planned before the dive, like mowing a lawn.",
+  heuristic: "This robot doesn't learn. It always heads for steep ground, a fixed rule it never changes.",
+  random: "This robot doesn't learn. It picks a random spot it can reach.",
+  "abyss-nolearn": "This is ABYSS with learning switched off, so its guesses never improve.",
+  "abyss-noinfo": "This is ABYSS without its curiosity bonus: it learns, but never goes somewhere just to find out.",
+};
+
+function depthWords(m) {
+  if (m < 400) return "shallow";
+  if (m < 1000) return "mid-depth";
+  return "deep";
+}
+
+function slopeWords(deg) {
+  if (deg < 3) return "flat";
+  if (deg < 8) return "gently sloping";
+  return "steep";
+}
+
+function plural(n, one, many) {
+  return `${n} ${n === 1 ? one : many}`;
+}
+
+// ABYSS's current guess, in words. Weights are on standardised features; small ones are
+// treated as "no clear pattern". This describes a model, not a proven cause.
+function guessWords(model) {
+  if (!model || !model.observations) return "It hasn't surveyed anywhere yet, so it has no idea where life is.";
+  const w = model.weights || {};
+  const parts = [];
+  if (Math.abs(w.slope || 0) > 0.15) parts.push(w.slope > 0 ? "steeper ground" : "flatter ground");
+  if (Math.abs(w.depth || 0) > 0.15) parts.push(w.depth > 0 ? "deeper water" : "shallower water");
+  const after = `After ${plural(model.observations, "survey", "surveys")}`;
+  if (!parts.length) return `${after}, it hasn't spotted a clear pattern yet.`;
+  return `${after}, its best guess is that ${parts.join(" and ")} ${parts.length > 1 ? "have" : "has"} more life. It will change its mind if new surveys disagree.`;
+}
+
+function reasonWords(utility) {
+  const reasons = [];
+  const expected = Math.max(0, utility.expected_richness);
+  reasons.push(expected < 0.3
+    ? "It doesn't expect much life there"
+    : `It expects about ${expected.toFixed(1)} kinds of creature there`);
+  if (utility.information_gain >= 0.25) reasons.push("it's still unsure what lives on that kind of ground, so checking will teach it something");
+  if (utility.coverage >= 0.99) reasons.push("it's away from everywhere it has already checked");
+  const trip = `Getting there and checking it costs ${utility.energy_cost.toFixed(1)} energy.`;
+  return `${reasons.join(", and ")}. ${trip}`;
+}
+
+function storyFor(pane, mission) {
+  const { log } = pane;
+  const surveys = mission.completed.filter((s) => s.step.observation);
+  const last = surveys.at(-1)?.step;
+  const isAbyss = pane.entry.planner === "abyss";
+  const found = mission.completed.at(-1)?.step.cumulative.distinct_categories || 0;
+  const story = { kicker: "", headline: "", lines: [], priority: 0 };
+
+  if (mission.phase === "done") {
+    story.kicker = "Mission over";
+    story.headline = log.outcome.safe_return ? "Back home safely" : "Mission ended";
+    story.lines.push(`It made ${plural(surveys.length, "survey", "surveys")} and found ${plural(found, "kind", "kinds")} of creature.`);
+    return story;
+  }
+  if (!last) {
+    story.kicker = "Starting out";
+    story.headline = "Setting off";
+    story.lines.push("It knows the shape of the seafloor, but not what lives there.");
+  } else {
+    const obs = last.observation;
+    const [r, c] = obs.waypoint;
+    const depth = Math.round(log.terrain.depth_m[r][c]);
+    const where = `${slopeWords(log.terrain.slope_deg[r][c])}, ${depthWords(depth)} seabed, ${depth} m down`;
+    const fresh = last.new_discoveries.length;
+    const seen = new Set(obs.categories).size;
+    story.kicker = `Survey ${surveys.length}`;
+    if (fresh) {
+      story.headline = `Found ${plural(fresh, "new kind", "new kinds")} of creature!`;
+      story.priority = 1;
+    } else if (seen) {
+      story.headline = "Only creatures it had already seen";
+    } else {
+      story.headline = "Nothing living here";
+    }
+    story.lines.push(`It checked a patch of ${where}.`);
+    story.lines.push(`So far it has found ${plural(found, "different kind", "different kinds")} of creature.`);
+  }
+
+  if (isAbyss) {
+    const utility = mission.current?.step.planner_diagnostics?.target_utility;
+    if (utility && Object.keys(utility).length && mission.phase !== "done") {
+      story.why = reasonWords(utility);
+    }
+    const model = (mission.completed.at(-1)?.step || mission.current?.step)?.planner_diagnostics?.model;
+    story.guess = guessWords(model);
+  } else {
+    story.why = STRATEGY_TEXT[pane.entry.planner] || "This robot follows a fixed plan and doesn't learn.";
+  }
+  return story;
+}
+
+function renderStory(pane, story) {
+  const box = pane.el.story;
+  const kicker = document.createElement("p");
+  kicker.className = "story-kicker";
+  kicker.textContent = story.kicker;
+  const headline = document.createElement("h3");
+  headline.className = story.priority ? "story-headline new" : "story-headline";
+  headline.textContent = story.headline;
+  const parts = [kicker, headline];
+  for (const text of story.lines) {
+    const line = document.createElement("p");
+    line.textContent = text;
+    parts.push(line);
+  }
+  if (story.why) {
+    const label = document.createElement("p");
+    label.className = "story-label";
+    label.textContent = pane.entry.planner === "abyss" ? "Why it chose its next spot" : "How it decides";
+    const why = document.createElement("p");
+    why.textContent = story.why;
+    parts.push(label, why);
+  }
+  if (story.guess) {
+    const label = document.createElement("p");
+    label.className = "story-label";
+    label.textContent = "What it has guessed so far";
+    const guess = document.createElement("p");
+    guess.textContent = story.guess;
+    parts.push(label, guess);
+  }
+  box.replaceChildren(...parts);
+  box.classList.remove("fresh");
+  void box.offsetWidth; // restart the fade-in
+  box.classList.add("fresh");
+}
+
+// Each message stays up long enough to read. New discoveries, pausing and scrubbing skip
+// the wait, so the story never falls behind what the viewer chose to look at.
+function updateStory(pane, mission) {
+  const story = storyFor(pane, mission);
+  const key = [story.kicker, story.headline, story.why, story.guess].join("|");
+  const state = pane.storyState || (pane.storyState = { key: null, shownAt: 0 });
+  if (key === state.key) return;
+  const now = performance.now();
+  const waited = now - state.shownAt >= STORY_HOLD_MS;
+  if (state.key && app.playing && !waited && !story.priority) return;
+  state.key = key;
+  state.shownAt = now;
+  renderStory(pane, story);
 }
 
 function readout(pane, cell) {
@@ -613,6 +770,7 @@ function render() {
     pane.mission = missionAt(pane, app.energy);
     if (app.view === "2d") drawMap(pane, pane.mission);
     updatePaneText(pane, pane.mission);
+    updateStory(pane, pane.mission);
     renderFeed(pane, pane.mission);
   }
   drawChart();
@@ -688,6 +846,7 @@ function createPane(index) {
     energyBar: node.querySelector(".energy i"),
     reserve: node.querySelector(".energy b"),
     why: node.querySelector(".why"),
+    story: node.querySelector(".story"),
     feed,
     feedTitle: title,
     feedList: list,

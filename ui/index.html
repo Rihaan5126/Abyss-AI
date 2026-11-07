@@ -133,10 +133,10 @@
     <output id="clock" for="scrub">0.0 / 150 energy</output>
     <label class="field speed">Speed
       <select id="speed">
-        <option value="3">0.5x</option>
-        <option value="6" selected>1x</option>
-        <option value="12">2x</option>
-        <option value="24">4x</option>
+        <option value="1.5" selected>Slow</option>
+        <option value="6">Normal</option>
+        <option value="12">Fast</option>
+        <option value="24">Very fast</option>
       </select>
     </label>
   </footer>
@@ -159,8 +159,9 @@
         <div><dt>Energy left</dt><dd class="left">0</dd></div>
       </dl>
       <div class="energy" aria-hidden="true"><i></i><b></b></div>
+      <section class="story" aria-live="polite"></section>
       <div class="hud-slot"></div>
-      <div class="why" hidden></div>
+      <details class="why" hidden></details>
     </article>
   </template>
 
