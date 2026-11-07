@@ -47,6 +47,11 @@ internet. It's a visualisation: robots don't see this scene, and the vision mode
 real photographs. Terrain is smoothed between grid cells, and its height is exaggerated 3×.
 If WebGL isn't available, the app falls back to the **2D maps** view.
 
+The **Habitats** layer shows five classes clustered from public depth, slope and bathymetric
+position, and the feed flags a robot's first survey of each class. This is display-only:
+planners never receive it, and all routes and results are unchanged. These are terrain-based
+classes, not biomes, because we have no temperature, oxygen or substrate data at this scale.
+
 Press **Guided demo** for the five-stage walkthrough. The benchmark section appears once
 `ui/logs/benchmark.json` exists.
 
