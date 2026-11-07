@@ -27,6 +27,9 @@ from abyss.planners import PLANNERS, PLANNER_LABELS
 from abyss.run_mission import run_mission, validate_mission_log
 
 SCENARIOS = {"ridge": 0.5, "reversed": 0.5, "clustered": 1.0, "nonlinear": 1.0, "random": 0.0}
+# The demo opens on ridge-associated ecology at full signal, where the 50-seed benchmark
+# shows ABYSS's largest gain. The world type was chosen from the benchmark, not the seed.
+HEADLINE = ("ridge", 1.0)
 LANDFORM_SCENARIO = ("ridge", 0.5)
 UI_PLANNERS = ("frontier", "abyss", "lawnmower", "heuristic", "random")
 OCEAN_PLANNERS = ("frontier", "abyss", "lawnmower")
@@ -66,7 +69,7 @@ def build(config_path: str, out_dir: Path, seed: int, oceans: int = 1, planners=
             old.unlink()
 
     base = load_config(config_path)
-    worlds = [(scenario, rho, None) for scenario, rho in SCENARIOS.items()]
+    worlds = [(*HEADLINE, None)] + [(scenario, rho, None) for scenario, rho in SCENARIOS.items()]
     shape = (base.height, base.width)
     worlds += [
         (*LANDFORM_SCENARIO, landform_terrain(name, shape, base.cell_size_m)) for name in LANDFORMS
@@ -79,7 +82,8 @@ def build(config_path: str, out_dir: Path, seed: int, oceans: int = 1, planners=
         prefix = out_dir.name
     for scenario, rho, terrain in worlds:
         config = replace(base, scenario=scenario, rho=rho)
-        for world_seed, selected in runs:
+        # Preserve the current demo's smaller ideal landform set.
+        for world_seed, selected in runs if terrain is None else runs[:1]:
             for name in selected:
                 entries.append(_write_mission(config, name, world_seed, scenario, out_dir, terrain, prefix))
     manifest = {"entries": entries}

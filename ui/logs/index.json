@@ -1,11 +1,297 @@
 {
  "entries": [
   {
-   "world_id": "ridge-rho0.5-seed1000",
+   "world_id": "ridge-rho1-seed1000",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1000,
    "terrain": "gebco_2025",
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho1-seed1000-frontier.json",
+   "reveal": "logs/ridge-rho1-seed1000-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1000",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1000,
+   "terrain": "gebco_2025",
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho1-seed1000-abyss.json",
+   "reveal": "logs/ridge-rho1-seed1000-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1000",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1000,
+   "terrain": "gebco_2025",
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho1-seed1000-lawnmower.json",
+   "reveal": "logs/ridge-rho1-seed1000-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1000",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1000,
+   "terrain": "gebco_2025",
+   "planner": "heuristic",
+   "label": "Heuristic",
+   "log": "logs/ridge-rho1-seed1000-heuristic.json",
+   "reveal": "logs/ridge-rho1-seed1000-heuristic.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1000",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1000,
+   "terrain": "gebco_2025",
+   "planner": "random",
+   "label": "Random",
+   "log": "logs/ridge-rho1-seed1000-random.json",
+   "reveal": "logs/ridge-rho1-seed1000-random.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1001",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1001,
+   "terrain": "gebco_2025",
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho1-seed1001-frontier.json",
+   "reveal": "logs/ridge-rho1-seed1001-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1001",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1001,
+   "terrain": "gebco_2025",
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho1-seed1001-abyss.json",
+   "reveal": "logs/ridge-rho1-seed1001-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1001",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1001,
+   "terrain": "gebco_2025",
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho1-seed1001-lawnmower.json",
+   "reveal": "logs/ridge-rho1-seed1001-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1002",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1002,
+   "terrain": "gebco_2025",
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho1-seed1002-frontier.json",
+   "reveal": "logs/ridge-rho1-seed1002-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1002",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1002,
+   "terrain": "gebco_2025",
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho1-seed1002-abyss.json",
+   "reveal": "logs/ridge-rho1-seed1002-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1002",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1002,
+   "terrain": "gebco_2025",
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho1-seed1002-lawnmower.json",
+   "reveal": "logs/ridge-rho1-seed1002-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1003",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1003,
+   "terrain": "gebco_2025",
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho1-seed1003-frontier.json",
+   "reveal": "logs/ridge-rho1-seed1003-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1003",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1003,
+   "terrain": "gebco_2025",
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho1-seed1003-abyss.json",
+   "reveal": "logs/ridge-rho1-seed1003-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1003",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1003,
+   "terrain": "gebco_2025",
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho1-seed1003-lawnmower.json",
+   "reveal": "logs/ridge-rho1-seed1003-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1004",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1004,
+   "terrain": "gebco_2025",
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho1-seed1004-frontier.json",
+   "reveal": "logs/ridge-rho1-seed1004-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1004",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1004,
+   "terrain": "gebco_2025",
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho1-seed1004-abyss.json",
+   "reveal": "logs/ridge-rho1-seed1004-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1004",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1004,
+   "terrain": "gebco_2025",
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho1-seed1004-lawnmower.json",
+   "reveal": "logs/ridge-rho1-seed1004-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1005",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1005,
+   "terrain": "gebco_2025",
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho1-seed1005-frontier.json",
+   "reveal": "logs/ridge-rho1-seed1005-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1005",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1005,
+   "terrain": "gebco_2025",
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho1-seed1005-abyss.json",
+   "reveal": "logs/ridge-rho1-seed1005-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1005",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1005,
+   "terrain": "gebco_2025",
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho1-seed1005-lawnmower.json",
+   "reveal": "logs/ridge-rho1-seed1005-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1006",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1006,
+   "terrain": "gebco_2025",
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho1-seed1006-frontier.json",
+   "reveal": "logs/ridge-rho1-seed1006-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1006",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1006,
+   "terrain": "gebco_2025",
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho1-seed1006-abyss.json",
+   "reveal": "logs/ridge-rho1-seed1006-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1006",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1006,
+   "terrain": "gebco_2025",
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho1-seed1006-lawnmower.json",
+   "reveal": "logs/ridge-rho1-seed1006-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1007",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1007,
+   "terrain": "gebco_2025",
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho1-seed1007-frontier.json",
+   "reveal": "logs/ridge-rho1-seed1007-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1007",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1007,
+   "terrain": "gebco_2025",
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho1-seed1007-abyss.json",
+   "reveal": "logs/ridge-rho1-seed1007-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed1007",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 1007,
+   "terrain": "gebco_2025",
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho1-seed1007-lawnmower.json",
+   "reveal": "logs/ridge-rho1-seed1007-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1000",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/ridge-rho0.5-seed1000-frontier.json",
@@ -13,10 +299,10 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/ridge-rho0.5-seed1000-abyss.json",
@@ -24,10 +310,10 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/ridge-rho0.5-seed1000-lawnmower.json",
@@ -35,10 +321,10 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/ridge-rho0.5-seed1000-heuristic.json",
@@ -46,10 +332,10 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "random",
    "label": "Random",
    "log": "logs/ridge-rho0.5-seed1000-random.json",
@@ -60,282 +346,282 @@
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/ridge-rho0.5-seed1001-frontier.json",
-   "reveal": "logs/ridge-rho0.5-seed1001-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1001-frontier.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1001",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/ridge-rho0.5-seed1001-abyss.json",
-   "reveal": "logs/ridge-rho0.5-seed1001-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1001-abyss.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1001",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/ridge-rho0.5-seed1001-lawnmower.json",
-   "reveal": "logs/ridge-rho0.5-seed1001-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1001-lawnmower.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1002",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/ridge-rho0.5-seed1002-frontier.json",
-   "reveal": "logs/ridge-rho0.5-seed1002-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1002-frontier.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1002",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/ridge-rho0.5-seed1002-abyss.json",
-   "reveal": "logs/ridge-rho0.5-seed1002-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1002-abyss.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1002",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/ridge-rho0.5-seed1002-lawnmower.json",
-   "reveal": "logs/ridge-rho0.5-seed1002-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1002-lawnmower.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1003",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/ridge-rho0.5-seed1003-frontier.json",
-   "reveal": "logs/ridge-rho0.5-seed1003-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1003-frontier.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1003",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/ridge-rho0.5-seed1003-abyss.json",
-   "reveal": "logs/ridge-rho0.5-seed1003-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1003-abyss.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1003",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/ridge-rho0.5-seed1003-lawnmower.json",
-   "reveal": "logs/ridge-rho0.5-seed1003-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1003-lawnmower.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1004",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/ridge-rho0.5-seed1004-frontier.json",
-   "reveal": "logs/ridge-rho0.5-seed1004-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1004-frontier.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1004",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/ridge-rho0.5-seed1004-abyss.json",
-   "reveal": "logs/ridge-rho0.5-seed1004-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1004-abyss.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1004",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/ridge-rho0.5-seed1004-lawnmower.json",
-   "reveal": "logs/ridge-rho0.5-seed1004-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1004-lawnmower.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1005",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/ridge-rho0.5-seed1005-frontier.json",
-   "reveal": "logs/ridge-rho0.5-seed1005-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1005-frontier.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1005",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/ridge-rho0.5-seed1005-abyss.json",
-   "reveal": "logs/ridge-rho0.5-seed1005-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1005-abyss.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1005",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/ridge-rho0.5-seed1005-lawnmower.json",
-   "reveal": "logs/ridge-rho0.5-seed1005-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1005-lawnmower.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1006",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/ridge-rho0.5-seed1006-frontier.json",
-   "reveal": "logs/ridge-rho0.5-seed1006-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1006-frontier.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1006",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/ridge-rho0.5-seed1006-abyss.json",
-   "reveal": "logs/ridge-rho0.5-seed1006-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1006-abyss.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1006",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/ridge-rho0.5-seed1006-lawnmower.json",
-   "reveal": "logs/ridge-rho0.5-seed1006-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1006-lawnmower.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1007",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/ridge-rho0.5-seed1007-frontier.json",
-   "reveal": "logs/ridge-rho0.5-seed1007-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1007-frontier.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1007",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/ridge-rho0.5-seed1007-abyss.json",
-   "reveal": "logs/ridge-rho0.5-seed1007-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1007-abyss.reveal.json"
   },
   {
    "world_id": "ridge-rho0.5-seed1007",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/ridge-rho0.5-seed1007-lawnmower.json",
-   "reveal": "logs/ridge-rho0.5-seed1007-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/ridge-rho0.5-seed1007-lawnmower.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/reversed-rho0.5-seed1000-frontier.json",
-   "reveal": "logs/reversed-rho0.5-seed1000-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1000-frontier.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/reversed-rho0.5-seed1000-abyss.json",
-   "reveal": "logs/reversed-rho0.5-seed1000-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1000-abyss.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/reversed-rho0.5-seed1000-lawnmower.json",
-   "reveal": "logs/reversed-rho0.5-seed1000-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1000-lawnmower.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/reversed-rho0.5-seed1000-heuristic.json",
-   "reveal": "logs/reversed-rho0.5-seed1000-heuristic.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1000-heuristic.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "random",
    "label": "Random",
    "log": "logs/reversed-rho0.5-seed1000-random.json",
@@ -346,810 +632,810 @@
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/reversed-rho0.5-seed1001-frontier.json",
-   "reveal": "logs/reversed-rho0.5-seed1001-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1001-frontier.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1001",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/reversed-rho0.5-seed1001-abyss.json",
-   "reveal": "logs/reversed-rho0.5-seed1001-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1001-abyss.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1001",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/reversed-rho0.5-seed1001-lawnmower.json",
-   "reveal": "logs/reversed-rho0.5-seed1001-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1001-lawnmower.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1002",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/reversed-rho0.5-seed1002-frontier.json",
-   "reveal": "logs/reversed-rho0.5-seed1002-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1002-frontier.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1002",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/reversed-rho0.5-seed1002-abyss.json",
-   "reveal": "logs/reversed-rho0.5-seed1002-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1002-abyss.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1002",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/reversed-rho0.5-seed1002-lawnmower.json",
-   "reveal": "logs/reversed-rho0.5-seed1002-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1002-lawnmower.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1003",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/reversed-rho0.5-seed1003-frontier.json",
-   "reveal": "logs/reversed-rho0.5-seed1003-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1003-frontier.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1003",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/reversed-rho0.5-seed1003-abyss.json",
-   "reveal": "logs/reversed-rho0.5-seed1003-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1003-abyss.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1003",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/reversed-rho0.5-seed1003-lawnmower.json",
-   "reveal": "logs/reversed-rho0.5-seed1003-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1003-lawnmower.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1004",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/reversed-rho0.5-seed1004-frontier.json",
-   "reveal": "logs/reversed-rho0.5-seed1004-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1004-frontier.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1004",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/reversed-rho0.5-seed1004-abyss.json",
-   "reveal": "logs/reversed-rho0.5-seed1004-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1004-abyss.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1004",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/reversed-rho0.5-seed1004-lawnmower.json",
-   "reveal": "logs/reversed-rho0.5-seed1004-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1004-lawnmower.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1005",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/reversed-rho0.5-seed1005-frontier.json",
-   "reveal": "logs/reversed-rho0.5-seed1005-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1005-frontier.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1005",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/reversed-rho0.5-seed1005-abyss.json",
-   "reveal": "logs/reversed-rho0.5-seed1005-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1005-abyss.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1005",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/reversed-rho0.5-seed1005-lawnmower.json",
-   "reveal": "logs/reversed-rho0.5-seed1005-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1005-lawnmower.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1006",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/reversed-rho0.5-seed1006-frontier.json",
-   "reveal": "logs/reversed-rho0.5-seed1006-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1006-frontier.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1006",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/reversed-rho0.5-seed1006-abyss.json",
-   "reveal": "logs/reversed-rho0.5-seed1006-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1006-abyss.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1006",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/reversed-rho0.5-seed1006-lawnmower.json",
-   "reveal": "logs/reversed-rho0.5-seed1006-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1006-lawnmower.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1007",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/reversed-rho0.5-seed1007-frontier.json",
-   "reveal": "logs/reversed-rho0.5-seed1007-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1007-frontier.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1007",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/reversed-rho0.5-seed1007-abyss.json",
-   "reveal": "logs/reversed-rho0.5-seed1007-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1007-abyss.reveal.json"
   },
   {
    "world_id": "reversed-rho0.5-seed1007",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/reversed-rho0.5-seed1007-lawnmower.json",
-   "reveal": "logs/reversed-rho0.5-seed1007-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/reversed-rho0.5-seed1007-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1000",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/clustered-rho1-seed1000-frontier.json",
-   "reveal": "logs/clustered-rho1-seed1000-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1000-frontier.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1000",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/clustered-rho1-seed1000-abyss.json",
-   "reveal": "logs/clustered-rho1-seed1000-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1000-abyss.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1000",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/clustered-rho1-seed1000-lawnmower.json",
-   "reveal": "logs/clustered-rho1-seed1000-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1000-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1000",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/clustered-rho1-seed1000-heuristic.json",
-   "reveal": "logs/clustered-rho1-seed1000-heuristic.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1000-heuristic.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1000",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "random",
    "label": "Random",
    "log": "logs/clustered-rho1-seed1000-random.json",
-   "reveal": "logs/clustered-rho1-seed1000-random.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1000-random.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1001",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/clustered-rho1-seed1001-frontier.json",
-   "reveal": "logs/clustered-rho1-seed1001-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1001-frontier.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1001",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/clustered-rho1-seed1001-abyss.json",
-   "reveal": "logs/clustered-rho1-seed1001-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1001-abyss.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1001",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/clustered-rho1-seed1001-lawnmower.json",
-   "reveal": "logs/clustered-rho1-seed1001-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1001-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1002",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/clustered-rho1-seed1002-frontier.json",
-   "reveal": "logs/clustered-rho1-seed1002-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1002-frontier.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1002",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/clustered-rho1-seed1002-abyss.json",
-   "reveal": "logs/clustered-rho1-seed1002-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1002-abyss.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1002",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/clustered-rho1-seed1002-lawnmower.json",
-   "reveal": "logs/clustered-rho1-seed1002-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1002-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1003",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/clustered-rho1-seed1003-frontier.json",
-   "reveal": "logs/clustered-rho1-seed1003-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1003-frontier.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1003",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/clustered-rho1-seed1003-abyss.json",
-   "reveal": "logs/clustered-rho1-seed1003-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1003-abyss.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1003",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/clustered-rho1-seed1003-lawnmower.json",
-   "reveal": "logs/clustered-rho1-seed1003-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1003-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1004",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/clustered-rho1-seed1004-frontier.json",
-   "reveal": "logs/clustered-rho1-seed1004-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1004-frontier.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1004",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/clustered-rho1-seed1004-abyss.json",
-   "reveal": "logs/clustered-rho1-seed1004-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1004-abyss.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1004",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/clustered-rho1-seed1004-lawnmower.json",
-   "reveal": "logs/clustered-rho1-seed1004-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1004-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1005",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/clustered-rho1-seed1005-frontier.json",
-   "reveal": "logs/clustered-rho1-seed1005-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1005-frontier.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1005",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/clustered-rho1-seed1005-abyss.json",
-   "reveal": "logs/clustered-rho1-seed1005-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1005-abyss.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1005",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/clustered-rho1-seed1005-lawnmower.json",
-   "reveal": "logs/clustered-rho1-seed1005-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1005-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1006",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/clustered-rho1-seed1006-frontier.json",
-   "reveal": "logs/clustered-rho1-seed1006-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1006-frontier.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1006",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/clustered-rho1-seed1006-abyss.json",
-   "reveal": "logs/clustered-rho1-seed1006-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1006-abyss.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1006",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/clustered-rho1-seed1006-lawnmower.json",
-   "reveal": "logs/clustered-rho1-seed1006-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1006-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1007",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/clustered-rho1-seed1007-frontier.json",
-   "reveal": "logs/clustered-rho1-seed1007-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1007-frontier.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1007",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/clustered-rho1-seed1007-abyss.json",
-   "reveal": "logs/clustered-rho1-seed1007-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1007-abyss.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1007",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/clustered-rho1-seed1007-lawnmower.json",
-   "reveal": "logs/clustered-rho1-seed1007-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/clustered-rho1-seed1007-lawnmower.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/nonlinear-rho1-seed1000-frontier.json",
-   "reveal": "logs/nonlinear-rho1-seed1000-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1000-frontier.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/nonlinear-rho1-seed1000-abyss.json",
-   "reveal": "logs/nonlinear-rho1-seed1000-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1000-abyss.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/nonlinear-rho1-seed1000-lawnmower.json",
-   "reveal": "logs/nonlinear-rho1-seed1000-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1000-lawnmower.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/nonlinear-rho1-seed1000-heuristic.json",
-   "reveal": "logs/nonlinear-rho1-seed1000-heuristic.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1000-heuristic.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "random",
    "label": "Random",
    "log": "logs/nonlinear-rho1-seed1000-random.json",
-   "reveal": "logs/nonlinear-rho1-seed1000-random.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1000-random.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1001",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/nonlinear-rho1-seed1001-frontier.json",
-   "reveal": "logs/nonlinear-rho1-seed1001-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1001-frontier.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1001",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/nonlinear-rho1-seed1001-abyss.json",
-   "reveal": "logs/nonlinear-rho1-seed1001-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1001-abyss.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1001",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/nonlinear-rho1-seed1001-lawnmower.json",
-   "reveal": "logs/nonlinear-rho1-seed1001-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1001-lawnmower.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1002",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/nonlinear-rho1-seed1002-frontier.json",
-   "reveal": "logs/nonlinear-rho1-seed1002-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1002-frontier.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1002",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/nonlinear-rho1-seed1002-abyss.json",
-   "reveal": "logs/nonlinear-rho1-seed1002-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1002-abyss.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1002",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/nonlinear-rho1-seed1002-lawnmower.json",
-   "reveal": "logs/nonlinear-rho1-seed1002-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1002-lawnmower.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1003",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/nonlinear-rho1-seed1003-frontier.json",
-   "reveal": "logs/nonlinear-rho1-seed1003-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1003-frontier.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1003",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/nonlinear-rho1-seed1003-abyss.json",
-   "reveal": "logs/nonlinear-rho1-seed1003-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1003-abyss.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1003",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/nonlinear-rho1-seed1003-lawnmower.json",
-   "reveal": "logs/nonlinear-rho1-seed1003-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1003-lawnmower.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1004",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/nonlinear-rho1-seed1004-frontier.json",
-   "reveal": "logs/nonlinear-rho1-seed1004-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1004-frontier.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1004",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/nonlinear-rho1-seed1004-abyss.json",
-   "reveal": "logs/nonlinear-rho1-seed1004-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1004-abyss.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1004",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/nonlinear-rho1-seed1004-lawnmower.json",
-   "reveal": "logs/nonlinear-rho1-seed1004-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1004-lawnmower.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1005",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/nonlinear-rho1-seed1005-frontier.json",
-   "reveal": "logs/nonlinear-rho1-seed1005-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1005-frontier.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1005",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/nonlinear-rho1-seed1005-abyss.json",
-   "reveal": "logs/nonlinear-rho1-seed1005-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1005-abyss.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1005",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/nonlinear-rho1-seed1005-lawnmower.json",
-   "reveal": "logs/nonlinear-rho1-seed1005-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1005-lawnmower.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1006",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/nonlinear-rho1-seed1006-frontier.json",
-   "reveal": "logs/nonlinear-rho1-seed1006-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1006-frontier.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1006",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/nonlinear-rho1-seed1006-abyss.json",
-   "reveal": "logs/nonlinear-rho1-seed1006-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1006-abyss.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1006",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/nonlinear-rho1-seed1006-lawnmower.json",
-   "reveal": "logs/nonlinear-rho1-seed1006-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1006-lawnmower.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1007",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/nonlinear-rho1-seed1007-frontier.json",
-   "reveal": "logs/nonlinear-rho1-seed1007-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1007-frontier.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1007",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/nonlinear-rho1-seed1007-abyss.json",
-   "reveal": "logs/nonlinear-rho1-seed1007-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1007-abyss.reveal.json"
   },
   {
    "world_id": "nonlinear-rho1-seed1007",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/nonlinear-rho1-seed1007-lawnmower.json",
-   "reveal": "logs/nonlinear-rho1-seed1007-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/nonlinear-rho1-seed1007-lawnmower.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/random-rho0-seed1000-frontier.json",
@@ -1157,10 +1443,10 @@
   },
   {
    "world_id": "random-rho0-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/random-rho0-seed1000-abyss.json",
@@ -1168,10 +1454,10 @@
   },
   {
    "world_id": "random-rho0-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/random-rho0-seed1000-lawnmower.json",
@@ -1179,10 +1465,10 @@
   },
   {
    "world_id": "random-rho0-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/random-rho0-seed1000-heuristic.json",
@@ -1190,10 +1476,10 @@
   },
   {
    "world_id": "random-rho0-seed1000",
-   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
+   "terrain": "gebco_2025",
    "planner": "random",
    "label": "Random",
    "log": "logs/random-rho0-seed1000-random.json",
@@ -1204,238 +1490,238 @@
    "scenario": "random",
    "rho": 0.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/random-rho0-seed1001-frontier.json",
-   "reveal": "logs/random-rho0-seed1001-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1001-frontier.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1001",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/random-rho0-seed1001-abyss.json",
-   "reveal": "logs/random-rho0-seed1001-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1001-abyss.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1001",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1001,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/random-rho0-seed1001-lawnmower.json",
-   "reveal": "logs/random-rho0-seed1001-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1001-lawnmower.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1002",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/random-rho0-seed1002-frontier.json",
-   "reveal": "logs/random-rho0-seed1002-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1002-frontier.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1002",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/random-rho0-seed1002-abyss.json",
-   "reveal": "logs/random-rho0-seed1002-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1002-abyss.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1002",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1002,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/random-rho0-seed1002-lawnmower.json",
-   "reveal": "logs/random-rho0-seed1002-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1002-lawnmower.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1003",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/random-rho0-seed1003-frontier.json",
-   "reveal": "logs/random-rho0-seed1003-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1003-frontier.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1003",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/random-rho0-seed1003-abyss.json",
-   "reveal": "logs/random-rho0-seed1003-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1003-abyss.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1003",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1003,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/random-rho0-seed1003-lawnmower.json",
-   "reveal": "logs/random-rho0-seed1003-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1003-lawnmower.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1004",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/random-rho0-seed1004-frontier.json",
-   "reveal": "logs/random-rho0-seed1004-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1004-frontier.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1004",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/random-rho0-seed1004-abyss.json",
-   "reveal": "logs/random-rho0-seed1004-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1004-abyss.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1004",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1004,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/random-rho0-seed1004-lawnmower.json",
-   "reveal": "logs/random-rho0-seed1004-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1004-lawnmower.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1005",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/random-rho0-seed1005-frontier.json",
-   "reveal": "logs/random-rho0-seed1005-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1005-frontier.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1005",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/random-rho0-seed1005-abyss.json",
-   "reveal": "logs/random-rho0-seed1005-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1005-abyss.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1005",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1005,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/random-rho0-seed1005-lawnmower.json",
-   "reveal": "logs/random-rho0-seed1005-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1005-lawnmower.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1006",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/random-rho0-seed1006-frontier.json",
-   "reveal": "logs/random-rho0-seed1006-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1006-frontier.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1006",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/random-rho0-seed1006-abyss.json",
-   "reveal": "logs/random-rho0-seed1006-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1006-abyss.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1006",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1006,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/random-rho0-seed1006-lawnmower.json",
-   "reveal": "logs/random-rho0-seed1006-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1006-lawnmower.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1007",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/random-rho0-seed1007-frontier.json",
-   "reveal": "logs/random-rho0-seed1007-frontier.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1007-frontier.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1007",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/random-rho0-seed1007-abyss.json",
-   "reveal": "logs/random-rho0-seed1007-abyss.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1007-abyss.reveal.json"
   },
   {
    "world_id": "random-rho0-seed1007",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1007,
+   "terrain": "gebco_2025",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/random-rho0-seed1007-lawnmower.json",
-   "reveal": "logs/random-rho0-seed1007-lawnmower.reveal.json",
-   "terrain": "gebco_2025"
+   "reveal": "logs/random-rho0-seed1007-lawnmower.reveal.json"
   },
   {
    "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_seamount",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_seamount",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-frontier.json",
@@ -1443,10 +1729,10 @@
   },
   {
    "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_seamount",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_seamount",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-abyss.json",
@@ -1454,10 +1740,10 @@
   },
   {
    "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_seamount",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_seamount",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-lawnmower.json",
@@ -1465,10 +1751,10 @@
   },
   {
    "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_seamount",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_seamount",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-heuristic.json",
@@ -1476,10 +1762,10 @@
   },
   {
    "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_seamount",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_seamount",
    "planner": "random",
    "label": "Random",
    "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-random.json",
@@ -1487,10 +1773,10 @@
   },
   {
    "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_abyssal_hills",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_abyssal_hills",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-frontier.json",
@@ -1498,10 +1784,10 @@
   },
   {
    "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_abyssal_hills",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_abyssal_hills",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-abyss.json",
@@ -1509,10 +1795,10 @@
   },
   {
    "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_abyssal_hills",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_abyssal_hills",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-lawnmower.json",
@@ -1520,10 +1806,10 @@
   },
   {
    "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_abyssal_hills",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_abyssal_hills",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-heuristic.json",
@@ -1531,10 +1817,10 @@
   },
   {
    "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_abyssal_hills",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_abyssal_hills",
    "planner": "random",
    "label": "Random",
    "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-random.json",
@@ -1542,10 +1828,10 @@
   },
   {
    "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_trench",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_trench",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-frontier.json",
@@ -1553,10 +1839,10 @@
   },
   {
    "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_trench",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_trench",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-abyss.json",
@@ -1564,10 +1850,10 @@
   },
   {
    "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_trench",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_trench",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-lawnmower.json",
@@ -1575,10 +1861,10 @@
   },
   {
    "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_trench",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_trench",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-heuristic.json",
@@ -1586,10 +1872,10 @@
   },
   {
    "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_trench",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_trench",
    "planner": "random",
    "label": "Random",
    "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-random.json",
@@ -1597,10 +1883,10 @@
   },
   {
    "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_basin",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_basin",
    "planner": "frontier",
    "label": "Frontier",
    "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-frontier.json",
@@ -1608,10 +1894,10 @@
   },
   {
    "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_basin",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_basin",
    "planner": "abyss",
    "label": "ABYSS",
    "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-abyss.json",
@@ -1619,10 +1905,10 @@
   },
   {
    "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_basin",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_basin",
    "planner": "lawnmower",
    "label": "Lawnmower",
    "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-lawnmower.json",
@@ -1630,10 +1916,10 @@
   },
   {
    "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_basin",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_basin",
    "planner": "heuristic",
    "label": "Heuristic",
    "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-heuristic.json",
@@ -1641,10 +1927,10 @@
   },
   {
    "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
-   "terrain": "synthetic_basin",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
+   "terrain": "synthetic_basin",
    "planner": "random",
    "label": "Random",
    "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-random.json",
