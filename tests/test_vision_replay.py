@@ -9,14 +9,18 @@ def test_real_replay_has_valid_paired_logs_and_resolvable_opaque_photos(tmp_path
     from test_fathomnet_perception import write_manifest, FAMILIAR, FakeEncoder
     from perception.dataset import read_manifest
     from perception.evaluate import fit_perception
-    from abyss.fathomnet_perception import build_kit
+    from abyss.fathomnet_perception import build_kit, read_test_rows
 
     data = tmp_path / 'data'
     data.mkdir()
     source = write_manifest(data)
     model = fit_perception(read_manifest(source), FAMILIAR, FakeEncoder())
     ui = tmp_path / 'ui'
-    manifest = build('config.yaml', build_kit(model, source), ui / 'vision-logs', ui_root=ui)
+    rows = [{**row, 'image_license': 'CC0-1.0'} for row in read_test_rows(source)]
+    manifest = build('config.yaml', build_kit(model, source), ui / 'vision-logs', ui_root=ui, rows=rows)
+    assert manifest['image_credits']
+    assert set(next(iter(manifest['image_credits'].values()))) == {'source', 'license'}
+    assert all((ui / path).is_file() for path in manifest['image_credits'])
     assert [e['planner'] for e in manifest['entries']] == ['frontier', 'abyss']
     assert len({e['world_id'] for e in manifest['entries']}) == 1
     count = 0

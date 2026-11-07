@@ -1,6 +1,13 @@
 // Evaluator-facing report, generated only when the viewer requests hidden truth.
 const esc = (v) => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+const STRATEGY = {
+  frontier: 'Frontier explores nearby unvisited locations.',
+  lawnmower: 'Lawnmower follows a back-and-forth pattern planned before the mission.',
+  heuristic: 'Heuristic follows a fixed preference for steep ground.',
+  random: 'Random picks reachable locations at random.',
+};
+
 export function buildReport(panes) {
   const rows = panes.map(p => {
     if (!p.reveal) throw new Error('Load the evaluation record before generating a report.');
@@ -9,7 +16,7 @@ export function buildReport(panes) {
       available:p.reveal.categories_available_count, surveys:o.surveys,
       energy:o.energy_used, budget:p.log.energy.budget, safe:o.safe_return,
       unknown:o.unknown_encounters, known:o.discovered, world:p.log.world,
-      vision:p.log.provenance.perception};
+      vision:p.log.provenance.perception, planner:p.entry.planner};
   });
   const abyss = rows.find(r => r.name.toLowerCase() === 'abyss');
   const other = rows.find(r => r !== abyss);
@@ -18,7 +25,7 @@ export function buildReport(panes) {
     const delta = abyss.actual - other.actual;
     finding = delta === 0
       ? `ABYSS and ${other.name} encountered the same number of actual organism categories: ${abyss.actual}.`
-      : `ABYSS encountered ${Math.abs(delta)} ${delta > 0 ? 'more' : 'fewer'} actual organism categories than ${other.name} (${abyss.actual} versus ${other.actual}).`;
+      : `ABYSS encountered ${Math.abs(delta)} ${delta > 0 ? 'more' : 'fewer'} actual organism ${Math.abs(delta) === 1 ? 'category' : 'categories'} than ${other.name} (${abyss.actual} versus ${other.actual}).`;
     finding += ` ABYSS made ${abyss.surveys} survey stops and used ${abyss.energy.toFixed(1)} energy; ${other.name} made ${other.surveys} stops and used ${other.energy.toFixed(1)} energy.`;
   }
   const body = rows.map(r => `<tr><th>${esc(r.name)}</th><td>${r.actual}/${r.available}</td><td>${r.perceived}</td><td>${r.surveys}</td><td>${r.energy.toFixed(1)}/${r.budget}</td><td>${r.unknown}</td><td>${r.safe?'Yes':'No'}</td></tr>`).join('');
@@ -34,7 +41,7 @@ export function buildReport(panes) {
 <p><strong>Survey stops</strong> are locations where the robot looked for animals. Fewer stops alone does not mean a better expedition. Travel and surveys both spend energy, and both robots must reserve enough energy to return home. Energy is simulated, not measured battery consumption.</p>
 <p><strong>Unfamiliar images</strong> are distinct images flagged as insufficiently similar to familiar references. They are not a count of new species; repeated or different images can represent the same category.</p>
 <h2>What did the robots recognise?</h2>${inventory}
-<h2>How the exploration works</h2><p>Frontier explores nearby unvisited locations. ABYSS updates a habitat model after observations, then balances predicted richness, uncertainty, coverage and travel cost when choosing its next destination. Its model predicts richness rather than directly predicting previously unseen categories. This report does not establish which component caused a difference.</p>
+<h2>How the exploration works</h2><p>${esc(other ? (STRATEGY[other.planner] || `${other.name} follows a fixed plan.`) : '')} ABYSS updates a habitat model after observations, then balances predicted richness, uncertainty, coverage and travel cost when choosing its next destination. Its model predicts richness rather than directly predicting previously unseen categories. This report does not establish which component caused a difference.</p>
 <h2>What we can conclude</h2><p>This report describes one paired simulated expedition. A tie, win or loss here does not prove that one explorer is generally better. That requires repeated matched worlds and separately reported benchmark results. These numbers are not the published 6,300-mission ideal-perception benchmark.</p>
 <p>The seabed uses the terrain source recorded in the mission. Biology is simulated. Animal photographs represent simulated encounters, not sightings at these coordinates. The 3D animation replays computed routes; the image model classifies supplied crops and does not detect animals inside the animated scene.</p>
 <details><summary>Experiment details</summary><ul>${provenance}</ul><p>Counts and routes come from the saved mission logs and private evaluation records. This report contains no animal image crops.</p></details>

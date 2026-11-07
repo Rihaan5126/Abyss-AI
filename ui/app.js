@@ -67,6 +67,7 @@ const app = {
   captionTimer: 0,
   summaryTimer: 0,
   manifestNotice: "",
+  imageCredits: {},
   benchmark: null,
 };
 
@@ -497,7 +498,8 @@ function storyFor(pane, mission) {
   if (mission.phase === "done") {
     story.kicker = "Mission over";
     story.headline = log.outcome.safe_return ? "Back home safely" : "Mission ended";
-    story.lines.push(`It made ${plural(surveys.length, "survey", "surveys")} and found ${plural(found, "kind", "kinds")} of creature.`);
+    const verb = log.provenance.perception !== "ideal" ? "reported" : "found";
+    story.lines.push(`It made ${plural(surveys.length, "survey", "surveys")} and ${verb} ${plural(found, "kind", "kinds")} of creature.`);
     return story;
   }
   if (!last) {
@@ -511,17 +513,26 @@ function storyFor(pane, mission) {
     const where = `${slopeWords(log.terrain.slope_deg[r][c])}, ${depthWords(depth)} seabed, ${depth} m down`;
     const fresh = last.new_discoveries.length;
     const seen = new Set(obs.categories).size;
+    const unfamiliar = obs.unknown_flags.filter(Boolean).length;
+    // With real perception, these are the model's labels and may be wrong.
+    const isReal = log.provenance.perception !== "ideal";
     story.kicker = `Survey ${surveys.length}`;
     if (fresh) {
-      story.headline = `Found ${plural(fresh, "new kind", "new kinds")} of creature!`;
+      story.headline = `${isReal ? "Reported" : "Found"} ${plural(fresh, "new kind", "new kinds")} of creature!`;
+      story.priority = 1;
+    } else if (unfamiliar) {
+      story.headline = "Something unfamiliar to its references";
       story.priority = 1;
     } else if (seen) {
-      story.headline = "Only creatures it had already seen";
+      story.headline = isReal ? "Only labels it had already reported" : "Only creatures it had already seen";
     } else {
-      story.headline = "Nothing living here";
+      story.headline = "No organisms in this survey";
     }
     story.lines.push(`It checked a patch of ${where}.`);
-    story.lines.push(`So far it has found ${plural(found, "different kind", "different kinds")} of creature.`);
+    if (unfamiliar) {
+      story.lines.push(`The image model flagged ${plural(unfamiliar, "image", "images")} as unfamiliar. That does not mean a new species.`);
+    }
+    story.lines.push(`So far it has ${isReal ? "reported" : "found"} ${plural(found, "different kind", "different kinds")} of creature.`);
   }
 
   if (isAbyss) {
@@ -921,6 +932,17 @@ function updateProvenance() {
     `${TERRAIN_NAMES[source] || source}${credit} Biology is simulated, not observed. ` +
     `${PERCEPTION_NAMES[model] || `Perception model: ${model}.`} ` +
     "Energy is in abstract units. Every route and count comes from an executed mission log.";
+  // Always say which perception made these results, so a fallback is never silent.
+  const modeText = model === "ideal"
+    ? "Ideal perception, no images"
+    : model === "stub"
+      ? "Stub perception: fake test model"
+      : `Real images: ${String(model).split("@")[0].split("/").pop()}`;
+  for (const id of ["mode-badge", "intro-mode"]) {
+    $(id).textContent = modeText;
+    $(id).title = `Perception model: ${model}`;
+  }
+  $("mode-badge").classList.toggle("real", model !== "ideal" && model !== "stub");
   const isReal = app.panes.some((p) => p.log.provenance.perception !== "ideal");
   $("chart-title").textContent = `Distinct categories ${isReal ? "perceived" : "found"} against energy used`;
   const stub = app.panes.some((p) => p.log.provenance.perception === "stub");
@@ -1606,6 +1628,7 @@ async function init() {
     const manifest = await getJson(manifestPath);
     app.entries = manifest.entries;
     app.manifestNotice = manifest.notice || "";
+    app.imageCredits = manifest.image_credits || {};
   } catch (error) {
     const hint = location.protocol === "file:"
       ? "Browsers block loading logs from file:// pages. Run: python -m http.server 8000 --directory ui"
