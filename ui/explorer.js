@@ -678,10 +678,11 @@ export function createExplorer(api) {
     view.feedKey = key;
 
     const title = document.createElement("h3");
-    title.textContent = `${pane.entry.label} camera feed`;
+    title.textContent = `${pane.entry.label} animal observations`;
     const body = document.createElement("div");
     body.className = "hud-body";
-    const last = surveys[surveys.length - 1]?.step;
+    const photographed = surveys.slice().reverse().find(s => s.step.observation.image_refs.length);
+    const last = photographed?.step || surveys[surveys.length - 1]?.step;
     if (!last) {
       const wait = document.createElement("p");
       wait.textContent = "Waiting for the first survey";
@@ -693,16 +694,25 @@ export function createExplorer(api) {
       const depth = Math.round(pane.log.terrain.depth_m[r][c]);
       const slope = pane.log.terrain.slope_deg[r][c].toFixed(1);
       meta.className = "hud-meta";
-      meta.textContent = `Survey ${surveys.length} at (${r}, ${c}), ${depth} m, slope ${slope}°`;
+      meta.textContent = `${photographed ? 'Latest photographed encounter' : 'Survey'}: step ${last.step}, (${r}, ${c}), ${depth} m`;
       body.append(meta);
-      for (const ref of obs.image_refs) {
+      const photos = document.createElement("div");
+      photos.className = "observation-photos";
+      for (const [index, ref] of obs.image_refs.entries()) {
         if (ref.includes("://")) continue;
         const image = document.createElement("img");
         image.src = ref;
         image.alt = "Marine image used as a simulated camera encounter";
         image.addEventListener("error", () => image.remove());
-        body.append(image);
+        const figure = document.createElement("figure");
+        const caption = document.createElement("figcaption");
+        caption.textContent = obs.unknown_flags[index]
+          ? "Flagged unfamiliar"
+          : `Predicted: ${categoryLabel(obs.image_labels[index] || 'Unlabelled')}`;
+        figure.append(image, caption);
+        photos.append(figure);
       }
+      body.append(photos);
       const chips = document.createElement("p");
       chips.className = "hud-chips";
       for (const category of obs.categories) {
@@ -731,7 +741,10 @@ export function createExplorer(api) {
       const note = document.createElement("p");
       note.className = "hud-note";
       const model = pane.log.provenance.perception;
-      note.textContent = model === "ideal" ? "Simulated labels, ideal perception" : `Perception model: ${model}`;
+      note.textContent = model === "ideal"
+        ? "Ideal perception: no animal photographs in this mission. Generate a vision replay to show photos."
+        : "Recorded image classifications, not live camera footage. Earlier photos remain until the next photographed encounter.";
+      note.title = model;
       body.append(note);
     }
     card.replaceChildren(title, body);

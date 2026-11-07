@@ -1433,7 +1433,13 @@ async function loadExplorer() {
 
 async function init() {
   bindControls();
-  const manifestPath = new URLSearchParams(location.search).get("missions") || "logs/index.json";
+  let manifestPath = new URLSearchParams(location.search).get("missions");
+  if (!manifestPath) {
+    try {
+      await getJson("vision-logs/index.json");
+      manifestPath = "vision-logs/index.json";
+    } catch (_) { manifestPath = "logs/index.json"; }
+  }
   if (!/^[a-zA-Z0-9_/-]+\/index\.json$/.test(manifestPath) || manifestPath.includes("..")) {
     throw new Error("Choose a local mission index inside the UI directory.");
   }
