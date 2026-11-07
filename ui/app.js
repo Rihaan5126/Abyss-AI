@@ -667,6 +667,10 @@ function renderFeed(pane, mission) {
     meta.className = "meta";
     meta.textContent = `Energy ${fmt(end)} at (${obs.waypoint[0]}, ${obs.waypoint[1]})`;
     item.append(meta);
+    const inspect = document.createElement("button");
+    inspect.textContent = "Inspect observation";
+    inspect.onclick = () => app.inspector?.open(pane, step.step);
+    item.append(inspect);
     if (!obs.categories.length && !obs.image_refs.length) {
       const none = document.createElement("span");
       none.className = "none";
@@ -689,12 +693,16 @@ function renderFeed(pane, mission) {
     });
     const habitat = habitatChip(obs);
     if (habitat) item.append(habitat);
-    for (const ref of obs.image_refs) {
+    for (const [imageIndex, ref] of obs.image_refs.entries()) {
       if (ref.includes("://")) continue; // opaque IDs, not image URLs
       const image = document.createElement("img");
       image.addEventListener("error", () => image.remove());
       image.src = ref;
       image.alt = "Marine image used as a simulated camera encounter";
+      image.tabIndex = 0;
+      image.style.cursor = "pointer";
+      image.onclick = () => app.inspector?.open(pane, step.step, imageIndex);
+      image.onkeydown = event => { if (event.key === "Enter") image.click(); };
       item.append(image);
     }
     return item;
@@ -878,10 +886,12 @@ function createPane(index) {
 }
 
 async function loadPane(pane, entry) {
+  app.inspector?.close();
   const log = await getJson(entry.log);
   pane.entry = entry;
   pane.log = log;
   pane.reveal = null;
+  pane.inferenceEvidence = null;
   pane.timeline = buildTimeline(log);
   pane.terrainImage = terrainImage(log.terrain);
   pane.isobaths = isobaths(log.terrain.depth_m);
@@ -1232,6 +1242,7 @@ function setRevealButton() {
 }
 
 async function selectWorld(worldId) {
+  app.inspector?.close();
   const token = (app.loadToken += 1);
   setPlaying(false);
   cancelSequence();
@@ -1624,6 +1635,8 @@ async function loadExplorer() {
 }
 
 async function init() {
+  const { installInspector } = await import("./inspector.js");
+  app.inspector = installInspector({app});
   bindControls();
   let manifestPath = new URLSearchParams(location.search).get("missions");
   if (!manifestPath) {

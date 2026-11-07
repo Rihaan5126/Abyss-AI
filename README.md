@@ -34,6 +34,11 @@ This writes a mission log and a `.reveal.json` file to `results/missions/`.
 
 ## Replay UI
 
+For input images, actual reference matches, threshold explanations, the
+observation-to-decision trace and optional fresh local inference, see
+[Observation Inspector](docs/observation-inspector.md). Regenerate a vision replay
+to capture evidence, then click an animal photo or survey-feed inspect button.
+
 When local `ui/vision-logs/index.json` exists, opening the viewer automatically
 loads that real-image replay. Otherwise it uses the bundled ideal-perception
 examples, which contain no animal photos. An explicit `?missions=logs/index.json`

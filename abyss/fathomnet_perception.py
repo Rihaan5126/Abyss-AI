@@ -63,12 +63,17 @@ class FathomNetPerception:
 
     def __init__(self, model) -> None:
         self._model = model
+        self.evidence_records = []
         self.name = model.encoder.identity
         if getattr(model, 'neighbors', 1) != 1:
             self.name += f':weighted-knn{model.neighbors}'
 
     def predict(self, image: str) -> PerceptionResult:
-        result = self._model.predict(image)
+        if hasattr(self._model, 'predict_with_evidence'):
+            result, evidence = self._model.predict_with_evidence(image)
+            self.evidence_records.append({'input_path': str(image), 'evidence': evidence})
+        else:
+            result = self._model.predict(image)
         return PerceptionResult(
             predicted_category=result.predicted_category,
             similarity=result.similarity_score,

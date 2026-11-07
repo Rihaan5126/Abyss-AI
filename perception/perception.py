@@ -2,6 +2,8 @@
 
 from dataclasses import asdict, dataclass
 import json
+import hashlib
+import time
 from pathlib import Path
 
 import numpy as np
@@ -34,18 +36,45 @@ class Perception:
         self.neighbors = neighbors
 
     def predict(self, image: str | Path | Image.Image) -> PerceptionResult:
+        return self.predict_with_evidence(image)[0]
+
+    @property
+    def artifact_id(self):
+        digest = hashlib.sha256(self.index.embeddings.tobytes())
+        digest.update(json.dumps([self.encoder.identity, self.index.labels, self.threshold, self.neighbors]).encode())
+        return digest.hexdigest()
+
+    def predict_with_evidence(self, image):
+        started = time.perf_counter()
         embeddings = self.encoder.encode([image])
-        scores, indices = self.index.query(embeddings)
-        score, index = float(scores[0]), int(indices[0])
+        from .novelty import unit_vectors
+        distances, indices = self.index._nn.kneighbors(unit_vectors(embeddings), n_neighbors=self.neighbors)
+        neighbors, votes = [], {}
+        for distance, index in zip(distances[0], indices[0]):
+            distance, index = float(np.clip(distance, 0, 2)), int(index)
+            label = self.index.labels[index]
+            weight = 1 / max(distance, 1e-6)
+            votes[label] = votes.get(label, 0.) + weight
+            neighbors.append({'reference': self.index.references[index], 'label': label,
+                              'distance': distance, 'similarity': 1-distance, 'weight': weight})
+        score = neighbors[0]['distance']
+        winner = max(votes, key=votes.get)
         unknown = score > self.threshold
-        return PerceptionResult(
-            predicted_category=None if unknown else self.index.classify(embeddings, self.neighbors)[0],
+        result = PerceptionResult(
+            predicted_category=None if unknown else winner,
             similarity_score=1 - score,
             novelty_score=score,
             is_unknown=unknown,
             image_reference=str(image) if isinstance(image, (str, Path)) else None,
-            nearest_reference=self.index.references[index],
+            nearest_reference=neighbors[0]['reference'],
         )
+        return result, {'artifact_id': self.artifact_id, 'encoder': self.encoder.identity,
+                        'neighbors_used': self.neighbors, 'neighbors': neighbors, 'votes': votes,
+                        'vote_winner': winner, 'threshold': self.threshold,
+                        'result': {k:v for k,v in result.to_dict().items() if k not in ('image_reference','nearest_reference')},
+                        'embedding_cached': getattr(self.encoder, 'last_cache_hits', [None])[0],
+                        'processing_ms': (time.perf_counter()-started)*1000,
+                        'timing_scope': 'Image encoding/cache lookup and reference matching; excludes model loading'}
 
     def save(self, directory: str | Path):
         directory = Path(directory)
