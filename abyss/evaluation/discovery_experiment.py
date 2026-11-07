@@ -170,6 +170,14 @@ def render(data):
     return "\n".join(lines)
 
 
+def write_results(path, data):
+    """Keep metadata readable and each mission on one line for reviewable diffs."""
+    metadata = {key: value for key, value in data.items() if key != "rows"}
+    header = json.dumps(metadata, indent=2).rstrip()[:-1]
+    records = ",\n".join("    " + json.dumps(row, separators=(",", ":")) for row in data["rows"])
+    Path(path).write_text(header.rstrip() + ',\n  "rows": [\n' + records + '\n  ]\n}\n')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("command", choices=("tune", "run", "landforms", "vision", "report"))
@@ -228,7 +236,7 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
     if args.command != "report":
         data["simulation"] = base.to_dict()
-        out.write_text(json.dumps(data, indent=1) + "\n")
+        write_results(out, data)
     if args.command != "tune":
         out.with_suffix(".md").write_text(render(data))
     print(f"Wrote {out}", flush=True)
