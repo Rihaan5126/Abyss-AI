@@ -91,6 +91,7 @@ class Environment:
             survey_cost=config.survey_cost,
             energy_reserve=config.energy_reserve,
             return_cost=_read_only_copy(self._return_cost),
+            terrain_cost_factor=config.terrain_cost_factor,
         )
         self._robot = RobotState(config.home, config.energy_budget)
         self._status = MissionStatus.RUNNING

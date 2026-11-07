@@ -43,6 +43,7 @@ const HABITAT_COLOURS = [[214, 226, 190], [255, 139, 120], [96, 66, 190], [48, 1
 const LAYER_LABELS = {
   habitat: "Habitat classes",
   predicted_richness: "Predicted richness",
+  discovery_proxy: "Rare-habitat discovery clues (proxy, not unseen-species count)",
   uncertainty: "Model uncertainty",
   hidden: "Hidden expected richness (simulated)",
 };
@@ -53,6 +54,13 @@ const UTILITY_LABELS = {
   energy_cost: "Energy cost",
   utility: "Utility",
   candidates: "Safe targets considered",
+  discovery_proxy: "Rare-habitat discovery proxy",
+  habitat_coverage: "Habitat coverage incentive",
+  exploration_bonus: "Exploration bonus",
+  route_score: "Planned route value per energy",
+  planned_stops: "Provisional survey stops",
+  planned_energy: "Planned travel and survey energy",
+  warmup: "Initial habitat sampling (1 = yes)",
 };
 
 const $ = (id) => document.getElementById(id);
@@ -434,9 +442,10 @@ function updatePaneText(pane, mission) {
     for (const [key, value] of Object.entries(utility)) {
       const row = document.createElement("div");
       const name = document.createElement("span");
-      name.textContent = UTILITY_LABELS[key] || key;
+      name.textContent = key === "information_gain" && pane.entry.planner.startsWith("abyss-discovery")
+        ? "Uncertainty score" : UTILITY_LABELS[key] || key;
       const number = document.createElement("span");
-      number.textContent = fmt(value, 3);
+      number.textContent = Array.isArray(value) ? value.map(cell => `(${cell.join(", ")})`).join(" → ") : fmt(value, 3);
       row.append(name, number);
       el.why.append(row);
     }
@@ -477,6 +486,12 @@ function plural(n, one, many) {
 // treated as "no clear pattern". This describes a model, not a proven cause.
 function guessWords(model) {
   if (!model || !model.observations) return "It hasn't surveyed anywhere yet, so it has no idea where life is.";
+  if (model.kind) {
+    const mix = model.mixture || {};
+    const strongest = Object.entries(mix).sort((a, b) => b[1] - a[1])[0]?.[0];
+    const pattern = strongest === "terrain" ? "similar seafloor habitats" : strongest === "spatial" ? "nearby patches" : "the overall sighting rate";
+    return `After ${plural(model.observations, "survey", "surveys")}, it models ${plural(model.categories_modelled, "observed category", "observed categories")}. Its predictions currently give most weight to ${pattern}. Rare sightings provide clues to further discoveries; they don't identify animals it has never seen.`;
+  }
   const w = model.weights || {};
   const parts = [];
   if (Math.abs(w.slope || 0) > 0.15) parts.push(w.slope > 0 ? "steeper ground" : "flatter ground");
@@ -487,6 +502,10 @@ function guessWords(model) {
 }
 
 function reasonWords(utility) {
+  if (utility.discovery_proxy !== undefined) {
+    const stops = utility.planned_stops?.length || 1;
+    return `${utility.warmup ? "It is sampling different habitats to learn early. " : ""}It favours habitats associated with less frequent sightings (discovery proxy ${fmt(utility.discovery_proxy, 2)}), balanced against uncertainty and energy. It compared routes of up to ${stops} stop${stops === 1 ? "" : "s"}; only the first stop is committed before observing again. This stop costs ${fmt(utility.energy_cost)} energy, with the return reserve protected.`;
+  }
   const reasons = [];
   const expected = Math.max(0, utility.expected_richness);
   reasons.push(expected < 0.3
@@ -502,7 +521,7 @@ function storyFor(pane, mission) {
   const { log } = pane;
   const surveys = mission.completed.filter((s) => s.step.observation);
   const last = surveys.at(-1)?.step;
-  const isAbyss = pane.entry.planner === "abyss";
+  const isAbyss = pane.entry.planner === "abyss" || pane.entry.planner.startsWith("abyss-discovery");
   const found = mission.completed.at(-1)?.step.cumulative.distinct_categories || 0;
   const story = { kicker: "", headline: "", lines: [], priority: 0 };
 
@@ -576,7 +595,7 @@ function renderStory(pane, story) {
   if (story.why) {
     const label = document.createElement("p");
     label.className = "story-label";
-    label.textContent = pane.entry.planner === "abyss" ? "Why it chose its next spot" : "How it decides";
+    label.textContent = pane.entry.planner.startsWith("abyss") ? "Why it chose its next spot" : "How it decides";
     const why = document.createElement("p");
     why.textContent = story.why;
     parts.push(label, why);
@@ -1199,7 +1218,10 @@ function advanceSequence() {
   once("belief", seq.belief && app.energy >= seq.belief.start, () => {
     setLayer("predicted_richness");
     render();
-    say("The seafloor now shows what ABYSS believes. Each target weighs predicted richness, uncertainty and coverage per unit of energy.", 8500);
+    const discovery = abyssPane().entry.planner.startsWith("abyss-discovery");
+    say(discovery
+      ? "The map shows category occurrence estimates. Discovery favours rare-category habitats, checks short routes and replans after each survey."
+      : "The seafloor now shows what ABYSS believes. Each target weighs predicted richness, uncertainty and coverage per unit of energy.", 8500);
   });
   once("back", app.energy >= seq.back, () => {
     setLayer("terrain");
@@ -1437,7 +1459,9 @@ async function loadBenchmark() {
 // Guided demo ----------------------------------------------------------------
 
 function abyssPane() {
-  return app.panes.find((p) => p.entry.planner === "abyss") || app.panes[0];
+  return app.panes.find((p) => p.entry.planner === "abyss-discovery") ||
+    app.panes.find((p) => p.entry.planner.startsWith("abyss-discovery")) ||
+    app.panes.find((p) => p.entry.planner === "abyss") || app.panes[0];
 }
 
 function otherPane() {
@@ -1475,6 +1499,8 @@ const TOUR_STAGES = [
     body: () => {
       const line = abyssPane().timeline;
       const terms = line[Math.min(5, line.length - 2)].step.planner_diagnostics?.target_utility;
+      if (terms?.discovery_proxy !== undefined) return reasonWords(terms) +
+        " The map shows estimated occurrence of observed categories; Discovery clues shows the rarity-weighted proxy. No discovery triggers a scripted route.";
       const numbers = terms?.utility !== undefined
         ? ` For this target: predicted richness ${fmt(terms.expected_richness, 2)}, information gain ${fmt(terms.information_gain, 2)}, ` +
           `coverage ${fmt(terms.coverage, 2)}, energy ${fmt(terms.energy_cost, 2)}.`

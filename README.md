@@ -96,6 +96,12 @@ See [docs/results.md](docs/results.md) for findings, limitations and full tables
 [docs/novelty-experiment.md](docs/novelty-experiment.md) records a separate experiment on
 targeting new categories, which did not improve on ABYSS.
 
+[Experimental category-aware Discovery](docs/discovery-planner.md) adds observed-category
+habitat models, rarity weighting, initial sampling, optional route lookahead and conservative
+vision updates. It has a separate fresh-seed evaluation and replay selection; original ABYSS
+and the published benchmark stay unchanged. Its “Discovery clues” map and observation
+inspector show how model predictions enter decisions. See the linked guide to run it.
+
 ```bash
 python -m abyss.evaluation.full_run
 ```
