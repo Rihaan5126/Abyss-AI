@@ -2,13 +2,19 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 from scipy.ndimage import gaussian_filter, uniform_filter
 
 FEATURE_NAMES = ("depth", "slope", "bpi")
 BPI_WINDOW = 5
+GEBCO_CITATION = (
+    "GEBCO Compilation Group (2025) GEBCO 2025 Grid "
+    "(doi:10.5285/37c52e96-24ea-67ce-e063-7086abc05f29)"
+)
 
 
 def _standardise(values: np.ndarray) -> np.ndarray:
@@ -26,11 +32,28 @@ class Terrain:
     source: str
 
 
-def terrain_from_depth(depth_m: np.ndarray, cell_size_m: float, source: str) -> Terrain:
-    """Derive slope and bathymetric position from a positive-down depth grid."""
+def load_gebco_terrain(path: str | Path) -> Terrain:
+    """Load a crop written by scripts/fetch_gebco.py. Row 0 is the northern edge."""
+    crop = json.loads(Path(path).read_text(encoding="utf-8"))
+    return terrain_from_depth(
+        -np.array(crop["elevation_m"], dtype=float),
+        crop["cell_height_m"],
+        "gebco_2025",
+        crop["cell_width_m"],
+    )
+
+
+def terrain_from_depth(
+    depth_m: np.ndarray, cell_size_m: float, source: str, cell_width_m: float | None = None
+) -> Terrain:
+    """Derive slope and bathymetric position from a positive-down depth grid.
+
+    ``cell_size_m`` is the north-south spacing. Pass ``cell_width_m`` when east-west
+    spacing differs, as it does for latitude-longitude grids away from the equator.
+    """
     depth = np.asarray(depth_m, dtype=float)
     elevation = -depth
-    d_row, d_col = np.gradient(elevation, cell_size_m)
+    d_row, d_col = np.gradient(elevation, cell_size_m, cell_width_m or cell_size_m)
     slope = np.degrees(np.arctan(np.hypot(d_row, d_col)))
     bpi = elevation - uniform_filter(elevation, size=BPI_WINDOW, mode="nearest")
     features = np.stack([_standardise(depth), _standardise(slope), _standardise(bpi)], axis=-1)

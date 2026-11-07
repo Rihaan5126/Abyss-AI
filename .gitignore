@@ -1,11 +1,13 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+.claude/
 .venv/
 venv/
 
 # Large or regenerated data
-data/
+data/*
+!data/gebco/
 results/
 *.nc
 *.pt

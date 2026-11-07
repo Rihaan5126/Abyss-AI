@@ -16,7 +16,9 @@ class SimConfig:
     height: int = 30
     width: int = 30
     cell_size_m: float = 463.0  # about one GEBCO 15-arc-second cell
-    terrain_seed: int | None = None  # None: each world seed gets its own terrain
+    terrain_source: str = "synthetic"  # synthetic | gebco
+    gebco_path: str = "data/gebco/monterey_canyon_30x30.json"
+    terrain_seed: int | None = None  # synthetic only. None: one terrain per world seed
     home: tuple[int, int] = (0, 0)
 
     # Hidden ecology
@@ -40,6 +42,8 @@ class SimConfig:
     def __post_init__(self) -> None:
         if self.scenario not in SCENARIOS:
             raise ValueError(f"Unknown scenario {self.scenario!r}; expected one of {SCENARIOS}")
+        if self.terrain_source not in ("synthetic", "gebco"):
+            raise ValueError(f"Unknown terrain_source {self.terrain_source!r}")
         if not 0.0 <= self.rho <= 1.0:
             raise ValueError("rho must be in [0, 1]")
         if self.survey_cost <= 0:

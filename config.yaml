@@ -2,7 +2,9 @@
 height: 30
 width: 30
 cell_size_m: 463.0
-terrain_seed: null
+terrain_source: gebco # gebco | synthetic
+gebco_path: data/gebco/monterey_canyon_30x30.json
+terrain_seed: null # synthetic only
 home: [0, 0]
 
 scenario: ridge # random | clustered | ridge | reversed | nonlinear

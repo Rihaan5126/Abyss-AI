@@ -19,7 +19,7 @@ from .contract import (
     Target,
 )
 from .robot import RobotState, TravelGraph
-from .terrain import FEATURE_NAMES, Terrain, generate_synthetic_terrain
+from .terrain import FEATURE_NAMES, Terrain, generate_synthetic_terrain, load_gebco_terrain
 from .world import STREAM_TERRAIN, HiddenWorld, generate_world, stream
 
 
@@ -73,6 +73,14 @@ class Environment:
 
     def _make_terrain(self, seed: int) -> Terrain:
         config = self.config
+        if config.terrain_source == "gebco":
+            terrain = load_gebco_terrain(config.gebco_path)
+            if terrain.depth_m.shape != (config.height, config.width):
+                raise ValueError(
+                    f"GEBCO crop is {terrain.depth_m.shape}, "
+                    f"config expects {(config.height, config.width)}"
+                )
+            return terrain
         terrain_seed = seed if config.terrain_seed is None else config.terrain_seed
         return generate_synthetic_terrain(
             (config.height, config.width), stream(terrain_seed, STREAM_TERRAIN), config.cell_size_m

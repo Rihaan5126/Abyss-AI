@@ -1,0 +1,64 @@
+{
+ "entries": [
+  {
+   "world_id": "ridge-rho1-seed0",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 0,
+   "planner": "random",
+   "label": "Random (run 1)",
+   "log": "logs/ridge-rho1-seed0-random-p3685993406.json",
+   "reveal": "logs/ridge-rho1-seed0-random-p3685993406.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho1-seed0",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "seed": 0,
+   "planner": "random",
+   "label": "Random (run 2)",
+   "log": "logs/ridge-rho1-seed0-random-p3633331186.json",
+   "reveal": "logs/ridge-rho1-seed0-random-p3633331186.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho1-seed0",
+   "scenario": "reversed",
+   "rho": 1.0,
+   "seed": 0,
+   "planner": "random",
+   "label": "Random (run 1)",
+   "log": "logs/reversed-rho1-seed0-random-p3685993406.json",
+   "reveal": "logs/reversed-rho1-seed0-random-p3685993406.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho1-seed0",
+   "scenario": "reversed",
+   "rho": 1.0,
+   "seed": 0,
+   "planner": "random",
+   "label": "Random (run 2)",
+   "log": "logs/reversed-rho1-seed0-random-p3633331186.json",
+   "reveal": "logs/reversed-rho1-seed0-random-p3633331186.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed0",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 0,
+   "planner": "random",
+   "label": "Random (run 1)",
+   "log": "logs/random-rho0-seed0-random-p3685993406.json",
+   "reveal": "logs/random-rho0-seed0-random-p3685993406.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed0",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 0,
+   "planner": "random",
+   "label": "Random (run 2)",
+   "log": "logs/random-rho0-seed0-random-p3633331186.json",
+   "reveal": "logs/random-rho0-seed0-random-p3633331186.reveal.json"
+  }
+ ]
+}

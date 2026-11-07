@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABYSS Mission Control</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>ABYSS</h1>
+      <span>Mission Control</span>
+    </div>
+    <label class="field">World
+      <select id="world"></select>
+    </label>
+    <fieldset class="layers" id="layers">
+      <legend>Map layer</legend>
+      <label><input type="radio" name="layer" value="terrain" checked><span>Terrain</span></label>
+      <label><input type="radio" name="layer" value="predicted_richness"><span>Predicted</span></label>
+      <label><input type="radio" name="layer" value="uncertainty"><span>Uncertainty</span></label>
+      <label><input type="radio" name="layer" value="hidden"><span>Hidden</span></label>
+    </fieldset>
+    <button id="reveal" class="reveal" type="button" aria-pressed="false">Reveal hidden world</button>
+  </header>
+
+  <p id="notice" class="notice" hidden></p>
+
+  <main>
+    <section class="panes" id="panes"></section>
+    <section class="lower">
+      <figure class="chart-card">
+        <figcaption>Distinct categories found against energy used</figcaption>
+        <canvas id="chart" role="img" aria-label="Line chart of distinct categories found against energy used for each mission"></canvas>
+      </figure>
+      <div class="feeds" id="feeds"></div>
+    </section>
+    <p class="provenance" id="provenance"></p>
+  </main>
+
+  <footer class="transport">
+    <button id="prev" type="button" title="Previous event (left arrow)" aria-label="Previous event">&#9664;&#9664;</button>
+    <button id="play" type="button" title="Play or pause (space)">Play</button>
+    <button id="next" type="button" title="Next event (right arrow)" aria-label="Next event">&#9654;&#9654;</button>
+    <input id="scrub" type="range" min="0" max="150" step="0.1" value="0" aria-label="Energy used">
+    <output id="clock" for="scrub">0.0 / 150 energy</output>
+    <label class="field speed">Speed
+      <select id="speed">
+        <option value="3">0.5x</option>
+        <option value="6" selected>1x</option>
+        <option value="12">2x</option>
+        <option value="24">4x</option>
+      </select>
+    </label>
+  </footer>
+
+  <template id="pane-template">
+    <article class="pane">
+      <header class="pane-head">
+        <span class="swatch" aria-hidden="true"></span>
+        <select class="planner" aria-label="Mission shown in this panel"></select>
+        <span class="status"></span>
+      </header>
+      <div class="map-wrap"><canvas class="map"></canvas></div>
+      <p class="readout">Hover over the map to inspect a cell.</p>
+      <p class="legend"></p>
+      <dl class="stats">
+        <div class="stat-main"><dt>Categories found</dt><dd class="found">0</dd></div>
+        <div><dt>Surveys</dt><dd class="surveys">0</dd></div>
+        <div><dt>Energy left</dt><dd class="left">0</dd></div>
+      </dl>
+      <div class="energy" aria-hidden="true"><i></i><b></b></div>
+      <div class="why" hidden></div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

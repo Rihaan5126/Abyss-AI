@@ -6,8 +6,9 @@ ABYSS is the decision-making software for a simulated underwater exploration rob
 learns which environments are associated with biodiversity during a mission and uses
 that to choose where to survey next, within a fixed energy budget.
 
-**This is a simulation.** Biology is always simulated, terrain is currently synthetic,
-and energy is in abstract units. It is not a validated AUV or a model of a real ecosystem.
+**This is a simulation.** The terrain is real GEBCO bathymetry, but the biology on it is
+always simulated and energy is in abstract units. It is not a validated AUV or a model
+of a real ecosystem.
 
 ## Quick start
 
@@ -23,16 +24,33 @@ python -m pytest
 python -m abyss.run_mission --scenario ridge --seed 0 --planner random
 ```
 
-This writes a mission log and a `.reveal.json` file to `results/missions/`. There is an
-example pair in `ui/logs/`.
+This writes a mission log and a `.reveal.json` file to `results/missions/`.
+
+## Replay UI
+
+```bash
+python -m scripts.build_ui_logs
+```
+
+```bash
+python -m http.server 8000 --directory ui
+```
+
+Then open <http://localhost:8000>. The first command runs real missions and rewrites
+`ui/logs/`; rerun it after adding a planner so that planner appears in the UI. Both panels
+share a clock in energy units, so they are always compared at equal spend. Reveal files
+are only fetched when the viewer presses Reveal.
+
+While only the random planner exists, the second panel shows a second random run with a
+different planner seed.
 
 ## Status
 
 | Area | Owner | State |
 | --- | --- | --- |
-| Contract, terrain, worlds, environment, mission runner, logs | Rihaan | Working, on synthetic terrain |
+| Contract, GEBCO terrain, worlds, environment, mission runner, logs | Rihaan | Working |
+| Replay UI | Rihaan | Working; belief layers tested only with temporary data until the adaptive planner logs them |
 | Random baseline | Shared | Working |
-| GEBCO terrain, replay UI | Rihaan | Not started |
 | Learner, adaptive planner, other baselines, benchmark | Cam | Not started |
 | Perception pipeline | Ammar | Not started; `Environment` currently supports ideal perception only |
 
@@ -55,6 +73,21 @@ class MyPlanner(Planner):
   `public_state.travel_cost` gives the cost of reaching each cell.
 - `public_map.features` holds standardised depth, slope and BPI.
 - A rejected target sends the robot home and is recorded as a violation in the log.
+
+To show beliefs in the UI, return these optional keys from `diagnostics()`. It is called
+after `observe()`, so `target_utility` describes the target just travelled to, and the maps
+are the updated beliefs. Each map is a `[row][col]` nested list.
+
+```python
+{
+    "predicted_richness": ...,
+    "uncertainty": ...,
+    "target_utility": {
+        "expected_richness": ..., "information_gain": ..., "coverage": ...,
+        "energy_cost": ..., "utility": ...,
+    },
+}
+```
 
 ## Adding perception (Ammar)
 
@@ -89,6 +122,17 @@ removes all signal.
 
 ## Data sources
 
-Planned: [GEBCO](https://www.gebco.net/) bathymetry, [FathomNet](https://database.fathomnet.org/)
-imagery and, as a stretch goal, [OBIS](https://obis.org/) occurrence records. None are
-integrated yet.
+**Bathymetry:** GEBCO Compilation Group (2025) GEBCO 2025 Grid
+(doi:10.5285/37c52e96-24ea-67ce-e063-7086abc05f29).
+
+- The committed crop is `data/gebco/monterey_canyon_30x30.json`, so nobody needs to
+  download anything. `python -m scripts.fetch_gebco` regenerates it from the
+  [UNH image service](https://gis.ccom.unh.edu/server/rest/services/GEBCO2025/GEBCO_2025_IS/ImageServer).
+- It is the all-ocean 30 x 30 window with the most varied slope, chosen from terrain alone.
+- Cells are about 464 m by 372 m. They are regional planning units, not camera footprints
+  or collision maps. Slope uses the true spacing, but travel costs treat the grid as square.
+- All seeds share this one crop, so repeated seeds do not show generalisation to other
+  regions. Set `terrain_source: synthetic` in `config.yaml` to vary terrain by seed.
+
+**Planned:** [FathomNet](https://database.fathomnet.org/) imagery and, as a stretch goal,
+[OBIS](https://obis.org/) occurrence records. Neither is integrated yet.
