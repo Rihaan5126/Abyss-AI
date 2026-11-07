@@ -1,0 +1,21 @@
+# Development defaults. Freeze before the final benchmark.
+height: 30
+width: 30
+cell_size_m: 463.0
+terrain_seed: null
+home: [0, 0]
+
+scenario: ridge # random | clustered | ridge | reversed | nonlinear
+rho: 1.0
+n_categories: 16
+prevalence_max: 0.25
+prevalence_min: 0.01
+signal_strength: 2.0
+cluster_sigma: 2.5
+
+energy_budget: 150.0
+survey_cost: 2.0
+energy_reserve: 5.0
+terrain_cost_factor: 0.5
+
+perception_mode: ideal
