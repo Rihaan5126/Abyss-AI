@@ -221,3 +221,5 @@ python -m pytest -q
 
 See [the perception runbook](docs/perception.md) for data preparation, offline
 inference, evaluation, image licensing and the simulator integration interface.
+For eight familiar categories plus a withheld dumbo-octopus category, see
+[the expanded dataset and Mac demo instructions](docs/expanded-perception.md).

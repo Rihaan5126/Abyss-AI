@@ -108,23 +108,28 @@ def restore_manifest(manifest: str | Path, output: str | Path,
     output = Path(output).resolve()
     (output / "crops").mkdir(parents=True, exist_ok=True)
     restored = []
-    for row in rows:
+    for number, row in enumerate(rows, 1):
         if (row.get("image_license") not in allowed_licenses
                 or row.get("annotation_license") not in allowed_licenses):
             raise ValueError(f"Source licence not allowed for {row['sample_id']}")
         sample_id = row["sample_id"]
         if Path(sample_id).name != sample_id or sample_id in {".", ".."}:
             raise ValueError("sample_id must be a plain filename component")
+        relative = f"crops/{sample_id}.png"
+        path = output / relative
+        if path.exists() and hashlib.sha256(path.read_bytes()).hexdigest() == row.get("crop_sha256"):
+            restored.append({**row, "image_path": relative})
+            LOGGER.info("Restored %d/%d (cached): %s", number, len(rows), row['category'])
+            continue
         payload = fetch_bytes(row["source_url"])
         if hashlib.sha256(payload).hexdigest() != row["original_sha256"]:
             raise ValueError(f"Source checksum changed for {sample_id}; refusing a different image")
         with Image.open(BytesIO(payload)) as image:
             crop = crop_organism(image, row["bbox"])
-        relative = f"crops/{sample_id}.png"
-        path = output / relative
         crop.save(path)
         restored.append({**row, "image_path": relative,
                          "crop_sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
+        LOGGER.info("Restored %d/%d: %s", number, len(rows), row['category'])
     path = output / "manifest.json"
     path.write_text(json.dumps(restored, indent=2) + "\n")
     return path
