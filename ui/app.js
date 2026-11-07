@@ -1281,6 +1281,10 @@ async function selectWorld(worldId) {
   exitTour();
   app.worldId = worldId;
   const options = app.entries.filter((e) => e.world_id === worldId);
+  // Preserve the selected comparison pair, with ABYSS first in the stacked HUD.
+  const pair = options.splice(0, 2);
+  pair.sort((a, b) => Number(b.planner.startsWith("abyss")) - Number(a.planner.startsWith("abyss")));
+  options.unshift(...pair);
   $("panes").replaceChildren();
   $("feeds").replaceChildren();
   app.panes = [];
