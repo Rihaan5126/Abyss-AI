@@ -2,6 +2,7 @@
  "entries": [
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -12,6 +13,7 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -22,6 +24,7 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -32,6 +35,7 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -42,6 +46,7 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -302,6 +307,7 @@
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
@@ -1042,6 +1048,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -1052,6 +1059,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -1062,6 +1070,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -1072,6 +1081,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -1082,6 +1092,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,

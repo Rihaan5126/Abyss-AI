@@ -8,13 +8,16 @@ from pathlib import Path
 import shutil
 
 from abyss.config import SCENARIOS, load_config
-from abyss.fathomnet_perception import load_fathomnet
+from abyss.fathomnet_perception import load_fathomnet, read_test_rows
 from abyss.planners import PLANNERS
 from abyss.run_mission import run_mission, validate_mission_log
 
 
 def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
-          scenario='ridge', ui_root=Path('ui')):
+          scenario='ridge', ui_root=Path('ui'), rows=()):
+    """``rows`` are manifest rows, used only to credit each displayed photo on screen."""
+    by_path = {row['image_path']: row for row in rows}
+    credits = {}
     out_dir, ui_root = Path(out_dir).resolve(), Path(ui_root).resolve()
     prefix = out_dir.relative_to(ui_root).as_posix()
     images = out_dir / 'images'
@@ -39,6 +42,11 @@ def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
                 target = images / filename
                 shutil.copyfile(source, target)
                 display_refs.append(f'{prefix}/images/{filename}')
+                row = by_path.get(str(source))
+                if row:
+                    credits[f'{prefix}/images/{filename}'] = {
+                        'source': 'FathomNet', 'license': row.get('image_license', 'licence not recorded'),
+                    }
             obs['image_refs'] = display_refs
         stem = f'{log["world"]["id"]}-{name}'
         (out_dir / f'{stem}.json').write_text(json.dumps(log, separators=(',', ':')))
@@ -47,7 +55,7 @@ def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
                         'seed': seed, 'planner': name, 'label': 'ABYSS' if name == 'abyss' else 'Frontier',
                         'log': f'{prefix}/{stem}.json', 'reveal': f'{prefix}/{stem}.reveal.json'})
         print(f'{name}: {log["outcome"]["surveys"]} surveys; safe home: {log["outcome"]["safe_return"]}', flush=True)
-    manifest = {'entries': entries, 'notice': (
+    manifest = {'entries': entries, 'image_credits': credits, 'notice': (
         'Real-image perception replay of computed missions. Biology is simulated. '
         'Local analysis only: image credits and licences are in your source dataset manifest; '
         'do not publish restricted crops. The 3D scene is a visualisation, not camera footage.')}
@@ -65,7 +73,7 @@ def main():
     args = parser.parse_args()
     print('Loading the cached DINOv2 model; no image downloads are needed.', flush=True)
     kit = load_fathomnet(args.manifest, args.artifact)
-    build(args.config, kit, seed=args.seed, scenario=args.scenario)
+    build(args.config, kit, seed=args.seed, scenario=args.scenario, rows=read_test_rows(args.manifest))
     print('Run: python -m http.server 8000 --directory ui', flush=True)
     print('Open: http://localhost:8000/?missions=vision-logs/index.json', flush=True)
 

@@ -926,6 +926,12 @@ export function createExplorer(api) {
         caption.textContent = obs.unknown_flags[index]
           ? "Flagged unfamiliar"
           : `Predicted: ${categoryLabel(obs.image_labels[index] || 'Unlabelled')}`;
+        const credit = app.imageCredits[ref];
+        if (credit) {
+          const small = document.createElement("small");
+          small.textContent = `${credit.source} · ${credit.license}`;
+          caption.append(document.createElement("br"), small);
+        }
         figure.append(image, caption);
         photos.append(figure);
       }
@@ -960,7 +966,7 @@ export function createExplorer(api) {
       const model = pane.log.provenance.perception;
       note.textContent = model === "ideal"
         ? "Ideal perception: no animal photographs in this mission. Generate a vision replay to show photos."
-        : "Recorded image classifications, not live camera footage. Earlier photos remain until the next photographed encounter.";
+        : "Recorded image classifications, not live camera footage. Novelty is a cosine distance, not a probability, and unfamiliar does not mean a new species. Earlier photos remain until the next photographed encounter.";
       note.title = model;
       body.append(note);
     }

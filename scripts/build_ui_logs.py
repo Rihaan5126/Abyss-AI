@@ -22,10 +22,12 @@ from dataclasses import replace
 from pathlib import Path
 
 from abyss.config import load_config
+from abyss.landforms import LANDFORMS, landform_terrain
 from abyss.planners import PLANNERS
 from abyss.run_mission import run_mission, validate_mission_log
 
 SCENARIOS = {"ridge": 0.5, "reversed": 0.5, "clustered": 1.0, "nonlinear": 1.0, "random": 0.0}
+LANDFORM_SCENARIO = ("ridge", 0.5)
 UI_PLANNERS = ("frontier", "abyss", "lawnmower", "heuristic", "random")
 OCEAN_PLANNERS = ("frontier", "abyss", "lawnmower")
 LABELS = {"abyss": "ABYSS"}
@@ -58,6 +60,11 @@ def build(config_path: str, out_dir: Path, seed: int, oceans: int = 1) -> dict:
             old.unlink()
 
     base = load_config(config_path)
+    worlds = [(scenario, rho, None) for scenario, rho in SCENARIOS.items()]
+    shape = (base.height, base.width)
+    worlds += [
+        (*LANDFORM_SCENARIO, landform_terrain(name, shape, base.cell_size_m)) for name in LANDFORMS
+    ]
     entries = []
     runs = [(seed, UI_PLANNERS)] + [(seed + n, OCEAN_PLANNERS) for n in range(1, oceans)]
     for scenario, rho in SCENARIOS.items():

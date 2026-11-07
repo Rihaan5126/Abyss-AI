@@ -1,6 +1,7 @@
 # Watch the full system in 3D
 
-This branch combines Rihaan's 3D explorer with Ammar's expanded perception and
+For the setup steps to use on the day, follow [DEMO.md](DEMO.md). This page describes the
+real-image replay. It combines Rihaan's 3D explorer with Ammar's expanded perception and
 Cam's adaptive planner. Two computed missions use the same world, seed, battery
 budget and real image model: frontier exploration and ABYSS. The replay displays
 their actual routes, discoveries, model beliefs and unfamiliarity flags.
@@ -9,7 +10,8 @@ In your Mac project terminal, stop any running demo with Control-C:
 
 ```bash
 git fetch origin
-git switch ammar/vision-3d
+git switch main
+git pull --ff-only origin main
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 OMP_NUM_THREADS=2 python -m scripts.build_vision_replay

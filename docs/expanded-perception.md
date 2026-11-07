@@ -24,7 +24,8 @@ Stop the running demo with **Control-C**. In the project folder with your virtua
 environment activated:
 
 ```bash
-git pull --ff-only origin ammar/perception-mvp
+git switch main
+git pull --ff-only origin main
 export SSL_CERT_FILE="$(python -m certifi)"
 export REQUESTS_CA_BUNDLE="$SSL_CERT_FILE"
 OMP_NUM_THREADS=2 python -m perception.expand

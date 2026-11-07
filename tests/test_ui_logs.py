@@ -22,7 +22,8 @@ def test_each_world_has_a_side_by_side_pair(built):
     worlds = {}
     for entry in manifest["entries"]:
         worlds.setdefault(entry["world_id"], []).append(entry)
-    assert len(worlds) == 5
+    # Five ecology worlds on the GEBCO crop, then four synthetic landforms.
+    assert len(worlds) == 9
     assert all(entries[1]["planner"] == "abyss" for entries in worlds.values())
     assert all(len(entries) >= 2 for entries in worlds.values())
 

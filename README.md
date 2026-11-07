@@ -13,6 +13,9 @@ of a real ecosystem.
 **Full definition:** [docs/PROJECT_BRIEF.md](docs/PROJECT_BRIEF.md) sets out what we are
 building, the research questions, roles, evaluation rules and what we are not claiming.
 
+**To run the demo, follow [docs/DEMO.md](docs/DEMO.md).** It covers real-image and
+ideal-perception replays, required local data, what to say and the release checklist.
+
 ## Quick start
 
 ```bash
@@ -109,10 +112,11 @@ Tuning stays on development seeds (0-999). See
 | Area | Owner | State |
 | --- | --- | --- |
 | Contract, GEBCO terrain, worlds, environment, mission runner, logs | Rihaan | Working |
-| Replay UI, guided demo, benchmark view | Rihaan | Working |
-| Learner, adaptive planner, baselines, ablations, benchmark | Cam | Working |
-| Real perception flow in the simulator | Rihaan | Working; tested through the pipeline's real classes with a fake encoder, not yet with DINOv2 |
-| Perception pipeline | Ammar | Working; only smoke-test results so far |
+| Mission Control: dive sequence, 3D view, charts, narration, benchmark view | Rihaan, Cam | Working |
+| Learner, adaptive planner, baselines, ablations, benchmark | Cam | Working; 6,300 missions with ideal perception |
+| Findings report and photo panels | Ammar | Working |
+| Real-image missions | Ammar, Rihaan | Run through `scripts/build_vision_replay.py` on local data, and separate from the benchmark |
+| Perception pipeline | Ammar | Working; 547-image follow-up shows trade-offs, in [perception-quality.md](docs/perception-quality.md) |
 
 ## Adding a planner (Cam)
 

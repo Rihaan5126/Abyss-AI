@@ -22,6 +22,16 @@ const TERRAIN_NAMES = {
   gebco_2025: "Real bathymetry: GEBCO 2025, Monterey Canyon area, 30 x 30 planning grid.",
   synthetic: "Synthetic procedural terrain.",
 };
+// Extra demo landforms from abyss/landforms.py. Illustrative shapes, not real places.
+const LANDFORM_NAMES = {
+  synthetic_seamount: "Seamount",
+  synthetic_abyssal_hills: "Abyssal hills",
+  synthetic_trench: "Trench",
+  synthetic_basin: "Basin",
+};
+for (const [source, name] of Object.entries(LANDFORM_NAMES)) {
+  TERRAIN_NAMES[source] = `Synthetic landform: ${name.toLowerCase()}. Not a real place, and not part of the benchmark.`;
+}
 const PERCEPTION_NAMES = {
   ideal: "Ideal perception: labels come directly from the simulator.",
   stub: "Stub perception: a fake model with made-up error rates.",
@@ -67,6 +77,7 @@ const app = {
   captionTimer: 0,
   summaryTimer: 0,
   manifestNotice: "",
+  imageCredits: {},
   benchmark: null,
 };
 
@@ -497,7 +508,8 @@ function storyFor(pane, mission) {
   if (mission.phase === "done") {
     story.kicker = "Mission over";
     story.headline = log.outcome.safe_return ? "Back home safely" : "Mission ended";
-    story.lines.push(`It made ${plural(surveys.length, "survey", "surveys")} and found ${plural(found, "kind", "kinds")} of creature.`);
+    const verb = log.provenance.perception !== "ideal" ? "reported" : "found";
+    story.lines.push(`It made ${plural(surveys.length, "survey", "surveys")} and ${verb} ${plural(found, "kind", "kinds")} of creature.`);
     return story;
   }
   if (!last) {
@@ -511,17 +523,26 @@ function storyFor(pane, mission) {
     const where = `${slopeWords(log.terrain.slope_deg[r][c])}, ${depthWords(depth)} seabed, ${depth} m down`;
     const fresh = last.new_discoveries.length;
     const seen = new Set(obs.categories).size;
+    const unfamiliar = obs.unknown_flags.filter(Boolean).length;
+    // With real perception, these are the model's labels and may be wrong.
+    const isReal = log.provenance.perception !== "ideal";
     story.kicker = `Survey ${surveys.length}`;
     if (fresh) {
-      story.headline = `Found ${plural(fresh, "new kind", "new kinds")} of creature!`;
+      story.headline = `${isReal ? "Reported" : "Found"} ${plural(fresh, "new kind", "new kinds")} of creature!`;
+      story.priority = 1;
+    } else if (unfamiliar) {
+      story.headline = "Something unfamiliar to its references";
       story.priority = 1;
     } else if (seen) {
-      story.headline = "Only creatures it had already seen";
+      story.headline = isReal ? "Only labels it had already reported" : "Only creatures it had already seen";
     } else {
-      story.headline = "Nothing living here";
+      story.headline = "No organisms in this survey";
     }
     story.lines.push(`It checked a patch of ${where}.`);
-    story.lines.push(`So far it has found ${plural(found, "different kind", "different kinds")} of creature.`);
+    if (unfamiliar) {
+      story.lines.push(`The image model flagged ${plural(unfamiliar, "image", "images")} as unfamiliar. That does not mean a new species.`);
+    }
+    story.lines.push(`So far it has ${isReal ? "reported" : "found"} ${plural(found, "different kind", "different kinds")} of creature.`);
   }
 
   if (isAbyss) {
@@ -937,16 +958,28 @@ function updateProvenance() {
     `${TERRAIN_NAMES[source] || source}${credit} Biology is simulated, not observed. ` +
     `${PERCEPTION_NAMES[model] || `Perception model: ${model}.`} ` +
     "Energy is in abstract units. Every route and count comes from an executed mission log.";
+  // Always say which perception made these results, so a fallback is never silent.
+  const modeText = model === "ideal"
+    ? "Ideal perception, no images"
+    : model === "stub"
+      ? "Stub perception: fake test model"
+      : `Real images: ${String(model).split("@")[0].split("/").pop()}`;
+  for (const id of ["mode-badge", "intro-mode"]) {
+    $(id).textContent = modeText;
+    $(id).title = `Perception model: ${model}`;
+  }
+  $("mode-badge").classList.toggle("real", model !== "ideal" && model !== "stub");
   const isReal = app.panes.some((p) => p.log.provenance.perception !== "ideal");
   $("chart-title").textContent = `Distinct categories ${isReal ? "perceived" : "found"} against energy used`;
   const stub = app.panes.some((p) => p.log.provenance.perception === "stub");
   if (stub) showNotice("Stub perception: a fake model for testing, with no real images. Not a vision result.");
+  const landform = LANDFORM_NAMES[source];
   $("inset-caption").textContent = source === "gebco_2025"
     ? "GEBCO 2025 chart. Contours every 250 m."
-    : "Synthetic terrain, not a real location.";
+    : `Synthetic ${landform ? landform.toLowerCase() : "terrain"}, not a real location.`;
   $("intro-place").textContent = source === "gebco_2025"
     ? "Monterey Canyon · 36°45′N 122°04′W"
-    : "Synthetic seafloor";
+    : landform ? `${landform} · synthetic seafloor` : "Synthetic seafloor";
 }
 
 // Nautical chart ---------------------------------------------------------------
@@ -1624,6 +1657,7 @@ async function init() {
     const manifest = await getJson(manifestPath);
     app.entries = manifest.entries;
     app.manifestNotice = manifest.notice || "";
+    app.imageCredits = manifest.image_credits || {};
   } catch (error) {
     const hint = location.protocol === "file:"
       ? "Browsers block loading logs from file:// pages. Run: python -m http.server 8000 --directory ui"
@@ -1632,11 +1666,24 @@ async function init() {
     return;
   }
   const select = $("world");
+  const groups = new Map();
   for (const world of worlds()) {
+    const landform = LANDFORM_NAMES[world.terrain];
+    const group = landform ? "Synthetic landforms" : "Monterey Canyon, real terrain";
+    if (!groups.has(group)) groups.set(group, []);
     const option = document.createElement("option");
     option.value = world.world_id;
-    option.textContent = `${SCENARIO_NAMES[world.scenario] || world.scenario}, seed ${world.seed}`;
-    select.append(option);
+    const scenario = `${SCENARIO_NAMES[world.scenario] || world.scenario}, seed ${world.seed}`;
+    option.textContent = landform ? `${landform} · ${scenario}` : scenario;
+    groups.get(group).push(option);
+  }
+  // Group only when there is more than one kind of terrain, such as in the ideal logs.
+  for (const [label, options] of groups) {
+    if (groups.size === 1) { select.append(...options); continue; }
+    const optgroup = document.createElement("optgroup");
+    optgroup.label = label;
+    optgroup.append(...options);
+    select.append(optgroup);
   }
   await selectWorld(select.value);
   if (manifestPath === "logs/index.json") await loadBenchmark();
