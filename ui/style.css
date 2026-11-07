@@ -119,8 +119,6 @@ button:disabled { opacity: .35; cursor: not-allowed; }
 .layers input:focus-visible + span { outline: 2px solid var(--glow); outline-offset: 1px; }
 .layers input:disabled + span { color: #4e6677; cursor: not-allowed; }
 
-.reveal { border-color: rgba(255, 143, 180, .5); color: #ffd0df; }
-.reveal[aria-pressed="true"] { background: rgba(255, 143, 180, .16); }
 
 .notice { margin: 10px 22px 0; padding: 7px 12px; border-left: 2px solid var(--violet); background: var(--glass); font-size: 14px; }
 .notice.error { border-left-color: var(--hidden); }

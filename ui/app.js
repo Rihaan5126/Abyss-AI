@@ -3,7 +3,8 @@
 // Replays executed mission logs. It draws what the logs record and never computes
 // scientific results of its own. Route interpolation between recorded cells is visual only.
 // Both panels share one clock in energy units, so they are always compared at equal spend.
-// Reveal files are not fetched until the viewer asks for the reveal.
+// Reveal files hold the simulator's hidden truth. They are not fetched until the viewer
+// requests the findings report, and the hidden world is never drawn on the map.
 
 const PANE_COLORS = ["#ff9d76", "#5ef2d6"];
 // The committed GEBCO crop's position, from data/gebco/monterey_canyon_30x30.json.
@@ -1133,7 +1134,6 @@ async function beginDive() {
   setPlaying(false);
   leaveTitle();
   setView("3d");
-  await setRevealed(false);
   setLayer("terrain");
   app.energy = 0;
   document.body.classList.add("diving");
@@ -1225,12 +1225,6 @@ function showSummary() {
   $("summary").hidden = false;
 }
 
-function setRevealButton() {
-  const button = $("reveal");
-  button.setAttribute("aria-pressed", String(app.revealed));
-  button.textContent = app.revealed ? "Hide hidden world" : "Reveal hidden world";
-}
-
 async function selectWorld(worldId) {
   const token = (app.loadToken += 1);
   setPlaying(false);
@@ -1242,7 +1236,6 @@ async function selectWorld(worldId) {
   $("feeds").replaceChildren();
   app.panes = [];
   app.revealed = false;
-  setRevealButton();
 
   const count = Math.min(options.length, 2);
   $("panes").style.gridTemplateColumns = count === 1 ? "minmax(0, 720px)" : "";
@@ -1301,20 +1294,6 @@ function setLayer(layer) {
   app.layer = layer;
 }
 
-async function setRevealed(revealed) {
-  if (revealed) await fetchReveals();
-  app.revealed = revealed;
-  setRevealButton();
-  updateLayerControls();
-  if (revealed) setLayer("hidden");
-}
-
-async function toggleReveal() {
-  if (!app.panes.length) return;
-  hideSummary();
-  await setRevealed(!app.revealed);
-  render();
-}
 
 // Benchmark ------------------------------------------------------------------
 
@@ -1441,14 +1420,13 @@ function otherPane() {
 const TOUR_STAGES = [
   {
     title: "Stage 1: Deployment",
-    apply: async () => { await setRevealed(false); setLayer("terrain"); app.energy = 0; },
+    apply: async () => { setLayer("terrain"); app.energy = 0; },
     body: () => "Two robots start at the same station on the same terrain, with the same energy. " +
       "Neither knows where the organisms are. This terrain is real bathymetry; the biology is simulated.",
   },
   {
     title: "Stage 2: First observations",
     apply: async () => {
-      await setRevealed(false);
       setLayer("terrain");
       const first = abyssPane().timeline.find((s) => s.step.new_discoveries.length);
       app.energy = first ? first.end : 0;
@@ -1463,7 +1441,6 @@ const TOUR_STAGES = [
   {
     title: "Stage 3: Behaviour emerges",
     apply: async () => {
-      await setRevealed(false);
       setLayer("predicted_richness");
       const line = abyssPane().timeline;
       app.energy = line[Math.min(5, line.length - 2)].start + 0.01;
@@ -1481,7 +1458,7 @@ const TOUR_STAGES = [
   },
   {
     title: "Stage 4: Mission complete",
-    apply: async () => { await setRevealed(false); setLayer("terrain"); app.energy = app.maxEnergy; },
+    apply: async () => { setLayer("terrain"); app.energy = app.maxEnergy; },
     body: () => {
       const safe = app.panes.every((p) => p.log.outcome.safe_return);
       const counts = app.panes.map((p) => `${p.entry.label} found ${p.log.outcome.distinct_categories}`).join(", ");
@@ -1489,15 +1466,14 @@ const TOUR_STAGES = [
     },
   },
   {
-    title: "Stage 5: The hidden world",
+    title: "Stage 5: The evidence",
     apply: async () => {
-      await setRevealed(true);
       app.energy = app.maxEnergy;
-      $("bench").scrollIntoView({ behavior: "smooth", block: "start" });
+      ($("bench").hidden ? $("lower") : $("bench")).scrollIntoView({ behavior: "smooth", block: "start" });
     },
     body: () => (app.benchmark
-      ? "The map now shows the simulator's hidden richness. The benchmark compares the planners across many worlds, including those where ABYSS has no advantage."
-      : "The map now shows the simulator's hidden richness, which the robots never saw."),
+      ? "One mission can't settle anything. The benchmark compares the planners across many worlds, including those where ABYSS has no advantage."
+      : "One mission can't settle anything. The charts below compare both robots across this mission."),
   },
 ];
 
@@ -1555,10 +1531,6 @@ function bindControls() {
   $("summary-replay").addEventListener("click", () => beginDive().catch((e) => showNotice(e.message, true)));
   $("skip-dive").addEventListener("click", () => app.explorer?.endDive(true));
   $("skip-intro").addEventListener("click", leaveTitle);
-  $("summary-reveal").addEventListener("click", () => {
-    app.explorer?.setFollow(-1);
-    toggleReveal().catch((e) => showNotice(e.message, true));
-  });
   $("summary-evidence").addEventListener("click", () => {
     hideSummary();
     ($("bench").hidden ? $("lower") : $("bench")).scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1569,7 +1541,6 @@ function bindControls() {
     app.energy = Number(event.target.value);
     render();
   });
-  $("reveal").addEventListener("click", () => toggleReveal().catch((e) => showNotice(e.message, true)));
   const tourStep = (index) => showTourStage(index).catch((e) => showNotice(e.message, true));
   $("tour-start").addEventListener("click", () => { if (app.panes.length) tourStep(0); });
   $("tour-back").addEventListener("click", () => tourStep(app.tourIndex - 1));
