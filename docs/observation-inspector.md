@@ -34,6 +34,21 @@ OMP_NUM_THREADS=2 python -m perception.inspector_server \
 The registry defaults to `data/inspector-registry.json`; keep the same generated
 registry with its replay. On Safari use Option-Command-R after changing versions.
 
+## Whole-system demo: terrains and random oceans
+
+Use `--all-worlds --oceans 8` on `scripts.build_vision_replay` to generate five
+ecological settings on the real terrain plus Rihaan's four landforms, with eight
+consecutive fixed seeds per setting. Both robots use real image predictions in
+every case: 144 computed missions in total. This can take several minutes;
+progress identifies the terrain, ecology, seed and planner. Stop the server
+while rebuilding, then restart it so it loads the combined image-ID registry.
+
+The world selector lists terrain/ecology combinations. **New ocean** chooses
+another generated seed in that combination; it does not choose a winning result.
+The inspector closes when the selected ocean changes. Existing images and model
+weights are reused, and already copied display assets are not rewritten.
+Without these flags the original quick two-mission build remains available.
+
 ## Use it
 
 Open the console or begin a dive. After a survey, click a side-panel animal photo

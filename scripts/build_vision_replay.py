@@ -16,12 +16,13 @@ from abyss.run_mission import run_mission, validate_mission_log
 def copy_asset(source, images, prefix):
     source = Path(source)
     filename = hashlib.sha256(source.read_bytes()).hexdigest() + source.suffix
-    shutil.copyfile(source, images / filename)
+    if not (images / filename).exists():
+        shutil.copyfile(source, images / filename)
     return f'{prefix}/images/{filename}'
 
 
-def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
-          scenario='ridge', ui_root=Path('ui'), rows=(), registry_path=None):
+def _build_pair(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
+          scenario='ridge', ui_root=Path('ui'), rows=(), registry=None, terrain=None, rho=None):
     """``rows`` are manifest rows, used only to credit each displayed photo on screen."""
     by_path = {row['image_path']: row for row in rows}
     credits = {}
@@ -31,12 +32,13 @@ def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
     images.mkdir(parents=True, exist_ok=True)
     config = replace(load_config(config_path), scenario=scenario, perception_mode='real',
                      n_categories=len(kit['image_pool'].categories))
+    if rho is not None: config = replace(config, rho=rho)
     entries = []
-    registry = {}
+    registry = {} if registry is None else registry
     for name in ('frontier', 'abyss'):
-        print(f'Computing {name} with real image predictions...', flush=True)
+        print(f'Computing {name}: {terrain.source if terrain else config.terrain_source}, {scenario}, seed {seed}...', flush=True)
         start = len(getattr(kit['perception'], 'evidence_records', []))
-        log, reveal = run_mission(config, PLANNERS[name](), seed, **kit)
+        log, reveal = run_mission(config, PLANNERS[name](), seed, terrain=terrain, **kit)
         events = iter(getattr(kit['perception'], 'evidence_records', [])[start:])
         evidence_records = {}
         validate_mission_log(log)
@@ -50,9 +52,9 @@ def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
             evidence_ids = []
             for image_index, ref in enumerate(obs['image_refs']):
                 source = Path(kit['image_pool'].load(ref))
-                filename = hashlib.sha256(ref.encode()).hexdigest() + source.suffix
+                filename = hashlib.sha256(source.read_bytes()).hexdigest() + source.suffix
                 target = images / filename
-                shutil.copyfile(source, target)
+                if not target.exists(): shutil.copyfile(source, target)
                 display_refs.append(f'{prefix}/images/{filename}')
                 event = next(events, None)
                 if event is not None:
@@ -86,6 +88,7 @@ def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
         (out_dir / f'{stem}.reveal.json').write_text(json.dumps(reveal, separators=(',', ':')))
         (out_dir / f'{stem}.evidence.json').write_text(json.dumps(evidence_records, separators=(',', ':')))
         entries.append({'world_id': log['world']['id'], 'scenario': scenario, 'rho': config.rho,
+                        'terrain': log['provenance']['terrain'],
                         'seed': seed, 'planner': name, 'label': 'ABYSS' if name == 'abyss' else 'Frontier',
                         'log': f'{prefix}/{stem}.json', 'reveal': f'{prefix}/{stem}.reveal.json',
                         'evidence': f'{prefix}/{stem}.evidence.json'})
@@ -94,7 +97,31 @@ def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
         'Real-image perception replay of computed missions. Biology is simulated. '
         'Local analysis only: image credits and licences are in your source dataset manifest; '
         'do not publish restricted crops. The 3D scene is a visualisation, not camera footage.')}
-    (out_dir / 'index.json').write_text(json.dumps(manifest, indent=2))
+    return manifest
+
+
+def build(config_path, kit, out_dir=Path('ui/vision-logs'), seed=1000,
+          scenario='ridge', ui_root=Path('ui'), rows=(), registry_path=None,
+          all_worlds=False, oceans=1):
+    """Keep quick single-world mode; optionally generate every terrain/ecology and seed."""
+    if not isinstance(oceans, int) or not 1 <= oceans <= 20:
+        raise ValueError('oceans must be an integer between 1 and 20')
+    worlds = [(scenario, None, None)]
+    if all_worlds:
+        from scripts.build_ui_logs import SCENARIOS as ECOLOGIES, LANDFORM_SCENARIO
+        from abyss.landforms import LANDFORMS, landform_terrain
+        base = load_config(config_path)
+        worlds = [(name, rho, None) for name, rho in ECOLOGIES.items()]
+        worlds += [(*LANDFORM_SCENARIO, landform_terrain(name, (base.height, base.width), base.cell_size_m))
+                   for name in LANDFORMS]
+    registry, entries, credits = {}, [], {}
+    for name, rho, terrain in worlds:
+        for offset in range(oceans):
+            pair = _build_pair(config_path, kit, out_dir, seed+offset, name, ui_root, rows,
+                               registry=registry, terrain=terrain, rho=rho)
+            entries.extend(pair['entries']);credits.update(pair['image_credits'])
+    manifest = {'entries': entries, 'image_credits': credits, 'notice': pair['notice']}
+    (Path(out_dir) / 'index.json').write_text(json.dumps(manifest, indent=2))
     if registry_path is not None:
         registry_path = Path(registry_path)
         registry_path.parent.mkdir(parents=True, exist_ok=True)
@@ -110,11 +137,14 @@ def main():
     parser.add_argument('--seed', type=int, default=1000)
     parser.add_argument('--scenario', choices=SCENARIOS, default='ridge')
     parser.add_argument('--registry', default='data/inspector-registry.json')
+    parser.add_argument('--all-worlds', action='store_true', help='Five ecological worlds plus four synthetic landforms')
+    parser.add_argument('--oceans', type=int, default=1, help='Consecutive fixed seeds per world, 1–20')
     args = parser.parse_args()
     print('Loading the cached DINOv2 model; no image downloads are needed.', flush=True)
     kit = load_fathomnet(args.manifest, args.artifact)
     from perception.dataset import read_manifest
-    build(args.config, kit, seed=args.seed, scenario=args.scenario, rows=read_manifest(args.manifest), registry_path=args.registry)
+    build(args.config, kit, seed=args.seed, scenario=args.scenario, rows=read_manifest(args.manifest),
+          registry_path=args.registry, all_worlds=args.all_worlds, oceans=args.oceans)
     print('Run: python -m http.server 8000 --directory ui', flush=True)
     print('Open: http://localhost:8000/?missions=vision-logs/index.json', flush=True)
 

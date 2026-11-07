@@ -38,3 +38,27 @@ def test_real_replay_has_valid_paired_logs_and_resolvable_opaque_photos(tmp_path
                     assert not any(c in ref for c in ('jelly', 'squid', 'ghostfish'))
         assert (ui / entry['reveal']).is_file()
     assert count > 0
+
+
+def test_all_terrains_oceans_keep_pairs_and_a_combined_registry(tmp_path):
+    from test_fathomnet_perception import write_manifest, FAMILIAR, FakeEncoder
+    from perception.dataset import read_manifest
+    from perception.evaluate import fit_perception
+    from abyss.fathomnet_perception import build_kit
+    data=tmp_path/'data';data.mkdir();source=write_manifest(data)
+    model=fit_perception(read_manifest(source),FAMILIAR,FakeEncoder())
+    ui=tmp_path/'ui';registry=data/'registry.json'
+    manifest=build('config.yaml',build_kit(model,source),ui/'vision-logs',ui_root=ui,
+                   all_worlds=True,oceans=2,registry_path=registry)
+    assert len(manifest['entries'])==36
+    assert {e['terrain'] for e in manifest['entries']}=={
+        'gebco_2025','synthetic_seamount','synthetic_abyssal_hills','synthetic_trench','synthetic_basin'}
+    registered=json.loads(registry.read_text())
+    groups={}
+    for e in manifest['entries']:
+        groups.setdefault((e['terrain'],e['scenario']),set()).add(e['seed'])
+        evidence=json.loads((ui/e['evidence']).read_text())
+        assert evidence and set(evidence)<=set(registered)
+        validate_mission_log(json.loads((ui/e['log']).read_text()))
+    assert len(groups)==9
+    assert all(seeds=={1000,1001} for seeds in groups.values())
