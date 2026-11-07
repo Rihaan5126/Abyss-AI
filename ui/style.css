@@ -432,3 +432,6 @@ main { padding: 16px 22px; max-width: 1560px; margin: 0 auto; }
   .summary { position: fixed; z-index: 8; max-height: 88vh; overflow: auto; }
   .intro { padding: 0 22px; }
 }
+
+.new-ocean { padding: 4px 10px; font: 12px var(--mono); background: rgba(160, 210, 235, .1); border: 1px solid var(--hair); border-radius: 999px; cursor: pointer; }
+.new-ocean:hover { background: rgba(160, 210, 235, .2); }

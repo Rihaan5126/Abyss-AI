@@ -51,6 +51,216 @@
    "reveal": "logs/ridge-rho0.5-seed1000-random.reveal.json"
   },
   {
+   "world_id": "ridge-rho0.5-seed1001",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1001,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho0.5-seed1001-frontier.json",
+   "reveal": "logs/ridge-rho0.5-seed1001-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1001",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1001,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho0.5-seed1001-abyss.json",
+   "reveal": "logs/ridge-rho0.5-seed1001-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1001",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1001,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho0.5-seed1001-lawnmower.json",
+   "reveal": "logs/ridge-rho0.5-seed1001-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1002",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1002,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho0.5-seed1002-frontier.json",
+   "reveal": "logs/ridge-rho0.5-seed1002-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1002",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1002,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho0.5-seed1002-abyss.json",
+   "reveal": "logs/ridge-rho0.5-seed1002-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1002",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1002,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho0.5-seed1002-lawnmower.json",
+   "reveal": "logs/ridge-rho0.5-seed1002-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1003",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1003,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho0.5-seed1003-frontier.json",
+   "reveal": "logs/ridge-rho0.5-seed1003-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1003",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1003,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho0.5-seed1003-abyss.json",
+   "reveal": "logs/ridge-rho0.5-seed1003-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1003",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1003,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho0.5-seed1003-lawnmower.json",
+   "reveal": "logs/ridge-rho0.5-seed1003-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1004",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1004,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho0.5-seed1004-frontier.json",
+   "reveal": "logs/ridge-rho0.5-seed1004-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1004",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1004,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho0.5-seed1004-abyss.json",
+   "reveal": "logs/ridge-rho0.5-seed1004-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1004",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1004,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho0.5-seed1004-lawnmower.json",
+   "reveal": "logs/ridge-rho0.5-seed1004-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1005",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1005,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho0.5-seed1005-frontier.json",
+   "reveal": "logs/ridge-rho0.5-seed1005-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1005",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1005,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho0.5-seed1005-abyss.json",
+   "reveal": "logs/ridge-rho0.5-seed1005-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1005",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1005,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho0.5-seed1005-lawnmower.json",
+   "reveal": "logs/ridge-rho0.5-seed1005-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1006",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1006,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho0.5-seed1006-frontier.json",
+   "reveal": "logs/ridge-rho0.5-seed1006-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1006",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1006,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho0.5-seed1006-abyss.json",
+   "reveal": "logs/ridge-rho0.5-seed1006-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1006",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1006,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho0.5-seed1006-lawnmower.json",
+   "reveal": "logs/ridge-rho0.5-seed1006-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1007",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1007,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/ridge-rho0.5-seed1007-frontier.json",
+   "reveal": "logs/ridge-rho0.5-seed1007-frontier.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1007",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1007,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/ridge-rho0.5-seed1007-abyss.json",
+   "reveal": "logs/ridge-rho0.5-seed1007-abyss.reveal.json"
+  },
+  {
+   "world_id": "ridge-rho0.5-seed1007",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1007,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/ridge-rho0.5-seed1007-lawnmower.json",
+   "reveal": "logs/ridge-rho0.5-seed1007-lawnmower.reveal.json"
+  },
+  {
    "world_id": "reversed-rho0.5-seed1000",
    "scenario": "reversed",
    "rho": 0.5,
@@ -99,6 +309,216 @@
    "label": "Random",
    "log": "logs/reversed-rho0.5-seed1000-random.json",
    "reveal": "logs/reversed-rho0.5-seed1000-random.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1001",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1001,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/reversed-rho0.5-seed1001-frontier.json",
+   "reveal": "logs/reversed-rho0.5-seed1001-frontier.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1001",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1001,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/reversed-rho0.5-seed1001-abyss.json",
+   "reveal": "logs/reversed-rho0.5-seed1001-abyss.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1001",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1001,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/reversed-rho0.5-seed1001-lawnmower.json",
+   "reveal": "logs/reversed-rho0.5-seed1001-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1002",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1002,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/reversed-rho0.5-seed1002-frontier.json",
+   "reveal": "logs/reversed-rho0.5-seed1002-frontier.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1002",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1002,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/reversed-rho0.5-seed1002-abyss.json",
+   "reveal": "logs/reversed-rho0.5-seed1002-abyss.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1002",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1002,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/reversed-rho0.5-seed1002-lawnmower.json",
+   "reveal": "logs/reversed-rho0.5-seed1002-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1003",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1003,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/reversed-rho0.5-seed1003-frontier.json",
+   "reveal": "logs/reversed-rho0.5-seed1003-frontier.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1003",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1003,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/reversed-rho0.5-seed1003-abyss.json",
+   "reveal": "logs/reversed-rho0.5-seed1003-abyss.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1003",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1003,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/reversed-rho0.5-seed1003-lawnmower.json",
+   "reveal": "logs/reversed-rho0.5-seed1003-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1004",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1004,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/reversed-rho0.5-seed1004-frontier.json",
+   "reveal": "logs/reversed-rho0.5-seed1004-frontier.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1004",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1004,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/reversed-rho0.5-seed1004-abyss.json",
+   "reveal": "logs/reversed-rho0.5-seed1004-abyss.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1004",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1004,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/reversed-rho0.5-seed1004-lawnmower.json",
+   "reveal": "logs/reversed-rho0.5-seed1004-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1005",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1005,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/reversed-rho0.5-seed1005-frontier.json",
+   "reveal": "logs/reversed-rho0.5-seed1005-frontier.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1005",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1005,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/reversed-rho0.5-seed1005-abyss.json",
+   "reveal": "logs/reversed-rho0.5-seed1005-abyss.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1005",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1005,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/reversed-rho0.5-seed1005-lawnmower.json",
+   "reveal": "logs/reversed-rho0.5-seed1005-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1006",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1006,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/reversed-rho0.5-seed1006-frontier.json",
+   "reveal": "logs/reversed-rho0.5-seed1006-frontier.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1006",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1006,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/reversed-rho0.5-seed1006-abyss.json",
+   "reveal": "logs/reversed-rho0.5-seed1006-abyss.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1006",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1006,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/reversed-rho0.5-seed1006-lawnmower.json",
+   "reveal": "logs/reversed-rho0.5-seed1006-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1007",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1007,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/reversed-rho0.5-seed1007-frontier.json",
+   "reveal": "logs/reversed-rho0.5-seed1007-frontier.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1007",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1007,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/reversed-rho0.5-seed1007-abyss.json",
+   "reveal": "logs/reversed-rho0.5-seed1007-abyss.reveal.json"
+  },
+  {
+   "world_id": "reversed-rho0.5-seed1007",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "seed": 1007,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/reversed-rho0.5-seed1007-lawnmower.json",
+   "reveal": "logs/reversed-rho0.5-seed1007-lawnmower.reveal.json"
   },
   {
    "world_id": "clustered-rho1-seed1000",
@@ -151,6 +571,216 @@
    "reveal": "logs/clustered-rho1-seed1000-random.reveal.json"
   },
   {
+   "world_id": "clustered-rho1-seed1001",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1001,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/clustered-rho1-seed1001-frontier.json",
+   "reveal": "logs/clustered-rho1-seed1001-frontier.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1001",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1001,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/clustered-rho1-seed1001-abyss.json",
+   "reveal": "logs/clustered-rho1-seed1001-abyss.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1001",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1001,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/clustered-rho1-seed1001-lawnmower.json",
+   "reveal": "logs/clustered-rho1-seed1001-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1002",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1002,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/clustered-rho1-seed1002-frontier.json",
+   "reveal": "logs/clustered-rho1-seed1002-frontier.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1002",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1002,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/clustered-rho1-seed1002-abyss.json",
+   "reveal": "logs/clustered-rho1-seed1002-abyss.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1002",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1002,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/clustered-rho1-seed1002-lawnmower.json",
+   "reveal": "logs/clustered-rho1-seed1002-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1003",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1003,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/clustered-rho1-seed1003-frontier.json",
+   "reveal": "logs/clustered-rho1-seed1003-frontier.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1003",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1003,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/clustered-rho1-seed1003-abyss.json",
+   "reveal": "logs/clustered-rho1-seed1003-abyss.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1003",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1003,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/clustered-rho1-seed1003-lawnmower.json",
+   "reveal": "logs/clustered-rho1-seed1003-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1004",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1004,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/clustered-rho1-seed1004-frontier.json",
+   "reveal": "logs/clustered-rho1-seed1004-frontier.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1004",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1004,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/clustered-rho1-seed1004-abyss.json",
+   "reveal": "logs/clustered-rho1-seed1004-abyss.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1004",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1004,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/clustered-rho1-seed1004-lawnmower.json",
+   "reveal": "logs/clustered-rho1-seed1004-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1005",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1005,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/clustered-rho1-seed1005-frontier.json",
+   "reveal": "logs/clustered-rho1-seed1005-frontier.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1005",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1005,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/clustered-rho1-seed1005-abyss.json",
+   "reveal": "logs/clustered-rho1-seed1005-abyss.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1005",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1005,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/clustered-rho1-seed1005-lawnmower.json",
+   "reveal": "logs/clustered-rho1-seed1005-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1006",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1006,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/clustered-rho1-seed1006-frontier.json",
+   "reveal": "logs/clustered-rho1-seed1006-frontier.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1006",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1006,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/clustered-rho1-seed1006-abyss.json",
+   "reveal": "logs/clustered-rho1-seed1006-abyss.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1006",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1006,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/clustered-rho1-seed1006-lawnmower.json",
+   "reveal": "logs/clustered-rho1-seed1006-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1007",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1007,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/clustered-rho1-seed1007-frontier.json",
+   "reveal": "logs/clustered-rho1-seed1007-frontier.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1007",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1007,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/clustered-rho1-seed1007-abyss.json",
+   "reveal": "logs/clustered-rho1-seed1007-abyss.reveal.json"
+  },
+  {
+   "world_id": "clustered-rho1-seed1007",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "seed": 1007,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/clustered-rho1-seed1007-lawnmower.json",
+   "reveal": "logs/clustered-rho1-seed1007-lawnmower.reveal.json"
+  },
+  {
    "world_id": "nonlinear-rho1-seed1000",
    "scenario": "nonlinear",
    "rho": 1.0,
@@ -201,6 +831,216 @@
    "reveal": "logs/nonlinear-rho1-seed1000-random.reveal.json"
   },
   {
+   "world_id": "nonlinear-rho1-seed1001",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1001,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/nonlinear-rho1-seed1001-frontier.json",
+   "reveal": "logs/nonlinear-rho1-seed1001-frontier.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1001",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1001,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/nonlinear-rho1-seed1001-abyss.json",
+   "reveal": "logs/nonlinear-rho1-seed1001-abyss.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1001",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1001,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/nonlinear-rho1-seed1001-lawnmower.json",
+   "reveal": "logs/nonlinear-rho1-seed1001-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1002",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1002,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/nonlinear-rho1-seed1002-frontier.json",
+   "reveal": "logs/nonlinear-rho1-seed1002-frontier.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1002",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1002,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/nonlinear-rho1-seed1002-abyss.json",
+   "reveal": "logs/nonlinear-rho1-seed1002-abyss.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1002",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1002,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/nonlinear-rho1-seed1002-lawnmower.json",
+   "reveal": "logs/nonlinear-rho1-seed1002-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1003",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1003,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/nonlinear-rho1-seed1003-frontier.json",
+   "reveal": "logs/nonlinear-rho1-seed1003-frontier.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1003",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1003,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/nonlinear-rho1-seed1003-abyss.json",
+   "reveal": "logs/nonlinear-rho1-seed1003-abyss.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1003",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1003,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/nonlinear-rho1-seed1003-lawnmower.json",
+   "reveal": "logs/nonlinear-rho1-seed1003-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1004",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1004,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/nonlinear-rho1-seed1004-frontier.json",
+   "reveal": "logs/nonlinear-rho1-seed1004-frontier.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1004",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1004,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/nonlinear-rho1-seed1004-abyss.json",
+   "reveal": "logs/nonlinear-rho1-seed1004-abyss.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1004",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1004,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/nonlinear-rho1-seed1004-lawnmower.json",
+   "reveal": "logs/nonlinear-rho1-seed1004-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1005",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1005,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/nonlinear-rho1-seed1005-frontier.json",
+   "reveal": "logs/nonlinear-rho1-seed1005-frontier.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1005",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1005,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/nonlinear-rho1-seed1005-abyss.json",
+   "reveal": "logs/nonlinear-rho1-seed1005-abyss.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1005",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1005,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/nonlinear-rho1-seed1005-lawnmower.json",
+   "reveal": "logs/nonlinear-rho1-seed1005-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1006",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1006,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/nonlinear-rho1-seed1006-frontier.json",
+   "reveal": "logs/nonlinear-rho1-seed1006-frontier.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1006",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1006,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/nonlinear-rho1-seed1006-abyss.json",
+   "reveal": "logs/nonlinear-rho1-seed1006-abyss.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1006",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1006,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/nonlinear-rho1-seed1006-lawnmower.json",
+   "reveal": "logs/nonlinear-rho1-seed1006-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1007",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1007,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/nonlinear-rho1-seed1007-frontier.json",
+   "reveal": "logs/nonlinear-rho1-seed1007-frontier.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1007",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1007,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/nonlinear-rho1-seed1007-abyss.json",
+   "reveal": "logs/nonlinear-rho1-seed1007-abyss.reveal.json"
+  },
+  {
+   "world_id": "nonlinear-rho1-seed1007",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "seed": 1007,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/nonlinear-rho1-seed1007-lawnmower.json",
+   "reveal": "logs/nonlinear-rho1-seed1007-lawnmower.reveal.json"
+  },
+  {
    "world_id": "random-rho0-seed1000",
    "scenario": "random",
    "rho": 0.0,
@@ -249,6 +1089,216 @@
    "label": "Random",
    "log": "logs/random-rho0-seed1000-random.json",
    "reveal": "logs/random-rho0-seed1000-random.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1001",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1001,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/random-rho0-seed1001-frontier.json",
+   "reveal": "logs/random-rho0-seed1001-frontier.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1001",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1001,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/random-rho0-seed1001-abyss.json",
+   "reveal": "logs/random-rho0-seed1001-abyss.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1001",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1001,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/random-rho0-seed1001-lawnmower.json",
+   "reveal": "logs/random-rho0-seed1001-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1002",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1002,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/random-rho0-seed1002-frontier.json",
+   "reveal": "logs/random-rho0-seed1002-frontier.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1002",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1002,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/random-rho0-seed1002-abyss.json",
+   "reveal": "logs/random-rho0-seed1002-abyss.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1002",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1002,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/random-rho0-seed1002-lawnmower.json",
+   "reveal": "logs/random-rho0-seed1002-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1003",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1003,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/random-rho0-seed1003-frontier.json",
+   "reveal": "logs/random-rho0-seed1003-frontier.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1003",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1003,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/random-rho0-seed1003-abyss.json",
+   "reveal": "logs/random-rho0-seed1003-abyss.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1003",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1003,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/random-rho0-seed1003-lawnmower.json",
+   "reveal": "logs/random-rho0-seed1003-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1004",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1004,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/random-rho0-seed1004-frontier.json",
+   "reveal": "logs/random-rho0-seed1004-frontier.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1004",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1004,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/random-rho0-seed1004-abyss.json",
+   "reveal": "logs/random-rho0-seed1004-abyss.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1004",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1004,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/random-rho0-seed1004-lawnmower.json",
+   "reveal": "logs/random-rho0-seed1004-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1005",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1005,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/random-rho0-seed1005-frontier.json",
+   "reveal": "logs/random-rho0-seed1005-frontier.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1005",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1005,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/random-rho0-seed1005-abyss.json",
+   "reveal": "logs/random-rho0-seed1005-abyss.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1005",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1005,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/random-rho0-seed1005-lawnmower.json",
+   "reveal": "logs/random-rho0-seed1005-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1006",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1006,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/random-rho0-seed1006-frontier.json",
+   "reveal": "logs/random-rho0-seed1006-frontier.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1006",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1006,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/random-rho0-seed1006-abyss.json",
+   "reveal": "logs/random-rho0-seed1006-abyss.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1006",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1006,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/random-rho0-seed1006-lawnmower.json",
+   "reveal": "logs/random-rho0-seed1006-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1007",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1007,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/random-rho0-seed1007-frontier.json",
+   "reveal": "logs/random-rho0-seed1007-frontier.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1007",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1007,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/random-rho0-seed1007-abyss.json",
+   "reveal": "logs/random-rho0-seed1007-abyss.reveal.json"
+  },
+  {
+   "world_id": "random-rho0-seed1007",
+   "scenario": "random",
+   "rho": 0.0,
+   "seed": 1007,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/random-rho0-seed1007-lawnmower.json",
+   "reveal": "logs/random-rho0-seed1007-lawnmower.reveal.json"
   }
  ]
 }

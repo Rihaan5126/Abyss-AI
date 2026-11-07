@@ -768,7 +768,8 @@ export function createExplorer(api) {
     }
     // Hidden richness is highly concentrated, so its colour scale lifts the low end to stay
     // visible on the unlit terrain. This changes the display only, never the values.
-    const hiddenRamp = (t) => HIDDEN_RAMP(t ** 0.55);
+    // Smoothing can overshoot just below the minimum, and a negative base would give NaN.
+    const hiddenRamp = (t) => HIDDEN_RAMP(Math.max(0, t) ** 0.55);
     recolour(grid, !grid ? seafloorRamp : app.layer === "hidden" ? hiddenRamp : BELIEF_RAMP);
     if (grid) {
       const [low, high] = gridExtent(grid);
