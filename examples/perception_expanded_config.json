@@ -1,0 +1,51 @@
+{
+  "familiar": [
+    "Benthocodon",
+    "Bathochordaeus",
+    "Vampyroteuthis infernalis",
+    "Atolla",
+    "Solmissus",
+    "Scotoplanes",
+    "Chiroteuthis calyx",
+    "Nanomia bijuga"
+  ],
+  "withheld": [
+    "Grimpoteuthis"
+  ],
+  "download_seed": 42,
+  "split_seed": 42,
+  "false_alert_rate": 0.05,
+  "allowed_licenses": [
+    "CC-BY-NC-ND-4.0",
+    "CC-BY-NC-4.0",
+    "CC-BY-4.0",
+    "CC0-1.0"
+  ],
+  "download_counts": {
+    "Benthocodon": 30,
+    "Bathochordaeus": 30,
+    "Vampyroteuthis infernalis": 30,
+    "Atolla": 30,
+    "Solmissus": 30,
+    "Scotoplanes": 30,
+    "Chiroteuthis calyx": 30,
+    "Nanomia bijuga": 30,
+    "Grimpoteuthis": 14
+  },
+  "retained_counts_by_split": {
+    "reference": 134,
+    "test": 45,
+    "validation": 64
+  },
+  "retained_test_categories": {
+    "Benthocodon": 10,
+    "Bathochordaeus": 2,
+    "Vampyroteuthis infernalis": 8,
+    "Atolla": 6,
+    "Solmissus": 8,
+    "Scotoplanes": 1,
+    "Chiroteuthis calyx": 2,
+    "Nanomia bijuga": 5,
+    "Grimpoteuthis": 3
+  }
+}

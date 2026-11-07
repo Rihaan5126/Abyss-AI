@@ -25,5 +25,7 @@ python -m pytest -q
 
 See [the perception runbook](docs/perception.md) for data preparation, offline
 inference, evaluation, image licensing and the simulator integration interface.
+For eight familiar categories plus a withheld dumbo-octopus category, see
+[the expanded dataset and Mac demo instructions](docs/expanded-perception.md).
 This branch supplies Ammar's module; the simulator, planners and shared mission
 contract remain with Rihaan and Cam.
