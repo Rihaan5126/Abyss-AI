@@ -10,6 +10,9 @@ that to choose where to survey next, within a fixed energy budget.
 always simulated and energy is in abstract units. It is not a validated AUV or a model
 of a real ecosystem.
 
+**Full definition:** [docs/PROJECT_BRIEF.md](docs/PROJECT_BRIEF.md) sets out what we are
+building, the research questions, roles, evaluation rules and what we are not claiming.
+
 ## Quick start
 
 ```bash
