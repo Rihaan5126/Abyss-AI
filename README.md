@@ -6,6 +6,15 @@ ABYSS is the decision-making software for a simulated underwater exploration rob
 learns which environments are associated with biodiversity during a mission and uses
 that to choose where to survey next, within a fixed energy budget.
 
+![ABYSS Mission Control: the ABYSS and Frontier robots exploring real GEBCO seafloor in 3D, with live category counts](docs/images/mission-control.jpg)
+
+**Headline result:** where organisms are strongly associated with ridges, ABYSS found
+**4.70 more organism categories** on average than frontier exploration, with the same
+energy budget (95% interval +4.30 to +5.10; 50 paired seeds on the GEBCO crop, ideal
+perception). The gain shrinks as the habitat signal weakens, and a plain lawnmower survey
+beats ABYSS on flat-associated worlds. All results, including where ABYSS loses, are in
+[docs/results.md](docs/results.md).
+
 **This is a simulation.** The terrain is real GEBCO bathymetry, but the biology on it is
 always simulated and energy is in abstract units. It is not a validated AUV or a model
 of a real ecosystem.
