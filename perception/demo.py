@@ -1,6 +1,7 @@
 """Local image-upload demo: python -m perception.demo (model and artifact required)."""
 
 import argparse
+from html import escape
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from io import BytesIO
 import json
@@ -17,7 +18,7 @@ PAGE = b'''<!doctype html><html lang="en"><meta charset="utf-8">
 <style>body{background:#071923;color:#def;font:18px system-ui;max-width:800px;margin:50px auto;padding:20px}
 button,input{font:inherit;margin:12px 0}img{max-width:100%;max-height:350px}pre{white-space:pre-wrap;background:#123;padding:20px}</style>
 <h1>ABYSS perception lab</h1><p>Choose a cropped marine organism image to run the real model.</p>
-<p>Familiar categories: Benthocodon, Bathochordaeus, Vampyroteuthis infernalis.</p>
+<p>Familiar categories: {{CATEGORIES}}</p>
 <input type="file" id="file" accept="image/*"><br><img id="preview" alt="Selected organism" hidden>
 <p id="status">Waiting for an image.</p><pre id="result">Results will appear here.</pre>
 <p>Similarity measures visual resemblance, not classification confidence. Unfamiliar does not mean a new species.</p>
@@ -37,6 +38,7 @@ document.querySelector('#file').onchange=async function(){
 
 
 def handler_for(perception):
+    page = PAGE.replace(b'{{CATEGORIES}}', escape(', '.join(sorted(set(perception.index.labels)))).encode())
     class Handler(BaseHTTPRequestHandler):
         def reply(self, status, content, content_type):
             self.send_response(status)
@@ -47,7 +49,7 @@ def handler_for(perception):
 
         def do_GET(self):
             self.reply(200 if self.path == '/' else 404,
-                       PAGE if self.path == '/' else b'Not found', 'text/html; charset=utf-8')
+                       page if self.path == '/' else b'Not found', 'text/html; charset=utf-8')
 
         def do_POST(self):
             if self.path != '/predict':

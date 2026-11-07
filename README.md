@@ -28,6 +28,11 @@ This writes a mission log and a `.reveal.json` file to `results/missions/`.
 
 ## Replay UI
 
+For the integrated **3D view with real image perception**, follow
+[Watch the full system in 3D](docs/vision-3d.md). It generates a local paired
+replay using your existing expanded image dataset and model, with actual photos
+in the discovery feed. Computed missions finish before browser playback.
+
 ```bash
 python -m scripts.build_ui_logs
 ```
@@ -40,6 +45,12 @@ Then open <http://localhost:8000>. The first command runs real missions and rewr
 `ui/logs/`; rerun it after adding a planner so that planner appears in the UI. Both panels
 share a clock in energy units, so they are always compared at equal spend. Reveal files
 are only fetched when the viewer presses Reveal.
+
+The app opens in a **3D explorer** view of the logged missions, built with a local copy of
+[Three.js](https://threejs.org/) r160 in `ui/vendor/three` (MIT licence), so it runs without
+internet. It's a visualisation: robots don't see this scene, and the vision model works on
+real photographs. Terrain is smoothed between grid cells, and its height is exaggerated 3×.
+If WebGL isn't available, the app falls back to the **2D maps** view.
 
 Press **Guided demo** for the five-stage walkthrough. The benchmark section appears once
 `ui/logs/benchmark.json` exists.
@@ -151,6 +162,13 @@ are used. Familiar categories come first, so withheld categories are the rarest 
 world. A small pool means each image is seen repeatedly, with the same result each time,
 so use enough test images per category for the final run.
 
+To measure what vision errors cost the planner, compare ideal and real perception on the
+same worlds. It writes `results/perception_comparison.json`:
+
+```bash
+python -m abyss.evaluation.perception_compare --manifest data/fathomnet/splits.json --artifact data/perception
+```
+
 ## Rules the code enforces
 
 - **No leakage.** Planners receive only `PublicMap`, `PublicState` and `Observation`.
@@ -214,3 +232,5 @@ python -m pytest -q
 
 See [the perception runbook](docs/perception.md) for data preparation, offline
 inference, evaluation, image licensing and the simulator integration interface.
+For eight familiar categories plus a withheld dumbo-octopus category, see
+[the expanded dataset and Mac demo instructions](docs/expanded-perception.md).

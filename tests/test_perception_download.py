@@ -67,6 +67,8 @@ def test_restore_recreates_exact_original_and_refuses_changed_sources(tmp_path, 
     assert rows[0]["split"] == "reference"
     with Image.open(restored.parent / rows[0]["image_path"]) as image:
         assert image.size == (5, 6)
+    monkeypatch.setattr(download, "fetch_bytes", lambda _: pytest.fail("Verified cache should avoid network"))
+    download.restore_manifest(restored, tmp_path / "restored")
     monkeypatch.setattr(download, "fetch_bytes", lambda _: b"changed-image")
     with pytest.raises(ValueError, match="checksum changed"):
         download.restore_manifest(manifest, tmp_path / "changed")
