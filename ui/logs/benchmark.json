@@ -1,0 +1,1767 @@
+{
+ "provenance": {
+  "biology": "simulated",
+  "energy": "abstract units",
+  "metric": "distinct categories found within the energy budget, scored on true labels",
+  "perception": "ideal: labels come directly from the simulator",
+  "interval": "95% paired bootstrap across seeds on shared worlds",
+  "note": "GEBCO runs share one terrain crop, so they show no regional generalisation"
+ },
+ "seeds": [
+  1000,
+  1001,
+  1002,
+  1003,
+  1004,
+  1005,
+  1006,
+  1007,
+  1008,
+  1009,
+  1010,
+  1011,
+  1012,
+  1013,
+  1014,
+  1015,
+  1016,
+  1017,
+  1018,
+  1019,
+  1020,
+  1021,
+  1022,
+  1023,
+  1024,
+  1025,
+  1026,
+  1027,
+  1028,
+  1029,
+  1030,
+  1031,
+  1032,
+  1033,
+  1034,
+  1035,
+  1036,
+  1037,
+  1038,
+  1039,
+  1040,
+  1041,
+  1042,
+  1043,
+  1044,
+  1045,
+  1046,
+  1047,
+  1048,
+  1049
+ ],
+ "frozen_config": {
+  "abyss": {
+   "beta": 1.0,
+   "gamma": 0.5,
+   "coverage": "spatial",
+   "coverage_radius": 3.0,
+   "habitat_radius": 1.0,
+   "noise_var": 1.0,
+   "prior_precision": 1.0,
+   "bias_prior_precision": 0.1,
+   "squared": [
+    "depth",
+    "slope"
+   ],
+   "learn": true,
+   "eps": 1e-06
+  },
+  "simulation": {
+   "height": 30,
+   "width": 30,
+   "cell_size_m": 463.0,
+   "terrain_source": "gebco",
+   "gebco_path": "data/gebco/monterey_canyon_30x30.json",
+   "terrain_seed": null,
+   "home": [
+    0,
+    0
+   ],
+   "scenario": "ridge",
+   "rho": 1.0,
+   "n_categories": 16,
+   "prevalence_max": 0.25,
+   "prevalence_min": 0.01,
+   "signal_strength": 2.0,
+   "cluster_sigma": 2.5,
+   "energy_budget": 150.0,
+   "survey_cost": 2.0,
+   "energy_reserve": 5.0,
+   "terrain_cost_factor": 0.5,
+   "perception_mode": "ideal"
+  }
+ },
+ "safety": {
+  "missions": 6300,
+  "safe_returns": 6300,
+  "forced_returns": 0
+ },
+ "worlds": [
+  {
+   "terrain": "gebco",
+   "scenario": "random",
+   "rho": 0.0,
+   "planners": {
+    "abyss": {
+     "mean": 12.24,
+     "std": 1.3334013588089182,
+     "surveys_mean": 38.16
+    },
+    "frontier": {
+     "mean": 12.76,
+     "std": 1.098421873528062,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 11.94,
+     "std": 1.3311035777481321,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 12.6,
+     "std": 1.538618516324144,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 5.56,
+     "std": 1.8752958950196503,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 12.9,
+     "std": 1.265717510476382,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 12.4,
+     "std": 0.9689042833036098,
+     "surveys_mean": 38.3
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": -0.52,
+     "ci95_low": -0.96,
+     "ci95_high": -0.08,
+     "wins": 14,
+     "ties": 17,
+     "losses": 19
+    },
+    "heuristic": {
+     "mean_difference": 0.3,
+     "ci95_low": -0.22,
+     "ci95_high": 0.8,
+     "wins": 26,
+     "ties": 9,
+     "losses": 15
+    },
+    "lawnmower": {
+     "mean_difference": -0.36,
+     "ci95_low": -0.92,
+     "ci95_high": 0.2,
+     "wins": 15,
+     "ties": 14,
+     "losses": 21
+    },
+    "random": {
+     "mean_difference": 6.68,
+     "ci95_low": 6.06,
+     "ci95_high": 7.28,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": -0.66,
+     "ci95_low": -1.08,
+     "ci95_high": -0.26,
+     "wins": 14,
+     "ties": 9,
+     "losses": 27
+    },
+    "abyss-noinfo": {
+     "mean_difference": -0.16,
+     "ci95_low": -0.56,
+     "ci95_high": 0.2,
+     "wins": 16,
+     "ties": 17,
+     "losses": 17
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "planners": {
+    "abyss": {
+     "mean": 11.48,
+     "std": 2.41796001047265,
+     "surveys_mean": 36.72
+    },
+    "frontier": {
+     "mean": 10.52,
+     "std": 3.15736909338087,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 10.1,
+     "std": 2.3754698783308417,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 11.68,
+     "std": 2.7659740137785027,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 5.7,
+     "std": 3.1184114218490104,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 10.06,
+     "std": 3.266465355451875,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 11.5,
+     "std": 2.392590603492032,
+     "surveys_mean": 36.44
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 0.96,
+     "ci95_low": 0.26,
+     "ci95_high": 1.7,
+     "wins": 24,
+     "ties": 14,
+     "losses": 12
+    },
+    "heuristic": {
+     "mean_difference": 1.38,
+     "ci95_low": 0.64,
+     "ci95_high": 2.14,
+     "wins": 31,
+     "ties": 5,
+     "losses": 14
+    },
+    "lawnmower": {
+     "mean_difference": -0.2,
+     "ci95_low": -1.14,
+     "ci95_high": 0.76,
+     "wins": 21,
+     "ties": 5,
+     "losses": 24
+    },
+    "random": {
+     "mean_difference": 5.78,
+     "ci95_low": 4.64,
+     "ci95_high": 6.82,
+     "wins": 45,
+     "ties": 0,
+     "losses": 5
+    },
+    "abyss-nolearn": {
+     "mean_difference": 1.42,
+     "ci95_low": 0.5795000000000001,
+     "ci95_high": 2.3,
+     "wins": 30,
+     "ties": 11,
+     "losses": 9
+    },
+    "abyss-noinfo": {
+     "mean_difference": -0.02,
+     "ci95_low": -0.66,
+     "ci95_high": 0.6,
+     "wins": 18,
+     "ties": 20,
+     "losses": 12
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "ridge",
+   "rho": 0.25,
+   "planners": {
+    "abyss": {
+     "mean": 13.82,
+     "std": 1.2727922061357855,
+     "surveys_mean": 37.9
+    },
+    "frontier": {
+     "mean": 13.1,
+     "std": 1.129384878631564,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 13.4,
+     "std": 1.228903609577518,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 12.38,
+     "std": 1.4269991347622621,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 5.96,
+     "std": 2.02997939066647,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 13.12,
+     "std": 1.4518109732471431,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 13.16,
+     "std": 1.360672102833218,
+     "surveys_mean": 38.84
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 0.72,
+     "ci95_low": 0.26,
+     "ci95_high": 1.18,
+     "wins": 31,
+     "ties": 8,
+     "losses": 11
+    },
+    "heuristic": {
+     "mean_difference": 0.42,
+     "ci95_low": 0.0,
+     "ci95_high": 0.86,
+     "wins": 25,
+     "ties": 12,
+     "losses": 13
+    },
+    "lawnmower": {
+     "mean_difference": 1.44,
+     "ci95_low": 0.86,
+     "ci95_high": 2.02,
+     "wins": 34,
+     "ties": 6,
+     "losses": 10
+    },
+    "random": {
+     "mean_difference": 7.86,
+     "ci95_low": 7.18,
+     "ci95_high": 8.54,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 0.7,
+     "ci95_low": 0.26,
+     "ci95_high": 1.14,
+     "wins": 27,
+     "ties": 11,
+     "losses": 12
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.66,
+     "ci95_low": 0.18,
+     "ci95_high": 1.16,
+     "wins": 26,
+     "ties": 11,
+     "losses": 13
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "planners": {
+    "abyss": {
+     "mean": 14.34,
+     "std": 1.6734420107267853,
+     "surveys_mean": 36.86
+    },
+    "frontier": {
+     "mean": 12.76,
+     "std": 1.1876919823329444,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 14.34,
+     "std": 1.1177601509724888,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 12.0,
+     "std": 1.3401187885209798,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 6.22,
+     "std": 2.169265840258931,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 13.26,
+     "std": 1.411469056677894,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 14.02,
+     "std": 1.6473850645858144,
+     "surveys_mean": 37.6
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 1.58,
+     "ci95_low": 1.04,
+     "ci95_high": 2.08,
+     "wins": 38,
+     "ties": 6,
+     "losses": 6
+    },
+    "heuristic": {
+     "mean_difference": 0.0,
+     "ci95_low": -0.48,
+     "ci95_high": 0.46,
+     "wins": 21,
+     "ties": 14,
+     "losses": 15
+    },
+    "lawnmower": {
+     "mean_difference": 2.34,
+     "ci95_low": 1.7,
+     "ci95_high": 2.94,
+     "wins": 41,
+     "ties": 3,
+     "losses": 6
+    },
+    "random": {
+     "mean_difference": 8.12,
+     "ci95_low": 7.42,
+     "ci95_high": 8.76,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 1.08,
+     "ci95_low": 0.48,
+     "ci95_high": 1.62,
+     "wins": 31,
+     "ties": 14,
+     "losses": 5
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.32,
+     "ci95_low": -0.28,
+     "ci95_high": 0.9,
+     "wins": 19,
+     "ties": 21,
+     "losses": 10
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "planners": {
+    "abyss": {
+     "mean": 15.78,
+     "std": 0.5454823740581939,
+     "surveys_mean": 34.8
+    },
+    "frontier": {
+     "mean": 11.08,
+     "std": 1.3376799897965286,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 15.2,
+     "std": 0.9689042833036098,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 10.26,
+     "std": 1.3372222198670356,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 6.22,
+     "std": 3.1252101970123873,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 12.48,
+     "std": 1.5810097522579338,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 15.58,
+     "std": 1.1444631572782704,
+     "surveys_mean": 35.02
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 4.7,
+     "ci95_low": 4.3,
+     "ci95_high": 5.1,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "heuristic": {
+     "mean_difference": 0.58,
+     "ci95_low": 0.3,
+     "ci95_high": 0.8604999999999927,
+     "wins": 22,
+     "ties": 24,
+     "losses": 4
+    },
+    "lawnmower": {
+     "mean_difference": 5.52,
+     "ci95_low": 5.12,
+     "ci95_high": 5.92,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "random": {
+     "mean_difference": 9.56,
+     "ci95_low": 8.7,
+     "ci95_high": 10.38,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 3.3,
+     "ci95_low": 2.84,
+     "ci95_high": 3.78,
+     "wins": 48,
+     "ties": 2,
+     "losses": 0
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.2,
+     "ci95_low": -0.1,
+     "ci95_high": 0.58,
+     "wins": 7,
+     "ties": 37,
+     "losses": 6
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "reversed",
+   "rho": 0.25,
+   "planners": {
+    "abyss": {
+     "mean": 12.18,
+     "std": 1.4241359714950403,
+     "surveys_mean": 37.4
+    },
+    "frontier": {
+     "mean": 12.7,
+     "std": 1.1994896874104761,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 10.2,
+     "std": 1.4568627181693672,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 12.7,
+     "std": 1.4880476182856899,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 5.48,
+     "std": 1.6689236418868836,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 12.58,
+     "std": 1.553008929367078,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 12.0,
+     "std": 1.355261854357877,
+     "surveys_mean": 37.1
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": -0.52,
+     "ci95_low": -1.02,
+     "ci95_high": -0.06,
+     "wins": 16,
+     "ties": 7,
+     "losses": 27
+    },
+    "heuristic": {
+     "mean_difference": 1.98,
+     "ci95_low": 1.46,
+     "ci95_high": 2.5,
+     "wins": 41,
+     "ties": 5,
+     "losses": 4
+    },
+    "lawnmower": {
+     "mean_difference": -0.52,
+     "ci95_low": -1.0,
+     "ci95_high": -0.02,
+     "wins": 16,
+     "ties": 10,
+     "losses": 24
+    },
+    "random": {
+     "mean_difference": 6.7,
+     "ci95_low": 6.14,
+     "ci95_high": 7.24,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": -0.4,
+     "ci95_low": -0.92,
+     "ci95_high": 0.1,
+     "wins": 15,
+     "ties": 16,
+     "losses": 19
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.18,
+     "ci95_low": -0.24,
+     "ci95_high": 0.58,
+     "wins": 23,
+     "ties": 14,
+     "losses": 13
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "planners": {
+    "abyss": {
+     "mean": 11.64,
+     "std": 1.7233095828571685,
+     "surveys_mean": 35.98
+    },
+    "frontier": {
+     "mean": 12.12,
+     "std": 1.56021976474012,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 8.26,
+     "std": 1.4400963686574617,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 12.5,
+     "std": 1.6812288994199742,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 5.5,
+     "std": 1.8979043222266319,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 12.18,
+     "std": 1.6249332796349842,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 11.64,
+     "std": 1.6874083497409602,
+     "surveys_mean": 35.56
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": -0.48,
+     "ci95_low": -1.02,
+     "ci95_high": 0.06,
+     "wins": 15,
+     "ties": 11,
+     "losses": 24
+    },
+    "heuristic": {
+     "mean_difference": 3.38,
+     "ci95_low": 2.84,
+     "ci95_high": 3.92,
+     "wins": 48,
+     "ties": 1,
+     "losses": 1
+    },
+    "lawnmower": {
+     "mean_difference": -0.86,
+     "ci95_low": -1.46,
+     "ci95_high": -0.24,
+     "wins": 16,
+     "ties": 5,
+     "losses": 29
+    },
+    "random": {
+     "mean_difference": 6.14,
+     "ci95_low": 5.34,
+     "ci95_high": 6.92,
+     "wins": 49,
+     "ties": 1,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": -0.54,
+     "ci95_low": -0.98,
+     "ci95_high": -0.1,
+     "wins": 12,
+     "ties": 11,
+     "losses": 27
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.0,
+     "ci95_low": -0.42,
+     "ci95_high": 0.44,
+     "wins": 15,
+     "ties": 20,
+     "losses": 15
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "reversed",
+   "rho": 1.0,
+   "planners": {
+    "abyss": {
+     "mean": 10.5,
+     "std": 2.484646732989441,
+     "surveys_mean": 35.28
+    },
+    "frontier": {
+     "mean": 10.4,
+     "std": 1.8626292586293283,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 5.2,
+     "std": 1.5649215928719034,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 12.22,
+     "std": 1.5945058731757111,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 5.42,
+     "std": 2.1293862294768684,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 10.78,
+     "std": 1.9303166706474852,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 10.92,
+     "std": 1.8826815439469222,
+     "surveys_mean": 34.76
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 0.1,
+     "ci95_low": -0.58,
+     "ci95_high": 0.78,
+     "wins": 23,
+     "ties": 6,
+     "losses": 21
+    },
+    "heuristic": {
+     "mean_difference": 5.3,
+     "ci95_low": 4.58,
+     "ci95_high": 6.0,
+     "wins": 49,
+     "ties": 0,
+     "losses": 1
+    },
+    "lawnmower": {
+     "mean_difference": -1.72,
+     "ci95_low": -2.56,
+     "ci95_high": -0.88,
+     "wins": 10,
+     "ties": 11,
+     "losses": 29
+    },
+    "random": {
+     "mean_difference": 5.08,
+     "ci95_low": 4.22,
+     "ci95_high": 5.94,
+     "wins": 46,
+     "ties": 1,
+     "losses": 3
+    },
+    "abyss-nolearn": {
+     "mean_difference": -0.28,
+     "ci95_low": -0.84,
+     "ci95_high": 0.32,
+     "wins": 13,
+     "ties": 15,
+     "losses": 22
+    },
+    "abyss-noinfo": {
+     "mean_difference": -0.42,
+     "ci95_low": -0.98,
+     "ci95_high": 0.18,
+     "wins": 10,
+     "ties": 18,
+     "losses": 22
+    }
+   }
+  },
+  {
+   "terrain": "gebco",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "planners": {
+    "abyss": {
+     "mean": 10.9,
+     "std": 3.045572229332549,
+     "surveys_mean": 34.84
+    },
+    "frontier": {
+     "mean": 8.94,
+     "std": 4.2301637928436895,
+     "surveys_mean": 44.0
+    },
+    "heuristic": {
+     "mean": 11.8,
+     "std": 3.1815796359028696,
+     "surveys_mean": 39.0
+    },
+    "lawnmower": {
+     "mean": 10.22,
+     "std": 3.9963759092662023,
+     "surveys_mean": 40.0
+    },
+    "random": {
+     "mean": 5.64,
+     "std": 2.9399430787214995,
+     "surveys_mean": 7.52
+    },
+    "abyss-nolearn": {
+     "mean": 8.16,
+     "std": 4.348868020672103,
+     "surveys_mean": 43.0
+    },
+    "abyss-noinfo": {
+     "mean": 11.4,
+     "std": 3.404678653660853,
+     "surveys_mean": 35.2
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 1.96,
+     "ci95_low": 0.84,
+     "ci95_high": 3.1004999999999927,
+     "wins": 29,
+     "ties": 11,
+     "losses": 10
+    },
+    "heuristic": {
+     "mean_difference": -0.9,
+     "ci95_low": -1.66,
+     "ci95_high": -0.12,
+     "wins": 19,
+     "ties": 7,
+     "losses": 24
+    },
+    "lawnmower": {
+     "mean_difference": 0.68,
+     "ci95_low": -0.74,
+     "ci95_high": 2.14,
+     "wins": 23,
+     "ties": 3,
+     "losses": 24
+    },
+    "random": {
+     "mean_difference": 5.26,
+     "ci95_low": 4.12,
+     "ci95_high": 6.38,
+     "wins": 45,
+     "ties": 1,
+     "losses": 4
+    },
+    "abyss-nolearn": {
+     "mean_difference": 2.74,
+     "ci95_low": 1.38,
+     "ci95_high": 4.14,
+     "wins": 33,
+     "ties": 5,
+     "losses": 12
+    },
+    "abyss-noinfo": {
+     "mean_difference": -0.5,
+     "ci95_low": -1.4804999999999997,
+     "ci95_high": 0.52,
+     "wins": 19,
+     "ties": 12,
+     "losses": 19
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "random",
+   "rho": 0.0,
+   "planners": {
+    "abyss": {
+     "mean": 12.68,
+     "std": 1.2687773320671152,
+     "surveys_mean": 37.58
+    },
+    "frontier": {
+     "mean": 12.72,
+     "std": 1.26232697339283,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 12.18,
+     "std": 1.3656126680664884,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 12.5,
+     "std": 1.5016997172591886,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 5.74,
+     "std": 1.6389394280996452,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 12.64,
+     "std": 1.3666583706401598,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 12.7,
+     "std": 1.373956004405096,
+     "surveys_mean": 39.12
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": -0.04,
+     "ci95_low": -0.46,
+     "ci95_high": 0.4,
+     "wins": 16,
+     "ties": 13,
+     "losses": 21
+    },
+    "heuristic": {
+     "mean_difference": 0.5,
+     "ci95_low": 0.04,
+     "ci95_high": 0.96,
+     "wins": 24,
+     "ties": 14,
+     "losses": 12
+    },
+    "lawnmower": {
+     "mean_difference": 0.18,
+     "ci95_low": -0.3004999999999998,
+     "ci95_high": 0.6604999999999928,
+     "wins": 21,
+     "ties": 10,
+     "losses": 19
+    },
+    "random": {
+     "mean_difference": 6.94,
+     "ci95_low": 6.36,
+     "ci95_high": 7.52,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 0.04,
+     "ci95_low": -0.42,
+     "ci95_high": 0.48,
+     "wins": 19,
+     "ties": 13,
+     "losses": 18
+    },
+    "abyss-noinfo": {
+     "mean_difference": -0.02,
+     "ci95_low": -0.44,
+     "ci95_high": 0.44,
+     "wins": 17,
+     "ties": 13,
+     "losses": 20
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "clustered",
+   "rho": 1.0,
+   "planners": {
+    "abyss": {
+     "mean": 11.52,
+     "std": 2.7571058472719585,
+     "surveys_mean": 35.82
+    },
+    "frontier": {
+     "mean": 10.7,
+     "std": 3.1509635714446826,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 11.06,
+     "std": 2.3422473073908296,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 11.34,
+     "std": 2.945837603072082,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 6.48,
+     "std": 2.7644979615821454,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 11.28,
+     "std": 2.9210006672301847,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 11.4,
+     "std": 2.6186146828319083,
+     "surveys_mean": 35.42
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 0.82,
+     "ci95_low": -0.04,
+     "ci95_high": 1.72,
+     "wins": 27,
+     "ties": 6,
+     "losses": 17
+    },
+    "heuristic": {
+     "mean_difference": 0.46,
+     "ci95_low": -0.4,
+     "ci95_high": 1.32,
+     "wins": 23,
+     "ties": 11,
+     "losses": 16
+    },
+    "lawnmower": {
+     "mean_difference": 0.18,
+     "ci95_low": -0.84,
+     "ci95_high": 1.18,
+     "wins": 23,
+     "ties": 7,
+     "losses": 20
+    },
+    "random": {
+     "mean_difference": 5.04,
+     "ci95_low": 4.14,
+     "ci95_high": 5.92,
+     "wins": 46,
+     "ties": 3,
+     "losses": 1
+    },
+    "abyss-nolearn": {
+     "mean_difference": 0.24,
+     "ci95_low": -0.58,
+     "ci95_high": 1.08,
+     "wins": 22,
+     "ties": 8,
+     "losses": 20
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.12,
+     "ci95_low": -0.62,
+     "ci95_high": 0.88,
+     "wins": 21,
+     "ties": 12,
+     "losses": 17
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "ridge",
+   "rho": 0.25,
+   "planners": {
+    "abyss": {
+     "mean": 13.22,
+     "std": 1.632451518172492,
+     "surveys_mean": 35.36
+    },
+    "frontier": {
+     "mean": 11.8,
+     "std": 1.8070158058105024,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 13.64,
+     "std": 1.6132107672563547,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 12.16,
+     "std": 1.5954015552358534,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 5.9,
+     "std": 1.6933242273042426,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 11.62,
+     "std": 2.0691120051355165,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 12.36,
+     "std": 1.7700455430552617,
+     "surveys_mean": 38.18
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 1.42,
+     "ci95_low": 0.8,
+     "ci95_high": 2.02,
+     "wins": 36,
+     "ties": 4,
+     "losses": 10
+    },
+    "heuristic": {
+     "mean_difference": -0.42,
+     "ci95_low": -0.94,
+     "ci95_high": 0.06,
+     "wins": 14,
+     "ties": 11,
+     "losses": 25
+    },
+    "lawnmower": {
+     "mean_difference": 1.06,
+     "ci95_low": 0.44,
+     "ci95_high": 1.68,
+     "wins": 34,
+     "ties": 3,
+     "losses": 13
+    },
+    "random": {
+     "mean_difference": 7.32,
+     "ci95_low": 6.66,
+     "ci95_high": 7.94,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 1.6,
+     "ci95_low": 0.94,
+     "ci95_high": 2.26,
+     "wins": 31,
+     "ties": 11,
+     "losses": 8
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.86,
+     "ci95_low": 0.28,
+     "ci95_high": 1.5,
+     "wins": 28,
+     "ties": 7,
+     "losses": 15
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "planners": {
+    "abyss": {
+     "mean": 14.72,
+     "std": 1.56544314649174,
+     "surveys_mean": 33.88
+    },
+    "frontier": {
+     "mean": 9.92,
+     "std": 2.3197466434496503,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 14.2,
+     "std": 1.7496355305594127,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 11.98,
+     "std": 1.5712986959317234,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 6.12,
+     "std": 2.246448444154661,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 10.38,
+     "std": 2.7913130550743626,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 12.9,
+     "std": 2.742336260064638,
+     "surveys_mean": 36.12
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 4.8,
+     "ci95_low": 4.06,
+     "ci95_high": 5.5,
+     "wins": 48,
+     "ties": 1,
+     "losses": 1
+    },
+    "heuristic": {
+     "mean_difference": 0.52,
+     "ci95_low": -0.08,
+     "ci95_high": 1.12,
+     "wins": 21,
+     "ties": 15,
+     "losses": 14
+    },
+    "lawnmower": {
+     "mean_difference": 2.74,
+     "ci95_low": 2.2,
+     "ci95_high": 3.28,
+     "wins": 43,
+     "ties": 6,
+     "losses": 1
+    },
+    "random": {
+     "mean_difference": 8.6,
+     "ci95_low": 7.84,
+     "ci95_high": 9.34,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 4.34,
+     "ci95_low": 3.54,
+     "ci95_high": 5.12,
+     "wins": 46,
+     "ties": 3,
+     "losses": 1
+    },
+    "abyss-noinfo": {
+     "mean_difference": 1.82,
+     "ci95_low": 1.0,
+     "ci95_high": 2.66,
+     "wins": 30,
+     "ties": 9,
+     "losses": 11
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "ridge",
+   "rho": 1.0,
+   "planners": {
+    "abyss": {
+     "mean": 15.52,
+     "std": 1.50156381068239,
+     "surveys_mean": 32.96
+    },
+    "frontier": {
+     "mean": 7.14,
+     "std": 3.1429220772512747,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 14.44,
+     "std": 2.704191757480318,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 12.22,
+     "std": 1.8658039794672747,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 6.46,
+     "std": 3.3209907545545403,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 8.12,
+     "std": 4.714891735939719,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 14.58,
+     "std": 2.2505328167311123,
+     "surveys_mean": 33.56
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 8.38,
+     "ci95_low": 7.42,
+     "ci95_high": 9.28,
+     "wins": 49,
+     "ties": 1,
+     "losses": 0
+    },
+    "heuristic": {
+     "mean_difference": 1.08,
+     "ci95_low": 0.22,
+     "ci95_high": 2.0,
+     "wins": 18,
+     "ties": 27,
+     "losses": 5
+    },
+    "lawnmower": {
+     "mean_difference": 3.3,
+     "ci95_low": 2.64,
+     "ci95_high": 3.9,
+     "wins": 47,
+     "ties": 2,
+     "losses": 1
+    },
+    "random": {
+     "mean_difference": 9.06,
+     "ci95_low": 8.12,
+     "ci95_high": 9.980499999999994,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 7.4,
+     "ci95_low": 6.1,
+     "ci95_high": 8.68,
+     "wins": 45,
+     "ties": 4,
+     "losses": 1
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.94,
+     "ci95_low": 0.34,
+     "ci95_high": 1.58,
+     "wins": 21,
+     "ties": 26,
+     "losses": 3
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "reversed",
+   "rho": 0.25,
+   "planners": {
+    "abyss": {
+     "mean": 12.46,
+     "std": 1.7403963892851346,
+     "surveys_mean": 35.16
+    },
+    "frontier": {
+     "mean": 12.82,
+     "std": 1.6498608475645848,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 9.78,
+     "std": 1.9927419321536006,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 12.34,
+     "std": 1.5728564940961423,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 5.64,
+     "std": 1.6132107672563547,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 11.9,
+     "std": 1.9192898346492004,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 12.82,
+     "std": 1.1551128578133456,
+     "surveys_mean": 38.96
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": -0.36,
+     "ci95_low": -1.0,
+     "ci95_high": 0.24,
+     "wins": 17,
+     "ties": 8,
+     "losses": 25
+    },
+    "heuristic": {
+     "mean_difference": 2.68,
+     "ci95_low": 2.04,
+     "ci95_high": 3.3,
+     "wins": 41,
+     "ties": 5,
+     "losses": 4
+    },
+    "lawnmower": {
+     "mean_difference": 0.12,
+     "ci95_low": -0.54,
+     "ci95_high": 0.74,
+     "wins": 23,
+     "ties": 9,
+     "losses": 18
+    },
+    "random": {
+     "mean_difference": 6.82,
+     "ci95_low": 6.22,
+     "ci95_high": 7.42,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 0.56,
+     "ci95_low": -0.06,
+     "ci95_high": 1.12,
+     "wins": 25,
+     "ties": 15,
+     "losses": 10
+    },
+    "abyss-noinfo": {
+     "mean_difference": -0.36,
+     "ci95_low": -0.88,
+     "ci95_high": 0.14,
+     "wins": 17,
+     "ties": 11,
+     "losses": 22
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "reversed",
+   "rho": 0.5,
+   "planners": {
+    "abyss": {
+     "mean": 12.96,
+     "std": 1.5247616073287236,
+     "surveys_mean": 34.8
+    },
+    "frontier": {
+     "mean": 12.28,
+     "std": 2.0408081632489794,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 7.56,
+     "std": 2.6120599424318622,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 12.1,
+     "std": 1.5939938288872426,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 5.76,
+     "std": 1.6728321335205083,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 11.32,
+     "std": 2.773342490827372,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 13.18,
+     "std": 1.452513655139719,
+     "surveys_mean": 37.62
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 0.68,
+     "ci95_low": 0.08,
+     "ci95_high": 1.3,
+     "wins": 24,
+     "ties": 11,
+     "losses": 15
+    },
+    "heuristic": {
+     "mean_difference": 5.4,
+     "ci95_low": 4.54,
+     "ci95_high": 6.22,
+     "wins": 46,
+     "ties": 4,
+     "losses": 0
+    },
+    "lawnmower": {
+     "mean_difference": 0.86,
+     "ci95_low": 0.24,
+     "ci95_high": 1.4604999999999926,
+     "wins": 31,
+     "ties": 6,
+     "losses": 13
+    },
+    "random": {
+     "mean_difference": 7.2,
+     "ci95_low": 6.64,
+     "ci95_high": 7.76,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 1.64,
+     "ci95_low": 0.86,
+     "ci95_high": 2.46,
+     "wins": 33,
+     "ties": 7,
+     "losses": 10
+    },
+    "abyss-noinfo": {
+     "mean_difference": -0.22,
+     "ci95_low": -0.7,
+     "ci95_high": 0.22,
+     "wins": 16,
+     "ties": 17,
+     "losses": 17
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "reversed",
+   "rho": 1.0,
+   "planners": {
+    "abyss": {
+     "mean": 13.96,
+     "std": 1.6777049435317943,
+     "surveys_mean": 33.12
+    },
+    "frontier": {
+     "mean": 10.92,
+     "std": 3.0628784647445477,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 4.64,
+     "std": 2.86968674959765,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 12.16,
+     "std": 1.788397983374723,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 5.76,
+     "std": 2.1998144634194463,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 9.94,
+     "std": 3.771049764525869,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 13.88,
+     "std": 1.7915903321818152,
+     "surveys_mean": 34.94
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 3.04,
+     "ci95_low": 2.12,
+     "ci95_high": 3.98,
+     "wins": 40,
+     "ties": 6,
+     "losses": 4
+    },
+    "heuristic": {
+     "mean_difference": 9.32,
+     "ci95_low": 8.3,
+     "ci95_high": 10.32,
+     "wins": 48,
+     "ties": 1,
+     "losses": 1
+    },
+    "lawnmower": {
+     "mean_difference": 1.8,
+     "ci95_low": 1.04,
+     "ci95_high": 2.56,
+     "wins": 35,
+     "ties": 7,
+     "losses": 8
+    },
+    "random": {
+     "mean_difference": 8.2,
+     "ci95_low": 7.44,
+     "ci95_high": 8.96,
+     "wins": 50,
+     "ties": 0,
+     "losses": 0
+    },
+    "abyss-nolearn": {
+     "mean_difference": 4.02,
+     "ci95_low": 2.9595000000000002,
+     "ci95_high": 5.160499999999993,
+     "wins": 39,
+     "ties": 8,
+     "losses": 3
+    },
+    "abyss-noinfo": {
+     "mean_difference": 0.08,
+     "ci95_low": -0.48,
+     "ci95_high": 0.68,
+     "wins": 15,
+     "ties": 21,
+     "losses": 14
+    }
+   }
+  },
+  {
+   "terrain": "synthetic",
+   "scenario": "nonlinear",
+   "rho": 1.0,
+   "planners": {
+    "abyss": {
+     "mean": 13.84,
+     "std": 2.8093139550358526,
+     "surveys_mean": 35.1
+    },
+    "frontier": {
+     "mean": 12.42,
+     "std": 2.9972095866192685,
+     "surveys_mean": 43.24
+    },
+    "heuristic": {
+     "mean": 10.9,
+     "std": 2.6668792432277812,
+     "surveys_mean": 35.38
+    },
+    "lawnmower": {
+     "mean": 11.48,
+     "std": 3.4240446306456143,
+     "surveys_mean": 38.7
+    },
+    "random": {
+     "mean": 6.7,
+     "std": 3.202358824494271,
+     "surveys_mean": 7.36
+    },
+    "abyss-nolearn": {
+     "mean": 13.12,
+     "std": 2.7452370627347005,
+     "surveys_mean": 43.12
+    },
+    "abyss-noinfo": {
+     "mean": 12.84,
+     "std": 2.8093139550358526,
+     "surveys_mean": 36.1
+    }
+   },
+   "abyss_vs": {
+    "frontier": {
+     "mean_difference": 1.42,
+     "ci95_low": 0.5595000000000002,
+     "ci95_high": 2.32,
+     "wins": 29,
+     "ties": 9,
+     "losses": 12
+    },
+    "heuristic": {
+     "mean_difference": 2.94,
+     "ci95_low": 2.06,
+     "ci95_high": 3.86,
+     "wins": 38,
+     "ties": 6,
+     "losses": 6
+    },
+    "lawnmower": {
+     "mean_difference": 2.36,
+     "ci95_low": 1.42,
+     "ci95_high": 3.38,
+     "wins": 34,
+     "ties": 8,
+     "losses": 8
+    },
+    "random": {
+     "mean_difference": 7.14,
+     "ci95_low": 5.98,
+     "ci95_high": 8.28,
+     "wins": 48,
+     "ties": 0,
+     "losses": 2
+    },
+    "abyss-nolearn": {
+     "mean_difference": 0.72,
+     "ci95_low": -0.060499999999999825,
+     "ci95_high": 1.54,
+     "wins": 22,
+     "ties": 14,
+     "losses": 14
+    },
+    "abyss-noinfo": {
+     "mean_difference": 1.0,
+     "ci95_low": 0.06,
+     "ci95_high": 1.92,
+     "wins": 24,
+     "ties": 15,
+     "losses": 11
+    }
+   }
+  }
+ ]
+}
