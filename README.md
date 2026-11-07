@@ -41,6 +41,12 @@ Then open <http://localhost:8000>. The first command runs real missions and rewr
 share a clock in energy units, so they are always compared at equal spend. Reveal files
 are only fetched when the viewer presses Reveal.
 
+The app opens in a **3D explorer** view of the logged missions, built with a local copy of
+[Three.js](https://threejs.org/) r160 in `ui/vendor/three` (MIT licence), so it runs without
+internet. It's a visualisation: robots don't see this scene, and the vision model works on
+real photographs. Terrain is smoothed between grid cells, and its height is exaggerated 3×.
+If WebGL isn't available, the app falls back to the **2D maps** view.
+
 Press **Guided demo** for the five-stage walkthrough. The benchmark section appears once
 `ui/logs/benchmark.json` exists.
 

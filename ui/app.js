@@ -43,6 +43,8 @@ const fmt = (v, digits = 1) => Number(v).toFixed(digits);
 
 const app = {
   entries: [],
+  view: "2d",
+  explorer: null,
   worldId: null,
   panes: [],
   energy: 0,
@@ -561,11 +563,12 @@ function drawChart() {
 function render() {
   for (const pane of app.panes) {
     pane.mission = missionAt(pane, app.energy);
-    drawMap(pane, pane.mission);
+    if (app.view === "2d") drawMap(pane, pane.mission);
     updatePaneText(pane, pane.mission);
     renderFeed(pane, pane.mission);
   }
   drawChart();
+  app.explorer?.sync();
   $("scrub").value = app.energy;
   $("clock").textContent = `${fmt(app.energy)} / ${fmt(app.maxEnergy)} energy`;
 }
@@ -749,6 +752,7 @@ async function selectWorld(worldId) {
   updateClockRange();
   updateLayerControls();
   updateProvenance();
+  app.explorer?.loadWorld();
   render();
 }
 
@@ -757,6 +761,7 @@ async function changePlanner(pane, options) {
   setPlaying(false);
   await loadPane(pane, entry);
   if (app.revealed) await fetchReveals();
+  app.explorer?.loadWorld();
   updateClockRange();
   updateLayerControls();
   render();
@@ -923,7 +928,7 @@ const TOUR_STAGES = [
     body: () => {
       const first = abyssPane().timeline.find((s) => s.step.new_discoveries.length);
       return first
-        ? `ABYSS makes its first discovery at energy ${fmt(first.end)}. Each survey now updates its habitat model. See the survey feed below the map.`
+        ? `ABYSS makes its first discovery at energy ${fmt(first.end)}. Each survey now updates its habitat model. The camera follows ABYSS, and its feed card shows what it found.`
         : "ABYSS found no organisms in this mission.";
     },
   },
@@ -942,7 +947,7 @@ const TOUR_STAGES = [
         ? ` For this target: predicted richness ${fmt(terms.expected_richness, 2)}, information gain ${fmt(terms.information_gain, 2)}, ` +
           `coverage ${fmt(terms.coverage, 2)}, energy ${fmt(terms.energy_cost, 2)}.`
         : "";
-      return "This map is what ABYSS currently believes. Its next target comes from a single formula: " +
+      return "The seafloor colours now show what ABYSS currently believes. Its next target comes from a single formula: " +
         `predicted richness, uncertainty and coverage, per unit of energy.${numbers} No discovery triggers a scripted route.`;
     },
   },
@@ -970,6 +975,11 @@ const TOUR_STAGES = [
 
 async function showTourStage(index) {
   app.tourIndex = index;
+  if (app.explorer) {
+    setView("3d");
+    if (index === 1) app.explorer.followAbyss();
+    else app.explorer.setFollow(-1);
+  }
   setPlaying(false);
   const stage = TOUR_STAGES[index];
   await stage.apply();
@@ -1003,6 +1013,7 @@ function bindControls() {
   $("tour-back").addEventListener("click", () => tourStep(app.tourIndex - 1));
   $("tour-next").addEventListener("click", () => tourStep(app.tourIndex + 1));
   $("tour-exit").addEventListener("click", exitTour);
+  $("views").addEventListener("change", (event) => setView(event.target.value));
   $("layers").addEventListener("change", (event) => {
     app.layer = event.target.value;
     render();
@@ -1015,6 +1026,34 @@ function bindControls() {
     if (event.key === "ArrowLeft") jumpEvent(-1);
   });
   new ResizeObserver(() => { if (app.panes.length) render(); }).observe($("panes"));
+}
+
+function setView(view) {
+  app.view = view;
+  document.querySelector(`input[name="view"][value="${view}"]`).checked = true;
+  document.body.classList.toggle("view-3d", view === "3d");
+  $("stage").hidden = view !== "3d";
+  $("stage-note").hidden = view !== "3d";
+  app.explorer?.setActive(view === "3d");
+  if (app.panes.length) render();
+}
+
+async function loadExplorer() {
+  try {
+    const { createExplorer } = await import("./explorer.js");
+    $("stage").hidden = false; // the renderer needs a real size to start
+    app.explorer = createExplorer({
+      app, overlayGrid, abyssPane, gridExtent, BELIEF_RAMP, HIDDEN_RAMP, LAYER_LABELS, categoryLabel,
+    });
+    document.querySelector('input[name="view"][value="3d"]').disabled = false;
+    app.explorer.loadWorld();
+    setView("3d");
+  } catch (error) {
+    // WebGL can be unavailable on some machines, and the 2D view shows the same missions.
+    console.warn("3D view unavailable:", error);
+    app.explorer = null;
+    setView("2d");
+  }
 }
 
 async function init() {
@@ -1037,6 +1076,7 @@ async function init() {
   }
   await selectWorld(select.value);
   await loadBenchmark();
+  await loadExplorer();
 }
 
 init().catch((error) => showNotice(error.message, true));
