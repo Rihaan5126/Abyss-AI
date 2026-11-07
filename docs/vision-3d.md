@@ -17,7 +17,7 @@ python -m http.server 8000 --directory ui
 ```
 
 Open <http://localhost:8000/?missions=vision-logs/index.json>. The view starts in
-3D when WebGL is available. Press **Play** or **Guided demo**. Drag to orbit,
+3D when WebGL is available. Press **Begin dive** or **Step through**. Drag to orbit,
 scroll to zoom, and use the camera controls to follow a robot. The discovery
 feed shows the actual held-out image crops passed to perception. Predicted and
 uncertainty layers come from the learned model. Reveal exposes simulated truth

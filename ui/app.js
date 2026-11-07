@@ -5,7 +5,11 @@
 // Both panels share one clock in energy units, so they are always compared at equal spend.
 // Reveal files are not fetched until the viewer asks for the reveal.
 
-const PANE_COLORS = ["#f5b544", "#6ee7c7"];
+const PANE_COLORS = ["#ff9d76", "#5ef2d6"];
+// The committed GEBCO crop's position, from data/gebco/monterey_canyon_30x30.json.
+const GEBCO_CROP = { west: -122.0625, north: 36.754167, cellsPerDegree: 240 };
+const CAPTION_MS = 6500;
+const SUMMARY_DELAY_MS = 2600;
 const ISOBATH_STEP_M = 250;
 const SCENARIO_NAMES = {
   random: "Independent random",
@@ -24,7 +28,7 @@ const PERCEPTION_NAMES = {
 };
 const GEBCO_CREDIT =" GEBCO Compilation Group (2025) GEBCO 2025 Grid (doi:10.5285/37c52e96-24ea-67ce-e063-7086abc05f29).";
 // Differ in lightness as well as hue, and each class is also named in the legend.
-const HABITAT_COLOURS = [[233, 205, 130], [231, 111, 81], [116, 62, 158], [64, 170, 160], [146, 196, 245]];
+const HABITAT_COLOURS = [[214, 226, 190], [255, 139, 120], [96, 66, 190], [48, 176, 186], [168, 206, 255]];
 const LAYER_LABELS = {
   habitat: "Habitat classes",
   predicted_richness: "Predicted richness",
@@ -59,6 +63,9 @@ const app = {
   lastFrame: 0,
   loadToken: 0,
   tourIndex: -1,
+  sequence: null,
+  captionTimer: 0,
+  summaryTimer: 0,
   manifestNotice: "",
   benchmark: null,
 };
@@ -130,9 +137,9 @@ function ramp(stops) {
   };
 }
 
-const DEPTH_RAMP = ramp([[126, 182, 186], [58, 128, 150], [28, 84, 118], [14, 48, 84], [6, 24, 50]]);
-const BELIEF_RAMP = ramp([[12, 30, 60], [34, 88, 130], [60, 160, 150], [190, 220, 120], [250, 245, 190]]);
-const HIDDEN_RAMP = ramp([[24, 14, 44], [96, 30, 90], [190, 56, 90], [245, 130, 80], [252, 225, 160]]);
+const DEPTH_RAMP = ramp([[158, 214, 214], [76, 158, 180], [38, 100, 156], [28, 56, 118], [14, 20, 66]]);
+const BELIEF_RAMP = ramp([[10, 14, 48], [32, 52, 132], [28, 136, 168], [112, 232, 206], [236, 255, 236]]);
+const HIDDEN_RAMP = ramp([[22, 8, 46], [88, 20, 112], [176, 40, 132], [250, 110, 132], [255, 222, 192]]);
 
 function gridExtent(grid) {
   const values = grid.flat();
@@ -270,7 +277,7 @@ function drawMap(pane, mission) {
   if (!isHabitat) pane.el.legend.textContent = legend;
 
   ctx.lineWidth = 0.8;
-  ctx.strokeStyle = grid ? "rgba(0,0,0,.28)" : "rgba(255,255,255,.2)";
+  ctx.strokeStyle = grid ? "rgba(0,0,0,.28)" : "rgba(230,250,255,.24)";
   ctx.beginPath();
   for (const [a, b] of pane.isobaths) {
     const [x1, y1] = toXY(a);
@@ -534,9 +541,9 @@ function drawChart() {
   const x = (e) => margin.left + (e / app.budget) * plotW;
   const y = (v) => margin.top + plotH - (v / yMax) * plotH;
 
-  ctx.font = "11px ui-monospace, Consolas, monospace";
-  ctx.fillStyle = "#93a7b8";
-  ctx.strokeStyle = "#24384b";
+  ctx.font = "11px 'Plex Mono', Consolas, monospace";
+  ctx.fillStyle = "#7c9aab";
+  ctx.strokeStyle = "rgba(170,215,240,.14)";
   ctx.lineWidth = 1;
   ctx.textAlign = "right";
   ctx.textBaseline = "middle";
@@ -556,13 +563,13 @@ function drawChart() {
   if (app.revealed) {
     ctx.save();
     ctx.setLineDash([5, 4]);
-    ctx.strokeStyle = "#ff7a8a";
+    ctx.strokeStyle = "#ff8fb4";
     ctx.beginPath();
     ctx.moveTo(margin.left, y(available));
     ctx.lineTo(width - margin.right, y(available));
     ctx.stroke();
     ctx.restore();
-    ctx.fillStyle = "#ffc2c9";
+    ctx.fillStyle = "#ffd0df";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     ctx.fillText("In this world", margin.left + 6, y(available) + 3);
@@ -609,6 +616,7 @@ function render() {
     renderFeed(pane, pane.mission);
   }
   drawChart();
+  if (app.view === "3d") drawInset();
   app.explorer?.sync();
   $("scrub").value = app.energy;
   $("clock").textContent = `${fmt(app.energy)} / ${fmt(app.maxEnergy)} energy`;
@@ -621,6 +629,7 @@ function tick(now) {
   app.energy = Math.min(app.maxEnergy, app.energy + elapsed * Number($("speed").value));
   if (app.energy >= app.maxEnergy) setPlaying(false);
   render();
+  if (app.sequence) advanceSequence();
   if (app.playing) requestAnimationFrame(tick);
 }
 
@@ -635,6 +644,7 @@ function setPlaying(playing) {
 }
 
 function jumpEvent(direction) {
+  cancelSequence();
   setPlaying(false);
   const events = app.panes.flatMap((p) => p.timeline.map((s) => s.end)).sort((a, b) => a - b);
   const target = direction > 0
@@ -726,6 +736,21 @@ function updateClockRange() {
   app.maxEnergy = Math.max(...app.panes.map((p) => p.log.outcome.energy_used));
   app.energy = Math.min(app.energy, app.maxEnergy);
   $("scrub").max = app.maxEnergy;
+  buildTicks();
+}
+
+// Marks each logged discovery on the timeline, one row per robot.
+function buildTicks() {
+  const ticks = app.panes.flatMap((pane, index) => pane.timeline
+    .filter((segment) => segment.step.new_discoveries.length)
+    .map((segment) => {
+      const tick = document.createElement("i");
+      tick.className = index === 0 ? "top" : "bottom";
+      tick.style.left = `${(100 * segment.end) / app.maxEnergy}%`;
+      tick.style.setProperty("--c", pane.color);
+      return tick;
+    }));
+  $("ticks").replaceChildren(...ticks);
 }
 
 function updateProvenance() {
@@ -741,6 +766,271 @@ function updateProvenance() {
   $("chart-title").textContent = `Distinct categories ${isReal ? "perceived" : "found"} against energy used`;
   const stub = app.panes.some((p) => p.log.provenance.perception === "stub");
   if (stub) showNotice("Stub perception: a fake model for testing, with no real images. Not a vision result.");
+  $("inset-caption").textContent = source === "gebco_2025"
+    ? "GEBCO 2025 chart. Contours every 250 m."
+    : "Synthetic terrain, not a real location.";
+  $("intro-place").textContent = source === "gebco_2025"
+    ? "Monterey Canyon · 36°45′N 122°04′W"
+    : "Synthetic seafloor";
+}
+
+// Nautical chart ---------------------------------------------------------------
+
+function formatCoordinate(value, positive, negative) {
+  const total = Math.round(Math.abs(value) * 60);
+  const degrees = Math.floor(total / 60);
+  return `${degrees}°${String(total - degrees * 60).padStart(2, "0")}′${value >= 0 ? positive : negative}`;
+}
+
+function drawChartBase(ctx, pane, size) {
+  const terrain = pane.log.terrain;
+  const [rows, cols] = terrain.shape;
+  const cell = size / cols;
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(pane.terrainImage, 0, 0, size, rows * cell);
+
+  ctx.lineWidth = 0.6;
+  ctx.strokeStyle = "rgba(235,250,255,.34)";
+  ctx.beginPath();
+  for (const [a, b] of pane.isobaths) {
+    ctx.moveTo((a[1] + 0.5) * cell, (a[0] + 0.5) * cell);
+    ctx.lineTo((b[1] + 0.5) * cell, (b[0] + 0.5) * cell);
+  }
+  ctx.stroke();
+  if (pane.log.provenance.terrain !== "gebco_2025") return;
+
+  // Graticule every three minutes of arc, positioned from the crop's real coordinates.
+  const { west, north, cellsPerDegree } = GEBCO_CROP;
+  const span = rows / cellsPerDegree;
+  const stepDegrees = 3 / 60;
+  ctx.font = "9px 'Plex Mono', Consolas, monospace";
+  ctx.lineWidth = 0.5;
+  for (let lat = Math.ceil((north - span) / stepDegrees) * stepDegrees; lat < north; lat += stepDegrees) {
+    const y = (north - lat) * cellsPerDegree * cell;
+    ctx.strokeStyle = "rgba(255,255,255,.2)";
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(size, y);
+    ctx.stroke();
+    ctx.fillStyle = "rgba(235,250,255,.86)";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(formatCoordinate(lat, "N", "S"), 3, y - 1);
+  }
+  for (let lon = Math.ceil(west / stepDegrees) * stepDegrees; lon < west + span; lon += stepDegrees) {
+    const x = (lon - west) * cellsPerDegree * cell;
+    ctx.strokeStyle = "rgba(255,255,255,.2)";
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, size);
+    ctx.stroke();
+    ctx.save();
+    ctx.translate(x - 1, size - 3);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillStyle = "rgba(235,250,255,.86)";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(formatCoordinate(lon, "E", "W"), 0, 0);
+    ctx.restore();
+  }
+}
+
+function drawInset() {
+  if (!app.panes.length) return;
+  const canvas = $("inset-chart");
+  const { ctx, width } = sizeCanvas(canvas);
+  if (width < 2) return;
+  drawChartBase(ctx, app.panes[0], width);
+  const [, cols] = app.panes[0].log.terrain.shape;
+  const cell = width / cols;
+  const toXY = ([r, c]) => [(c + 0.5) * cell, (r + 0.5) * cell];
+
+  for (const pane of app.panes) {
+    const { mission } = pane;
+    if (!mission) continue;
+    if (mission.trail.length > 1) {
+      ctx.beginPath();
+      mission.trail.forEach((point, i) => {
+        const [x, y] = toXY(point);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.lineJoin = "round";
+      ctx.lineWidth = 2.6;
+      ctx.strokeStyle = "rgba(2,8,16,.6)";
+      ctx.stroke();
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = pane.color;
+      ctx.stroke();
+    }
+    for (const { step } of mission.completed) {
+      if (!step.new_discoveries.length) continue;
+      const [x, y] = toXY(step.observation.waypoint);
+      ctx.beginPath();
+      ctx.arc(x, y, 1.9, 0, Math.PI * 2);
+      ctx.fillStyle = "#fff";
+      ctx.fill();
+    }
+    const [x, y] = toXY(mission.position);
+    ctx.beginPath();
+    ctx.arc(x, y, 3.4, 0, Math.PI * 2);
+    ctx.fillStyle = pane.color;
+    ctx.shadowColor = pane.color;
+    ctx.shadowBlur = 8;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  // North arrow
+  const nx = width - 13;
+  ctx.fillStyle = "rgba(245,252,255,.92)";
+  ctx.beginPath();
+  ctx.moveTo(nx, 7);
+  ctx.lineTo(nx + 4, 18);
+  ctx.lineTo(nx, 15);
+  ctx.lineTo(nx - 4, 18);
+  ctx.closePath();
+  ctx.fill();
+  ctx.font = "9px 'Plex Mono', Consolas, monospace";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.fillText("N", nx, 20);
+}
+
+// Mission sequence -------------------------------------------------------------
+// Sets the stage around the logged mission: its timing and camera work are presentation,
+// and every position and count still comes from the logs.
+
+function leaveTitle() {
+  document.body.classList.remove("pre-dive");
+  $("intro").classList.add("leaving");
+  setTimeout(() => { $("intro").hidden = true; }, 800);
+}
+
+function say(text, duration = CAPTION_MS) {
+  clearTimeout(app.captionTimer);
+  $("caption").textContent = text;
+  $("caption").hidden = !text;
+  if (text && duration) app.captionTimer = setTimeout(() => { $("caption").hidden = true; }, duration);
+}
+
+function hideSummary() {
+  clearTimeout(app.summaryTimer);
+  $("summary").hidden = true;
+}
+
+function cancelSequence() {
+  app.sequence = null;
+  say("");
+  hideSummary();
+  document.body.classList.remove("diving");
+  $("skip-dive").hidden = true;
+  app.explorer?.endDive(false);
+}
+
+function homeDepth() {
+  const { terrain } = app.panes[0].log;
+  return Math.round(terrain.depth_m[terrain.home[0]][terrain.home[1]]);
+}
+
+async function beginDive() {
+  if (!app.explorer || !app.panes.length) return;
+  cancelSequence();
+  exitTour();
+  setPlaying(false);
+  leaveTitle();
+  setView("3d");
+  await setRevealed(false);
+  setLayer("terrain");
+  app.energy = 0;
+  document.body.classList.add("diving");
+  $("skip-dive").hidden = false;
+  render();
+  window.scrollTo(0, 0);
+  say(`Descending to the home station at ${homeDepth()} m. This descent is illustrative.`, 0);
+  app.explorer.dive(startExploring);
+}
+
+function startExploring() {
+  document.body.classList.remove("diving");
+  $("skip-dive").hidden = true;
+  say("Two robots, the same terrain and the same energy. Neither knows what lives here.");
+  const abyss = abyssPane();
+  const line = abyss.timeline;
+  app.sequence = {
+    fired: new Set(),
+    first: line.find((s) => s.step.new_discoveries.length) || null,
+    belief: line[Math.min(5, Math.max(0, line.length - 2))],
+    back: app.maxEnergy * 0.72,
+  };
+  setPlaying(true);
+}
+
+function advanceSequence() {
+  const seq = app.sequence;
+  const once = (key, condition, action) => {
+    if (!seq.fired.has(key) && condition) {
+      seq.fired.add(key);
+      action();
+    }
+  };
+  once("first", seq.first && app.energy >= seq.first.end, () => {
+    say(`ABYSS logs its first discovery at energy ${fmt(seq.first.end)}, and its habitat model updates.`);
+  });
+  once("belief", seq.belief && app.energy >= seq.belief.start, () => {
+    setLayer("predicted_richness");
+    render();
+    say("The seafloor now shows what ABYSS believes. Each target weighs predicted richness, uncertainty and coverage per unit of energy.", 8500);
+  });
+  once("back", app.energy >= seq.back, () => {
+    setLayer("terrain");
+    render();
+    say("Each robot must always keep enough energy to get home.");
+  });
+  if (app.energy >= app.maxEnergy) finishMission();
+}
+
+function finishMission() {
+  app.sequence = null;
+  setLayer("terrain");
+  render();
+  app.explorer?.park();
+  say("Both missions are over. Propellers stop, and lights go down.", SUMMARY_DELAY_MS);
+  app.summaryTimer = setTimeout(showSummary, SUMMARY_DELAY_MS);
+}
+
+function showSummary() {
+  const safe = app.panes.every((p) => p.log.outcome.safe_return);
+  $("summary-title").textContent = safe
+    ? "Both robots returned home safely."
+    : "Check the return status of each robot.";
+  const rows = app.panes.map((pane) => {
+    const { outcome, energy, terrain } = pane.log;
+    const isReal = pane.log.provenance.perception !== "ideal";
+    const lastSurvey = pane.timeline.filter((s) => s.step.observation).at(-1);
+    const classes = lastSurvey?.step.observation.habitat?.classes_sampled;
+    const row = document.createElement("div");
+    row.className = "summary-row";
+    row.style.setProperty("--c", pane.color);
+    const who = document.createElement("span");
+    who.className = "who";
+    who.textContent = pane.entry.label;
+    const count = document.createElement("span");
+    count.className = "count";
+    count.textContent = outcome.distinct_categories;
+    const unit = document.createElement("small");
+    unit.textContent = isReal ? " perceived" : " categories";
+    count.append(unit);
+    const detail = document.createElement("span");
+    detail.className = "detail";
+    const habitat = classes ? `, ${classes} of ${terrain.habitat.names.length} habitat classes` : "";
+    detail.textContent = `${outcome.surveys} surveys, ${fmt(outcome.energy_used)} of ${energy.budget} energy${habitat}`;
+    row.append(who, count, detail);
+    return row;
+  });
+  $("summary-rows").replaceChildren(...rows);
+  $("summary").hidden = false;
 }
 
 function setRevealButton() {
@@ -752,6 +1042,7 @@ function setRevealButton() {
 async function selectWorld(worldId) {
   const token = (app.loadToken += 1);
   setPlaying(false);
+  cancelSequence();
   exitTour();
   app.worldId = worldId;
   const options = app.entries.filter((e) => e.world_id === worldId);
@@ -828,6 +1119,7 @@ async function setRevealed(revealed) {
 
 async function toggleReveal() {
   if (!app.panes.length) return;
+  hideSummary();
   await setRevealed(!app.revealed);
   render();
 }
@@ -1019,6 +1311,8 @@ const TOUR_STAGES = [
 
 async function showTourStage(index) {
   app.tourIndex = index;
+  cancelSequence();
+  leaveTitle();
   if (app.explorer) {
     setView("3d");
     if (index === 1) app.explorer.followAbyss();
@@ -1046,7 +1340,20 @@ function bindControls() {
   $("play").addEventListener("click", () => setPlaying(!app.playing));
   $("prev").addEventListener("click", () => jumpEvent(-1));
   $("next").addEventListener("click", () => jumpEvent(1));
+  $("begin-dive").addEventListener("click", () => beginDive().catch((e) => showNotice(e.message, true)));
+  $("summary-replay").addEventListener("click", () => beginDive().catch((e) => showNotice(e.message, true)));
+  $("skip-dive").addEventListener("click", () => app.explorer?.endDive(true));
+  $("skip-intro").addEventListener("click", leaveTitle);
+  $("summary-reveal").addEventListener("click", () => {
+    app.explorer?.setFollow(-1);
+    toggleReveal().catch((e) => showNotice(e.message, true));
+  });
+  $("summary-evidence").addEventListener("click", () => {
+    hideSummary();
+    ($("bench").hidden ? $("lower") : $("bench")).scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   $("scrub").addEventListener("input", (event) => {
+    cancelSequence();
     setPlaying(false);
     app.energy = Number(event.target.value);
     render();
@@ -1073,6 +1380,10 @@ function bindControls() {
 }
 
 function setView(view) {
+  if (view === "2d") {
+    cancelSequence();
+    document.body.classList.remove("pre-dive");
+  }
   app.view = view;
   document.querySelector(`input[name="view"][value="${view}"]`).checked = true;
   document.body.classList.toggle("view-3d", view === "3d");

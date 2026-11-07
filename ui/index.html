@@ -10,10 +10,10 @@
     { "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/" } }
   </script>
 </head>
-<body>
+<body class="pre-dive">
   <header class="topbar">
     <div class="brand">
-      <h1>ABYSS</h1>
+      <h1>Abyss</h1>
       <span>Mission Control</span>
     </div>
     <label class="field">World
@@ -21,8 +21,8 @@
     </label>
     <fieldset class="layers" id="views">
       <legend>View</legend>
-      <label><input type="radio" name="view" value="3d" disabled><span>3D explorer</span></label>
-      <label><input type="radio" name="view" value="2d" checked><span>2D maps</span></label>
+      <label><input type="radio" name="view" value="3d" disabled><span>3D</span></label>
+      <label><input type="radio" name="view" value="2d" checked><span>Charts</span></label>
     </fieldset>
     <fieldset class="layers" id="layers">
       <legend>Map layer</legend>
@@ -32,38 +32,72 @@
       <label><input type="radio" name="layer" value="uncertainty"><span>Uncertainty</span></label>
       <label><input type="radio" name="layer" value="hidden"><span>Hidden</span></label>
     </fieldset>
-    <button id="reveal" class="reveal" type="button" aria-pressed="false">Reveal hidden world</button>
-    <button id="tour-start" type="button">Guided demo</button>
+    <button id="reveal" class="ghost reveal" type="button" aria-pressed="false">Reveal hidden world</button>
+    <button id="tour-start" class="ghost" type="button">Step through</button>
   </header>
-
-  <aside class="tour" id="tour" hidden aria-live="polite">
-    <div class="tour-text">
-      <strong id="tour-title"></strong>
-      <p id="tour-body"></p>
-    </div>
-    <div class="tour-actions">
-      <button id="tour-back" type="button">Back</button>
-      <button id="tour-next" type="button">Next</button>
-      <button id="tour-exit" type="button">Exit</button>
-    </div>
-  </aside>
 
   <p id="notice" class="notice" hidden></p>
 
   <main>
-    <section class="stage" id="stage" hidden>
-      <canvas id="stage-canvas" aria-label="3D view of the seafloor and the robots' logged routes"></canvas>
-      <div class="stage-hud" id="stage-hud"></div>
-      <div class="stage-foot">
-        <label class="field">Camera
-          <select id="stage-camera"></select>
-        </label>
-        <p id="stage-legend"></p>
-      </div>
+    <section class="console" id="console">
+      <section class="stage" id="stage" hidden>
+        <canvas id="stage-canvas" aria-label="3D view of the seafloor and the robots' logged routes"></canvas>
+        <div class="gauge" id="gauge" aria-hidden="true"></div>
+        <figure class="inset" id="inset">
+          <canvas id="inset-chart" role="img" aria-label="Chart of the survey area showing both robots' logged routes"></canvas>
+          <figcaption id="inset-caption"></figcaption>
+        </figure>
+        <div class="stage-foot">
+          <label class="field">Camera
+            <select id="stage-camera"></select>
+          </label>
+          <p id="stage-legend"></p>
+        </div>
+
+        <aside class="tour" id="tour" hidden aria-live="polite">
+          <div class="tour-text">
+            <strong id="tour-title"></strong>
+            <p id="tour-body"></p>
+          </div>
+          <div class="tour-actions">
+            <button id="tour-back" class="ghost" type="button">Back</button>
+            <button id="tour-next" class="ghost" type="button">Next</button>
+            <button id="tour-exit" class="ghost" type="button">Exit</button>
+          </div>
+        </aside>
+
+        <p class="caption" id="caption" hidden aria-live="polite"></p>
+        <button class="skip ghost" id="skip-dive" type="button" hidden>Skip descent</button>
+
+        <aside class="summary" id="summary" hidden>
+          <p class="eyebrow">Mission complete</p>
+          <h2 id="summary-title"></h2>
+          <div class="summary-rows" id="summary-rows"></div>
+          <p class="summary-note">One mission settles nothing, whichever robot found more. The evidence is across many worlds.</p>
+          <div class="summary-actions">
+            <button id="summary-reveal" class="primary" type="button">Reveal the hidden world</button>
+            <button id="summary-evidence" class="ghost" type="button">See the evidence</button>
+            <button id="summary-replay" class="ghost" type="button">Dive again</button>
+          </div>
+        </aside>
+
+        <section class="intro" id="intro">
+          <p class="eyebrow" id="intro-place">Monterey Canyon · 36°45′N 122°04′W</p>
+          <h2 class="intro-title">Abyss</h2>
+          <p class="intro-line">An autonomous explorer that learns where to look next.</p>
+          <div class="intro-actions">
+            <button id="begin-dive" class="primary" type="button">Begin dive</button>
+            <button id="skip-intro" class="ghost" type="button">Open console</button>
+          </div>
+          <p class="intro-note">A replay of executed missions. Real seafloor data, simulated biology.</p>
+        </section>
+      </section>
+      <section class="panes" id="panes"></section>
     </section>
-    <p class="stage-note" id="stage-note" hidden>Visualisation of logged missions, not real footage. Terrain is smoothed between grid cells and its height is exaggerated 3×. Sediment texture, lighting, marine snow and vehicle models are decorative, and vehicles aren't to scale. Camera feed cards show simulated encounters. Light columns mark a robot's first survey of a habitat class. Habitat classes are clustered from terrain for display only: they aren't biomes, and planners never see them.</p>
-    <section class="panes" id="panes"></section>
-    <section class="lower">
+
+    <p class="stage-note" id="stage-note" hidden>Visualisation of logged missions, not real footage. The descent is illustrative: missions start at the home station. Terrain is smoothed between grid cells and its height is exaggerated 3×. Sediment texture, lighting, marine snow and vehicle models are decorative, and vehicles aren't to scale. Camera feed cards show simulated encounters. Light columns mark a robot's first survey of a habitat class. Habitat classes are clustered from terrain for display only: they aren't biomes, and planners never see them.</p>
+
+    <section class="lower" id="lower">
       <figure class="chart-card">
         <figcaption id="chart-title">Distinct categories found against energy used</figcaption>
         <canvas id="chart" role="img" aria-label="Line chart of distinct categories found against energy used for each mission"></canvas>
@@ -72,7 +106,7 @@
     </section>
     <section class="bench" id="bench" hidden>
       <div class="bench-head">
-        <h2>Benchmark across worlds</h2>
+        <h2>The evidence, across worlds</h2>
         <label class="field">Terrain
           <select id="bench-terrain"></select>
         </label>
@@ -89,10 +123,13 @@
   </main>
 
   <footer class="transport">
-    <button id="prev" type="button" title="Previous event (left arrow)" aria-label="Previous event">&#9664;&#9664;</button>
-    <button id="play" type="button" title="Play or pause (space)">Play</button>
-    <button id="next" type="button" title="Next event (right arrow)" aria-label="Next event">&#9654;&#9654;</button>
-    <input id="scrub" type="range" min="0" max="150" step="0.1" value="0" aria-label="Energy used">
+    <button id="prev" class="icon" type="button" title="Previous event (left arrow)" aria-label="Previous event">&#9664;&#9664;</button>
+    <button id="play" class="play" type="button" title="Play or pause (space)">Play</button>
+    <button id="next" class="icon" type="button" title="Next event (right arrow)" aria-label="Next event">&#9654;&#9654;</button>
+    <div class="timeline">
+      <div class="ticks" id="ticks" aria-hidden="true"></div>
+      <input id="scrub" type="range" min="0" max="150" step="0.1" value="0" aria-label="Energy used">
+    </div>
     <output id="clock" for="scrub">0.0 / 150 energy</output>
     <label class="field speed">Speed
       <select id="speed">
@@ -112,7 +149,7 @@
         <span class="status"></span>
       </header>
       <div class="map-wrap"><canvas class="map"></canvas></div>
-      <p class="readout">Hover over the map to inspect a cell.</p>
+      <p class="readout">Hover over the chart to inspect a cell.</p>
       <p class="legend"></p>
       <dl class="stats">
         <div class="stat-main"><dt class="found-label">Categories found</dt><dd class="found">0</dd></div>
@@ -122,6 +159,7 @@
         <div><dt>Energy left</dt><dd class="left">0</dd></div>
       </dl>
       <div class="energy" aria-hidden="true"><i></i><b></b></div>
+      <div class="hud-slot"></div>
       <div class="why" hidden></div>
     </article>
   </template>
