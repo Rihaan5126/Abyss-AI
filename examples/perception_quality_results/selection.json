@@ -1,0 +1,22 @@
+{
+  "candidates": [
+    {
+      "neighbors": 1,
+      "development_macro_recall": 0.5406249999999999,
+      "count": 42
+    },
+    {
+      "neighbors": 3,
+      "development_macro_recall": 0.5708333333333333,
+      "count": 42
+    },
+    {
+      "neighbors": 5,
+      "development_macro_recall": 0.6208333333333333,
+      "count": 42
+    }
+  ],
+  "selected": 5,
+  "rule": "Highest familiar development macro recall; ties prefer smaller k",
+  "old_test_status": "Development; not a new held-out result"
+}

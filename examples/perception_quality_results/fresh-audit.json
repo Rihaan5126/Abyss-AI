@@ -1,0 +1,337 @@
+{
+  "counts": {
+    "Benthocodon": {
+      "images": 60,
+      "sources": 48
+    },
+    "Bathochordaeus": {
+      "images": 60,
+      "sources": 52
+    },
+    "Vampyroteuthis infernalis": {
+      "images": 60,
+      "sources": 48
+    },
+    "Atolla": {
+      "images": 60,
+      "sources": 50
+    },
+    "Solmissus": {
+      "images": 60,
+      "sources": 51
+    },
+    "Scotoplanes": {
+      "images": 56,
+      "sources": 38
+    },
+    "Chiroteuthis calyx": {
+      "images": 60,
+      "sources": 56
+    },
+    "Nanomia bijuga": {
+      "images": 60,
+      "sources": 55
+    },
+    "Periphylla periphylla": {
+      "images": 30,
+      "sources": 28
+    },
+    "Crossota rufobrunnea": {
+      "images": 11,
+      "sources": 7
+    },
+    "Gonatus onyx": {
+      "images": 30,
+      "sources": 20
+    }
+  },
+  "issues": [
+    {
+      "sample_id": "4dd794ff-1243-49a0-a3e1-6c892fee6222_9175f923-01c9-46e7-8878-2a9103e85f3d",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "ba76123a-a7bd-4747-9580-1589ee407b2c_48e38607-0328-4f1f-bb4c-71cd266d68a0",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "dfbe827d-a094-4ee1-a684-b18d6a360cde_33431b0f-03b0-4754-b893-d69442416839",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "b6e092ea-f27d-494f-aba2-9042bd5aafab_45983b08-d070-4ff3-8f75-e0e1e2df1632",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "fcacdf6d-4ff6-4e93-a7bd-e4e9cde3d18b_445849a9-9a13-41e1-a1ba-86f180c56b45",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "18dec963-311b-49ce-b704-2e8b5d219f3b_1ff25ca7-a98d-4904-80b9-8a9df05d7f9d",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "bf34714e-a438-4e0e-b7f5-feb76665cc01_d090f83d-abae-4703-8738-b47131eb3e22",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "885a884b-8bd5-4375-a580-9c2e24acb3f4_0bb3ebc4-7215-4ccb-8862-2904cdd0ffe0",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "51b6ccaf-2405-4578-a96a-6f9afd4ff3c1_bfdb719d-cb2a-4146-a68e-220c5a0017f2",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "d3720754-8ff7-40ae-a567-90ebca988f25_dfb4dd60-4a39-406d-bd1d-7b4be5664ad4",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "7e4c241d-36cb-4630-a1a1-cac6ce58cbfd_066fb9bb-b428-41ce-b021-9b7e3d78f860",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "093f2433-bea7-45ab-9db7-5a36953a622b_9706731e-6b5a-4f58-9b10-d138fc99b60e",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "8dc537c4-03e6-427b-b160-db4f9e418822_389d7b88-58d4-4d21-947f-8fdd990a9407",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "cd36479a-c72b-4cc3-bbe2-339499f3031e_567bbfc6-c17b-4235-9218-a43f2ca68b43",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "ead34a0d-4b64-429a-93f5-5a4548f7fcca_a0c8ca9c-2596-4cb5-970f-3d7b9bd9488a",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "55c72897-43eb-40f1-9ac8-c1036c56ecd8_4c6353ca-e6b1-44e8-99e5-fbc29b7290db",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "5862f2a0-3a95-4278-8d6f-3e4e7833e4cb_f4426a5b-3e0c-411a-b973-0d5965f6a384",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "d0c0378e-49ad-442d-9421-2e4b9ba32df1_873dc8bd-f041-4bfc-a881-d8e24da6e8d6",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "f0b2ac04-2fdd-4712-a080-4d05e9aecc81_32d4ae00-df25-429b-a159-b8a58705c7bd",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "7cb5cafa-bd89-4d8b-957e-d0971c10eb91_1738f363-7a4c-4e45-bb04-2b2e956a7f52",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "bd26ce9d-ad9e-48a3-9f16-45703734118f_ee013b89-906e-46d3-9528-3b14bacd1c33",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "9fabc6a3-01ec-4c1b-85bd-40bf8cdb617c_d48d08b2-7ab5-4578-a27f-dcbe94823cfa",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "b70c992a-2537-4412-8f69-1e74f16076eb_fa879698-5ba5-4ba3-b24a-7f4b6a868c4b",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "4d777072-6581-4123-9dc4-4ea6af8e2d1a_7dc4dc53-68ed-4b2e-b355-4780ed5d6c34",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "d40e3b4f-3ecf-4561-9f61-ae60206526ce_b71f5930-a823-4108-92cd-bf3ba6981678",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "e9e043c0-57d6-4aa0-b9ed-049f6b6d4656_b70f7c90-dc5b-44c7-98f1-086bf1d3c7cc",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "dc15273e-5895-4d7b-8a78-2e8a7ff273d3_d879d259-7399-4d15-9176-51e9fd08cb41",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "5e0386f8-c30a-457e-ba0d-d533c2ee4c92_4a8b40d2-632c-425c-b1d5-7dea6c793835",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "54898909-6ca4-4de0-ba5d-d949134c8b37_07911ff9-41b9-4632-8433-412b81ff0018",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "b8e0c549-62ac-429a-ad80-fc891ffe810d_3696207a-7a6e-48b9-8c43-11f8456b5ef7",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "8909aad9-c7ec-4fa2-8903-2225a40b0166_32eede6e-d09e-4ba4-9d05-bd6616df69ab",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "f8005328-f3d3-4d0a-a529-51c1121fad92_06c91638-154a-4f37-8474-4a7452782f3f",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "0259ae22-3457-4803-8fed-5ccca9b504e4_d6e3f364-c317-4bad-b6eb-d5a4afac6f21",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "f5e7271b-07c3-4ac3-94a1-c63c1bc8bda9_3c3e869e-3bf9-4366-8dd6-51f833c9a066",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "fdeb565b-bbbc-4d14-ac0a-0c163be757d9_e6ade03b-b7ca-4344-bcff-92de4affe482",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "6582b564-dccf-4be3-b7dd-512af16bf073_101773b6-435c-405c-8550-d4de03b18a24",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "ea3e9172-f232-4d2d-a049-6f14facfac76_1424557d-09d1-4380-bd1a-b95df158dcfb",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "0c30e648-285a-4c64-a017-9ce3a0b62c2d_2a7033d5-ed18-489e-862d-113c2a99ae38",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "0d5d9042-477c-44a8-9181-981ad863173e_33b8cbab-7e08-4f6a-8ec3-80fea1bccbb7",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "5ed1af3e-05a9-42b5-94a6-5bf268cb84be_f893df10-d6a9-4aa8-8cc4-7d873e552e35",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "df24cc57-2799-42ba-b36b-f3e564f3db94_f3b7b41e-5077-47cd-9ae9-12c391d88401",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "a88b7901-d557-48f9-9e46-31ab45388694_9fd584c5-0f60-40e7-a2b4-bb7dfd3e63fc",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "29d9e19b-1d22-4252-831a-577d87ae027f_e9e427de-a394-48c8-b661-e45731075ea3",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "c8583b40-1cc7-4cdf-8b4b-412967edfc3d_fa977d11-cfcb-48ab-bd09-5243b493a42e",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "1ab6bd6b-0527-4580-84a2-0fa18abe92f0_0e1a3717-e7da-4c41-80ab-a52201967dee",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "356afa34-1c55-4e30-ab21-5a6ad47e73fb_a81641e5-1383-49c4-ab88-7fb50f6b8cee",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "637b2555-c562-49f1-802e-40426e8c0452_e6db7cd0-9409-40d5-a530-1bc494d1bc59",
+      "flags": [
+        "small crop"
+      ]
+    }
+  ],
+  "duplicate_candidates": [],
+  "licences": {
+    "CC-BY-NC-ND-4.0": 547
+  },
+  "warning": "Thumbnail matching is a screening heuristic, not proof of independence. Review labels and dives manually."
+}

@@ -1,0 +1,167 @@
+{
+  "counts": {
+    "Benthocodon": {
+      "images": 30,
+      "sources": 21
+    },
+    "Bathochordaeus": {
+      "images": 30,
+      "sources": 28
+    },
+    "Vampyroteuthis infernalis": {
+      "images": 30,
+      "sources": 24
+    },
+    "Atolla": {
+      "images": 30,
+      "sources": 25
+    },
+    "Solmissus": {
+      "images": 30,
+      "sources": 30
+    },
+    "Scotoplanes": {
+      "images": 30,
+      "sources": 9
+    },
+    "Chiroteuthis calyx": {
+      "images": 30,
+      "sources": 26
+    },
+    "Nanomia bijuga": {
+      "images": 30,
+      "sources": 30
+    },
+    "Grimpoteuthis": {
+      "images": 3,
+      "sources": 2
+    }
+  },
+  "issues": [
+    {
+      "sample_id": "acced663-7179-47ff-b194-ed361516ece5_cc09a790-abcb-4a23-b126-af3b33de679e",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "dd1374f4-aa54-4408-a590-5b5aea182623_7615f80d-4b85-4b5f-b70c-d99c6a706e93",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "8b6658b3-97fe-487c-9d59-7b0ea63acde4_179de335-6909-4890-a8ff-bb1ac6a7deb4",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "91f04a25-884d-405c-8d6c-4fe0b54922b0_63a0e5ca-476b-44f2-baa6-0b561ba8c1a8",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "908f2420-8870-4c6c-8f94-7bc4ec3b5302_7b28bb56-f10a-477e-bc72-3298bf237a80",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "59c6123a-23c7-41c6-ba90-7b66250e9c48_0616880f-36e6-41b1-903c-39e03e49bc41",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "7ae05844-38b7-4a68-a9e6-73381cc7d845_54aaa7ee-2abd-4170-bccd-1465526bbedf",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "4a68226f-8db2-4523-bb2d-e22d0f0a9538_0da84c11-6e5c-4002-97a5-0a65f8d01356",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "8684d2de-5876-46f0-8fc3-e44486fb211a_e9a3d39c-a6e3-4058-921d-5d99cca9efd9",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "b3d008b3-e898-4a0d-b3ed-5579fc51043d_55aa1e82-a973-4c94-862f-13a9300e4b1c",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "52ef0200-fad5-4ea5-9037-a794e780340b_00b749dc-9ea7-48ad-9758-4bac5486f131",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "5b9003da-be45-49a7-aa3c-599a9ba006ad_7c89a702-fc5c-405d-b8fe-92e3cd7ba573",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "26f5207d-efd6-401b-aba5-926a5f3d0d3c_a5f3a2e9-6651-4dbf-86a1-8f96e2eaea2e",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "44260c94-189d-4ed6-87ea-f43845267fb9_fa91eddd-81a7-44f1-bdbb-253dd291ffde",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "40a3a163-32f6-4566-9627-9b9f56e61176_a7918ff9-b17f-4fd1-bbf3-97d18fbc07a7",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "6e19eaf0-e69d-4a5e-8678-5f6015cdf05c_03f74e74-073a-4d9f-9aea-a1e7fe5a5e48",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "fab6a948-4536-490a-bfbe-c512c9b2c13c_1104eebd-62f8-47ec-a099-fe6f8b7c2da7",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "fb5d619c-9ced-4bd4-96cc-b5d603a23ed0_11015530-de93-47a9-84c1-8bde54547eb5",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "6fd3ff4b-e4a1-47f3-9a68-8231bf7e0d98_1f7fd343-c6d9-478a-825e-d3095fd2d555",
+      "flags": [
+        "small crop"
+      ]
+    },
+    {
+      "sample_id": "01087e95-27f1-4546-8906-d0fe270885d2_15c35b4a-4fd1-4319-8356-c42156723e49",
+      "flags": [
+        "small crop"
+      ]
+    }
+  ],
+  "duplicate_candidates": [],
+  "licences": {
+    "CC-BY-NC-ND-4.0": 243
+  },
+  "warning": "Thumbnail matching is a screening heuristic, not proof of independence. Review labels and dives manually."
+}

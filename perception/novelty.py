@@ -30,6 +30,19 @@ class ReferenceIndex:
         distances, indices = self._nn.kneighbors(unit_vectors(embeddings))
         return np.clip(distances[:, 0], 0, 2), indices[:, 0]
 
+    def classify(self, embeddings, neighbors=1):
+        if not isinstance(neighbors, int) or not 1 <= neighbors <= len(self.labels):
+            raise ValueError('neighbors must be between 1 and the reference count')
+        distances, indices = self._nn.kneighbors(unit_vectors(embeddings), n_neighbors=neighbors)
+        predictions = []
+        for ds, ids in zip(distances, indices):
+            votes = {}
+            for distance, index in zip(ds, ids):
+                label = self.labels[index]
+                votes[label] = votes.get(label, 0.) + 1 / max(float(distance), 1e-6)
+            predictions.append(max(votes, key=votes.get))  # ties prefer nearest label
+        return predictions
+
 
 def calibrate_threshold(familiar_scores: np.ndarray, false_alert_rate: float = .05) -> float:
     """Higher scores mean less familiar. Unknown iff score > threshold.

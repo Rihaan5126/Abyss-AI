@@ -40,6 +40,9 @@ def test_downloader_filters_licences_and_records_real_crop_provenance(tmp_path, 
     assert all("restricted.png" not in url for url in requests)
     with Image.open(tmp_path / rows[0]["image_path"]) as crop:
         assert crop.size == (5, 6)
+    count = len(requests)
+    download.download_categories(["Jelly"], tmp_path)
+    assert len(requests) == count  # cached metadata and verified crop require no network
 
 
 def test_downloader_reports_missing_eligible_images(tmp_path, monkeypatch):

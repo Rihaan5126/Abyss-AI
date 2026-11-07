@@ -225,6 +225,9 @@ images. Check each image's licence before showing or redistributing it.
 
 ## Ammar's perception pipeline
 
+For the fresh-source evaluation, error gallery, neighbour voting and matched
+old/new mission analysis, see [Perception quality](docs/perception-quality.md).
+
 The `perception/` package implements FathomNet organism cropping, frozen
 DINOv2-small embeddings, nearest-neighbour familiar-category recognition,
 validation-calibrated reference-unfamiliarity detection, and held-out evaluation.

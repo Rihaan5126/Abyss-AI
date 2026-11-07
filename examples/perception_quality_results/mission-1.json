@@ -1,0 +1,417 @@
+{
+  "encounter_weighted": {
+    "confusion": {
+      "labels": [
+        "Atolla",
+        "Bathochordaeus",
+        "Benthocodon",
+        "Chiroteuthis calyx",
+        "Nanomia bijuga",
+        "Scotoplanes",
+        "Solmissus",
+        "Vampyroteuthis infernalis",
+        "Unfamiliar"
+      ],
+      "rows_true_columns_predicted": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "per_category": {
+      "Atolla": {
+        "count": 6,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "predicted_count": 3
+      },
+      "Bathochordaeus": {
+        "count": 6,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted_count": 5
+      },
+      "Benthocodon": {
+        "count": 5,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "predicted_count": 5
+      },
+      "Chiroteuthis calyx": {
+        "count": 6,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "predicted_count": 3
+      },
+      "Nanomia bijuga": {
+        "count": 3,
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1": 0.5,
+        "predicted_count": 9
+      },
+      "Scotoplanes": {
+        "count": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted_count": 0
+      },
+      "Solmissus": {
+        "count": 1,
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4,
+        "predicted_count": 4
+      },
+      "Vampyroteuthis infernalis": {
+        "count": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted_count": 0
+      },
+      "Unfamiliar": {
+        "count": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted_count": 0
+      }
+    },
+    "classification": {
+      "hits": 15,
+      "total": 29,
+      "rate": 0.5172413793103449,
+      "wilson95": [
+        0.34431021881994717,
+        0.6861390984731652
+      ]
+    },
+    "false_alerts": {
+      "hits": 0,
+      "total": 29,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.11696979849974075
+      ]
+    },
+    "unknown_recall": {
+      "hits": 0,
+      "total": 0,
+      "rate": null,
+      "wilson95": null
+    },
+    "interval_note": "Wilson intervals assume independent images; shared dives reduce independence."
+  },
+  "unique_images": {
+    "confusion": {
+      "labels": [
+        "Atolla",
+        "Bathochordaeus",
+        "Benthocodon",
+        "Chiroteuthis calyx",
+        "Nanomia bijuga",
+        "Scotoplanes",
+        "Solmissus",
+        "Vampyroteuthis infernalis",
+        "Unfamiliar"
+      ],
+      "rows_true_columns_predicted": [
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "per_category": {
+      "Atolla": {
+        "count": 4,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "predicted_count": 2
+      },
+      "Bathochordaeus": {
+        "count": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted_count": 3
+      },
+      "Benthocodon": {
+        "count": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "predicted_count": 4
+      },
+      "Chiroteuthis calyx": {
+        "count": 2,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "predicted_count": 1
+      },
+      "Nanomia bijuga": {
+        "count": 2,
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666,
+        "predicted_count": 4
+      },
+      "Scotoplanes": {
+        "count": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted_count": 0
+      },
+      "Solmissus": {
+        "count": 1,
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1": 0.5,
+        "predicted_count": 3
+      },
+      "Vampyroteuthis infernalis": {
+        "count": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted_count": 0
+      },
+      "Unfamiliar": {
+        "count": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted_count": 0
+      }
+    },
+    "classification": {
+      "hits": 10,
+      "total": 17,
+      "rate": 0.5882352941176471,
+      "wilson95": [
+        0.3600544264299978,
+        0.7838894320978518
+      ]
+    },
+    "false_alerts": {
+      "hits": 0,
+      "total": 17,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.1843181350088518
+      ]
+    },
+    "unknown_recall": {
+      "hits": 0,
+      "total": 0,
+      "rate": null,
+      "wilson95": null
+    },
+    "interval_note": "Wilson intervals assume independent images; shared dives reduce independence."
+  },
+  "encounters": 29,
+  "unique_count": 17,
+  "explanation": "Repeated images change encounter weighting; neither view estimates generalisation to new dives."
+}

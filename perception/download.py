@@ -31,13 +31,15 @@ def fetch_bytes(url: str, max_bytes=40_000_000) -> bytes:
 
 
 def download_categories(categories: list[str], output: str | Path, per_category=20,
-                        seed=42, allowed_licenses=DEFAULT_LICENSES) -> Path:
+                        seed=42, allowed_licenses=DEFAULT_LICENSES, max_per_source=None,
+                        excluded_sources=()) -> Path:
     if per_category < 1 or not categories or len(set(categories)) != len(categories):
         raise ValueError("Choose unique categories and a positive per-category limit")
     output = Path(output).resolve()
     (output / "crops").mkdir(parents=True, exist_ok=True)
     (output / "metadata").mkdir(exist_ok=True)
     rows, failures, originals_seen = [], [], set()
+    excluded_sources = set(excluded_sources)
     for category in categories:
         metadata_path = output / "metadata" / f"{hashlib.sha256(category.encode()).hexdigest()}.json"
         if not metadata_path.exists():
@@ -45,11 +47,14 @@ def download_categories(categories: list[str], output: str | Path, per_category=
         records = json.loads(metadata_path.read_text())
         # Stable seeded order, independent of API ordering; one crop per original.
         records.sort(key=lambda r: hashlib.sha256(f"{seed}:{r['uuid']}".encode()).hexdigest())
-        count = 0
+        count, by_source, attempts = 0, {}, 0
         for record in records:
             if count >= per_category:
                 break
             if record.get("imageLicense") not in allowed_licenses:
+                continue
+            source_id = record['url'].rsplit('/', 1)[0]
+            if source_id in excluded_sources or (max_per_source and by_source.get(source_id, 0) >= max_per_source):
                 continue
             boxes = [b for b in record.get("boundingBoxes", [])
                      if b.get("concept", "").casefold() == category.casefold()
@@ -58,6 +63,23 @@ def download_categories(categories: list[str], output: str | Path, per_category=
             if not boxes or record["uuid"] in originals_seen:
                 continue
             box = sorted(boxes, key=lambda b: b["uuid"])[0]
+            sample_id = f"{record['uuid']}_{box['uuid']}"
+            sidecar = output / 'metadata' / f'{sample_id}.crop.json'
+            if sidecar.exists():
+                cached = json.loads(sidecar.read_text())
+                path = output / cached['image_path']
+                if path.exists() and hashlib.sha256(path.read_bytes()).hexdigest() == cached['crop_sha256']:
+                    if cached['original_sha256'] in originals_seen:
+                        continue
+                    rows.append(cached)
+                    originals_seen.update((record['uuid'], cached['original_sha256']))
+                    count += 1
+                    by_source[source_id] = by_source.get(source_id, 0) + 1
+                    LOGGER.info('%s %d/%d (cached)', category, count, per_category)
+                    continue
+            if attempts >= per_category * 3:
+                break
+            attempts += 1
             try:
                 payload = fetch_bytes(record["url"])
                 original_sha = hashlib.sha256(payload).hexdigest()
@@ -86,6 +108,9 @@ def download_categories(categories: list[str], output: str | Path, per_category=
                 })
                 originals_seen.update((record["uuid"], original_sha))
                 count += 1
+                by_source[source_id] = by_source.get(source_id, 0) + 1
+                sidecar.write_text(json.dumps(rows[-1], indent=2) + '\n')
+                LOGGER.info('%s %d/%d', category, count, per_category)
             except (OSError, ValueError) as exc:
                 failures.append({"category": category, "uuid": record["uuid"], "error": str(exc)})
                 LOGGER.warning("Skipping %s: %s", record["uuid"], exc)

@@ -33,7 +33,7 @@ def validate_splits(rows: list[dict], familiar: list[str]):
             raise ValueError("Each sample requires a reference, validation or test split")
         if split != "test" and row["category"] not in familiar_set:
             raise ValueError("Withheld categories must never enter reference or calibration")
-        for field in ("source_id", "image_uuid", "original_sha256", "crop_sha256", "image_path"):
+        for field in ("source_id", "image_uuid", "original_sha256", "crop_sha256", "image_path", "near_duplicate_group"):
             value = row.get(field)
             if not value:
                 continue
@@ -49,7 +49,7 @@ def validate_splits(rows: list[dict], familiar: list[str]):
         raise ValueError("Test split needs at least one withheld category for unknown evaluation")
 
 
-def make_splits(rows: list[dict], familiar: list[str], seed=42) -> list[dict]:
+def make_splits(rows: list[dict], familiar: list[str], seed=42, test_sources=()) -> list[dict]:
     """Group by imaging source, merging duplicate originals across sources.
 
     Source IDs default to the image URL's parent (usually a dive archive).
@@ -67,13 +67,14 @@ def make_splits(rows: list[dict], familiar: list[str], seed=42) -> list[dict]:
 
     duplicates = {}
     for row in rows:
-        for field in ("image_uuid", "original_sha256", "crop_sha256", "image_path"):
+        for field in ("image_uuid", "original_sha256", "crop_sha256", "image_path", "near_duplicate_group"):
             if value := row.get(field):
                 key = (field, value)
                 if key in duplicates:
                     parent[root(row["source_id"])] = root(duplicates[key])
                 duplicates[key] = row["source_id"]
     groups = sorted({root(g) for g in groups})
+    forced_test = {root(g) for g in test_sources}
     if len(groups) < 3:
         raise ValueError("Need at least three independent imaging sources; collect more dives")
     rng = np.random.default_rng(seed)
@@ -85,6 +86,7 @@ def make_splits(rows: list[dict], familiar: list[str], seed=42) -> list[dict]:
             g: "validation" if i < n_val else "test" if i < n_val + n_test else "reference"
             for i, g in enumerate(shuffled)
         }
+        assignments.update({g: 'test' for g in forced_test})
         output = []
         for row in rows:
             split = assignments[root(row["source_id"])]
