@@ -33,8 +33,8 @@ OCEAN_PLANNERS = ("frontier", "abyss", "lawnmower")
 LABELS = {"abyss": "ABYSS"}
 
 
-def _write_mission(config, name: str, seed: int, scenario: str, out_dir: Path) -> dict:
-    log, reveal = run_mission(config, PLANNERS[name](), seed)
+def _write_mission(config, name: str, seed: int, scenario: str, out_dir: Path, terrain=None) -> dict:
+    log, reveal = run_mission(config, PLANNERS[name](), seed, terrain=terrain)
     validate_mission_log(log)
     stem = f"{log['world']['id']}-{name}"
     (out_dir / f"{stem}.json").write_text(json.dumps(log, separators=(",", ":")), encoding="utf-8")
@@ -46,6 +46,7 @@ def _write_mission(config, name: str, seed: int, scenario: str, out_dir: Path) -
         "scenario": scenario,
         "rho": config.rho,
         "seed": seed,
+        "terrain": log["provenance"]["terrain"],
         "planner": name,
         "label": LABELS.get(name, name.capitalize()),
         "log": f"logs/{stem}.json",
@@ -67,11 +68,11 @@ def build(config_path: str, out_dir: Path, seed: int, oceans: int = 1) -> dict:
     ]
     entries = []
     runs = [(seed, UI_PLANNERS)] + [(seed + n, OCEAN_PLANNERS) for n in range(1, oceans)]
-    for scenario, rho in SCENARIOS.items():
+    for scenario, rho, terrain in worlds:
         config = replace(base, scenario=scenario, rho=rho)
         for world_seed, planners in runs:
             for name in planners:
-                entries.append(_write_mission(config, name, world_seed, scenario, out_dir))
+                entries.append(_write_mission(config, name, world_seed, scenario, out_dir, terrain))
     manifest = {"entries": entries}
     (out_dir / "index.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
     return manifest

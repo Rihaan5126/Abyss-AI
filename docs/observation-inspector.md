@@ -99,4 +99,5 @@ remain uncommitted. Restricted image licences still apply to local galleries
 and reference crops; the inspector does not clear public redistribution rights.
 
 The findings report remains evaluator-facing and loads hidden truth only on an
-explicit report/reveal action. Opening the inspector never fetches reveal files.
+explicit report action. The latest team's removal of the map-reveal control is
+preserved. Opening the inspector never fetches hidden-truth files.
