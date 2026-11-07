@@ -21,8 +21,16 @@ const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // Sandy shelf down to blue canyon floor. The deep end stays brighter than the background.
 const SEAFLOOR_STOPS = [[176, 206, 208], [112, 172, 186], [62, 126, 170], [50, 84, 166], [46, 48, 134]];
-const DIVE_SECONDS = 9;
-const DIVE_DESCENT_SHARE = 0.72; // the rest of the dive pulls the camera back to the overview
+const DIVE_SECONDS = 10;
+// The robot sinks over this share of the dive. The camera starts gliding out to the
+// overview before it lands, so the move never stops halfway.
+const DIVE_DESCENT_SHARE = 0.78;
+const DIVE_PULL_START = 0.55;
+// How fast light fades with depth: water absorbs most of it near the surface.
+const ABSORPTION = 3.2;
+// The water gradient, from bright surface water to the deep-sea background (top to bottom).
+const SURFACE_GRADIENT = [[127, 214, 223], [63, 178, 198], [29, 111, 136]];
+const DEEP_GRADIENT = [[11, 51, 70], [5, 26, 39], [1, 6, 9]];
 const GAUGE_MAX_M = 1800;
 const SPOTLIGHT_ON = 64;
 const SPOTLIGHT_PARKED = 7;
@@ -31,7 +39,22 @@ const BEAM_PARKED = 0.012;
 const DETAIL_M = 26; // decorative relief between cell centres, in metres before exaggeration
 const ROCK_COUNT = 900;
 
-const ease = (t) => t * t * (3 - 2 * t);
+// Smootherstep: zero speed and zero acceleration at both ends, so moves glide in and out.
+const glide = (t) => t * t * t * (t * (6 * t - 15) + 10);
+// Its speed, scaled so the fastest point is 1.
+const glideSpeed = (t) => (30 * t * t * (1 - t) * (1 - t)) / 1.875;
+const clamp01 = (t) => Math.min(1, Math.max(0, t));
+
+// Where the dive is at a given time: how far down (0 to 1) and how fast it is sinking.
+function diveProgress(dive, time) {
+  const elapsed = clamp01((time - dive.start) / DIVE_SECONDS);
+  const sink = clamp01(elapsed / DIVE_DESCENT_SHARE);
+  // Blend in a little linear motion, so the robot leaves the surface promptly rather
+  // than hanging there, while still landing gently.
+  const down = 0.8 * glide(sink) + 0.2 * (1 - (1 - sink) ** 3);
+  const speed = (0.8 * 1.875 * glideSpeed(sink) + 0.6 * (1 - sink) ** 2) / 1.66;
+  return { elapsed, down, speed: Math.min(1, speed) };
+}
 
 function seafloorRamp(t) {
   const x = Math.min(1, Math.max(0, t)) * (SEAFLOOR_STOPS.length - 1);
@@ -225,19 +248,26 @@ function softDotTexture() {
   return new THREE.CanvasTexture(canvas);
 }
 
+// The water behind the scene. `depth` blends from surface water (0) to the deep sea (1),
+// and the dive repaints it every frame, so the light fades without a jump at the end.
 function waterBackground() {
   const canvas = document.createElement("canvas");
   canvas.width = 4;
   canvas.height = 256;
   const ctx = canvas.getContext("2d");
-  const gradient = ctx.createLinearGradient(0, 0, 0, 256);
-  gradient.addColorStop(0, "#0b3346");
-  gradient.addColorStop(0.45, "#051a27");
-  gradient.addColorStop(1, "#010609");
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 4, 256);
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
+  texture.paint = (depth) => {
+    const gradient = ctx.createLinearGradient(0, 0, 0, 256);
+    [0, 0.45, 1].forEach((stop, i) => {
+      const rgb = SURFACE_GRADIENT[i].map((v, k) => Math.round(v + (DEEP_GRADIENT[i][k] - v) * depth));
+      gradient.addColorStop(stop, `rgb(${rgb.join(",")})`);
+    });
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 4, 256);
+    texture.needsUpdate = true;
+  };
+  texture.paint(1);
   return texture;
 }
 
@@ -467,8 +497,6 @@ export function createExplorer(api) {
   scene.fog = new THREE.FogExp2(0x03151f, 0.016);
   const shallowWater = new THREE.Color(0x2a93ad);
   const deepWater = new THREE.Color(0x03151f);
-  const skyWater = new THREE.Color(0x3fb2c6);
-  const trenchWater = new THREE.Color(0x020b12);
   const causticTime = { value: 0 };
   const causticStrength = { value: CAUSTIC_STRENGTH };
   const sedimentColour = noiseTexture(512, 7, 0.55, 1);
@@ -1036,10 +1064,18 @@ export function createExplorer(api) {
     position.x += nearHome * (view.index === 0 ? -0.6 : 0.6);
 
     let descent = 1;
+    let sinking = 0;
+    let lights = 1;
     if (dive) {
-      descent = ease(Math.min(1, (time - dive.start) / (DIVE_SECONDS * DIVE_DESCENT_SHARE)));
+      const progress = diveProgress(dive, time);
+      descent = progress.down;
+      sinking = progress.speed;
+      // Lamps switch on once surface light has faded.
+      lights = glide(clamp01((descent - 0.12) / 0.4));
       position.y = terrain.yOf(0) + (position.y - terrain.yOf(0)) * descent;
     }
+    // The camera follows this unbobbed position, so it doesn't shake with the robot.
+    view.steady = position.clone();
     const dx = position.x - vehicle.position.x;
     const dz = position.z - vehicle.position.z;
     if (dx * dx + dz * dz > 1e-5) {
@@ -1058,10 +1094,11 @@ export function createExplorer(api) {
       if (beacon) beacon.visible = view.rest > 0.5 || Math.sin(time * 3.2) > -0.2;
     }
     vehicle.rotation.y = view.heading;
-    vehicle.rotation.x = dive ? 0.55 * (1 - descent) : 0;
+    // The nose dips while it sinks fast and levels out as it slows to land.
+    vehicle.rotation.x = dive ? 0.42 * sinking : 0;
     // Lights have no visible effect in bright surface water, so they grow with depth.
-    vehicle.userData.spot.intensity = (SPOTLIGHT_ON + (SPOTLIGHT_PARKED - SPOTLIGHT_ON) * view.rest) * descent;
-    vehicle.userData.beam.material.opacity = (BEAM_ON + (BEAM_PARKED - BEAM_ON) * view.rest) * descent;
+    vehicle.userData.spot.intensity = (SPOTLIGHT_ON + (SPOTLIGHT_PARKED - SPOTLIGHT_ON) * view.rest) * lights;
+    vehicle.userData.beam.material.opacity = (BEAM_ON + (BEAM_PARKED - BEAM_ON) * view.rest) * lights;
 
     const shownDepth = depthAt(r, c) * descent;
     view.gaugeBot.style.top = `${(100 * Math.min(GAUGE_MAX_M, shownDepth)) / GAUGE_MAX_M}%`;
@@ -1129,26 +1166,40 @@ export function createExplorer(api) {
   }
 
   function updateDive(time) {
-    const elapsed = (time - dive.start) / DIVE_SECONDS;
+    const { elapsed, down } = diveProgress(dive, time);
     if (elapsed >= 1) {
       endDive(true);
       return;
     }
-    const down = ease(Math.min(1, elapsed / DIVE_DESCENT_SHARE));
-    const anchor = views.find((view) => view.pane === abyssPane())?.vehicle.position || new THREE.Vector3();
-    const near = anchor.clone().add(new THREE.Vector3(6, -1.2 + 3.2 * down, 8));
-    const pull = ease(Math.max(0, (elapsed - DIVE_DESCENT_SHARE) / (1 - DIVE_DESCENT_SHARE)));
+    const anchor = views.find((view) => view.pane === abyssPane())?.steady || new THREE.Vector3();
+    // The camera starts just under the surface, looking up at ABYSS, then spirals down with
+    // it and rises above it. Every term is smooth, so the path has no corners or stops.
+    const turn = glide(elapsed);
+    // Starting square-on keeps the two robots side by side rather than one behind the other.
+    const angle = 0.12 + 1.1 * turn;
+    const radius = 7.5 + 2.5 * turn;
+    const near = anchor.clone().add(new THREE.Vector3(
+      Math.sin(angle) * radius,
+      -1.8 + 4.6 * down,
+      Math.cos(angle) * radius,
+    ));
+    // Gliding out to the overview overlaps the end of the descent.
+    const pull = glide(clamp01((elapsed - DIVE_PULL_START) / (1 - DIVE_PULL_START)));
     camera.position.lerpVectors(near, orbitPosition(), pull);
     camera.lookAt(anchor.clone().lerp(new THREE.Vector3(0, -1, 1), pull));
 
-    // Light fades and the water darkens with depth.
-    scene.fog.color.lerpColors(shallowWater, deepWater, down);
-    scene.fog.density = 0.024 + (0.016 - 0.024) * down;
-    scene.background.lerpColors(skyWater, trenchWater, down);
-    ambient.intensity = 3.2 + (1.25 - 3.2) * down;
-    renderer.toneMappingExposure = 1.55 + (1.15 - 1.55) * down;
-    surface.material.opacity = 0.6 * (1 - down);
-    shaftMaterial.opacity = 0.05 * (1 - down);
+    // Water absorbs light quickly near the surface, then more slowly.
+    const dark = (1 - Math.exp(-ABSORPTION * down)) / (1 - Math.exp(-ABSORPTION));
+    scene.fog.color.lerpColors(shallowWater, deepWater, dark);
+    scene.fog.density = 0.024 + (0.016 - 0.024) * dark;
+    deepBackground.paint(dark);
+    ambient.intensity = 3.2 + (1.25 - 3.2) * dark;
+    renderer.toneMappingExposure = 1.55 + (1.15 - 1.55) * dark;
+    // The surface and light shafts recede as the robot sinks away from them.
+    const above = (1 - down) ** 1.6;
+    surface.material.opacity = 0.6 * above;
+    shaftMaterial.opacity = 0.06 * above * (0.85 + 0.15 * Math.sin(time * 1.3));
+    shafts.rotation.y = 0.12 * Math.sin(time * 0.21);
     surfaceTexture.offset.set(time * 0.012, time * 0.008);
   }
 
@@ -1156,7 +1207,7 @@ export function createExplorer(api) {
     if (!dive) return;
     const { onDone } = dive;
     dive = null;
-    scene.background = deepBackground;
+    deepBackground.paint(1);
     scene.fog.color.copy(deepWater);
     scene.fog.density = 0.016;
     ambient.intensity = 1.25;
@@ -1176,7 +1227,7 @@ export function createExplorer(api) {
     controls.enabled = false;
     dive = { start: performance.now() / 1000, onDone };
     views.forEach((view) => { view.rest = 0; });
-    scene.background = skyWater.clone();
+    deepBackground.paint(0);
     surface.position.y = terrain.yOf(0) + 1.3;
     surface.visible = true;
     const [homeRow, homeCol] = app.panes[0].log.terrain.home;
@@ -1220,11 +1271,12 @@ export function createExplorer(api) {
       else controls.update();
     }
     if (snow && !reducedMotion) {
+      const snowRise = dive ? 3.2 * diveProgress(dive, time).speed : 0;
       causticTime.value = time * 0.55;
       const positions = snow.geometry.getAttribute("position");
       for (let n = 0; n < SNOW_COUNT; n += 1) {
-        // During the descent, snow streams upward past the sinking camera.
-        let y = positions.getY(n) + delta * (dive ? 1.5 : -0.09);
+        // During the descent, snow streams upward past the camera as fast as it sinks.
+        let y = positions.getY(n) + delta * (-0.09 + snowRise);
         if (y < -12) y = 22;
         if (y > 22) y = -12;
         positions.setY(n, y);
