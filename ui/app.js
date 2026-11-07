@@ -1336,6 +1336,24 @@ function exitTour() {
 }
 
 function bindControls() {
+  const downloadReport = async () => {
+    if (app.energy + 1e-6 < app.maxEnergy) {
+      showNotice("Finish the expedition, or move the timeline to the end, before generating its findings report.");
+      return;
+    }
+    try {
+      await fetchReveals();
+      const { buildReport } = await import("./report.js");
+      const url = URL.createObjectURL(new Blob([buildReport(app.panes)], {type:"text/html;charset=utf-8"}));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "abyss-expedition-findings.html";
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch (error) { showNotice(`Could not generate report: ${error.message}`, true); }
+  };
+  $("summary-report").addEventListener("click", downloadReport);
+  $("mission-report").addEventListener("click", downloadReport);
   $("world").addEventListener("change", (event) => selectWorld(event.target.value));
   $("play").addEventListener("click", () => setPlaying(!app.playing));
   $("prev").addEventListener("click", () => jumpEvent(-1));
