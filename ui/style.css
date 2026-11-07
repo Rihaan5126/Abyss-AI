@@ -454,3 +454,30 @@ main { padding: 16px 22px; max-width: 1560px; margin: 0 auto; }
 
 .new-ocean { padding: 4px 10px; font: 12px var(--mono); background: rgba(160, 210, 235, .1); border: 1px solid var(--hair); border-radius: 999px; cursor: pointer; }
 .new-ocean:hover { background: rgba(160, 210, 235, .2); }
+
+/* Readable mission summaries: explicit sizes override the compact HUD fonts. */
+.pane .story p, .pane .hud p, .pane .hud .hud-meta,
+.pane .hud .hud-note, .pane .hud-chips,
+.pane .observation-photos figcaption, .pane .why {
+  font: 20px/1.55 system-ui, sans-serif;
+  color: var(--text);
+}
+.pane .story .story-kicker, .pane .story .story-label, .pane .hud h3 {
+  font: 600 18px/1.5 system-ui, sans-serif;
+  color: var(--soft);
+  letter-spacing: .02em;
+}
+.pane .story .story-headline { font: 600 25px/1.4 system-ui, sans-serif; }
+.pane .observation-photos small { font: 16px/1.5 system-ui, sans-serif; }
+.pane .observation-photos { max-height: 440px; gap: 14px; }
+.pane .observation-photos img { height: 180px; max-height: 180px; }
+.pane .stats dt, .pane .status { font: 16px/1.4 system-ui, sans-serif; }
+.pane .stats dd { font-size: 22px; }
+.pane .stat-main dd { font-size: 44px; }
+.pane .planner { font-size: 22px; }
+.view-3d .panes { width: min(640px, 46vw); }
+.view-3d .pane { padding: 20px; flex: 0 0 auto; max-height: none; overflow: visible; }
+.view-3d .pane[data-planner^="abyss"] { order: -1; }
+@media (max-width: 760px) {
+  .view-3d .panes { width: auto; }
+}

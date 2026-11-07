@@ -925,6 +925,7 @@ async function loadPane(pane, entry) {
   app.inspector?.close();
   const log = await getJson(entry.log);
   pane.entry = entry;
+  pane.el.root.dataset.planner = entry.planner;
   pane.log = log;
   pane.reveal = null;
   pane.inferenceEvidence = null;
