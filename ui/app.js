@@ -1657,7 +1657,8 @@ async function init() {
     if (!groups.has(group)) groups.set(group, []);
     const option = document.createElement("option");
     option.value = world.world_id;
-    const scenario = `${SCENARIO_NAMES[world.scenario] || world.scenario}, seed ${world.seed}`;
+    // Two worlds can share an ecology at different strengths, so the label names the signal.
+    const scenario = `${worldLabel(world)}, seed ${world.seed}`;
     option.textContent = landform ? `${landform} · ${scenario}` : scenario;
     groups.get(group).push(option);
   }
