@@ -265,6 +265,19 @@ main { padding: 16px 22px; max-width: 1560px; margin: 0 auto; }
 .observation-photos figure { min-width: 0; margin: 0; }
 .observation-photos img { height: 100px; object-fit: contain; }
 .observation-photos figcaption { font: 10px/1.3 var(--mono); color: var(--soft); overflow-wrap: anywhere; }
+#observation-inspector { position: fixed; z-index: 30; right: 10px; top: 65px; bottom: 76px; width: min(430px, 42vw); overflow: auto; padding: 20px; background: rgba(5,21,35,.98); border: 1px solid #3b8d98; box-shadow: 0 8px 40px #0008; }
+#observation-inspector[hidden] { display:none; }
+#observation-inspector h2, #observation-inspector h3 { margin:12px 0; }
+#observation-inspector p, #observation-inspector li { font-size:14px; line-height:1.5; margin:9px 0; }
+#observation-inspector img { width:100%; object-fit:contain; max-height:220px; }
+#observation-inspector pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:11px; }
+#observation-inspector button { padding:7px 10px; margin:4px; border:1px solid #3b8d98; }
+#observation-inspector dt { font-size:12px; opacity:.8; } #observation-inspector dd { margin:0 0 7px; }
+.inspector-close { float:right; } .inspector-references { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+.inspector-references figure { margin:0; } .inspector-references figcaption { font-size:12px; overflow-wrap:anywhere; }
+.inspector-open.view-3d .panes { opacity:0; pointer-events:none; }
+.inspector-open.view-3d .pane { pointer-events:none; }
+@media(max-width:760px) { #observation-inspector { top:15vh; bottom:0; right:0; width:100%; box-sizing:border-box; } .inspector-open.view-3d .panes { right:auto; } }
 
 .story { margin-top: 10px; padding: 10px 12px 12px; background: rgba(160, 210, 235, .06); border-left: 2px solid var(--pane-color); border-radius: 2px; }
 .story.fresh { animation: story-in .9s ease-out; }

@@ -68,12 +68,14 @@ class CachedEncoder:
 
     def encode(self, images):
         result = []
+        self.last_cache_hits = []
         for image in images:
             rgb = load_rgb(image)
             digest = hashlib.sha256(self.identity.encode())
             digest.update(json.dumps(rgb.size).encode())
             digest.update(rgb.tobytes())
             path = self.cache_dir / f"{digest.hexdigest()}.npy"
+            self.last_cache_hits.append(path.exists())
             if path.exists():
                 vector = np.load(path, allow_pickle=False)
             else:

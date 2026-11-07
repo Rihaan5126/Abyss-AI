@@ -920,6 +920,10 @@ export function createExplorer(api) {
         const image = document.createElement("img");
         image.src = ref;
         image.alt = "Marine image used as a simulated camera encounter";
+        image.tabIndex = 0;
+        image.style.cursor = "pointer";
+        image.onclick = () => app.inspector?.open(pane, last.step, index);
+        image.onkeydown = event => { if (event.key === "Enter") image.click(); };
         image.addEventListener("error", () => image.remove());
         const figure = document.createElement("figure");
         const caption = document.createElement("figcaption");
