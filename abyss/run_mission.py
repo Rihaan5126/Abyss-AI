@@ -33,6 +33,7 @@ from .habitat import annotate_surveys, habitat_classes
 from .planners import PLANNERS
 from .planners.base import Planner
 from .stub_perception import StubImagePool, StubPerception
+from .terrain import Terrain
 from .world import STREAM_PLANNER
 
 REQUIRED_LOG_KEYS = {
@@ -124,12 +125,16 @@ def run_mission(
     planner_seed: int | None = None,
     perception: Perception | None = None,
     image_pool: ImagePool | None = None,
+    terrain: Terrain | None = None,
 ) -> tuple[dict, dict]:
-    """Run a mission to completion and return (public mission log, reveal payload)."""
+    """Run a mission to completion and return (public mission log, reveal payload).
+
+    Pass ``terrain`` to use a fixed public terrain instead of the one ``config`` selects.
+    """
     planner_config = planner_config or {}
     planner_seed = planner_seed_for(seed) if planner_seed is None else planner_seed
 
-    env = Environment(config, perception=perception, image_pool=image_pool)
+    env = Environment(config, terrain=terrain, perception=perception, image_pool=image_pool)
     state = env.reset(seed)
     public_map = env.public_map
     planner.reset(public_map, planner_config, planner_seed)
@@ -168,7 +173,9 @@ def run_mission(
             "perception": perception.name if perception else "ideal",
         },
         "world": {
-            "id": f"{config.scenario}-rho{config.rho:g}-seed{seed}",
+            # A supplied terrain is named in the id, so it can't collide with the default world.
+            "id": (f"{terrain.source}-" if terrain is not None else "")
+            + f"{config.scenario}-rho{config.rho:g}-seed{seed}",
             "scenario": config.scenario,
             "rho": config.rho,
             "seed": seed,

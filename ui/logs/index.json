@@ -2,6 +2,7 @@
  "entries": [
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -12,6 +13,7 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -22,6 +24,7 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -32,6 +35,7 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -42,6 +46,7 @@
   },
   {
    "world_id": "ridge-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "ridge",
    "rho": 0.5,
    "seed": 1000,
@@ -52,6 +57,7 @@
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
@@ -62,6 +68,7 @@
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
@@ -72,6 +79,7 @@
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
@@ -82,6 +90,7 @@
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
@@ -92,6 +101,7 @@
   },
   {
    "world_id": "reversed-rho0.5-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "reversed",
    "rho": 0.5,
    "seed": 1000,
@@ -102,6 +112,7 @@
   },
   {
    "world_id": "clustered-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
@@ -112,6 +123,7 @@
   },
   {
    "world_id": "clustered-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
@@ -122,6 +134,7 @@
   },
   {
    "world_id": "clustered-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
@@ -132,6 +145,7 @@
   },
   {
    "world_id": "clustered-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
@@ -142,6 +156,7 @@
   },
   {
    "world_id": "clustered-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "clustered",
    "rho": 1.0,
    "seed": 1000,
@@ -152,6 +167,7 @@
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
@@ -162,6 +178,7 @@
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
@@ -172,6 +189,7 @@
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
@@ -182,6 +200,7 @@
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
@@ -192,6 +211,7 @@
   },
   {
    "world_id": "nonlinear-rho1-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "nonlinear",
    "rho": 1.0,
    "seed": 1000,
@@ -202,6 +222,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -212,6 +233,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -222,6 +244,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -232,6 +255,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -242,6 +266,7 @@
   },
   {
    "world_id": "random-rho0-seed1000",
+   "terrain": "gebco_2025",
    "scenario": "random",
    "rho": 0.0,
    "seed": 1000,
@@ -249,6 +274,226 @@
    "label": "Random",
    "log": "logs/random-rho0-seed1000-random.json",
    "reveal": "logs/random-rho0-seed1000-random.reveal.json"
+  },
+  {
+   "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_seamount",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-frontier.json",
+   "reveal": "logs/synthetic_seamount-ridge-rho0.5-seed1000-frontier.reveal.json"
+  },
+  {
+   "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_seamount",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-abyss.json",
+   "reveal": "logs/synthetic_seamount-ridge-rho0.5-seed1000-abyss.reveal.json"
+  },
+  {
+   "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_seamount",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-lawnmower.json",
+   "reveal": "logs/synthetic_seamount-ridge-rho0.5-seed1000-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_seamount",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "heuristic",
+   "label": "Heuristic",
+   "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-heuristic.json",
+   "reveal": "logs/synthetic_seamount-ridge-rho0.5-seed1000-heuristic.reveal.json"
+  },
+  {
+   "world_id": "synthetic_seamount-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_seamount",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "random",
+   "label": "Random",
+   "log": "logs/synthetic_seamount-ridge-rho0.5-seed1000-random.json",
+   "reveal": "logs/synthetic_seamount-ridge-rho0.5-seed1000-random.reveal.json"
+  },
+  {
+   "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_abyssal_hills",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-frontier.json",
+   "reveal": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-frontier.reveal.json"
+  },
+  {
+   "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_abyssal_hills",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-abyss.json",
+   "reveal": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-abyss.reveal.json"
+  },
+  {
+   "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_abyssal_hills",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-lawnmower.json",
+   "reveal": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_abyssal_hills",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "heuristic",
+   "label": "Heuristic",
+   "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-heuristic.json",
+   "reveal": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-heuristic.reveal.json"
+  },
+  {
+   "world_id": "synthetic_abyssal_hills-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_abyssal_hills",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "random",
+   "label": "Random",
+   "log": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-random.json",
+   "reveal": "logs/synthetic_abyssal_hills-ridge-rho0.5-seed1000-random.reveal.json"
+  },
+  {
+   "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_trench",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-frontier.json",
+   "reveal": "logs/synthetic_trench-ridge-rho0.5-seed1000-frontier.reveal.json"
+  },
+  {
+   "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_trench",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-abyss.json",
+   "reveal": "logs/synthetic_trench-ridge-rho0.5-seed1000-abyss.reveal.json"
+  },
+  {
+   "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_trench",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-lawnmower.json",
+   "reveal": "logs/synthetic_trench-ridge-rho0.5-seed1000-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_trench",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "heuristic",
+   "label": "Heuristic",
+   "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-heuristic.json",
+   "reveal": "logs/synthetic_trench-ridge-rho0.5-seed1000-heuristic.reveal.json"
+  },
+  {
+   "world_id": "synthetic_trench-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_trench",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "random",
+   "label": "Random",
+   "log": "logs/synthetic_trench-ridge-rho0.5-seed1000-random.json",
+   "reveal": "logs/synthetic_trench-ridge-rho0.5-seed1000-random.reveal.json"
+  },
+  {
+   "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_basin",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "frontier",
+   "label": "Frontier",
+   "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-frontier.json",
+   "reveal": "logs/synthetic_basin-ridge-rho0.5-seed1000-frontier.reveal.json"
+  },
+  {
+   "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_basin",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "abyss",
+   "label": "ABYSS",
+   "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-abyss.json",
+   "reveal": "logs/synthetic_basin-ridge-rho0.5-seed1000-abyss.reveal.json"
+  },
+  {
+   "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_basin",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "lawnmower",
+   "label": "Lawnmower",
+   "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-lawnmower.json",
+   "reveal": "logs/synthetic_basin-ridge-rho0.5-seed1000-lawnmower.reveal.json"
+  },
+  {
+   "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_basin",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "heuristic",
+   "label": "Heuristic",
+   "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-heuristic.json",
+   "reveal": "logs/synthetic_basin-ridge-rho0.5-seed1000-heuristic.reveal.json"
+  },
+  {
+   "world_id": "synthetic_basin-ridge-rho0.5-seed1000",
+   "terrain": "synthetic_basin",
+   "scenario": "ridge",
+   "rho": 0.5,
+   "seed": 1000,
+   "planner": "random",
+   "label": "Random",
+   "log": "logs/synthetic_basin-ridge-rho0.5-seed1000-random.json",
+   "reveal": "logs/synthetic_basin-ridge-rho0.5-seed1000-random.reveal.json"
   }
  ]
 }

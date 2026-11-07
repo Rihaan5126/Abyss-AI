@@ -5,6 +5,10 @@
 Runs each planner listed below on one world of each type. The first planner listed
 fills the left panel and the second fills the right. The seed is fixed in advance and
 is not chosen by outcome.
+
+After the GEBCO worlds come extra synthetic landforms (a seamount, abyssal hills, a
+trench and a basin), so the demo can show different seafloor shapes. They are for the
+replay only and are not part of the benchmark.
 """
 
 from __future__ import annotations
@@ -15,10 +19,12 @@ from dataclasses import replace
 from pathlib import Path
 
 from abyss.config import load_config
+from abyss.landforms import LANDFORMS, landform_terrain
 from abyss.planners import PLANNERS
 from abyss.run_mission import run_mission, validate_mission_log
 
 SCENARIOS = {"ridge": 0.5, "reversed": 0.5, "clustered": 1.0, "nonlinear": 1.0, "random": 0.0}
+LANDFORM_SCENARIO = ("ridge", 0.5)
 UI_PLANNERS = ("frontier", "abyss", "lawnmower", "heuristic", "random")
 LABELS = {"abyss": "ABYSS"}
 
@@ -30,11 +36,16 @@ def build(config_path: str, out_dir: Path, seed: int) -> dict:
             old.unlink()
 
     base = load_config(config_path)
+    worlds = [(scenario, rho, None) for scenario, rho in SCENARIOS.items()]
+    shape = (base.height, base.width)
+    worlds += [
+        (*LANDFORM_SCENARIO, landform_terrain(name, shape, base.cell_size_m)) for name in LANDFORMS
+    ]
     entries = []
-    for scenario, rho in SCENARIOS.items():
+    for scenario, rho, terrain in worlds:
         config = replace(base, scenario=scenario, rho=rho)
         for name in UI_PLANNERS:
-            log, reveal = run_mission(config, PLANNERS[name](), seed)
+            log, reveal = run_mission(config, PLANNERS[name](), seed, terrain=terrain)
             validate_mission_log(log)
             stem = f"{log['world']['id']}-{name}"
             (out_dir / f"{stem}.json").write_text(
@@ -46,6 +57,7 @@ def build(config_path: str, out_dir: Path, seed: int) -> dict:
             entries.append(
                 {
                     "world_id": log["world"]["id"],
+                    "terrain": log["provenance"]["terrain"],
                     "scenario": scenario,
                     "rho": config.rho,
                     "seed": seed,

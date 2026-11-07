@@ -65,7 +65,8 @@ From the project folder with the existing virtual environment active:
 
 ```bash
 git fetch origin
-git switch ammar/perception-quality
+git switch main
+git pull --ff-only origin main
 export SSL_CERT_FILE="$(python -m certifi)"
 export REQUESTS_CA_BUNDLE="$SSL_CERT_FILE"
 python -m perception restore examples/perception_quality_manifest.json \
