@@ -29,3 +29,9 @@ and finds richer cells, but `lawnmower` finds more *distinct* categories. The mo
 predicts richness, not novelty, so it keeps returning to one rich habitat full of
 already-seen organisms; lawnmower's rows cross every depth niche. A per-category
 occurrence model is the planned fix (brief section 11, stretch goal).
+
+The experimental [`abyss-discovery`](../../docs/discovery-planner.md) now tests
+category incidence, rarity weighting and optional short routes. Its development
+grid and fresh seeds 3000–3019 have separate reports; it does not change these
+frozen planners or the published benchmark. Use
+`python -m abyss.evaluation.discovery_experiment run` to reproduce that experiment.

@@ -1,0 +1,374 @@
+{
+  "provenance": {
+    "biology": "simulated",
+    "perception": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056:cls:resize256-crop224-imagenet:v1:pillow12.3.0:weighted-knn5",
+    "artifact": {
+      "name": "perception-quality",
+      "id": "f5c041e494615306dd0af3358519e698eb0a9e02d81cb59782b082ab10514567"
+    },
+    "metric": "true distinct categories within fixed budget",
+    "interval": "95% paired seed bootstrap; aggregate resamples complete seeds",
+    "status": "Experimental; does not replace the published benchmark."
+  },
+  "seeds": [
+    3000,
+    3001,
+    3002
+  ],
+  "frozen_config": {
+    "rarity_power": 1.0,
+    "lookahead": 1,
+    "warmup_surveys": 5,
+    "habitat_bandwidth": 1.0,
+    "spatial_bandwidth": 4.0,
+    "prior_strength": 2.0,
+    "exploration_weight": 0.5,
+    "warmup_weight": 2.0,
+    "beam_width": 6,
+    "candidate_count": 18,
+    "robust_vision": true,
+    "learn": true
+  },
+  "safety": {
+    "missions": 60,
+    "safe_returns": 60,
+    "forced_returns": 0
+  },
+  "aggregate": {
+    "means": {
+      "abyss-discovery": 7.866666666666666,
+      "abyss": 8.266666666666667,
+      "frontier": 6.666666666666667,
+      "abyss-discovery-unguarded": 8.133333333333335
+    },
+    "discovery_vs": {
+      "abyss": {
+        "mean_difference": -0.40000000000000097,
+        "ci95_low": -1.0,
+        "ci95_high": 0.3999999999999986,
+        "wins": 1,
+        "ties": 0,
+        "losses": 2
+      },
+      "frontier": {
+        "mean_difference": 1.1999999999999995,
+        "ci95_low": 0.20000000000000018,
+        "ci95_high": 2.5999999999999996,
+        "wins": 3,
+        "ties": 0,
+        "losses": 0
+      },
+      "abyss-discovery-unguarded": {
+        "mean_difference": -0.2666666666666669,
+        "ci95_low": -0.5999999999999996,
+        "ci95_high": 0.1999999999999993,
+        "wins": 1,
+        "ties": 0,
+        "losses": 2
+      }
+    }
+  },
+  "worlds": [
+    {
+      "terrain": "gebco_2025",
+      "scenario": "random",
+      "rho": 0.0,
+      "means": {
+        "abyss-discovery": 8.333333333333334,
+        "abyss": 7.666666666666667,
+        "frontier": 9.0,
+        "abyss-discovery-unguarded": 8.666666666666666
+      },
+      "surveys": {
+        "abyss-discovery": 39.666666666666664,
+        "abyss": 34.666666666666664,
+        "frontier": 44.0,
+        "abyss-discovery-unguarded": 39.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 0.6666666666666666,
+          "ci95_low": -1.0,
+          "ci95_high": 2.0,
+          "wins": 2,
+          "ties": 0,
+          "losses": 1
+        },
+        "frontier": {
+          "mean_difference": -0.6666666666666666,
+          "ci95_low": -1.0,
+          "ci95_high": 0.0,
+          "wins": 0,
+          "ties": 1,
+          "losses": 2
+        },
+        "abyss-discovery-unguarded": {
+          "mean_difference": -0.3333333333333333,
+          "ci95_low": -1.0,
+          "ci95_high": 1.0,
+          "wins": 1,
+          "ties": 0,
+          "losses": 2
+        }
+      }
+    },
+    {
+      "terrain": "gebco_2025",
+      "scenario": "clustered",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 7.0,
+        "abyss": 8.333333333333334,
+        "frontier": 5.666666666666667,
+        "abyss-discovery-unguarded": 8.0
+      },
+      "surveys": {
+        "abyss-discovery": 39.666666666666664,
+        "abyss": 34.333333333333336,
+        "frontier": 44.0,
+        "abyss-discovery-unguarded": 40.666666666666664
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -1.3333333333333333,
+          "ci95_low": -6.0,
+          "ci95_high": 3.0,
+          "wins": 1,
+          "ties": 0,
+          "losses": 2
+        },
+        "frontier": {
+          "mean_difference": 1.3333333333333333,
+          "ci95_low": -2.0,
+          "ci95_high": 6.0,
+          "wins": 1,
+          "ties": 1,
+          "losses": 1
+        },
+        "abyss-discovery-unguarded": {
+          "mean_difference": -1.0,
+          "ci95_low": -4.0,
+          "ci95_high": 1.0,
+          "wins": 1,
+          "ties": 1,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "terrain": "gebco_2025",
+      "scenario": "ridge",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 9.666666666666666,
+        "abyss": 11.0,
+        "frontier": 7.0,
+        "abyss-discovery-unguarded": 9.666666666666666
+      },
+      "surveys": {
+        "abyss-discovery": 38.333333333333336,
+        "abyss": 33.333333333333336,
+        "frontier": 44.0,
+        "abyss-discovery-unguarded": 40.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -1.3333333333333333,
+          "ci95_low": -2.0,
+          "ci95_high": -1.0,
+          "wins": 0,
+          "ties": 0,
+          "losses": 3
+        },
+        "frontier": {
+          "mean_difference": 2.6666666666666665,
+          "ci95_low": 1.0,
+          "ci95_high": 4.0,
+          "wins": 3,
+          "ties": 0,
+          "losses": 0
+        },
+        "abyss-discovery-unguarded": {
+          "mean_difference": 0.0,
+          "ci95_low": -1.0,
+          "ci95_high": 1.0,
+          "wins": 1,
+          "ties": 1,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "terrain": "gebco_2025",
+      "scenario": "reversed",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 6.333333333333333,
+        "abyss": 7.666666666666667,
+        "frontier": 6.666666666666667,
+        "abyss-discovery-unguarded": 6.333333333333333
+      },
+      "surveys": {
+        "abyss-discovery": 40.0,
+        "abyss": 35.666666666666664,
+        "frontier": 44.0,
+        "abyss-discovery-unguarded": 40.333333333333336
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -1.3333333333333333,
+          "ci95_low": -4.0,
+          "ci95_high": 1.0,
+          "wins": 1,
+          "ties": 0,
+          "losses": 2
+        },
+        "frontier": {
+          "mean_difference": -0.3333333333333333,
+          "ci95_low": -1.0,
+          "ci95_high": 0.0,
+          "wins": 0,
+          "ties": 2,
+          "losses": 1
+        },
+        "abyss-discovery-unguarded": {
+          "mean_difference": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "wins": 0,
+          "ties": 3,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "terrain": "gebco_2025",
+      "scenario": "nonlinear",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 8.0,
+        "abyss": 6.666666666666667,
+        "frontier": 5.0,
+        "abyss-discovery-unguarded": 8.0
+      },
+      "surveys": {
+        "abyss-discovery": 39.333333333333336,
+        "abyss": 31.333333333333332,
+        "frontier": 44.0,
+        "abyss-discovery-unguarded": 40.333333333333336
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 1.3333333333333333,
+          "ci95_low": 0.0,
+          "ci95_high": 3.0,
+          "wins": 2,
+          "ties": 1,
+          "losses": 0
+        },
+        "frontier": {
+          "mean_difference": 3.0,
+          "ci95_low": 0.0,
+          "ci95_high": 7.0,
+          "wins": 2,
+          "ties": 1,
+          "losses": 0
+        },
+        "abyss-discovery-unguarded": {
+          "mean_difference": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "wins": 0,
+          "ties": 3,
+          "losses": 0
+        }
+      }
+    }
+  ],
+  "simulation": {
+    "height": 30,
+    "width": 30,
+    "cell_size_m": 463.0,
+    "terrain_source": "gebco",
+    "gebco_path": "data/gebco/monterey_canyon_30x30.json",
+    "terrain_seed": null,
+    "home": [
+      0,
+      0
+    ],
+    "scenario": "ridge",
+    "rho": 1.0,
+    "n_categories": 11,
+    "prevalence_max": 0.25,
+    "prevalence_min": 0.01,
+    "signal_strength": 2.0,
+    "cluster_sigma": 2.5,
+    "energy_budget": 150.0,
+    "survey_cost": 2.0,
+    "energy_reserve": 5.0,
+    "terrain_cost_factor": 0.5,
+    "perception_mode": "real"
+  },
+  "rows": [
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":7,"available":11,"perceived":6,"surveys":41,"energy":144.589453,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":8,"available":11,"perceived":6,"surveys":33,"energy":144.9035,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":7,"available":11,"perceived":4,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":8,"available":11,"perceived":7,"surveys":42,"energy":144.75888,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":9,"available":11,"perceived":8,"surveys":40,"energy":144.115491,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":7,"available":11,"perceived":6,"surveys":32,"energy":144.863812,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":10,"available":11,"perceived":8,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":10,"available":11,"perceived":8,"surveys":38,"energy":143.35399,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":9,"available":11,"perceived":8,"surveys":38,"energy":144.485247,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":8,"available":11,"perceived":7,"surveys":39,"energy":144.199776,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":10,"available":11,"perceived":7,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":8,"available":11,"perceived":7,"surveys":37,"energy":144.061582,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":10,"available":11,"perceived":7,"surveys":41,"energy":144.913453,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":7,"available":11,"perceived":7,"surveys":35,"energy":144.665782,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":10,"available":11,"perceived":8,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":10,"available":11,"perceived":7,"surveys":42,"energy":143.455339,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":10,"available":11,"perceived":8,"surveys":39,"energy":144.619506,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":11,"available":11,"perceived":8,"surveys":33,"energy":143.783322,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":4,"available":11,"perceived":5,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":9,"available":11,"perceived":8,"surveys":41,"energy":144.360116,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":1,"available":11,"perceived":1,"surveys":39,"energy":143.511733,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":7,"available":11,"perceived":5,"surveys":35,"energy":144.401299,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":3,"available":11,"perceived":3,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":5,"available":11,"perceived":5,"surveys":39,"energy":143.954942,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":10,"available":11,"perceived":7,"surveys":39,"energy":143.867958,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":11,"available":11,"perceived":8,"surveys":34,"energy":144.55691,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":6,"available":11,"perceived":6,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":11,"available":11,"perceived":8,"surveys":39,"energy":144.435094,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":10,"available":11,"perceived":8,"surveys":38,"energy":143.5475,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":11,"available":11,"perceived":8,"surveys":33,"energy":143.882072,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":9,"available":11,"perceived":8,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":9,"available":11,"perceived":7,"surveys":43,"energy":143.457491,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":9,"available":11,"perceived":8,"surveys":38,"energy":143.552008,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":11,"available":11,"perceived":8,"surveys":33,"energy":144.898534,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":6,"available":11,"perceived":7,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":9,"available":11,"perceived":8,"surveys":38,"energy":143.135924,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":6,"available":11,"perceived":4,"surveys":42,"energy":143.260794,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":10,"available":11,"perceived":7,"surveys":30,"energy":144.81387,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":6,"available":11,"perceived":5,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":6,"available":11,"perceived":4,"surveys":42,"energy":143.260794,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":7,"available":11,"perceived":8,"surveys":37,"energy":144.637537,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":8,"available":11,"perceived":8,"surveys":38,"energy":144.676355,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":7,"available":11,"perceived":7,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":7,"available":11,"perceived":7,"surveys":42,"energy":144.307061,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":6,"available":11,"perceived":6,"surveys":41,"energy":144.535664,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":5,"available":11,"perceived":6,"surveys":39,"energy":144.302176,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":7,"available":11,"perceived":6,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":6,"available":11,"perceived":7,"surveys":37,"energy":144.989597,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":8,"available":11,"perceived":6,"surveys":40,"energy":144.429948,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":8,"available":11,"perceived":7,"surveys":26,"energy":143.25018,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":8,"available":11,"perceived":6,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":8,"available":11,"perceived":7,"surveys":41,"energy":144.275039,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":10,"available":11,"perceived":8,"surveys":38,"energy":144.938698,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":7,"available":11,"perceived":6,"surveys":35,"energy":143.524481,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":3,"available":11,"perceived":3,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":10,"available":11,"perceived":8,"surveys":40,"energy":144.332857,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":6,"available":11,"perceived":7,"surveys":40,"energy":144.511384,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":5,"available":11,"perceived":4,"surveys":33,"energy":144.821941,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":4,"available":11,"perceived":5,"surveys":44,"energy":142.738884,"safe":true,"forced":false},
+    {"terrain":"gebco_2025","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss-discovery-unguarded","candidate":{},"distinct":6,"available":11,"perceived":7,"surveys":40,"energy":144.511384,"safe":true,"forced":false}
+  ]
+}

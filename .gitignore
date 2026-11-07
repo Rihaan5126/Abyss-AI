@@ -12,6 +12,8 @@ data/*
 !data/gebco/
 results/
 ui/vision-logs/
+ui/discovery-vision/
+ui/discovery-logs/
 *.nc
 *.pt
 *.pth

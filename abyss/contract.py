@@ -45,6 +45,9 @@ class PublicMap:
     survey_cost: float
     energy_reserve: float
     return_cost: np.ndarray  # (H, W), travel cost from each cell to home
+    # Public navigation setting, shared by every planner. None supports older
+    # callers; planners must then fall back to the supplied one-step costs.
+    terrain_cost_factor: float | None = None
 
 
 @dataclass(frozen=True, eq=False)

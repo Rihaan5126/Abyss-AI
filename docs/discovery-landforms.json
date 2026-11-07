@@ -1,0 +1,1049 @@
+{
+  "provenance": {
+    "biology": "simulated",
+    "perception": "ideal",
+    "artifact": null,
+    "metric": "true distinct categories within fixed budget",
+    "interval": "95% paired seed bootstrap; aggregate resamples complete seeds",
+    "status": "Experimental; does not replace the published benchmark."
+  },
+  "seeds": [
+    3000,
+    3001,
+    3002,
+    3003,
+    3004
+  ],
+  "frozen_config": {
+    "rarity_power": 1.0,
+    "lookahead": 1,
+    "warmup_surveys": 5,
+    "habitat_bandwidth": 1.0,
+    "spatial_bandwidth": 4.0,
+    "prior_strength": 2.0,
+    "exploration_weight": 0.5,
+    "warmup_weight": 2.0,
+    "beam_width": 6,
+    "candidate_count": 18,
+    "robust_vision": true,
+    "learn": true
+  },
+  "safety": {
+    "missions": 300,
+    "safe_returns": 300,
+    "forced_returns": 0
+  },
+  "aggregate": {
+    "means": {
+      "abyss-discovery": 12.919999999999998,
+      "abyss": 12.870000000000001,
+      "frontier": 11.32
+    },
+    "discovery_vs": {
+      "abyss": {
+        "mean_difference": 0.05,
+        "ci95_low": -0.2600000000000001,
+        "ci95_high": 0.3499999999999993,
+        "wins": 3,
+        "ties": 0,
+        "losses": 2
+      },
+      "frontier": {
+        "mean_difference": 1.6,
+        "ci95_low": 0.95,
+        "ci95_high": 2.25,
+        "wins": 5,
+        "ties": 0,
+        "losses": 0
+      }
+    }
+  },
+  "worlds": [
+    {
+      "terrain": "synthetic_seamount",
+      "scenario": "random",
+      "rho": 0.0,
+      "means": {
+        "abyss-discovery": 13.2,
+        "abyss": 12.2,
+        "frontier": 12.6
+      },
+      "surveys": {
+        "abyss-discovery": 38.6,
+        "abyss": 36.6,
+        "frontier": 40.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 1.0,
+          "ci95_low": -0.4,
+          "ci95_high": 2.6,
+          "wins": 3,
+          "ties": 1,
+          "losses": 1
+        },
+        "frontier": {
+          "mean_difference": 0.6,
+          "ci95_low": 0.2,
+          "ci95_high": 1.0,
+          "wins": 3,
+          "ties": 2,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_seamount",
+      "scenario": "clustered",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 11.8,
+        "abyss": 12.2,
+        "frontier": 10.4
+      },
+      "surveys": {
+        "abyss-discovery": 42.0,
+        "abyss": 33.0,
+        "frontier": 40.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -0.4,
+          "ci95_low": -1.8049999999999984,
+          "ci95_high": 1.4,
+          "wins": 1,
+          "ties": 1,
+          "losses": 3
+        },
+        "frontier": {
+          "mean_difference": 1.4,
+          "ci95_low": 0.0,
+          "ci95_high": 2.8,
+          "wins": 3,
+          "ties": 1,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_seamount",
+      "scenario": "ridge",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 15.0,
+        "abyss": 15.0,
+        "frontier": 12.0
+      },
+      "surveys": {
+        "abyss-discovery": 41.2,
+        "abyss": 32.0,
+        "frontier": 40.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 0.0,
+          "ci95_low": -0.6,
+          "ci95_high": 0.6,
+          "wins": 1,
+          "ties": 3,
+          "losses": 1
+        },
+        "frontier": {
+          "mean_difference": 3.0,
+          "ci95_low": 1.6,
+          "ci95_high": 4.4,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_seamount",
+      "scenario": "reversed",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 14.0,
+        "abyss": 14.0,
+        "frontier": 14.0
+      },
+      "surveys": {
+        "abyss-discovery": 41.6,
+        "abyss": 37.6,
+        "frontier": 40.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 0.0,
+          "ci95_low": -0.8,
+          "ci95_high": 0.8,
+          "wins": 2,
+          "ties": 1,
+          "losses": 2
+        },
+        "frontier": {
+          "mean_difference": 0.0,
+          "ci95_low": -0.6,
+          "ci95_high": 0.6,
+          "wins": 1,
+          "ties": 3,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_seamount",
+      "scenario": "nonlinear",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 11.8,
+        "abyss": 10.8,
+        "frontier": 11.6
+      },
+      "surveys": {
+        "abyss-discovery": 40.0,
+        "abyss": 30.8,
+        "frontier": 40.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 1.0,
+          "ci95_low": -0.4,
+          "ci95_high": 2.4,
+          "wins": 2,
+          "ties": 2,
+          "losses": 1
+        },
+        "frontier": {
+          "mean_difference": 0.2,
+          "ci95_low": -4.0,
+          "ci95_high": 2.8,
+          "wins": 4,
+          "ties": 0,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_abyssal_hills",
+      "scenario": "random",
+      "rho": 0.0,
+      "means": {
+        "abyss-discovery": 12.4,
+        "abyss": 12.0,
+        "frontier": 12.6
+      },
+      "surveys": {
+        "abyss-discovery": 36.4,
+        "abyss": 34.4,
+        "frontier": 38.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 0.4,
+          "ci95_low": -0.6,
+          "ci95_high": 1.8,
+          "wins": 1,
+          "ties": 3,
+          "losses": 1
+        },
+        "frontier": {
+          "mean_difference": -0.2,
+          "ci95_low": -1.2,
+          "ci95_high": 0.6,
+          "wins": 1,
+          "ties": 3,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_abyssal_hills",
+      "scenario": "clustered",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 10.4,
+        "abyss": 9.6,
+        "frontier": 11.0
+      },
+      "surveys": {
+        "abyss-discovery": 38.8,
+        "abyss": 35.0,
+        "frontier": 38.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 0.8,
+          "ci95_low": -0.8,
+          "ci95_high": 2.2,
+          "wins": 3,
+          "ties": 1,
+          "losses": 1
+        },
+        "frontier": {
+          "mean_difference": -0.6,
+          "ci95_low": -4.2,
+          "ci95_high": 2.4,
+          "wins": 2,
+          "ties": 1,
+          "losses": 2
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_abyssal_hills",
+      "scenario": "ridge",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 16.0,
+        "abyss": 16.0,
+        "frontier": 9.4
+      },
+      "surveys": {
+        "abyss-discovery": 37.8,
+        "abyss": 33.0,
+        "frontier": 38.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 0.0,
+          "ci95_low": 0.0,
+          "ci95_high": 0.0,
+          "wins": 0,
+          "ties": 5,
+          "losses": 0
+        },
+        "frontier": {
+          "mean_difference": 6.6,
+          "ci95_low": 5.6,
+          "ci95_high": 7.6,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_abyssal_hills",
+      "scenario": "reversed",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 12.2,
+        "abyss": 13.8,
+        "frontier": 10.6
+      },
+      "surveys": {
+        "abyss-discovery": 37.6,
+        "abyss": 33.8,
+        "frontier": 38.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -1.6,
+          "ci95_low": -2.0,
+          "ci95_high": -1.2,
+          "wins": 0,
+          "ties": 0,
+          "losses": 5
+        },
+        "frontier": {
+          "mean_difference": 1.6,
+          "ci95_low": 0.8,
+          "ci95_high": 2.4,
+          "wins": 4,
+          "ties": 1,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_abyssal_hills",
+      "scenario": "nonlinear",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 12.6,
+        "abyss": 13.6,
+        "frontier": 11.8
+      },
+      "surveys": {
+        "abyss-discovery": 39.8,
+        "abyss": 28.0,
+        "frontier": 38.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -1.0,
+          "ci95_low": -3.2,
+          "ci95_high": 0.8,
+          "wins": 1,
+          "ties": 1,
+          "losses": 3
+        },
+        "frontier": {
+          "mean_difference": 0.8,
+          "ci95_low": -5.2,
+          "ci95_high": 6.0,
+          "wins": 2,
+          "ties": 2,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_trench",
+      "scenario": "random",
+      "rho": 0.0,
+      "means": {
+        "abyss-discovery": 12.0,
+        "abyss": 12.8,
+        "frontier": 12.8
+      },
+      "surveys": {
+        "abyss-discovery": 41.4,
+        "abyss": 39.0,
+        "frontier": 42.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -0.8,
+          "ci95_low": -2.4,
+          "ci95_high": 0.8,
+          "wins": 1,
+          "ties": 2,
+          "losses": 2
+        },
+        "frontier": {
+          "mean_difference": -0.8,
+          "ci95_low": -2.4,
+          "ci95_high": 0.6,
+          "wins": 2,
+          "ties": 0,
+          "losses": 3
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_trench",
+      "scenario": "clustered",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 12.2,
+        "abyss": 11.8,
+        "frontier": 10.8
+      },
+      "surveys": {
+        "abyss-discovery": 39.8,
+        "abyss": 36.4,
+        "frontier": 42.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 0.4,
+          "ci95_low": -1.4,
+          "ci95_high": 3.2,
+          "wins": 1,
+          "ties": 1,
+          "losses": 3
+        },
+        "frontier": {
+          "mean_difference": 1.4,
+          "ci95_low": 0.2,
+          "ci95_high": 3.2,
+          "wins": 3,
+          "ties": 2,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_trench",
+      "scenario": "ridge",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 15.8,
+        "abyss": 13.0,
+        "frontier": 4.2
+      },
+      "surveys": {
+        "abyss-discovery": 35.2,
+        "abyss": 31.0,
+        "frontier": 42.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 2.8,
+          "ci95_low": 0.4,
+          "ci95_high": 6.4,
+          "wins": 3,
+          "ties": 2,
+          "losses": 0
+        },
+        "frontier": {
+          "mean_difference": 11.6,
+          "ci95_low": 10.8,
+          "ci95_high": 12.4,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_trench",
+      "scenario": "reversed",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 11.6,
+        "abyss": 13.0,
+        "frontier": 12.2
+      },
+      "surveys": {
+        "abyss-discovery": 42.2,
+        "abyss": 33.2,
+        "frontier": 42.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -1.4,
+          "ci95_low": -3.4,
+          "ci95_high": 0.6,
+          "wins": 2,
+          "ties": 0,
+          "losses": 3
+        },
+        "frontier": {
+          "mean_difference": -0.6,
+          "ci95_low": -3.2,
+          "ci95_high": 1.4,
+          "wins": 3,
+          "ties": 0,
+          "losses": 2
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_trench",
+      "scenario": "nonlinear",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 14.0,
+        "abyss": 11.2,
+        "frontier": 11.0
+      },
+      "surveys": {
+        "abyss-discovery": 39.8,
+        "abyss": 37.6,
+        "frontier": 42.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 2.8,
+          "ci95_low": 0.2,
+          "ci95_high": 5.4,
+          "wins": 3,
+          "ties": 1,
+          "losses": 1
+        },
+        "frontier": {
+          "mean_difference": 3.0,
+          "ci95_low": 0.4,
+          "ci95_high": 5.6,
+          "wins": 4,
+          "ties": 0,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_basin",
+      "scenario": "random",
+      "rho": 0.0,
+      "means": {
+        "abyss-discovery": 11.6,
+        "abyss": 11.4,
+        "frontier": 14.0
+      },
+      "surveys": {
+        "abyss-discovery": 37.8,
+        "abyss": 33.0,
+        "frontier": 44.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 0.2,
+          "ci95_low": -1.0,
+          "ci95_high": 1.0,
+          "wins": 3,
+          "ties": 1,
+          "losses": 1
+        },
+        "frontier": {
+          "mean_difference": -2.4,
+          "ci95_low": -4.4,
+          "ci95_high": -0.8,
+          "wins": 0,
+          "ties": 1,
+          "losses": 4
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_basin",
+      "scenario": "clustered",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 10.4,
+        "abyss": 11.4,
+        "frontier": 11.0
+      },
+      "surveys": {
+        "abyss-discovery": 37.2,
+        "abyss": 37.0,
+        "frontier": 44.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -1.0,
+          "ci95_low": -3.6,
+          "ci95_high": 1.4,
+          "wins": 1,
+          "ties": 2,
+          "losses": 2
+        },
+        "frontier": {
+          "mean_difference": -0.6,
+          "ci95_low": -3.4,
+          "ci95_high": 2.6,
+          "wins": 2,
+          "ties": 0,
+          "losses": 3
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_basin",
+      "scenario": "ridge",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 14.8,
+        "abyss": 15.4,
+        "frontier": 7.8
+      },
+      "surveys": {
+        "abyss-discovery": 36.0,
+        "abyss": 33.2,
+        "frontier": 44.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -0.6,
+          "ci95_low": -1.6,
+          "ci95_high": 0.4,
+          "wins": 1,
+          "ties": 2,
+          "losses": 2
+        },
+        "frontier": {
+          "mean_difference": 7.0,
+          "ci95_low": 4.8,
+          "ci95_high": 9.4,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_basin",
+      "scenario": "reversed",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 13.2,
+        "abyss": 15.8,
+        "frontier": 14.0
+      },
+      "surveys": {
+        "abyss-discovery": 40.8,
+        "abyss": 42.6,
+        "frontier": 44.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": -2.6,
+          "ci95_low": -4.4,
+          "ci95_high": -1.2,
+          "wins": 0,
+          "ties": 0,
+          "losses": 5
+        },
+        "frontier": {
+          "mean_difference": -0.8,
+          "ci95_low": -2.0,
+          "ci95_high": 0.2,
+          "wins": 1,
+          "ties": 1,
+          "losses": 3
+        }
+      }
+    },
+    {
+      "terrain": "synthetic_basin",
+      "scenario": "nonlinear",
+      "rho": 1.0,
+      "means": {
+        "abyss-discovery": 13.4,
+        "abyss": 12.4,
+        "frontier": 12.6
+      },
+      "surveys": {
+        "abyss-discovery": 39.4,
+        "abyss": 35.2,
+        "frontier": 44.0
+      },
+      "discovery_vs": {
+        "abyss": {
+          "mean_difference": 1.0,
+          "ci95_low": 0.2,
+          "ci95_high": 2.0,
+          "wins": 3,
+          "ties": 2,
+          "losses": 0
+        },
+        "frontier": {
+          "mean_difference": 0.8,
+          "ci95_low": -1.4,
+          "ci95_high": 3.0,
+          "wins": 3,
+          "ties": 0,
+          "losses": 2
+        }
+      }
+    }
+  ],
+  "simulation": {
+    "height": 30,
+    "width": 30,
+    "cell_size_m": 463.0,
+    "terrain_source": "gebco",
+    "gebco_path": "data/gebco/monterey_canyon_30x30.json",
+    "terrain_seed": null,
+    "home": [
+      0,
+      0
+    ],
+    "scenario": "ridge",
+    "rho": 1.0,
+    "n_categories": 16,
+    "prevalence_max": 0.25,
+    "prevalence_min": 0.01,
+    "signal_strength": 2.0,
+    "cluster_sigma": 2.5,
+    "energy_budget": 150.0,
+    "survey_cost": 2.0,
+    "energy_reserve": 5.0,
+    "terrain_cost_factor": 0.5,
+    "perception_mode": "ideal"
+  },
+  "rows": [
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":35,"energy":144.532941,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":41,"energy":143.313989,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":35,"energy":143.090721,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":42,"energy":144.581275,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":41,"energy":144.769946,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":34,"energy":143.533483,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":42,"energy":144.395188,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":37,"energy":144.296484,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":144.44506,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":29,"energy":143.981177,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"random","rho":0.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":45,"energy":144.43968,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":43,"energy":144.72404,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":40,"energy":143.55708,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":27,"energy":143.993242,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":43,"energy":144.639844,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":26,"energy":144.330673,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":39,"energy":144.49179,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":41,"energy":143.687911,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":43,"energy":144.322754,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":28,"energy":143.819676,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"clustered","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":41,"energy":144.664022,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":33,"energy":144.376548,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":41,"energy":143.930645,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":28,"energy":143.072073,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":41,"energy":144.506445,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":30,"energy":144.830858,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":43,"energy":144.854753,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":31,"energy":144.816589,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":40,"energy":144.115055,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":38,"energy":144.181944,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"ridge","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":45,"energy":142.179339,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":38,"energy":143.757086,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":37,"energy":144.256629,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":40,"energy":144.334186,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":39,"energy":144.791121,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":43,"energy":144.844508,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":42,"energy":143.59262,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":32,"energy":144.66733,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":45,"energy":143.426846,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":35,"energy":144.614276,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"reversed","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":40,"energy":144.882073,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":38,"energy":144.01077,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":40,"energy":144.459373,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":31,"energy":144.941519,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":36,"energy":143.956544,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":27,"energy":144.90585,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":42,"energy":144.297066,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":26,"energy":144.376035,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":42,"energy":143.151025,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":32,"energy":144.764577,"safe":true,"forced":false},
+    {"terrain":"synthetic_seamount","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":40,"energy":143.82665,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":35,"energy":143.930621,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":42,"energy":144.130768,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":38,"energy":143.460387,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":35,"energy":144.490441,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":37,"energy":144.917221,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":25,"energy":143.003964,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":37,"energy":144.068092,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":36,"energy":144.376031,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":35,"energy":143.870532,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":34,"energy":143.973361,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"random","rho":0.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":39,"energy":143.258738,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":39,"energy":143.428436,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":5,"available":16,"perceived":5,"surveys":40,"energy":143.490448,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":36,"energy":144.941848,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":37,"energy":144.797479,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":36,"energy":144.795502,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":41,"energy":144.926823,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":27,"energy":143.662862,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":37,"energy":143.06209,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":37,"energy":144.679103,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"clustered","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":39,"energy":143.818934,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":34,"energy":144.273222,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":37,"energy":143.163491,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":33,"energy":144.343966,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":38,"energy":143.58941,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":37,"energy":144.998438,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":37,"energy":144.415107,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":32,"energy":143.760264,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":38,"energy":144.338184,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":29,"energy":144.71254,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"ridge","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":39,"energy":143.129628,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":38,"energy":144.957727,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":35,"energy":144.599064,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":34,"energy":144.130049,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":37,"energy":143.975794,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":33,"energy":144.36749,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":39,"energy":144.503463,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":33,"energy":143.23656,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":38,"energy":143.078229,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":31,"energy":144.631365,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"reversed","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":42,"energy":144.378324,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":26,"energy":144.043706,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":4,"available":16,"perceived":4,"surveys":38,"energy":144.404192,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":27,"energy":143.974864,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":38,"energy":143.599922,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":34,"energy":143.09579,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":39,"energy":143.168652,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":25,"energy":143.624174,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":5,"available":16,"perceived":5,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":42,"energy":142.647713,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":28,"energy":143.25415,"safe":true,"forced":false},
+    {"terrain":"synthetic_abyssal_hills","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":38,"energy":143.695542,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":46,"energy":142.389763,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":45,"energy":143.901776,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":44,"energy":144.014772,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":37,"energy":143.955463,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":38,"energy":143.589427,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":33,"energy":144.680657,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":34,"energy":144.201921,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":36,"energy":144.864069,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":45,"energy":143.205886,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":44,"energy":143.288689,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"random","rho":0.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":45,"energy":144.491689,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":35,"energy":143.847666,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":35,"energy":144.574548,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":33,"energy":143.844105,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":32,"energy":143.558918,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":29,"energy":144.352382,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":6,"available":16,"perceived":6,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":44,"energy":143.379875,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":42,"energy":144.40453,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":43,"energy":144.424052,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":43,"energy":144.547474,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"clustered","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":35,"energy":144.571322,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":30,"energy":143.27401,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":4,"available":16,"perceived":4,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":35,"energy":144.571322,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":6,"available":16,"perceived":6,"surveys":27,"energy":143.300252,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":6,"available":16,"perceived":6,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":35,"energy":144.571322,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":33,"energy":144.72025,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":5,"available":16,"perceived":5,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":36,"energy":143.781553,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":29,"energy":143.300173,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":3,"available":16,"perceived":3,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":35,"energy":144.828237,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":36,"energy":144.828731,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"ridge","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":3,"available":16,"perceived":3,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":42,"energy":144.339958,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":32,"energy":143.299755,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":46,"energy":142.980382,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":31,"energy":144.882646,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":45,"energy":144.614578,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":29,"energy":143.931135,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":33,"energy":144.133241,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":28,"energy":143.627503,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":45,"energy":143.747389,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":46,"energy":144.677727,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"reversed","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":44,"energy":144.840828,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":43,"energy":144.99372,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":32,"energy":143.235811,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":33,"energy":143.882379,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":32,"energy":144.210716,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":5,"available":16,"perceived":5,"surveys":31,"energy":143.376777,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":46,"energy":144.661528,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":37,"energy":143.733139,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":45,"energy":144.64144,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":44,"energy":144.567586,"safe":true,"forced":false},
+    {"terrain":"synthetic_trench","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":42,"energy":144.636054,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":36,"energy":144.745461,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":33,"energy":144.649294,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":34,"energy":144.07032,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":29,"energy":144.564871,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":38,"energy":143.364721,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":32,"energy":143.613468,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":37,"energy":143.998505,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":38,"energy":144.715886,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":44,"energy":144.822091,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":33,"energy":144.08299,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"random","rho":0.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":38,"energy":143.97529,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":46,"energy":144.104983,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":32,"energy":144.807543,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":28,"energy":143.889335,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":32,"energy":143.018651,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":7,"available":16,"perceived":7,"surveys":28,"energy":143.330983,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":41,"energy":144.787645,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":43,"energy":143.344476,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":43,"energy":143.289279,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":143.425954,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"clustered","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":34,"energy":144.464675,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":33,"energy":144.756296,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":9,"available":16,"perceived":9,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":34,"energy":144.45546,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":32,"energy":143.916006,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":143.59721,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":32,"energy":144.818015,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":8,"available":16,"perceived":8,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":39,"energy":144.489438,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":35,"energy":144.595116,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":6,"available":16,"perceived":6,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":33,"energy":143.222105,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":34,"energy":143.672733,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"ridge","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":5,"available":16,"perceived":5,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":42,"energy":143.679107,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":44,"energy":144.981876,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":40,"energy":144.748813,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":41,"energy":143.688461,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":38,"energy":144.602738,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":42,"energy":143.269207,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":39,"energy":144.473999,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":45,"energy":144.36589,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":45,"energy":143.9434,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":41,"energy":143.656324,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"reversed","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":14,"available":16,"perceived":14,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":40,"energy":144.199626,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":35,"energy":144.593238,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3000,"planner":"frontier","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss-discovery","candidate":{},"distinct":13,"available":16,"perceived":13,"surveys":33,"energy":144.529646,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":30,"energy":143.645569,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3001,"planner":"frontier","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss-discovery","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":37,"energy":143.54546,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"abyss","candidate":{},"distinct":10,"available":16,"perceived":10,"surveys":27,"energy":144.543809,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3002,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"abyss-discovery","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":42,"energy":144.379203,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"abyss","candidate":{},"distinct":12,"available":16,"perceived":12,"surveys":42,"energy":143.66918,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3003,"planner":"frontier","candidate":{},"distinct":11,"available":16,"perceived":11,"surveys":44,"energy":143.86044,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"abyss-discovery","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":45,"energy":144.386847,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"abyss","candidate":{},"distinct":16,"available":16,"perceived":16,"surveys":42,"energy":144.256344,"safe":true,"forced":false},
+    {"terrain":"synthetic_basin","scenario":"nonlinear","rho":1.0,"seed":3004,"planner":"frontier","candidate":{},"distinct":15,"available":16,"perceived":15,"surveys":44,"energy":143.86044,"safe":true,"forced":false}
+  ]
+}

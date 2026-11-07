@@ -14,6 +14,10 @@ export function traceFor(log, stepNumber) {
     after:current.planner_diagnostics?.model?.observations ?? null,
     beforeRichness:previous?.planner_diagnostics?.predicted_richness?.[r]?.[c] ?? null,
     afterRichness:current.planner_diagnostics?.predicted_richness?.[r]?.[c] ?? null,
+    beforeProxy:previous?.planner_diagnostics?.discovery_proxy?.[r]?.[c] ?? null,
+    afterProxy:current.planner_diagnostics?.discovery_proxy?.[r]?.[c] ?? null,
+    model:current.planner_diagnostics?.model,
+    nextCategoryClues:next?.planner_diagnostics?.model?.target_categories,
     nextTarget:next?.planned_target ?? null,
     utility:next?.planned_target==='HOME' ? null : next?.planner_diagnostics?.target_utility ?? null,
     mapsAvailable:!!current.planner_diagnostics?.predicted_richness};
@@ -63,6 +67,7 @@ export function installInspector({app}) {
       <p>${esc(evidence?.credit?.attribution || 'Attribution in source manifest')} · ${esc(evidence?.credit?.image_license || 'See source licence')}</p>
       <details><summary>How this entered the mission</summary><ol><li>Image classified as shown above.</li><li>Observation delivered: ${esc(trace.categories.join(', ') || 'No familiar labels')}; ${trace.unknown} unfamiliar-image flags; richness ${esc(trace.richness)}.</li><li>Habitat update count: ${esc(trace.before ?? 'Not recorded')} → ${esc(trace.after ?? 'No learned-model count recorded')}. Updated belief map ${trace.mapsAvailable?'recorded':'not recorded'}.</li><li>Next selected action: ${esc(decision)}. ${trace.utility?`Selection scores: ${esc(JSON.stringify(trace.utility))}`:''}</li></ol><p>These are chronological records, not proof that this single image caused a route change. Next-target scores come from the following step's decision record.</p></details>
       <p>Predicted richness at this waypoint before/after the update: ${num(trace.beforeRichness)} → ${num(trace.afterRichness)}. Missing prior values are not invented.</p>
+      ${trace.model?.kind ? `<h3>How Discovery used this observation</h3><p>It learns category occurrence and gives frequent sightings less weight. Its rare-habitat score at this waypoint changed from ${num(trace.beforeProxy)} to ${num(trace.afterProxy)}. This is a discovery proxy, not an unseen-species count.</p><p>${trace.model.robust_vision ? 'Isolated labels have reduced influence until supported by another distinct image. Unfamiliar-image influence is capped at 0.25 per survey and deduplicated across the mission; uncertain surveys give weaker local absence evidence. These are conservative rules, not calibrated confidence.' : 'Conservative vision safeguards are disabled in this ablation.'}</p><details><summary>Category clues for the next destination</summary><pre>${esc(JSON.stringify(trace.nextCategoryClues || [], null, 2))}</pre></details>` : ''}
       <details><summary>Technical provenance</summary><pre>${esc(evidence ? JSON.stringify({image_id:evidence.id,artifact:evidence.artifact_id,encoder:evidence.encoder,embedding_cached:evidence.embedding_cached,processing_ms:evidence.processing_ms,timing_scope:evidence.timing_scope},null,2) : 'Unavailable for this older log')}</pre></details>
       <h3>Optional fresh reanalysis</h3><p class="inspector-api">Checking local inference server…</p><button class="inspector-reanalyse" disabled>Reanalyse this image</button><div class="inspector-fresh"></div>`;
     content.querySelectorAll('[data-image]').forEach(b=>b.onclick=()=>open(pane,stepNumber,Number(b.dataset.image)));
