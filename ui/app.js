@@ -452,11 +452,11 @@ function renderFeed(pane, mission) {
       if (!unknown) return;
       const chip = document.createElement("span");
       chip.className = "chip unknown";
-      chip.textContent = `Unfamiliar ${fmt(obs.novelty_scores[index], 2)}`;
+      chip.textContent = `Unfamiliar, novelty ${fmt(obs.novelty_scores[index], 2)}`;
       item.append(chip);
     });
     for (const ref of obs.image_refs) {
-      if (ref.startsWith("stub://")) continue; // the stub model has no real images
+      if (ref.includes("://")) continue; // opaque IDs, not image URLs
       const image = document.createElement("img");
       image.addEventListener("error", () => image.remove());
       image.src = ref;

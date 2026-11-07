@@ -120,6 +120,18 @@ they don't replace your held-out evaluation.
 `abyss/stub_perception.py` has no real images and made-up error rates. Never report its
 numbers as vision results.
 
+`abyss/fathomnet_perception.py` connects the `perception` package to these interfaces.
+After following the perception runbook to fit a model:
+
+```bash
+python -m abyss.run_mission --scenario ridge --seed 0 --perception fathomnet --manifest data/fathomnet/splits.json --artifact data/perception
+```
+
+This sets `n_categories` to the manifest's category count, and only held-out test images
+are used. Familiar categories come first, so withheld categories are the rarest in the
+world. A small pool means each image is seen repeatedly, with the same result each time,
+so use enough test images per category for the final run.
+
 ## Rules the code enforces
 
 - **No leakage.** Planners receive only `PublicMap`, `PublicState` and `Observation`.

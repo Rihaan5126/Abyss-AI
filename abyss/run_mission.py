@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from dataclasses import replace
 from pathlib import Path
 
@@ -27,6 +28,7 @@ from .contract import (
     StepResult,
 )
 from .env import Environment
+from .fathomnet_perception import load_fathomnet
 from .planners import PLANNERS
 from .planners.base import Planner
 from .stub_perception import StubImagePool, StubPerception
@@ -231,7 +233,8 @@ def write_logs(log: dict, reveal: dict, out_dir: str | Path) -> tuple[Path, Path
     out_dir.mkdir(parents=True, exist_ok=True)
     stem = f"{log['world']['id']}-{log['planner']['name']}"
     if log["provenance"]["perception"] != "ideal":
-        stem += f"-{log['provenance']['perception']}"
+        # Model names can hold characters that aren't valid in filenames.
+        stem += "-" + re.sub(r"[^A-Za-z0-9.]+", "_", log["provenance"]["perception"])[:40]
     log_path = out_dir / f"{stem}.json"
     reveal_path = out_dir / f"{stem}.reveal.json"
     log_path.write_text(json.dumps(log, separators=(",", ":")), encoding="utf-8")
@@ -248,10 +251,14 @@ def main() -> None:
     parser.add_argument("--planner", choices=sorted(PLANNERS), default="random")
     parser.add_argument("--out", default="results/missions")
     parser.add_argument(
-        "--perception", choices=("ideal", "stub"), default="ideal",
+        "--perception", choices=("ideal", "stub", "fathomnet"), default="ideal",
         help="stub is a fake model for testing integration, not computer vision",
     )
+    parser.add_argument("--manifest", help="split manifest, for --perception fathomnet")
+    parser.add_argument("--artifact", default="data/perception", help="saved perception model")
     args = parser.parse_args()
+    if args.perception == "fathomnet" and not args.manifest:
+        parser.error("--perception fathomnet needs --manifest")
 
     config = load_config(args.config)
     overrides = {k: v for k, v in (("scenario", args.scenario), ("rho", args.rho)) if v is not None}
@@ -260,6 +267,11 @@ def main() -> None:
         overrides["perception_mode"] = "real"
         image_pool = StubImagePool(config.n_categories)
         perception = StubPerception(image_pool)
+    elif args.perception == "fathomnet":
+        kit = load_fathomnet(args.manifest, args.artifact)
+        perception, image_pool = kit["perception"], kit["image_pool"]
+        overrides["perception_mode"] = "real"
+        overrides["n_categories"] = len(image_pool.categories)
     config = replace(config, **overrides)
 
     log, reveal = run_mission(
