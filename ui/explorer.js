@@ -8,8 +8,11 @@ import { OrbitControls } from "three/addons/OrbitControls.js";
 const SUBDIVISIONS = 4;
 const VERTICAL_EXAGGERATION = 3;
 const ALTITUDE = 0.9;
-const BACKGROUND = 0x06151f;
-const SNOW_COUNT = 1400;
+const BACKGROUND = 0x020b12;
+const SNOW_COUNT = 3200;
+// How much of its colour the deepest seafloor keeps. Lower is closer to true darkness.
+const DEEP_LIGHT = 0.3;
+const CAUSTIC_STRENGTH = 0.09;
 const NO_FINDS_COLOR = 0x7f93a3;
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -96,40 +99,162 @@ function labelSprite(text, color) {
   return sprite;
 }
 
+function noiseTexture(size, repeat, low, high) {
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  const image = ctx.createImageData(size, size);
+  // Layered value noise, wrapped at the edges so the texture tiles without seams.
+  const layers = [8, 16, 32, 64, 128].map((cells, n) => {
+    const values = Float32Array.from({ length: cells * cells }, () => Math.random());
+    return { cells, values, weight: 0.5 ** (n + 1) };
+  });
+  const smooth = (t) => t * t * (3 - 2 * t);
+  for (let y = 0; y < size; y += 1) {
+    for (let x = 0; x < size; x += 1) {
+      let total = 0;
+      for (const { cells, values, weight } of layers) {
+        const fx = (x / size) * cells;
+        const fy = (y / size) * cells;
+        const x0 = Math.floor(fx);
+        const y0 = Math.floor(fy);
+        const x1 = (x0 + 1) % cells;
+        const y1 = (y0 + 1) % cells;
+        const u = smooth(fx - x0);
+        const v = smooth(fy - y0);
+        const top = values[y0 * cells + x0] * (1 - u) + values[y0 * cells + x1] * u;
+        const bottom = values[y1 * cells + x0] * (1 - u) + values[y1 * cells + x1] * u;
+        total += (top * (1 - v) + bottom * v) * weight;
+      }
+      const value = Math.round((low + (high - low) * Math.min(1, total * 1.03)) * 255);
+      const i = (y * size + x) * 4;
+      image.data[i] = value;
+      image.data[i + 1] = value;
+      image.data[i + 2] = value;
+      image.data[i + 3] = 255;
+    }
+  }
+  ctx.putImageData(image, 0, 0);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(repeat, repeat);
+  return texture;
+}
+
+function softDotTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 32;
+  canvas.height = 32;
+  const ctx = canvas.getContext("2d");
+  const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+  gradient.addColorStop(0, "rgba(255,255,255,1)");
+  gradient.addColorStop(0.45, "rgba(255,255,255,.35)");
+  gradient.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 32, 32);
+  return new THREE.CanvasTexture(canvas);
+}
+
+function waterBackground() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 4;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+  const gradient = ctx.createLinearGradient(0, 0, 0, 256);
+  gradient.addColorStop(0, "#0b3346");
+  gradient.addColorStop(0.45, "#051a27");
+  gradient.addColorStop(1, "#010609");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 4, 256);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
+// A torpedo-shaped survey vehicle. Forward is +z. Only the band carries the panel colour.
 function buildVehicle(color, label) {
   const group = new THREE.Group();
-  const hull = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.35, roughness: 0.4 });
-  const dark = new THREE.MeshStandardMaterial({ color: 0x18242e, roughness: 0.6 });
+  const paint = new THREE.MeshStandardMaterial({ color: 0xd8b13a, roughness: 0.38, metalness: 0.15 });
+  const band = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.5, roughness: 0.4 });
+  const metal = new THREE.MeshStandardMaterial({ color: 0x4f5c66, roughness: 0.32, metalness: 0.85 });
+  const dark = new THREE.MeshStandardMaterial({ color: 0x11181e, roughness: 0.55 });
 
-  const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.2, 0.75, 6, 14), hull);
-  body.rotation.x = Math.PI / 2;
-  group.add(body);
-  const fin = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.3, 0.26), dark);
-  fin.position.set(0, 0.17, -0.42);
-  group.add(fin);
-  const planes = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.04, 0.2), dark);
-  planes.position.z = -0.42;
-  group.add(planes);
+  // Radius along the hull, from tail to nose.
+  const profile = [[0, -0.62], [0.05, -0.62], [0.1, -0.54], [0.17, -0.34], [0.19, -0.1], [0.19, 0.3], [0.165, 0.46], [0.1, 0.57], [0, 0.62]];
+  const hull = new THREE.Mesh(
+    new THREE.LatheGeometry(profile.map(([r, h]) => new THREE.Vector2(r, h)), 28),
+    paint,
+  );
+  hull.rotation.x = Math.PI / 2;
+  group.add(hull);
 
+  const stripe = new THREE.Mesh(new THREE.CylinderGeometry(0.193, 0.193, 0.14, 28, 1, true), band);
+  stripe.rotation.x = Math.PI / 2;
+  stripe.position.z = 0.1;
+  group.add(stripe);
+
+  for (const [x, y, width, height] of [[0, 0.17, 0.018, 0.18], [0, -0.17, 0.018, 0.18], [0.17, 0, 0.18, 0.018], [-0.17, 0, 0.18, 0.018]]) {
+    const fin = new THREE.Mesh(new THREE.BoxGeometry(width, height, 0.17), dark);
+    fin.position.set(x, y, -0.43);
+    group.add(fin);
+  }
+
+  const shroud = new THREE.Mesh(new THREE.TorusGeometry(0.135, 0.018, 8, 26), metal);
+  shroud.position.z = -0.63;
+  group.add(shroud);
+  const propeller = new THREE.Group();
+  for (let n = 0; n < 3; n += 1) {
+    const blade = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.12, 0.008), metal);
+    blade.position.y = 0.065;
+    const holder = new THREE.Group();
+    holder.rotation.z = (n * Math.PI * 2) / 3;
+    holder.add(blade);
+    propeller.add(holder);
+  }
+  propeller.position.z = -0.63;
+  group.add(propeller);
+  group.userData.propeller = propeller;
+
+  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.2, 6), dark);
+  mast.position.set(0, 0.28, -0.05);
+  group.add(mast);
+  const camera = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.05, 0.13), dark);
+  camera.position.set(0, -0.2, 0.28);
+  group.add(camera);
+
+  for (const x of [-0.07, 0.07]) {
+    const lamp = new THREE.Mesh(
+      new THREE.SphereGeometry(0.022, 10, 8),
+      new THREE.MeshBasicMaterial({ color: 0xfff6dc }),
+    );
+    lamp.position.set(x, -0.2, 0.35);
+    group.add(lamp);
+  }
+
+  // A seafloor spotlight, plus a faint visible beam where light scatters in the water.
+  const spot = new THREE.SpotLight(0xfff0d0, 130, 11, 0.8, 0.75, 1.5);
+  spot.position.set(0, -0.2, 0.3);
+  spot.target.position.set(0, -2.2, 1.35);
+  group.add(spot, spot.target);
   const beam = new THREE.Mesh(
-    new THREE.ConeGeometry(0.72, ALTITUDE / 1.5, 20, 1, true),
+    new THREE.ConeGeometry(0.72, 1.45, 24, 1, true),
     new THREE.MeshBasicMaterial({
-      color: 0xdff4ff,
+      color: 0xfff0d0,
       transparent: true,
-      opacity: 0.14,
+      opacity: 0.055,
       side: THREE.DoubleSide,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     }),
   );
-  beam.position.y = -ALTITUDE / 3;
+  beam.position.set(0, -0.82, 0.62);
+  beam.rotation.x = -0.46;
   group.add(beam);
 
-  const glow = new THREE.PointLight(0xdff4ff, 6, 5, 2);
-  glow.position.y = -0.3;
-  group.add(glow);
   group.add(labelSprite(label, `#${new THREE.Color(color).getHexString()}`));
-  group.scale.setScalar(1.5);
+  group.scale.setScalar(1.25);
   return group;
 }
 
@@ -143,9 +268,16 @@ export function createExplorer(api) {
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(BACKGROUND);
-  scene.fog = new THREE.FogExp2(BACKGROUND, 0.011);
+  scene.background = waterBackground();
+  scene.fog = new THREE.FogExp2(0x03151f, 0.016);
+  const causticTime = { value: 0 };
+  const causticStrength = { value: CAUSTIC_STRENGTH };
+  const sedimentColour = noiseTexture(512, 7, 0.55, 1);
+  sedimentColour.colorSpace = THREE.SRGBColorSpace;
+  const sedimentBump = noiseTexture(512, 14, 0, 1);
   const camera = new THREE.PerspectiveCamera(42, 2, 0.1, 400);
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
@@ -153,9 +285,10 @@ export function createExplorer(api) {
   controls.minDistance = 5;
   controls.maxDistance = 140;
 
-  scene.add(new THREE.HemisphereLight(0xcfeaff, 0x1b3a4b, 2.2));
-  const sun = new THREE.DirectionalLight(0xffffff, 2.2);
-  sun.position.set(-20, 30, -15);
+  // Water absorbs red first, so surface light reaches the seafloor blue-green.
+  scene.add(new THREE.HemisphereLight(0x9fd8e8, 0x0b1c26, 1.25));
+  const sun = new THREE.DirectionalLight(0xbfeaf0, 1.5);
+  sun.position.set(-14, 34, -10);
   scene.add(sun);
 
   const world = new THREE.Group();
@@ -208,12 +341,15 @@ export function createExplorer(api) {
     const { fine, yOf, centreC, centreR } = terrain;
     const count = fine.height * fine.width;
     const positions = new Float32Array(count * 3);
+    const uvs = new Float32Array(count * 2);
     for (let i = 0; i < fine.height; i += 1) {
       for (let j = 0; j < fine.width; j += 1) {
-        const k = (i * fine.width + j) * 3;
-        positions[k] = j / SUBDIVISIONS - centreC;
-        positions[k + 1] = yOf(fine.values[i * fine.width + j]);
-        positions[k + 2] = i / SUBDIVISIONS - centreR;
+        const n = i * fine.width + j;
+        positions[n * 3] = j / SUBDIVISIONS - centreC;
+        positions[n * 3 + 1] = yOf(fine.values[n]);
+        positions[n * 3 + 2] = i / SUBDIVISIONS - centreR;
+        uvs[n * 2] = j / (fine.width - 1);
+        uvs[n * 2 + 1] = i / (fine.height - 1);
       }
     }
     const indices = [];
@@ -229,9 +365,36 @@ export function createExplorer(api) {
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute("color", new THREE.BufferAttribute(new Float32Array(count * 3), 3));
+    geometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
     geometry.setIndex(indices);
     geometry.computeVertexNormals();
-    terrain.mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95, metalness: 0 }));
+    // The sediment texture and caustics change only the surface's look, never its shape.
+    const seabed = new THREE.MeshStandardMaterial({
+      vertexColors: true,
+      map: sedimentColour,
+      bumpMap: sedimentBump,
+      bumpScale: 1.6,
+      roughness: 1,
+      metalness: 0,
+    });
+    seabed.onBeforeCompile = (shader) => {
+      shader.uniforms.causticTime = causticTime;
+      shader.uniforms.causticStrength = causticStrength;
+      shader.vertexShader = shader.vertexShader
+        .replace("#include <common>", "#include <common>\nvarying vec3 vSeabedPosition;")
+        .replace("#include <begin_vertex>", "#include <begin_vertex>\nvSeabedPosition = (modelMatrix * vec4(position, 1.0)).xyz;");
+      shader.fragmentShader = shader.fragmentShader
+        .replace("#include <common>", "#include <common>\nvarying vec3 vSeabedPosition;\nuniform float causticTime;\nuniform float causticStrength;")
+        .replace("#include <opaque_fragment>", `
+          vec2 causticPoint = vSeabedPosition.xz * 2.3;
+          causticPoint += 0.9 * vec2(sin(vSeabedPosition.z * 0.73 + causticTime * 0.4), cos(vSeabedPosition.x * 0.61 - causticTime * 0.3));
+          float causticWave = sin(causticPoint.x * 1.17 + causticTime + 1.7 * sin(causticPoint.y * 0.83 - causticTime * 0.6))
+            + sin(causticPoint.y * 1.31 - causticTime * 0.7 + 1.5 * sin(causticPoint.x * 0.71 + causticTime * 0.5));
+          float shallowness = smoothstep(1.5, 5.4, vSeabedPosition.y);
+          outgoingLight += vec3(0.4, 0.62, 0.58) * pow(1.0 - min(1.0, abs(causticWave)), 9.0) * causticStrength * shallowness;
+          #include <opaque_fragment>`);
+    };
+    terrain.mesh = new THREE.Mesh(geometry, seabed);
     world.add(terrain.mesh);
 
     // Close the sides of the block, so its edges read as a cut-out of the seafloor.
@@ -254,7 +417,8 @@ export function createExplorer(api) {
     edge(down.map((i) => [i, fine.width - 1]));
     const skirtGeometry = new THREE.BufferGeometry();
     skirtGeometry.setAttribute("position", new THREE.BufferAttribute(new Float32Array(skirt), 3));
-    world.add(new THREE.Mesh(skirtGeometry, new THREE.MeshBasicMaterial({ color: 0x0a2230, side: THREE.DoubleSide })));
+    // Near the background colour, so the cut edges fade into dark water.
+    world.add(new THREE.Mesh(skirtGeometry, new THREE.MeshBasicMaterial({ color: 0x041018, side: THREE.DoubleSide })));
 
     const lines = [];
     for (const [a, b] of pane.isobaths) lines.push(toWorld(a[0], a[1], 0.03), toWorld(b[0], b[1], 0.03));
@@ -280,7 +444,9 @@ export function createExplorer(api) {
     }
     for (let n = 0; n < values.length; n += 1) {
       const [r, g, b] = ramp((values[n] - low) / span);
-      colour.setRGB(r / 255, g / 255, b / 255, THREE.SRGBColorSpace);
+      // Plain terrain darkens with depth. Data layers stay at full strength to stay readable.
+      const light = grid ? 1 : 1 - (1 - DEEP_LIGHT) * ((fine.values[n] - lo) / (hi - lo || 1));
+      colour.setRGB((r * light) / 255, (g * light) / 255, (b * light) / 255, THREE.SRGBColorSpace);
       colours.setXYZ(n, colour.r, colour.g, colour.b);
     }
     colours.needsUpdate = true;
@@ -292,6 +458,7 @@ export function createExplorer(api) {
     const grid = overlayGrid(pane, pane.mission);
     if (colourKey === (grid || "terrain")) return;
     colourKey = grid || "terrain";
+    causticStrength.value = grid ? 0 : CAUSTIC_STRENGTH; // nothing may distort a data layer
     recolour(grid, !grid ? seafloorRamp : app.layer === "hidden" ? HIDDEN_RAMP : BELIEF_RAMP);
     if (grid) {
       const [low, high] = gridExtent(grid);
@@ -323,7 +490,7 @@ export function createExplorer(api) {
   function tube(cells, material) {
     const points = densify(cells);
     if (points.length < 2) return null;
-    return new THREE.Mesh(new THREE.TubeGeometry(new Polyline(points), Math.min(points.length * 2, 1500), 0.07, 5, false), material);
+    return new THREE.Mesh(new THREE.TubeGeometry(new Polyline(points), Math.min(points.length * 2, 1500), 0.024, 5, false), material);
   }
 
   function buildView(pane, index) {
@@ -333,7 +500,7 @@ export function createExplorer(api) {
       index,
       color,
       vehicle: buildVehicle(color, pane.entry.label),
-      trailMaterial: new THREE.MeshBasicMaterial({ color }),
+      trailMaterial: new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.72 }),
       completed: new THREE.Group(),
       markers: new THREE.Group(),
       current: null,
@@ -368,21 +535,27 @@ export function createExplorer(api) {
     const path = tube(cells, view.trailMaterial.clone());
     if (path) view.completed.add(path);
 
-    const ring = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    const found = new THREE.MeshStandardMaterial({ color: view.color, emissive: view.color, emissiveIntensity: 0.55 });
+    // Survey sites are small seabed beacons, with a brighter head where organisms were found.
+    const ring = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 });
+    const found = new THREE.MeshBasicMaterial({ color: view.color });
     const empty = new THREE.MeshStandardMaterial({ color: NO_FINDS_COLOR, roughness: 0.8 });
+    const post = new THREE.MeshStandardMaterial({ color: 0x2c3841, roughness: 0.7 });
     for (const { step } of mission.completed) {
       if (!step.observation) continue;
       const [r, c] = step.observation.waypoint;
       const richness = step.observation.richness;
-      const radius = richness ? 0.13 + Math.sqrt(richness) * 0.09 : 0.09;
-      const marker = new THREE.Mesh(new THREE.SphereGeometry(radius, 14, 10), richness ? found.clone() : empty.clone());
-      marker.position.copy(toWorld(r, c, radius + 0.06));
-      view.markers.add(marker);
+      const radius = richness ? 0.05 + Math.sqrt(richness) * 0.04 : 0.04;
+      const height = 0.2 + radius;
+      const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.02, height, 6), post.clone());
+      stem.position.copy(toWorld(r, c, height / 2));
+      view.markers.add(stem);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(radius, 14, 10), richness ? found.clone() : empty.clone());
+      head.position.copy(toWorld(r, c, height + radius * 0.5));
+      view.markers.add(head);
       if (step.new_discoveries.length) {
-        const halo = new THREE.Mesh(new THREE.TorusGeometry(radius + 0.16, 0.022, 8, 28), ring.clone());
+        const halo = new THREE.Mesh(new THREE.TorusGeometry(radius + 0.06, 0.01, 8, 32), ring.clone());
         halo.rotation.x = Math.PI / 2;
-        halo.position.copy(marker.position);
+        halo.position.copy(head.position);
         view.markers.add(halo);
       }
     }
@@ -474,17 +647,18 @@ export function createExplorer(api) {
   function buildSnow() {
     const positions = new Float32Array(SNOW_COUNT * 3);
     for (let n = 0; n < SNOW_COUNT; n += 1) {
-      positions[n * 3] = (Math.random() - 0.5) * 44;
-      positions[n * 3 + 1] = Math.random() * 26 - 10;
-      positions[n * 3 + 2] = (Math.random() - 0.5) * 44;
+      positions[n * 3] = (Math.random() - 0.5) * 60;
+      positions[n * 3 + 1] = Math.random() * 34 - 12;
+      positions[n * 3 + 2] = (Math.random() - 0.5) * 60;
     }
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     snow = new THREE.Points(geometry, new THREE.PointsMaterial({
-      color: 0xd5ecf7,
-      size: 0.055,
+      color: 0xcfe6ee,
+      size: 0.11,
+      map: softDotTexture(),
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.42,
       depthWrite: false,
     }));
     scene.add(snow);
@@ -507,7 +681,10 @@ export function createExplorer(api) {
       view.heading += turn * Math.min(1, delta * 8);
     }
     vehicle.position.copy(position);
-    if (!reducedMotion) vehicle.position.y += Math.sin(time * 1.4 + view.index) * 0.035;
+    if (!reducedMotion) {
+      vehicle.position.y += Math.sin(time * 1.1 + view.index) * 0.025;
+      if (mission.phase === "travel") vehicle.userData.propeller.rotation.z += delta * 24;
+    }
     vehicle.rotation.y = view.heading;
 
     if (view.current) {
@@ -543,7 +720,7 @@ export function createExplorer(api) {
     const view = views[followIndex];
     if (!view) return;
     const { vehicle, heading } = { vehicle: view.vehicle, heading: view.heading };
-    const behind = new THREE.Vector3(-Math.sin(heading) * 9, 4.5, -Math.cos(heading) * 9);
+    const behind = new THREE.Vector3(-Math.sin(heading) * 5.5, 2.3, -Math.cos(heading) * 5.5);
     const wanted = vehicle.position.clone().add(behind);
     const row = wanted.z + terrain.centreR;
     const col = wanted.x + terrain.centreC;
@@ -573,11 +750,13 @@ export function createExplorer(api) {
       else controls.update();
     }
     if (snow && !reducedMotion) {
+      causticTime.value = time * 0.55;
       const positions = snow.geometry.getAttribute("position");
       for (let n = 0; n < SNOW_COUNT; n += 1) {
-        let y = positions.getY(n) - delta * 0.12;
-        if (y < -10) y = 16;
+        let y = positions.getY(n) - delta * 0.09;
+        if (y < -12) y = 22;
         positions.setY(n, y);
+        positions.setX(n, positions.getX(n) + Math.sin(time * 0.3 + n) * delta * 0.03);
       }
       positions.needsUpdate = true;
     }
