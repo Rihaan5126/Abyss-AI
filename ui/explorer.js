@@ -234,7 +234,7 @@ function buildVehicle(color, label) {
   }
 
   // A seafloor spotlight, plus a faint visible beam where light scatters in the water.
-  const spot = new THREE.SpotLight(0xfff0d0, 130, 11, 0.8, 0.75, 1.5);
+  const spot = new THREE.SpotLight(0xffe8c4, 64, 11, 0.75, 0.85, 1.5);
   spot.position.set(0, -0.2, 0.3);
   spot.target.position.set(0, -2.2, 1.35);
   group.add(spot, spot.target);
