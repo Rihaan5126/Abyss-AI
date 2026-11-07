@@ -5,6 +5,7 @@ from .base import Planner
 from .frontier import FrontierPlanner
 from .heuristic import TerrainHeuristicPlanner
 from .lawnmower import LawnmowerPlanner
+from .novelty import NoveltyPlanner
 from .random import RandomPlanner
 
 PLANNERS: dict[str, type[Planner]] = {
@@ -14,6 +15,7 @@ PLANNERS: dict[str, type[Planner]] = {
         AdaptivePlanner,
         NoLearnPlanner,
         NoInfoPlanner,
+        NoveltyPlanner,
         FrontierPlanner,
         TerrainHeuristicPlanner,
         LawnmowerPlanner,
