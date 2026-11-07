@@ -1,5 +1,8 @@
 """The experimental planner learns the discovery rate and leaves the official planner alone."""
 
+import json
+from pathlib import Path
+
 import pytest
 from helpers import ALL_SCENARIOS
 
@@ -7,7 +10,7 @@ from abyss.config import SimConfig
 from abyss.contract import Observation
 from abyss.env import Environment
 from abyss.evaluation.benchmark import DEFAULT_PLANNERS
-from abyss.evaluation.novelty_experiment import DEVELOPMENT_SEEDS, FRESH_SEEDS
+from abyss.evaluation.novelty_experiment import DEVELOPMENT_SEEDS, FRESH_SEEDS, render
 from abyss.planners import PLANNERS
 from abyss.planners.adaptive import DEFAULTS
 from abyss.planners.novelty import NoveltyPlanner
@@ -80,6 +83,13 @@ def test_official_planner_set_and_weights_are_untouched():
     assert "abyss-novelty" not in DEFAULT_PLANNERS
     assert "abyss-novelty" in PLANNERS
     assert (DEFAULTS["beta"], DEFAULTS["gamma"]) == (1.0, 0.5)
+
+
+def test_document_matches_the_recorded_experiment():
+    data = json.loads(Path("docs/novelty-experiment.json").read_text(encoding="utf-8"))
+    assert Path("docs/novelty-experiment.md").read_text(encoding="utf-8") == render(data)
+    assert data["safety"]["missions"] == data["safety"]["safe_returns"]
+    assert data["seeds"] == list(FRESH_SEEDS)
 
 
 def test_tuning_and_final_seeds_are_separate_from_each_other_and_the_official_run():

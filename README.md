@@ -66,6 +66,8 @@ Press **Guided demo** for the five-stage walkthrough. The benchmark section appe
 ## Results
 
 See [docs/results.md](docs/results.md) for findings, limitations and full tables.
+[docs/novelty-experiment.md](docs/novelty-experiment.md) records a separate experiment on
+targeting new categories, which did not improve on ABYSS.
 
 ```bash
 python -m abyss.evaluation.full_run
