@@ -1495,6 +1495,25 @@ function exitTour() {
 }
 
 function bindControls() {
+  const downloadReport = async () => {
+    // The range control rounds to its step, while logged energy has more decimals.
+    if (app.energy + Number($("scrub").step || 0.1) < app.maxEnergy) {
+      showNotice("Finish the expedition, or move the timeline to the end, before generating its findings report.");
+      return;
+    }
+    try {
+      await fetchReveals();
+      const { buildReport } = await import("./report.js");
+      const url = URL.createObjectURL(new Blob([buildReport(app.panes)], {type:"text/html;charset=utf-8"}));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "abyss-expedition-findings.html";
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch (error) { showNotice(`Could not generate report: ${error.message}`, true); }
+  };
+  $("summary-report").addEventListener("click", downloadReport);
+  $("mission-report").addEventListener("click", downloadReport);
   $("world").addEventListener("change", (event) => selectWorld(event.target.value));
   $("play").addEventListener("click", () => setPlaying(!app.playing));
   $("prev").addEventListener("click", () => jumpEvent(-1));
@@ -1573,7 +1592,13 @@ async function loadExplorer() {
 
 async function init() {
   bindControls();
-  const manifestPath = new URLSearchParams(location.search).get("missions") || "logs/index.json";
+  let manifestPath = new URLSearchParams(location.search).get("missions");
+  if (!manifestPath) {
+    try {
+      await getJson("vision-logs/index.json");
+      manifestPath = "vision-logs/index.json";
+    } catch (_) { manifestPath = "logs/index.json"; }
+  }
   if (!/^[a-zA-Z0-9_/-]+\/index\.json$/.test(manifestPath) || manifestPath.includes("..")) {
     throw new Error("Choose a local mission index inside the UI directory.");
   }

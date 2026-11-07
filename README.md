@@ -31,6 +31,22 @@ This writes a mission log and a `.reveal.json` file to `results/missions/`.
 
 ## Replay UI
 
+When local `ui/vision-logs/index.json` exists, opening the viewer automatically
+loads that real-image replay. Otherwise it uses the bundled ideal-perception
+examples, which contain no animal photos. An explicit `?missions=logs/index.json`
+still selects the ideal examples. The side panels show the latest photographed
+encounter with per-image predicted labels or unfamiliarity flags; an empty later
+survey does not erase the previous photos. These are recorded image predictions,
+not live detections in the rendered ocean.
+
+After playback finishes, press **Findings report** in the bottom controls or
+**Download findings report** on the end-of-dive summary. This explicitly loads
+the evaluator's answer sheet and downloads `abyss-expedition-findings.html`.
+Open the file and use **Print / save as PDF** for a plain-English expedition
+sheet with actual and perceived category counts, surveys, energy, unfamiliar
+images, safe return, experiment identifiers and limitations. It contains no
+animal image crops. Reports are unavailable before the timeline reaches the end.
+
 For the integrated **3D view with real image perception**, follow
 [Watch the full system in 3D](docs/vision-3d.md). It generates a local paired
 replay using your existing expanded image dataset and model, with actual photos
