@@ -1,0 +1,21 @@
+name: Perception tests
+
+on:
+  push:
+    paths: ['perception/**', 'tests/test_perception*.py', 'pyproject.toml', '.github/workflows/perception.yml']
+  pull_request:
+    paths: ['perception/**', 'tests/test_perception*.py', 'pyproject.toml', '.github/workflows/perception.yml']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '${{ matrix.python-version }}'
+      - run: python -m pip install -e '.[test]'
+      - run: python -m pytest -q tests/test_perception.py tests/test_perception_download.py

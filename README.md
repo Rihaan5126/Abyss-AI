@@ -52,8 +52,8 @@ different planner seed.
 | Replay UI | Rihaan | Working; belief layers tested only with temporary data until the adaptive planner logs them |
 | Random baseline | Shared | Working |
 | Learner, adaptive planner, other baselines, benchmark | Cam | Not started |
-| Real perception flow in the simulator | Rihaan | Working, tested with a fake model only |
-| Perception pipeline | Ammar | Not started |
+| Real perception flow in the simulator | Rihaan | Working; tested through the pipeline's real classes with a fake encoder, not yet with DINOv2 |
+| Perception pipeline | Ammar | Working; only smoke-test results so far |
 
 ## Adding a planner (Cam)
 
@@ -171,5 +171,27 @@ removes all signal.
 - All seeds share this one crop, so repeated seeds do not show generalisation to other
   regions. Set `terrain_source: synthetic` in `config.yaml` to vary terrain by seed.
 
-**Planned:** [FathomNet](https://database.fathomnet.org/) imagery and, as a stretch goal,
-[OBIS](https://obis.org/) occurrence records. Neither is integrated yet.
+**Imagery:** the perception pipeline uses [FathomNet](https://database.fathomnet.org/)
+images. Check each image's licence before showing or redistributing it.
+
+**Stretch goal, not integrated:** [OBIS](https://obis.org/) occurrence records.
+
+## Ammar's perception pipeline
+
+The `perception/` package implements FathomNet organism cropping, frozen
+DINOv2-small embeddings, nearest-neighbour familiar-category recognition,
+validation-calibrated reference-unfamiliarity detection, and held-out evaluation.
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[test]'
+# CPU-only PyTorch avoids downloading CUDA libraries on a laptop/server:
+python -m pip install 'torch>=2.4,<3' --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -e '.[vision]'
+python -m perception --help
+python -m pytest -q
+```
+
+See [the perception runbook](docs/perception.md) for data preparation, offline
+inference, evaluation, image licensing and the simulator integration interface.
