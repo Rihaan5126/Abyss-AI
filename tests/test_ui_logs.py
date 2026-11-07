@@ -45,3 +45,19 @@ def test_committed_logs_are_valid_and_public():
         validate_mission_log(json.loads(text))
         assert "expected_richness_map" not in text
         assert (UI_ROOT / entry["reveal"]).exists()
+
+
+def test_extra_oceans_move_the_organisms(tmp_path):
+    """Each extra ocean is a new seed: same terrain, organisms in different places."""
+    manifest = build("config.yaml", tmp_path, seed=0, oceans=3)
+    ridge = [e for e in manifest["entries"] if e["scenario"] == "ridge"]
+    assert sorted({e["seed"] for e in ridge}) == [0, 1, 2]
+    for seed in (1, 2):
+        planners = {e["planner"] for e in ridge if e["seed"] == seed}
+        assert {"abyss", "frontier"} <= planners
+    maps = []
+    for seed in (0, 1):
+        entry = next(e for e in ridge if e["seed"] == seed and e["planner"] == "abyss")
+        reveal = json.loads((tmp_path / Path(entry["reveal"]).name).read_text())
+        maps.append(reveal["encounter_richness_map"])
+    assert maps[0] != maps[1]

@@ -841,6 +841,22 @@ function worlds() {
   return [...seen.values()];
 }
 
+// Another hidden ocean of the same world type, chosen at random. Seeds were fixed when
+// the logs were built and never picked by outcome; both robots always share the ocean.
+function newOcean() {
+  const current = worlds().find((w) => w.world_id === app.worldId);
+  if (!current) return;
+  const others = worlds().filter((w) => w.scenario === current.scenario && w.rho === current.rho && w.world_id !== app.worldId);
+  if (!others.length) {
+    showNotice("Only one ocean was built for this world type. Run: python -m scripts.build_ui_logs --oceans 8");
+    return;
+  }
+  const next = others[Math.floor(Math.random() * others.length)];
+  $("world").value = next.world_id;
+  selectWorld(next.world_id);
+  say(`A new hidden ocean: same seafloor, but the creatures now live in different places (seed ${next.seed}).`);
+}
+
 function createPane(index) {
   const node = $("pane-template").content.firstElementChild.cloneNode(true);
   node.style.setProperty("--pane-color", PANE_COLORS[index]);
@@ -1548,6 +1564,7 @@ function bindControls() {
   $("summary-report").addEventListener("click", downloadReport);
   $("mission-report").addEventListener("click", downloadReport);
   $("world").addEventListener("change", (event) => selectWorld(event.target.value));
+  $("new-ocean").addEventListener("click", newOcean);
   $("play").addEventListener("click", () => setPlaying(!app.playing));
   $("prev").addEventListener("click", () => jumpEvent(-1));
   $("next").addEventListener("click", () => jumpEvent(1));
@@ -1586,6 +1603,7 @@ function bindControls() {
     if (event.code === "Space") { event.preventDefault(); setPlaying(!app.playing); }
     if (event.key === "ArrowRight") jumpEvent(1);
     if (event.key === "ArrowLeft") jumpEvent(-1);
+    if (event.key === "n" || event.key === "N") newOcean();
   });
   new ResizeObserver(() => { if (app.panes.length) render(); }).observe($("panes"));
 }
