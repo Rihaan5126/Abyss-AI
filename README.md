@@ -53,14 +53,17 @@ The app opens in a **3D explorer** view of the logged missions, built with a loc
 [Three.js](https://threejs.org/) r160 in `ui/vendor/three` (MIT licence), so it runs without
 internet. It's a visualisation: robots don't see this scene, and the vision model works on
 real photographs. Terrain is smoothed between grid cells, and its height is exaggerated 3×.
-If WebGL isn't available, the app falls back to the **2D maps** view.
+Its descent animation is illustrative, because missions start at the home station. Fonts are
+stored in `ui/vendor/fonts` under their open licences. If WebGL isn't available, the app falls
+back to the **Charts** view.
 
 The **Habitats** layer shows five classes clustered from public depth, slope and bathymetric
 position, and the feed flags a robot's first survey of each class. This is display-only:
 planners never receive it, and all routes and results are unchanged. These are terrain-based
 classes, not biomes, because we have no temperature, oxygen or substrate data at this scale.
 
-Press **Guided demo** for the five-stage walkthrough. The benchmark section appears once
+Press **Begin dive** for the full sequence: descent, exploration with captions, then a mission
+summary. **Step through** moves through the same story one stage at a time. The benchmark section appears once
 `ui/logs/benchmark.json` exists.
 
 ## Results

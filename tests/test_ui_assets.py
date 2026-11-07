@@ -17,6 +17,20 @@ def test_three_js_is_served_locally():
     assert (UI / "vendor/three/LICENSE").exists()
 
 
+def test_fonts_are_served_locally_with_licences():
+    css = (UI / "style.css").read_text(encoding="utf-8")
+    fonts = re.findall(r"url\((vendor/fonts/[^)]+)\)", css)
+    assert len(fonts) >= 5
+    assert all((UI / font).exists() for font in fonts)
+    assert (UI / "vendor/fonts/LICENSE-instrument-serif").exists()
+    assert (UI / "vendor/fonts/LICENSE-ibm-plex").exists()
+
+
+def test_descent_is_labelled_illustrative():
+    assert "descent is illustrative" in (UI / "index.html").read_text(encoding="utf-8")
+    assert "descent is illustrative" in (UI / "app.js").read_text(encoding="utf-8")
+
+
 def test_page_loads_nothing_from_other_hosts():
     for name in ("index.html", "app.js", "explorer.js", "style.css"):
         text = (UI / name).read_text(encoding="utf-8")

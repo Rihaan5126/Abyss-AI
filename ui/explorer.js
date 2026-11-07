@@ -17,7 +17,16 @@ const NO_FINDS_COLOR = 0x7f93a3;
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // Sandy shelf down to blue canyon floor. The deep end stays brighter than the background.
-const SEAFLOOR_STOPS = [[199, 186, 143], [128, 158, 140], [70, 128, 148], [52, 92, 150], [46, 62, 128]];
+const SEAFLOOR_STOPS = [[176, 206, 208], [112, 172, 186], [62, 126, 170], [50, 84, 166], [46, 48, 134]];
+const DIVE_SECONDS = 9;
+const DIVE_DESCENT_SHARE = 0.72; // the rest of the dive pulls the camera back to the overview
+const GAUGE_MAX_M = 1800;
+const SPOTLIGHT_ON = 64;
+const SPOTLIGHT_PARKED = 7;
+const BEAM_ON = 0.055;
+const BEAM_PARKED = 0.012;
+
+const ease = (t) => t * t * (3 - 2 * t);
 
 function seafloorRamp(t) {
   const x = Math.min(1, Math.max(0, t)) * (SEAFLOOR_STOPS.length - 1);
@@ -174,9 +183,9 @@ function waterBackground() {
 }
 
 // A torpedo-shaped survey vehicle. Forward is +z. Only the band carries the panel colour.
-function buildVehicle(color, label) {
+function buildVehicle(color, label, index) {
   const group = new THREE.Group();
-  const paint = new THREE.MeshStandardMaterial({ color: 0xd8b13a, roughness: 0.38, metalness: 0.15 });
+  const paint = new THREE.MeshStandardMaterial({ color: 0xdfe8ea, roughness: 0.34, metalness: 0.25 });
   const band = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.5, roughness: 0.4 });
   const metal = new THREE.MeshStandardMaterial({ color: 0x4f5c66, roughness: 0.32, metalness: 0.85 });
   const dark = new THREE.MeshStandardMaterial({ color: 0x11181e, roughness: 0.55 });
@@ -234,7 +243,7 @@ function buildVehicle(color, label) {
   }
 
   // A seafloor spotlight, plus a faint visible beam where light scatters in the water.
-  const spot = new THREE.SpotLight(0xffe8c4, 64, 11, 0.75, 0.85, 1.5);
+  const spot = new THREE.SpotLight(0xffe8c4, SPOTLIGHT_ON, 11, 0.75, 0.85, 1.5);
   spot.position.set(0, -0.2, 0.3);
   spot.target.position.set(0, -2.2, 1.35);
   group.add(spot, spot.target);
@@ -243,7 +252,7 @@ function buildVehicle(color, label) {
     new THREE.MeshBasicMaterial({
       color: 0xfff0d0,
       transparent: true,
-      opacity: 0.055,
+      opacity: BEAM_ON,
       side: THREE.DoubleSide,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
@@ -252,8 +261,12 @@ function buildVehicle(color, label) {
   beam.position.set(0, -0.82, 0.62);
   beam.rotation.x = -0.46;
   group.add(beam);
+  group.userData.spot = spot;
+  group.userData.beam = beam;
 
-  group.add(labelSprite(label, `#${new THREE.Color(color).getHexString()}`));
+  const tag = labelSprite(label, `#${new THREE.Color(color).getHexString()}`);
+  tag.position.y += index * 0.5; // so labels don't overlap while the robots are side by side
+  group.add(tag);
   group.scale.setScalar(1.25);
   return group;
 }
@@ -266,7 +279,7 @@ export function createExplorer(api) {
   const stage = document.getElementById("stage");
   const canvas = document.getElementById("stage-canvas");
   const legend = document.getElementById("stage-legend");
-  const hud = document.getElementById("stage-hud");
+  const gauge = document.getElementById("gauge");
   const cameraSelect = document.getElementById("stage-camera");
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -274,8 +287,13 @@ export function createExplorer(api) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
   const scene = new THREE.Scene();
-  scene.background = waterBackground();
+  const deepBackground = waterBackground();
+  scene.background = deepBackground;
   scene.fog = new THREE.FogExp2(0x03151f, 0.016);
+  const shallowWater = new THREE.Color(0x2a93ad);
+  const deepWater = new THREE.Color(0x03151f);
+  const skyWater = new THREE.Color(0x3fb2c6);
+  const trenchWater = new THREE.Color(0x020b12);
   const causticTime = { value: 0 };
   const causticStrength = { value: CAUSTIC_STRENGTH };
   const sedimentColour = noiseTexture(512, 7, 0.55, 1);
@@ -289,13 +307,55 @@ export function createExplorer(api) {
   controls.maxDistance = 140;
 
   // Water absorbs red first, so surface light reaches the seafloor blue-green.
-  scene.add(new THREE.HemisphereLight(0x9fd8e8, 0x0b1c26, 1.25));
+  const ambient = new THREE.HemisphereLight(0x9fd8e8, 0x0b1c26, 1.25);
+  scene.add(ambient);
   const sun = new THREE.DirectionalLight(0xbfeaf0, 1.5);
   sun.position.set(-14, 34, -10);
   scene.add(sun);
 
   const world = new THREE.Group();
   scene.add(world);
+
+  // The sea surface and its light shafts appear only during the illustrative descent.
+  const surfaceTexture = noiseTexture(256, 26, 0.15, 1);
+  const surface = new THREE.Mesh(
+    new THREE.PlaneGeometry(320, 320),
+    new THREE.MeshBasicMaterial({
+      color: 0xbff4f2,
+      map: surfaceTexture,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      fog: false,
+      blending: THREE.AdditiveBlending,
+    }),
+  );
+  surface.rotation.x = -Math.PI / 2;
+  surface.visible = false;
+  scene.add(surface);
+  const shafts = new THREE.Group();
+  const shaftMaterial = new THREE.MeshBasicMaterial({
+    color: 0xd6fbf6,
+    transparent: true,
+    opacity: 0,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+    fog: false,
+    blending: THREE.AdditiveBlending,
+  });
+  [[-3.5, -2, 0.22], [1.5, -5, -0.16], [5, 1, 0.12], [-1, 4.5, -0.26], [7.5, -4, 0.3], [3, 6.5, -0.1], [-6, 3, 0.18]].forEach(([x, z, lean]) => {
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 1.5, 15, 14, 1, true), shaftMaterial);
+    shaft.position.set(x, -7.5, z);
+    shaft.rotation.z = lean;
+    shafts.add(shaft);
+  });
+  shafts.visible = false;
+  scene.add(shafts);
+
+  let dive = null;
+  let parked = false;
+  let parkAngle = 0;
 
   let terrain = null;
   let views = [];
@@ -324,8 +384,10 @@ export function createExplorer(api) {
     };
   }
 
-  function heightAt(r, c) {
-    const { fine, yOf, rows, cols } = terrain;
+  const heightAt = (r, c) => terrain.yOf(depthAt(r, c));
+
+  function depthAt(r, c) {
+    const { fine, rows, cols } = terrain;
     const fr = Math.min(rows - 1, Math.max(0, r)) * SUBDIVISIONS;
     const fc = Math.min(cols - 1, Math.max(0, c)) * SUBDIVISIONS;
     const r0 = Math.min(Math.floor(fr), fine.height - 2);
@@ -335,7 +397,7 @@ export function createExplorer(api) {
     const at = (i, j) => fine.values[i * fine.width + j];
     const top = at(r0, c0) * (1 - u) + at(r0, c0 + 1) * u;
     const bottom = at(r0 + 1, c0) * (1 - u) + at(r0 + 1, c0 + 1) * u;
-    return yOf(top * (1 - v) + bottom * v);
+    return top * (1 - v) + bottom * v;
   }
 
   const toWorld = (r, c, lift = 0) => new THREE.Vector3(c - terrain.centreC, heightAt(r, c) + lift, r - terrain.centreR);
@@ -488,10 +550,14 @@ export function createExplorer(api) {
       fillHabitatLegend(legend, pane.log.terrain.habitat.names);
       return;
     }
-    recolour(grid, !grid ? seafloorRamp : app.layer === "hidden" ? HIDDEN_RAMP : BELIEF_RAMP);
+    // Hidden richness is highly concentrated, so its colour scale lifts the low end to stay
+    // visible on the unlit terrain. This changes the display only, never the values.
+    const hiddenRamp = (t) => HIDDEN_RAMP(t ** 0.55);
+    recolour(grid, !grid ? seafloorRamp : app.layer === "hidden" ? hiddenRamp : BELIEF_RAMP);
     if (grid) {
       const [low, high] = gridExtent(grid);
-      legend.textContent = `${LAYER_LABELS[app.layer]}: ${low.toFixed(2)} (dark) to ${high.toFixed(2)} (bright)`;
+      const scale = app.layer === "hidden" ? ". Non-linear colour scale" : "";
+      legend.textContent = `${LAYER_LABELS[app.layer]}: ${low.toFixed(2)} (dark) to ${high.toFixed(2)} (bright)${scale}`;
     } else if (app.layer === "terrain") {
       legend.textContent = `Depth ${Math.round(terrain.lo)} to ${Math.round(terrain.hi)} m. Lines every 250 m.`;
     } else {
@@ -528,13 +594,14 @@ export function createExplorer(api) {
       pane,
       index,
       color,
-      vehicle: buildVehicle(color, pane.entry.label),
+      vehicle: buildVehicle(color, pane.entry.label, index),
       trailMaterial: new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.72 }),
       completed: new THREE.Group(),
       markers: new THREE.Group(),
       current: null,
       completedCount: -1,
       feedKey: null,
+      rest: 0,
       heading: 0,
       targetRing: new THREE.Mesh(
         new THREE.TorusGeometry(0.42, 0.035, 8, 32),
@@ -551,7 +618,7 @@ export function createExplorer(api) {
     const card = document.createElement("section");
     card.className = "hud";
     card.style.setProperty("--pane-color", pane.color);
-    hud.append(card);
+    pane.el.root.querySelector(".hud-slot").append(card);
     view.card = card;
     return view;
   }
@@ -678,14 +745,13 @@ export function createExplorer(api) {
   }
 
   function resetCamera() {
-    // Pull back on narrow screens so the whole block fits.
-    const fit = Math.max(1, 1.75 / camera.aspect) ** 0.6;
-    camera.position.set(-5 * fit, 25 * fit, 35 * fit);
+    camera.position.copy(orbitPosition());
     controls.target.set(0, -1, 1);
     controls.update();
   }
 
   function setFollow(index) {
+    parked = false;
     followIndex = index;
     controls.enabled = index < 0;
     cameraSelect.value = String(index);
@@ -717,9 +783,23 @@ export function createExplorer(api) {
     const { mission } = pane;
     if (!mission) return;
     if (mission.completed.length !== view.completedCount) rebuildCompleted(view);
+    vehicle.visible = !document.body.classList.contains("pre-dive");
 
     const [r, c] = mission.position;
-    const position = toWorld(r, c, ALTITUDE);
+    // At mission end the robot settles lower and powers down. This is presentation only.
+    const finished = mission.phase === "done" && !dive;
+    view.rest += ((finished ? 1 : 0) - view.rest) * Math.min(1, delta * 1.3);
+    const position = toWorld(r, c, ALTITUDE - 0.5 * view.rest);
+    // Both robots share a home cell, so they're drawn apart when close to it.
+    const [homeRow, homeCol] = pane.log.terrain.home;
+    const nearHome = Math.max(0, 1 - Math.hypot(r - homeRow, c - homeCol) / 2.5);
+    position.x += nearHome * (view.index === 0 ? -0.6 : 0.6);
+
+    let descent = 1;
+    if (dive) {
+      descent = ease(Math.min(1, (time - dive.start) / (DIVE_SECONDS * DIVE_DESCENT_SHARE)));
+      position.y = terrain.yOf(0) + (position.y - terrain.yOf(0)) * descent;
+    }
     const dx = position.x - vehicle.position.x;
     const dz = position.z - vehicle.position.z;
     if (dx * dx + dz * dz > 1e-5) {
@@ -730,10 +810,18 @@ export function createExplorer(api) {
     }
     vehicle.position.copy(position);
     if (!reducedMotion) {
-      vehicle.position.y += Math.sin(time * 1.1 + view.index) * 0.025;
-      if (mission.phase === "travel") vehicle.userData.propeller.rotation.z += delta * 24;
+      vehicle.position.y += Math.sin(time * 1.1 + view.index) * 0.025 * (1 - view.rest);
+      if (mission.phase === "travel" || dive) vehicle.userData.propeller.rotation.z += delta * 24;
     }
     vehicle.rotation.y = view.heading;
+    vehicle.rotation.x = dive ? 0.55 * (1 - descent) : 0;
+    // Lights have no visible effect in bright surface water, so they grow with depth.
+    vehicle.userData.spot.intensity = (SPOTLIGHT_ON + (SPOTLIGHT_PARKED - SPOTLIGHT_ON) * view.rest) * descent;
+    vehicle.userData.beam.material.opacity = (BEAM_ON + (BEAM_PARKED - BEAM_ON) * view.rest) * descent;
+
+    const shownDepth = depthAt(r, c) * descent;
+    view.gaugeBot.style.top = `${(100 * Math.min(GAUGE_MAX_M, shownDepth)) / GAUGE_MAX_M}%`;
+    view.gaugeLabel.textContent = `${Math.round(shownDepth)} m`;
 
     if (view.current) {
       view.current.geometry.dispose();
@@ -767,7 +855,9 @@ export function createExplorer(api) {
   function updateFollowCamera(delta) {
     const view = views[followIndex];
     if (!view) return;
-    const { vehicle, heading } = { vehicle: view.vehicle, heading: view.heading };
+    const { vehicle } = view;
+    if (parked && !reducedMotion) parkAngle += delta * 0.14;
+    const heading = parked ? parkAngle : view.heading;
     const behind = new THREE.Vector3(-Math.sin(heading) * 5.5, 2.3, -Math.cos(heading) * 5.5);
     const wanted = vehicle.position.clone().add(behind);
     const row = wanted.z + terrain.centreR;
@@ -782,7 +872,94 @@ export function createExplorer(api) {
     if (!width || !height) return;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
+    // Keep the seafloor centred in the space left of the instrument column.
+    if (width > 900) camera.setViewOffset(width, height, 130, 0, width, height);
+    else camera.clearViewOffset();
     camera.updateProjectionMatrix();
+  }
+
+  function orbitPosition() {
+    // Pull back on narrow screens so the whole block fits.
+    const fit = Math.max(1, 1.75 / camera.aspect) ** 0.6;
+    return new THREE.Vector3(-5 * fit, 25 * fit, 35 * fit);
+  }
+
+  function updateDive(time) {
+    const elapsed = (time - dive.start) / DIVE_SECONDS;
+    if (elapsed >= 1) {
+      endDive(true);
+      return;
+    }
+    const down = ease(Math.min(1, elapsed / DIVE_DESCENT_SHARE));
+    const anchor = views.find((view) => view.pane === abyssPane())?.vehicle.position || new THREE.Vector3();
+    const near = anchor.clone().add(new THREE.Vector3(6, -1.2 + 3.2 * down, 8));
+    const pull = ease(Math.max(0, (elapsed - DIVE_DESCENT_SHARE) / (1 - DIVE_DESCENT_SHARE)));
+    camera.position.lerpVectors(near, orbitPosition(), pull);
+    camera.lookAt(anchor.clone().lerp(new THREE.Vector3(0, -1, 1), pull));
+
+    // Light fades and the water darkens with depth.
+    scene.fog.color.lerpColors(shallowWater, deepWater, down);
+    scene.fog.density = 0.024 + (0.016 - 0.024) * down;
+    scene.background.lerpColors(skyWater, trenchWater, down);
+    ambient.intensity = 3.2 + (1.25 - 3.2) * down;
+    renderer.toneMappingExposure = 1.55 + (1.15 - 1.55) * down;
+    surface.material.opacity = 0.6 * (1 - down);
+    shaftMaterial.opacity = 0.05 * (1 - down);
+    surfaceTexture.offset.set(time * 0.012, time * 0.008);
+  }
+
+  function endDive(notify) {
+    if (!dive) return;
+    const { onDone } = dive;
+    dive = null;
+    scene.background = deepBackground;
+    scene.fog.color.copy(deepWater);
+    scene.fog.density = 0.016;
+    ambient.intensity = 1.25;
+    renderer.toneMappingExposure = 1.15;
+    surface.visible = false;
+    shafts.visible = false;
+    setFollow(-1);
+    if (notify) onDone();
+  }
+
+  function startDive(onDone) {
+    if (!terrain) return;
+    endDive(false);
+    parked = false;
+    followIndex = -1;
+    cameraSelect.value = "-1";
+    controls.enabled = false;
+    dive = { start: performance.now() / 1000, onDone };
+    views.forEach((view) => { view.rest = 0; });
+    scene.background = skyWater.clone();
+    surface.position.y = terrain.yOf(0) + 1.3;
+    surface.visible = true;
+    const [homeRow, homeCol] = app.panes[0].log.terrain.home;
+    shafts.position.set(homeCol - terrain.centreC, surface.position.y, homeRow - terrain.centreR);
+    shafts.visible = true;
+  }
+
+  function buildGauge() {
+    gauge.replaceChildren();
+    for (let depth = 0; depth <= 1500; depth += 500) {
+      const mark = document.createElement("span");
+      mark.className = "mark";
+      mark.style.top = `${(100 * depth) / GAUGE_MAX_M}%`;
+      mark.textContent = depth === 0 ? "Surface" : `${depth} m`;
+      gauge.append(mark);
+    }
+    views.forEach((view) => {
+      const bot = document.createElement("span");
+      bot.className = "bot";
+      bot.style.setProperty("--c", view.pane.color);
+      const label = document.createElement("b");
+      if (view.index === 1) label.style.top = "6px";
+      bot.append(label);
+      gauge.append(bot);
+      view.gaugeBot = bot;
+      view.gaugeLabel = label;
+    });
   }
 
   function frame(now) {
@@ -794,15 +971,18 @@ export function createExplorer(api) {
     lastTime = time;
     if (terrain) {
       for (const view of views) updateVehicle(view, time, delta);
-      if (followIndex >= 0) updateFollowCamera(delta);
+      if (dive) updateDive(time);
+      else if (followIndex >= 0) updateFollowCamera(delta);
       else controls.update();
     }
     if (snow && !reducedMotion) {
       causticTime.value = time * 0.55;
       const positions = snow.geometry.getAttribute("position");
       for (let n = 0; n < SNOW_COUNT; n += 1) {
-        let y = positions.getY(n) - delta * 0.09;
+        // During the descent, snow streams upward past the sinking camera.
+        let y = positions.getY(n) + delta * (dive ? 1.5 : -0.09);
         if (y < -12) y = 22;
+        if (y > 22) y = -12;
         positions.setY(n, y);
         positions.setX(n, positions.getX(n) + Math.sin(time * 0.3 + n) * delta * 0.03);
       }
@@ -819,22 +999,33 @@ export function createExplorer(api) {
   }
 
   function loadWorld() {
+    endDive(false);
     disposeGroup(world);
-    hud.replaceChildren();
+    views.forEach((view) => view.card.remove());
     views = [];
     colourKey = null;
     if (!app.panes.length) return;
     terrain = terrainData(app.panes[0].log);
     buildTerrain(app.panes[0]);
     views = app.panes.map(buildView);
+    buildGauge();
     if (followIndex >= views.length) followIndex = -1;
     updateCameraOptions();
     views.forEach((view) => { view.vehicle.position.copy(toWorld(...view.pane.log.terrain.home, ALTITUDE)); });
-    const home = new THREE.Mesh(
-      new THREE.BoxGeometry(0.5, 0.26, 0.5),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0.5 }),
+    // Home station: a low seabed dock with a lit ring.
+    const home = new THREE.Group();
+    const dock = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.62, 0.72, 0.1, 32),
+      new THREE.MeshStandardMaterial({ color: 0x2b3944, roughness: 0.55, metalness: 0.5 }),
     );
-    home.position.copy(toWorld(...app.panes[0].log.terrain.home, 0.14));
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(0.62, 0.016, 8, 48),
+      new THREE.MeshBasicMaterial({ color: 0xd8fff7 }),
+    );
+    ring.rotation.x = Math.PI / 2;
+    ring.position.y = 0.06;
+    home.add(dock, ring);
+    home.position.copy(toWorld(...app.panes[0].log.terrain.home, 0.06));
     world.add(home);
     sync();
   }
@@ -856,6 +1047,14 @@ export function createExplorer(api) {
     sync,
     setFollow,
     followAbyss: () => setFollow(views.findIndex((view) => view.pane === abyssPane())),
+    dive: startDive,
+    endDive,
+    park() {
+      const index = views.findIndex((view) => view.pane === abyssPane());
+      setFollow(index);
+      parked = true;
+      parkAngle = views[index]?.heading || 0;
+    },
     setActive(value) {
       active = value;
       if (active) {
