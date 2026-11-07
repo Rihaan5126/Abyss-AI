@@ -74,9 +74,9 @@ Open <http://localhost:8000/?missions=logs/index.json>.
    In ideal mode, the **World** menu also lists synthetic landforms: a seamount, abyssal hills,
    a trench and a basin. They show other seafloor shapes, but they are not real places and are
    not in the benchmark. Regenerate them with `python -m scripts.build_ui_logs`.
-5. Press **Reveal the hidden world** at the end. Hidden data is not loaded before you choose it,
-   or before you request the report.
-6. Press **Download findings report**, open the file and use **Print / save as PDF**.
+5. At the end, press **Download findings report**, open the file and use **Print / save as PDF**.
+   The report compares what each robot reported with the simulator's hidden truth. That hidden
+   data is not loaded until you request the report, and it is never drawn on the map.
 
 ## What to say
 
@@ -131,7 +131,7 @@ By hand, on the presenting laptop:
 - [ ] Real-image replay generated, with the badge naming the real model
 - [ ] Photos show predictions and unfamiliar flags
 - [ ] Full dive watched at full screen with Wi-Fi off
-- [ ] Reveal works, and the report downloads and prints to PDF
+- [ ] The report downloads and prints to PDF
 - [ ] Ideal-perception link tested as the fallback
 - [ ] Backup recording made, without restricted images unless permitted
 - [ ] Deck exported to PDF
