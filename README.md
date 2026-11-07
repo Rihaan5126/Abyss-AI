@@ -151,6 +151,13 @@ are used. Familiar categories come first, so withheld categories are the rarest 
 world. A small pool means each image is seen repeatedly, with the same result each time,
 so use enough test images per category for the final run.
 
+To measure what vision errors cost the planner, compare ideal and real perception on the
+same worlds. It writes `results/perception_comparison.json`:
+
+```bash
+python -m abyss.evaluation.perception_compare --manifest data/fathomnet/splits.json --artifact data/perception
+```
+
 ## Rules the code enforces
 
 - **No leakage.** Planners receive only `PublicMap`, `PublicState` and `Observation`.
