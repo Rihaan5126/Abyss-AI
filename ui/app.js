@@ -1337,7 +1337,8 @@ function exitTour() {
 
 function bindControls() {
   const downloadReport = async () => {
-    if (app.energy + 1e-6 < app.maxEnergy) {
+    // The range control rounds to its step, while logged energy has more decimals.
+    if (app.energy + Number($("scrub").step || 0.1) < app.maxEnergy) {
       showNotice("Finish the expedition, or move the timeline to the end, before generating its findings report.");
       return;
     }
