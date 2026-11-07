@@ -19,10 +19,16 @@ from ..contract import HOME, Observation, PublicMap, PublicState, Target
 from ..learning.bayesian import BayesianLinearRegression, quadratic_features
 from .base import Planner
 
+# Frozen 2026-11-07 after `python -m abyss.evaluation.tune` on development seeds 0-19.
+# Across 27 settings the spread in mean distinct categories was within seed noise
+# (12.74 here vs 12.80 best), and habitat coverage did not help, so the original
+# defaults were kept rather than fitting noise. Do not retune on seeds >= 1000.
 DEFAULTS: dict = {
     "beta": 1.0,  # information-gain weight
     "gamma": 0.5,  # coverage weight
-    "coverage_radius": 3.0,  # cells
+    "coverage": "spatial",  # spatial | habitat | both (mean of the two)
+    "coverage_radius": 3.0,  # cells, for spatial coverage
+    "habitat_radius": 1.0,  # standardised feature units, for habitat coverage
     "noise_var": 1.0,
     "prior_precision": 1.0,
     "bias_prior_precision": 0.1,
@@ -40,7 +46,8 @@ class AdaptivePlanner(Planner):
         self.config = {**DEFAULTS, **self.overrides, **(config or {})}
         c = self.config
         self.survey_cost = public_map.survey_cost
-        self.phi, self.phi_names = quadratic_features(
+        self.features = np.asarray(public_map.features, float)
+        self.phi,self.phi_names = quadratic_features(
             public_map.features, public_map.feature_names, tuple(c["squared"])
         )
         dim = self.phi.shape[-1]
@@ -62,9 +69,24 @@ class AdaptivePlanner(Planner):
 
     # planning -----------------------------------------------------------
     def _coverage(self, surveyed: np.ndarray) -> np.ndarray:
+        """C(x) in [0, 1]: how unlike anything surveyed so far x is.
+
+        spatial: map distance to the nearest surveyed cell.
+        habitat: terrain-feature distance to the nearest surveyed habitat, so the robot
+        values habitat types it has rarely sampled even when they are far from home.
+        """
         if not surveyed.any():
             return np.ones(surveyed.shape)
-        return np.minimum(1.0, distance_transform_edt(~surveyed) / self.config["coverage_radius"])
+        c = self.config
+        spatial = np.minimum(1.0, distance_transform_edt(~surveyed) / c["coverage_radius"])
+        if c["coverage"] == "spatial":
+            return spatial
+        sampled = self.features[surveyed]  # (N, F)
+        diff = self.features[:, :, None, :] - sampled[None, None, :, :]
+        habitat = np.minimum(1.0, np.sqrt((diff**2).sum(-1)).min(-1) / c["habitat_radius"])
+        if c["coverage"] == "habitat":
+            return habitat
+        return 0.5 * (spatial + habitat)
 
     def utility_terms(self, state: PublicState) -> dict[str, np.ndarray]:
         c = self.config
