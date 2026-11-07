@@ -32,4 +32,6 @@ def test_3d_view_says_it_is_a_visualisation():
 
 
 def test_3d_view_never_loads_reveal_files_itself():
-    assert "reveal" not in (UI / "explorer.js").read_text(encoding="utf-8").lower()
+    code = (UI / "explorer.js").read_text(encoding="utf-8")
+    for forbidden in ("fetch(", "XMLHttpRequest", ".reveal", "encounter_richness_map", "expected_richness_map"):
+        assert forbidden not in code, forbidden

@@ -458,7 +458,7 @@ export function createExplorer(api) {
 
   function resetCamera() {
     // Pull back on narrow screens so the whole block fits.
-    const fit = Math.max(1, 1.75 / camera.aspect);
+    const fit = Math.max(1, 1.75 / camera.aspect) ** 0.6;
     camera.position.set(-5 * fit, 25 * fit, 35 * fit);
     controls.target.set(0, -1, 1);
     controls.update();
