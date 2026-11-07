@@ -95,10 +95,18 @@ def _calibrate_intercept(signal: np.ndarray, prevalence: float) -> float:
     return brentq(lambda a: expit(a + signal).mean() - prevalence, -40.0, 40.0)
 
 
-def generate_world(terrain: Terrain, config: SimConfig, seed: int) -> HiddenWorld:
+def generate_world(
+    terrain: Terrain,
+    config: SimConfig,
+    seed: int,
+    category_names: tuple[str, ...] | None = None,
+) -> HiddenWorld:
     rng = stream(seed, STREAM_WORLD)
     shape = terrain.depth_m.shape
     n = config.n_categories
+    names = category_names or tuple(f"category_{k:02d}" for k in range(n))
+    if len(names) != n:
+        raise ValueError(f"Got {len(names)} category names, config expects {n}")
 
     # Draw everything up front so all scenarios share the same random numbers.
     weights = rng.uniform(0.6, 1.0, size=n)
@@ -127,5 +135,4 @@ def generate_world(terrain: Terrain, config: SimConfig, seed: int) -> HiddenWorl
     encounters.setflags(write=False)
     prevalence.setflags(write=False)
 
-    names = tuple(f"category_{k:02d}" for k in range(n))
     return HiddenWorld(config.scenario, config.rho, names, prevalence, probability, encounters)

@@ -62,6 +62,7 @@ class PublicState:
     surveyed: np.ndarray  # (H, W) bool
     transited: np.ndarray  # (H, W) bool, passed through or surveyed
     discovered: tuple[str, ...]  # distinct categories as perceived by the robot
+    unknown_encounters: int = 0  # distinct images flagged unfamiliar so far
 
 
 @dataclass(frozen=True)
@@ -69,7 +70,9 @@ class Observation:
     """Result of one local survey.
 
     ``categories`` are true labels in ideal perception and model predictions in
-    real perception. In real mode the true labels stay in the evaluation record.
+    real perception, excluding images flagged unknown. In real mode the true labels
+    stay in the evaluation record. ``image_refs``, ``image_labels``, ``novelty_scores``
+    and ``unknown_flags`` are aligned, one entry per image.
     """
 
     step: int
@@ -82,11 +85,15 @@ class Observation:
     image_refs: tuple[str, ...] = ()
     novelty_scores: tuple[float, ...] = ()
     unknown_flags: tuple[bool, ...] = ()
+    image_labels: tuple[str | None, ...] = ()
 
     @property
     def richness(self) -> int:
-        """Distinct categories in this survey: the habitat model's target."""
-        return len(set(self.categories))
+        """Distinct perceived organisms: the habitat model's target.
+
+        Each image flagged unknown counts once, because it has no label to compare.
+        """
+        return len(set(self.categories)) + sum(self.unknown_flags)
 
 
 @dataclass(frozen=True, eq=False)
@@ -118,4 +125,23 @@ class PerceptionResult:
 
 
 class Perception(Protocol):
+    """A deterministic model: the same image must always give the same result."""
+
+    name: str  # recorded in log provenance, so results show which model made them
+
     def predict(self, image: object) -> PerceptionResult: ...
+
+
+class ImagePool(Protocol):
+    """Images the simulator can show the robot. Used only by the simulator."""
+
+    categories: tuple[str, ...]  # one per hidden category, most common first
+    withheld: tuple[str, ...]  # categories kept out of the model's references
+
+    def images_for(self, category: str) -> tuple[str, ...]:
+        """Return image refs. Refs reach the planner, so they must not reveal the category."""
+        ...
+
+    def load(self, ref: str) -> object:
+        """Return the image for ``Perception.predict``."""
+        ...

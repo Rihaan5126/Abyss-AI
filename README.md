@@ -52,7 +52,8 @@ different planner seed.
 | Replay UI | Rihaan | Working; belief layers tested only with temporary data until the adaptive planner logs them |
 | Random baseline | Shared | Working |
 | Learner, adaptive planner, other baselines, benchmark | Cam | Not started |
-| Perception pipeline | Ammar | Not started; `Environment` currently supports ideal perception only |
+| Real perception flow in the simulator | Rihaan | Working, tested with a fake model only |
+| Perception pipeline | Ammar | Not started |
 
 ## Adding a planner (Cam)
 
@@ -91,9 +92,33 @@ are the updated beliefs. Each map is a `[row][col]` nested list.
 
 ## Adding perception (Ammar)
 
-Implement the `Perception` protocol in `abyss/contract.py`, returning a `PerceptionResult`
-from `predict(image)`. Category names are currently `category_00` and so on; these still
-need mapping to the FathomNet categories you select.
+The simulator side is ready and tested with a fake model. To try it:
+
+```bash
+python -m abyss.run_mission --scenario ridge --seed 0 --perception stub
+```
+
+Implement these two interfaces from `abyss/contract.py`. `abyss/stub_perception.py` is a
+working example of both, and `run_mission()` takes them as `perception=` and `image_pool=`,
+with `perception_mode="real"` in the config.
+
+- **`ImagePool`** provides `categories` (common first; the count must equal `n_categories`),
+  `withheld`, `images_for(category)` and `load(ref)`. Your categories replace the
+  `category_00` names.
+- **`Perception`** provides `name` (recorded in the log) and `predict(image)`, which returns
+  a `PerceptionResult`. The same image must always give the same result.
+
+Image refs reach the planner, so they must not reveal the category: the simulator refuses
+a path like `images/squid/001.jpg`. Use opaque IDs. Refs are also the UI's image URLs, so
+they should resolve from `ui/` for the gallery to show them.
+
+Each survey runs the model once per cell. Images flagged unknown count towards richness,
+but not towards discovered categories. True labels and the scores in `perception_summary`
+stay in the `.reveal.json` file. These scores cover only images seen on that mission, so
+they don't replace your held-out evaluation.
+
+`abyss/stub_perception.py` has no real images and made-up error rates. Never report its
+numbers as vision results.
 
 ## Rules the code enforces
 

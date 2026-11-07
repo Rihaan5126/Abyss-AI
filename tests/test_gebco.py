@@ -36,7 +36,11 @@ def test_public_terrain_is_positive_down_and_fixed_across_seeds():
 def test_missions_are_safe_on_gebco(scenario):
     log, reveal = run_mission(SimConfig(scenario=scenario, **GEBCO), RandomPlanner(), 0)
     validate_mission_log(log)
-    assert log["provenance"] == {"terrain": "gebco_2025", "biology": "simulated"}
+    assert log["provenance"] == {
+        "terrain": "gebco_2025",
+        "biology": "simulated",
+        "perception": "ideal",
+    }
     assert reveal["biology_provenance"] == "simulated"
 
 

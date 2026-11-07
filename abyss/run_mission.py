@@ -17,10 +17,19 @@ from pathlib import Path
 import numpy as np
 
 from .config import SCENARIOS, SimConfig, load_config
-from .contract import HOME, SCHEMA_VERSION, MissionStatus, PublicMap, StepResult
+from .contract import (
+    HOME,
+    SCHEMA_VERSION,
+    ImagePool,
+    MissionStatus,
+    Perception,
+    PublicMap,
+    StepResult,
+)
 from .env import Environment
 from .planners import PLANNERS
 from .planners.base import Planner
+from .stub_perception import StubImagePool, StubPerception
 from .world import STREAM_PLANNER
 
 REQUIRED_LOG_KEYS = {
@@ -90,11 +99,13 @@ def _step_payload(result: StepResult, planned: object, diagnostics: dict, survey
             "image_refs": observation.image_refs,
             "novelty_scores": observation.novelty_scores,
             "unknown_flags": observation.unknown_flags,
+            "image_labels": observation.image_labels,
             "perception_mode": observation.perception_mode,
         },
         "new_discoveries": result.new_discoveries,
         "cumulative": {
             "distinct_categories": len(state.discovered),
+            "unknown_encounters": state.unknown_encounters,
             "surveys": surveys,
             "energy_used": state.energy_used,
         },
@@ -108,12 +119,14 @@ def run_mission(
     seed: int,
     planner_config: dict | None = None,
     planner_seed: int | None = None,
+    perception: Perception | None = None,
+    image_pool: ImagePool | None = None,
 ) -> tuple[dict, dict]:
     """Run a mission to completion and return (public mission log, reveal payload)."""
     planner_config = planner_config or {}
     planner_seed = planner_seed_for(seed) if planner_seed is None else planner_seed
 
-    env = Environment(config)
+    env = Environment(config, perception=perception, image_pool=image_pool)
     state = env.reset(seed)
     public_map = env.public_map
     planner.reset(public_map, planner_config, planner_seed)
@@ -142,7 +155,11 @@ def run_mission(
     energy_ok = state.energy_remaining >= config.energy_reserve - 1e-9
     log = {
         "schema_version": SCHEMA_VERSION,
-        "provenance": {"terrain": public_map.terrain_source, "biology": "simulated"},
+        "provenance": {
+            "terrain": public_map.terrain_source,
+            "biology": "simulated",
+            "perception": perception.name if perception else "ideal",
+        },
         "world": {
             "id": f"{config.scenario}-rho{config.rho:g}-seed{seed}",
             "scenario": config.scenario,
@@ -168,6 +185,7 @@ def run_mission(
             "waypoints_surveyed": int(state.surveyed.sum()),
             "distinct_categories": len(state.discovered),
             "discovered": state.discovered,
+            "unknown_encounters": state.unknown_encounters,
             "forced_return": forced_return,
             "rejected_targets": rejected,
         },
@@ -212,6 +230,8 @@ def write_logs(log: dict, reveal: dict, out_dir: str | Path) -> tuple[Path, Path
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     stem = f"{log['world']['id']}-{log['planner']['name']}"
+    if log["provenance"]["perception"] != "ideal":
+        stem += f"-{log['provenance']['perception']}"
     log_path = out_dir / f"{stem}.json"
     reveal_path = out_dir / f"{stem}.reveal.json"
     log_path.write_text(json.dumps(log, separators=(",", ":")), encoding="utf-8")
@@ -227,13 +247,24 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--planner", choices=sorted(PLANNERS), default="random")
     parser.add_argument("--out", default="results/missions")
+    parser.add_argument(
+        "--perception", choices=("ideal", "stub"), default="ideal",
+        help="stub is a fake model for testing integration, not computer vision",
+    )
     args = parser.parse_args()
 
     config = load_config(args.config)
     overrides = {k: v for k, v in (("scenario", args.scenario), ("rho", args.rho)) if v is not None}
+    perception, image_pool = None, None
+    if args.perception == "stub":
+        overrides["perception_mode"] = "real"
+        image_pool = StubImagePool(config.n_categories)
+        perception = StubPerception(image_pool)
     config = replace(config, **overrides)
 
-    log, reveal = run_mission(config, PLANNERS[args.planner](), args.seed)
+    log, reveal = run_mission(
+        config, PLANNERS[args.planner](), args.seed, perception=perception, image_pool=image_pool
+    )
     validate_mission_log(log)
     log_path, reveal_path = write_logs(log, reveal, args.out)
 
@@ -245,6 +276,9 @@ def main() -> None:
         f"discovered: {reveal['true_distinct_count']} of "
         f"{reveal['categories_available_count']} simulated categories"
     )
+    if perception is not None:
+        print(f"perceived:  {outcome['distinct_categories']} categories, "
+              f"{outcome['unknown_encounters']} unfamiliar images ({perception.name} model)")
     print(f"energy:     {outcome['energy_used']:.1f} used, {outcome['energy_remaining']:.1f} left")
     print(f"safe home:  {outcome['safe_return']}")
     print(f"log:        {log_path}")

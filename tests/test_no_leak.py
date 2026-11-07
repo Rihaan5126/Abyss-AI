@@ -102,6 +102,6 @@ def test_mission_log_excludes_hidden_maps():
     log, reveal = run_mission(SimConfig(), RandomPlanner(), 0)
     text = json.dumps(log)
     for key in ("probability", "encounters", "expected_richness_map", "encounter_richness_map"):
-        assert key not in text
+        assert f'"{key}"' not in text
     assert "expected_richness_map" in reveal
     assert reveal["biology_provenance"] == "simulated"

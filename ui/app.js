@@ -18,7 +18,11 @@ const TERRAIN_NAMES = {
   gebco_2025: "Real bathymetry: GEBCO 2025, Monterey Canyon area, 30 x 30 planning grid.",
   synthetic: "Synthetic procedural terrain.",
 };
-const GEBCO_CREDIT = " GEBCO Compilation Group (2025) GEBCO 2025 Grid (doi:10.5285/37c52e96-24ea-67ce-e063-7086abc05f29).";
+const PERCEPTION_NAMES = {
+  ideal: "Ideal perception: labels come directly from the simulator.",
+  stub: "Stub perception: a fake model with made-up error rates.",
+};
+const GEBCO_CREDIT =" GEBCO Compilation Group (2025) GEBCO 2025 Grid (doi:10.5285/37c52e96-24ea-67ce-e063-7086abc05f29).";
 const LAYER_LABELS = {
   predicted_richness: "Predicted richness",
   uncertainty: "Model uncertainty",
@@ -344,7 +348,17 @@ const STATUS_TEXT = {
 function updatePaneText(pane, mission) {
   const { el, log, reveal } = pane;
   const last = mission.completed[mission.completed.length - 1];
-  const found = last ? last.step.cumulative.distinct_categories : 0;
+  let found = last ? last.step.cumulative.distinct_categories : 0;
+  const isReal = log.provenance.perception !== "ideal";
+  if (app.revealed && isReal) {
+    // After the reveal, score against the true labels rather than the model's predictions.
+    const lastStep = last ? last.step.step : 0;
+    const seen = reveal.true_observations.filter((o) => o.step <= lastStep).flatMap((o) => o.categories);
+    found = new Set(seen).size;
+  }
+  el.foundLabel.textContent = !isReal ? "Categories found" : app.revealed ? "True categories found" : "Categories perceived";
+  el.unknownStat.hidden = !isReal;
+  el.unknown.textContent = last ? last.step.cumulative.unknown_encounters : 0;
   const surveys = last ? last.step.cumulative.surveys : 0;
   const used = last ? last.step.cumulative.energy_used : 0;
   const budget = log.energy.budget;
@@ -421,7 +435,7 @@ function renderFeed(pane, mission) {
     meta.className = "meta";
     meta.textContent = `Energy ${fmt(end)} at (${obs.waypoint[0]}, ${obs.waypoint[1]})`;
     item.append(meta);
-    if (!obs.categories.length) {
+    if (!obs.categories.length && !obs.image_refs.length) {
       const none = document.createElement("span");
       none.className = "none";
       none.textContent = "No organisms in this survey";
@@ -434,8 +448,17 @@ function renderFeed(pane, mission) {
       chip.textContent = isNew ? `New: ${categoryLabel(category)}` : categoryLabel(category);
       item.append(chip);
     }
+    obs.unknown_flags.forEach((unknown, index) => {
+      if (!unknown) return;
+      const chip = document.createElement("span");
+      chip.className = "chip unknown";
+      chip.textContent = `Unfamiliar ${fmt(obs.novelty_scores[index], 2)}`;
+      item.append(chip);
+    });
     for (const ref of obs.image_refs) {
+      if (ref.startsWith("stub://")) continue; // the stub model has no real images
       const image = document.createElement("img");
+      image.addEventListener("error", () => image.remove());
       image.src = ref;
       image.alt = "Marine image used as a simulated camera encounter";
       item.append(image);
@@ -596,6 +619,9 @@ function createPane(index) {
     readout: node.querySelector(".readout"),
     legend: node.querySelector(".legend"),
     found: node.querySelector(".found"),
+    foundLabel: node.querySelector(".found-label"),
+    unknown: node.querySelector(".unknown-count"),
+    unknownStat: node.querySelector(".unknown-stat"),
     surveys: node.querySelector(".surveys"),
     left: node.querySelector(".left"),
     energyBar: node.querySelector(".energy i"),
@@ -655,9 +681,15 @@ function updateProvenance() {
   const log = app.panes[0].log;
   const source = log.provenance.terrain;
   const credit = source === "gebco_2025" ? GEBCO_CREDIT : "";
+  const model = log.provenance.perception;
   $("provenance").textContent =
     `${TERRAIN_NAMES[source] || source}${credit} Biology is simulated, not observed. ` +
+    `${PERCEPTION_NAMES[model] || `Perception model: ${model}.`} ` +
     "Energy is in abstract units. Every route and count comes from an executed mission log.";
+  const isReal = app.panes.some((p) => p.log.provenance.perception !== "ideal");
+  $("chart-title").textContent = `Distinct categories ${isReal ? "perceived" : "found"} against energy used`;
+  const stub = app.panes.some((p) => p.log.provenance.perception === "stub");
+  if (stub) showNotice("Stub perception: a fake model for testing, with no real images. Not a vision result.");
 }
 
 function setRevealButton() {

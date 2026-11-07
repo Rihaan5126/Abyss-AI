@@ -42,6 +42,8 @@ class SimConfig:
     def __post_init__(self) -> None:
         if self.scenario not in SCENARIOS:
             raise ValueError(f"Unknown scenario {self.scenario!r}; expected one of {SCENARIOS}")
+        if self.perception_mode not in ("ideal", "real"):
+            raise ValueError(f"Unknown perception_mode {self.perception_mode!r}")
         if self.terrain_source not in ("synthetic", "gebco"):
             raise ValueError(f"Unknown terrain_source {self.terrain_source!r}")
         if not 0.0 <= self.rho <= 1.0:

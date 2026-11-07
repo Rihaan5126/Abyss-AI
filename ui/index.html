@@ -31,7 +31,7 @@
     <section class="panes" id="panes"></section>
     <section class="lower">
       <figure class="chart-card">
-        <figcaption>Distinct categories found against energy used</figcaption>
+        <figcaption id="chart-title">Distinct categories found against energy used</figcaption>
         <canvas id="chart" role="img" aria-label="Line chart of distinct categories found against energy used for each mission"></canvas>
       </figure>
       <div class="feeds" id="feeds"></div>
@@ -66,8 +66,9 @@
       <p class="readout">Hover over the map to inspect a cell.</p>
       <p class="legend"></p>
       <dl class="stats">
-        <div class="stat-main"><dt>Categories found</dt><dd class="found">0</dd></div>
+        <div class="stat-main"><dt class="found-label">Categories found</dt><dd class="found">0</dd></div>
         <div><dt>Surveys</dt><dd class="surveys">0</dd></div>
+        <div class="unknown-stat" hidden><dt>Unfamiliar images</dt><dd class="unknown-count">0</dd></div>
         <div><dt>Energy left</dt><dd class="left">0</dd></div>
       </dl>
       <div class="energy" aria-hidden="true"><i></i><b></b></div>
