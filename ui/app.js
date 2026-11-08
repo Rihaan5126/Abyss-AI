@@ -33,6 +33,28 @@ const LANDFORM_NAMES = {
 for (const [source, name] of Object.entries(LANDFORM_NAMES)) {
   TERRAIN_NAMES[source] = `Synthetic landform: ${name.toLowerCase()}. Not a real place, and not part of the benchmark.`;
 }
+// Display names for the demo. The invented landforms get invented names, so no one mistakes
+// them for real places. The Monterey worlds share one real seafloor, and their names hint at
+// where the simulated life lives. The plain scientific label is always shown alongside.
+const LANDFORM_TITLES = {
+  synthetic_seamount: "Leviathan Seamount",
+  synthetic_abyssal_hills: "Serpent Hills",
+  synthetic_trench: "Kraken Trench",
+  synthetic_basin: "Obsidian Basin",
+};
+const ECOLOGY_TITLES = {
+  "ridge-1": "Ridge Gardens",
+  "ridge-0.5": "Faint Ridges",
+  "reversed-0.5": "Silent Plains",
+  "clustered-1": "Hidden Colonies",
+  "nonlinear-1": "Tangled Niches",
+  "random-0": "Scattered Drift",
+};
+const REAL_PLACE = "Pacific Ocean · Monterey Canyon";
+
+function worldTitle(world) {
+  return LANDFORM_TITLES[world.terrain] || ECOLOGY_TITLES[`${world.scenario}-${world.rho}`] || "";
+}
 const PERCEPTION_NAMES = {
   ideal: "Ideal perception: labels come directly from the simulator.",
   stub: "Stub perception: a fake model with made-up error rates.",
@@ -1004,12 +1026,13 @@ function updateProvenance() {
   const stub = app.panes.some((p) => p.log.provenance.perception === "stub");
   if (stub) showNotice("Stub perception: a fake model for testing, with no real images. Not a vision result.");
   const landform = LANDFORM_NAMES[source];
+  const title = LANDFORM_TITLES[source];
   $("inset-caption").textContent = source === "gebco_2025"
     ? "GEBCO 2025 chart. Contours every 250 m."
-    : `Synthetic ${landform ? landform.toLowerCase() : "terrain"}, not a real location.`;
+    : `${title ? `${title}: synthetic` : "Synthetic"} ${landform ? landform.toLowerCase() : "terrain"}, not a real location.`;
   $("intro-place").textContent = source === "gebco_2025"
-    ? "Monterey Canyon · 36°45′N 122°04′W"
-    : landform ? `${landform} · synthetic seafloor` : "Synthetic seafloor";
+    ? `${REAL_PLACE} · 36°45′N 122°04′W`
+    : title ? `${title} · imagined seafloor` : "Synthetic seafloor";
 }
 
 // Nautical chart ---------------------------------------------------------------
@@ -1679,13 +1702,15 @@ async function init() {
   const groups = new Map();
   for (const world of worlds()) {
     const landform = LANDFORM_NAMES[world.terrain];
-    const group = landform ? "Synthetic landforms" : "Monterey Canyon, real terrain";
+    const group = landform ? "Imagined seafloors (synthetic)" : `${REAL_PLACE} (real seafloor)`;
     if (!groups.has(group)) groups.set(group, []);
     const option = document.createElement("option");
     option.value = world.world_id;
     // Two worlds can share an ecology at different strengths, so the label names the signal.
-    const scenario = `${worldLabel(world)}, seed ${world.seed}`;
-    option.textContent = landform ? `${landform} · ${scenario}` : scenario;
+    const science = `${landform ? `${landform.toLowerCase()}, ` : ""}${worldLabel(world).toLowerCase()}, seed ${world.seed}`;
+    const title = worldTitle(world);
+    option.textContent = title ? `${title} · ${science}` : science;
+    option.title = landform ? "Invented landform, not a real place" : "Real GEBCO seafloor, simulated biology";
     groups.get(group).push(option);
   }
   // Group only when there is more than one kind of terrain, such as in the ideal logs.

@@ -61,6 +61,18 @@ def test_docs_point_to_main_rather_than_old_feature_branches():
         assert "origin ammar/" not in path.read_text(encoding="utf-8"), path
 
 
+def test_hidden_panels_cannot_swallow_the_skip_descent_click():
+    css = (UI / "style.css").read_text(encoding="utf-8")
+    assert ".diving .pane { pointer-events: none; }" in css.replace(".pre-dive .pane, ", "")
+
+
+def test_invented_landforms_are_never_labelled_as_real_places():
+    app = (UI / "app.js").read_text(encoding="utf-8")
+    assert '"Imagined seafloors (synthetic)"' in app
+    assert "imagined seafloor" in app
+    assert "not a real location" in app
+
+
 def test_page_loads_nothing_from_other_hosts():
     for name in ("index.html", "app.js", "explorer.js", "style.css"):
         text = (UI / name).read_text(encoding="utf-8")

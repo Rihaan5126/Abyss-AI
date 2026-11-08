@@ -190,7 +190,7 @@ def test_experiment_rejects_unpaired_scores_and_bootstraps_complete_seeds():
 @pytest.mark.parametrize('stem', ['evaluation', 'landforms', 'vision'])
 def test_recorded_reports_match_their_paired_scores_and_frozen_settings(stem):
     path = Path(f'docs/discovery-{stem}.json')
-    data = json.loads(path.read_text())
+    data = json.loads(path.read_text(encoding='utf-8'))
     regenerated = summarise(data['rows'], perception=data['provenance']['perception'],
                             artifact=data['provenance']['artifact'])
     assert regenerated['aggregate'] == data['aggregate']
@@ -198,6 +198,6 @@ def test_recorded_reports_match_their_paired_scores_and_frozen_settings(stem):
     assert data['frozen_config'] == DISCOVERY_DEFAULTS
     assert data['safety']['safe_returns'] == data['safety']['missions']
     assert data['safety']['forced_returns'] == 0
-    assert path.with_suffix('.md').read_text() == render(data)
-    development = json.loads(Path('docs/discovery-development.json').read_text())
+    assert path.with_suffix('.md').read_text(encoding='utf-8') == render(data)
+    development = json.loads(Path('docs/discovery-development.json').read_text(encoding='utf-8'))
     assert development['selected'] == {k: DISCOVERY_DEFAULTS[k] for k in development['selected']}
