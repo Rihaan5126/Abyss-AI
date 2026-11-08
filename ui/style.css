@@ -458,3 +458,135 @@ main { padding: 16px 22px; max-width: 1560px; margin: 0 auto; }
 
 .new-ocean { padding: 4px 10px; font: 12px var(--mono); background: rgba(160, 210, 235, .1); border: 1px solid var(--hair); border-radius: 999px; cursor: pointer; }
 .new-ocean:hover { background: rgba(160, 210, 235, .2); }
+
+/* Mission workspace: a single observation scroll and persistent instruments. */
+:root { --dim: #a0bdca; --sidebar-width: 390px; }
+body { font-family: system-ui, sans-serif; font-size: 15px; }
+[hidden], .pane[hidden] { display: none !important; }
+button, select, summary { touch-action: manipulation; }
+summary { cursor: pointer; }
+.topbar { flex-wrap: wrap; gap: 8px 16px; }
+.layers { align-items: center; border-left: 1px solid var(--hair-strong); padding-left: 10px; }
+.layers legend { position: static; clip-path: none; float: left; padding: 0 6px; font-size: 12px; color: var(--soft); }
+.layers span { border-radius: 5px; }
+.layers input:checked + span { background: #5ef2d622; box-shadow: inset 0 0 0 1px #5ef2d655; }
+.mission-sidebar { min-width: 0; background: #061722f2; border: 1px solid var(--hair); }
+.sidebar-head { position: sticky; top: 0; z-index: 3; background: #071923; padding: 16px 18px 0; border-bottom: 1px solid var(--hair); }
+.replay-label { font-size: 12px; color: var(--soft); margin-bottom: 10px; }
+#comparison table { border-collapse: collapse; width: 100%; font-size: 13px; }
+#comparison th { text-align: left; font-weight: 500; padding: 6px 0; }
+#comparison th:not(:first-child), #comparison td { text-align: right; }
+#comparison td { font: 14px var(--mono); padding: 6px 0 6px 10px; }
+#comparison tbody tr { border-top: 1px solid var(--hair); }
+#robot-tabs { display: flex; gap: 6px; margin-top: 12px; }
+#robot-tabs button { flex: 1; padding: 12px; color: var(--robot-color); border-bottom: 3px solid transparent; border-radius: 6px 6px 0 0; }
+#robot-tabs button[aria-selected="true"] { background: color-mix(in srgb, var(--robot-color) 12%, transparent); border-color: var(--robot-color); }
+.panes { display: block; margin: 0; }
+.pane { padding: 18px; box-shadow: none; border: 0; }
+.pane .stat-main, .pane .stats > div:has(.surveys), .pane .stats > div:has(.left) { display: none; }
+.pane-head { margin-bottom: 16px; }
+.pane .status { font-size: 11px; }
+.story p, .hud p { font: 14px/1.6 system-ui, sans-serif; }
+.story .story-headline { font: 24px/1.2 var(--serif); }
+.story details { margin-top: 12px; }
+.story summary { color: var(--glow); font-size: 14px; }
+.why { font-size: 12px; }
+.hud { margin-top: 20px; }
+.hud h3 { font-size: 12px; color: var(--soft); }
+.observation-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-height: none; overflow: visible; margin: 12px 0; }
+.observation-photos img { height: 130px; max-height: none; border: 1px solid var(--hair); background: #020d16; border-radius: 6px; }
+.observation-photos figcaption { font: 13px/1.5 system-ui, sans-serif; }
+.hud .hud-meta, .hud .hud-note { font: 12px/1.5 system-ui, sans-serif; color: var(--soft); }
+.chip { font-size: 12px; padding: 2px 6px; }
+.camera-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.stage-foot { max-width: 65%; }
+#stage-legend { font-size: 12px; }
+.evidence-drawer { background: #06131ff5; border-top: 1px solid var(--hair-strong); }
+.evidence-drawer > summary { padding: 12px 20px; color: var(--glow); font-size: 15px; }
+.evidence-drawer > summary span { color: var(--soft); font-size: 12px; margin-left: 12px; }
+.evidence-body { padding: 0 20px 20px; }
+.evidence-body .lower { margin: 12px 0; }
+.evidence-body .stage-note, .evidence-body .provenance { margin: 12px 0; padding: 0; font-size: 13px; line-height: 1.6; }
+.evidence-body .method { padding: 16px 0; border-top: 1px solid var(--hair); }
+.feed h2 { font-size: 13px; }
+.feed ol { overflow: visible; }
+.feed { height: auto; }
+.feed li { font-size: 14px; }
+.feeds { align-items: start; }
+.transport { min-height: 78px; background: #04121bf5; border-top: 1px solid var(--hair); gap: 12px; }
+.transport button { min-height: 40px; }
+#mission-report { border: 1px solid var(--glow); border-radius: 7px; padding: 8px 12px; color: var(--glow); }
+.report-hint { font-size: 11px; color: var(--soft); max-width: 90px; }
+.timeline, #scrub { height: 48px; }
+#scrub::-webkit-slider-thumb { width: 18px; height: 18px; margin-top: -7px; }
+#scrub::-webkit-slider-runnable-track { height: 4px; }
+#scrub::-moz-range-thumb { width: 18px; height: 18px; }
+#scrub::-moz-range-track { height: 4px; }
+.ticks { z-index: 2; }
+.ticks button { pointer-events: auto; position: absolute; width: 10px; min-height: 12px; height: 12px; padding: 0; transform: translateX(-50%); background: var(--c); border: 2px solid #061722; border-radius: 3px; }
+.ticks button.top { top: 0; }
+.ticks button.bottom { bottom: 0; }
+.ticks button:focus-visible, .ticks button:hover { z-index: 3; outline: 2px solid white; }
+.inspector-open.view-3d .panes { opacity: 1; }
+@media (min-width: 901px) {
+  body { height: 100dvh; overflow: hidden; padding: 0; display: flex; flex-direction: column; }
+  .topbar, .view-3d .topbar { position: relative; inset: auto; flex: none; min-height: 68px; padding: 10px 18px; background: #04141df5; border-bottom: 1px solid var(--hair); }
+  main, .view-3d main { flex: 1; min-height: 0; width: 100%; max-width: none; margin: 0; padding: 0; display: flex; flex-direction: column; position: relative; }
+  .console, .view-3d .console { flex: 1; height: auto; min-height: 0; position: relative; display: flex; }
+  .view-3d .stage { position: relative; inset: auto; flex: 1; min-width: 0; }
+  .mission-sidebar { overflow-y: auto; overscroll-behavior-y: contain; scrollbar-width: thin; }
+  .view-3d .mission-sidebar { width: var(--sidebar-width); flex: none; }
+  .view-3d .panes { position: static; width: auto; margin: 0; display: block; overflow: visible; pointer-events: auto; }
+  .view-3d .pane { overflow: visible; height: auto; min-height: auto; padding: 18px; background: transparent; backdrop-filter: none; }
+  body:not(.view-3d) .mission-sidebar { width: 100%; }
+  body:not(.view-3d) .pane { max-width: 1100px; margin: auto; }
+  body:not(.view-3d) .map-wrap { width: min(55vh, 100%); float: left; margin-right: 24px; }
+  .transport { position: relative; inset: auto; flex: none; }
+  .evidence-drawer { flex: none; z-index: 8; }
+  .evidence-drawer[open] .evidence-body { max-height: 36vh; overflow-y: auto; overscroll-behavior: contain; }
+  .view-3d .lower, .view-3d .bench { margin: 12px 0; }
+  .inset { width: 150px; left: 60px; bottom: 20px; }
+  .stage-foot { left: 226px; bottom: 20px; display: flex; }
+  .gauge { left: 12px; top: 30px; bottom: 200px; }
+  .view-3d .notice { top: 8px; left: 70px; right: 410px; z-index: 4; }
+  .pre-dive .mission-sidebar, .diving .mission-sidebar { display: none; }
+  .pre-dive .evidence-drawer, .diving .evidence-drawer { display: none; }
+  .pre-dive .topbar, .pre-dive .transport { display: none; }
+  .caption, .tour { width: 80%; }
+}
+@media (max-width: 1100px) and (min-width: 901px) { :root { --sidebar-width: 350px; } .report-hint { display: none; } .topbar .brand { width: auto; } }
+@media (max-width: 900px) {
+  body, .view-3d { height: auto; overflow: auto; padding-bottom: 150px; }
+  main, .view-3d main { padding: 0; }
+  .topbar, .view-3d .topbar { position: static; background: #04141d; padding: 12px; }
+  .brand { width: 100%; }
+  .view-3d .topbar .field { display: inline-flex; }
+  .view-3d .console { height: auto; min-height: 0; }
+  .view-3d .stage { position: relative; height: 55vh; min-height: 350px; }
+  .mission-sidebar { margin: 0; max-height: 65vh; overflow-y: auto; overscroll-behavior: contain; }
+  .view-3d .panes { position: static; width: auto; display: block; margin: 0; overflow: visible; pointer-events: auto; }
+  .view-3d .pane { overflow: visible; padding: 18px; }
+  .sidebar-head { top: 0; }
+  .stage-foot { display: flex; left: 16px; bottom: 16px; max-width: 65%; }
+  .stage-foot > .field, #stage-legend { display: none; }
+  .camera-actions .ghost { padding: 6px 9px; font-size: 12px; }
+  .transport { position: fixed; flex-wrap: wrap; padding: 8px 12px; gap: 6px; }
+  .transport .timeline { order: 5; flex-basis: 100%; }
+  #clock { font-size: 10px; }
+  .report-hint { display: none; }
+  .transport .speed { margin-left: auto; }
+  .transport button { font-size: 13px; }
+  .lower { display: block; }
+  .feeds { margin-top: 20px; }
+  #observation-inspector { top: 3vh; bottom: 150px; width: min(100%, 460px); right: 0; }
+  .pre-dive .mission-sidebar, .pre-dive .evidence-drawer, .diving .mission-sidebar { display: none; }
+  .pre-dive .stage-foot { display: none; }
+  .view-3d .notice { position: static; margin: 8px; }
+}
+/* Notices belong to the scene, so dataset terms never collide with the toolbar. */
+.view-3d .console > .notice { position: absolute; top: 8px; left: 70px; right: calc(var(--sidebar-width) + 16px); max-height: 90px; overflow-y: auto; background: #071923f5; z-index: 6; }
+.story .decision-lead { color: #cce3e8; }
+@media (max-width: 900px) { .view-3d .console > .notice { position: relative; top: auto; left: auto; right: auto; margin: 8px; font-size: 12px; } }
+/* Keep decisions readable throughout the update animation. */
+@keyframes story-in { from { opacity: .8; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+.transport { background: #04121b; }

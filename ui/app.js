@@ -6,7 +6,7 @@
 // Reveal files hold the simulator's hidden truth. They are not fetched until the viewer
 // requests the findings report, and the hidden world is never drawn on the map.
 
-const PANE_COLORS = ["#ff9d76", "#5ef2d6"];
+const PANE_COLORS = ["#5ef2d6", "#ff9d76"];
 // The committed GEBCO crop's position, from data/gebco/monterey_canyon_30x30.json.
 const GEBCO_CROP = { west: -122.0625, north: 36.754167, cellsPerDegree: 240 };
 const CAPTION_MS = 6500;
@@ -609,18 +609,28 @@ function renderStory(pane, story) {
   headline.className = story.priority ? "story-headline new" : "story-headline";
   headline.textContent = story.headline;
   const parts = [kicker, headline];
+  const details = document.createElement("details");
+  details.open = !!box.querySelector("details[open]");
+  const summary = document.createElement("summary");
+  summary.textContent = story.why ? "Why this location?" : "Survey details";
+  details.append(summary);
   for (const text of story.lines) {
     const line = document.createElement("p");
     line.textContent = text;
-    parts.push(line);
+    details.append(line);
   }
   if (story.why) {
+    const lead = document.createElement("p");
+    lead.className = "decision-lead";
+    // Keep the complete recorded explanation in the disclosure.
+    lead.textContent = story.why.split(/(?<=\.)\s/)[0];
+    parts.push(lead);
     const label = document.createElement("p");
     label.className = "story-label";
     label.textContent = pane.entry.planner.startsWith("abyss") ? "Why it chose its next spot" : "How it decides";
     const why = document.createElement("p");
     why.textContent = story.why;
-    parts.push(label, why);
+    details.append(label, why);
   }
   if (story.guess) {
     const label = document.createElement("p");
@@ -628,8 +638,9 @@ function renderStory(pane, story) {
     label.textContent = "What it has guessed so far";
     const guess = document.createElement("p");
     guess.textContent = story.guess;
-    parts.push(label, guess);
+    details.append(label, guess);
   }
+  if (story.lines.length || story.why || story.guess) parts.push(details);
   box.replaceChildren(...parts);
   box.classList.remove("fresh");
   void box.offsetWidth; // restart the fade-in
@@ -844,11 +855,64 @@ function render() {
     updateStory(pane, pane.mission);
     renderFeed(pane, pane.mission);
   }
+  updateComparison();
   drawChart();
   if (app.view === "3d") drawInset();
   app.explorer?.sync();
   $("scrub").value = app.energy;
   $("clock").textContent = `${fmt(app.energy)} / ${fmt(app.maxEnergy)} energy`;
+}
+
+let selectedRobot = 0;
+function selectRobot(index) {
+  selectedRobot = index;
+  document.querySelector(".mission-sidebar").scrollTop = 0;
+  app.panes.forEach((pane, i) => {
+    pane.el.root.hidden = i !== index;
+    const tab = $("robot-tabs").children[i];
+    tab.setAttribute("aria-selected", String(i === index));
+    tab.tabIndex = i === index ? 0 : -1;
+  });
+  if (app.view === "2d") render();
+}
+function buildRobotTabs() {
+  $("robot-tabs").replaceChildren(...app.panes.map((pane, i) => {
+    const tab = document.createElement("button");
+    tab.type = "button"; tab.id = `robot-tab-${i}`;
+    tab.setAttribute("role", "tab"); tab.setAttribute("aria-controls", `robot-panel-${i}`);
+    tab.textContent = pane.entry.label; tab.style.setProperty("--robot-color", pane.color);
+    pane.el.root.id = `robot-panel-${i}`; pane.el.root.setAttribute("role", "tabpanel");
+    pane.el.root.setAttribute("aria-labelledby", tab.id);
+    pane.el.root.tabIndex = 0;
+    tab.addEventListener("click", () => selectRobot(i));
+    tab.addEventListener("keydown", e => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+      e.preventDefault();
+      const next = e.key === "Home" ? 0 : e.key === "End" ? app.panes.length-1 : (i + (e.key === "ArrowRight" ? 1 : -1) + app.panes.length) % app.panes.length;
+      selectRobot(next); $("robot-tabs").children[next].focus();
+    });
+    return tab;
+  }));
+  selectedRobot = Math.min(selectedRobot, app.panes.length - 1);
+  selectRobot(selectedRobot);
+}
+function updateComparison() {
+  const table = document.createElement("table");
+  const head = table.createTHead().insertRow();
+  head.append(document.createElement("td"));
+  for (const pane of app.panes) {
+    const th = document.createElement("th"); th.scope = "col"; th.textContent = pane.entry.label; th.style.color = pane.color; head.append(th);
+  }
+  const body = table.createTBody();
+  for (const [label, key] of [["Categories perceived", "found"], ["Surveys", "surveys"], ["Energy remaining", "left"]]) {
+    const row = body.insertRow(); const th = document.createElement("th"); th.scope = "row"; th.textContent = label; row.append(th);
+    app.panes.forEach(pane => { row.insertCell().textContent = pane.el[key].textContent; });
+  }
+  $("comparison").replaceChildren(table);
+  const complete = app.energy + Number($("scrub").step) >= app.maxEnergy;
+  $("mission-report").disabled = !complete;
+  $("mission-report").title = complete ? "Download findings report" : "Move the timeline to the end to generate a findings report";
+  $("report-hint").textContent = complete ? "Ready to download" : "Available at mission end";
 }
 
 function tick(now) {
@@ -947,6 +1011,9 @@ async function loadPane(pane, entry) {
   app.inspector?.close();
   const log = await getJson(entry.log);
   pane.entry = entry;
+  pane.color = entry.planner.startsWith("abyss") ? PANE_COLORS[0] : PANE_COLORS[1];
+  pane.el.root.style.setProperty("--pane-color", pane.color);
+  pane.el.feed.style.setProperty("--pane-color", pane.color);
   pane.log = log;
   pane.reveal = null;
   pane.inferenceEvidence = null;
@@ -992,7 +1059,12 @@ function buildTicks() {
   const ticks = app.panes.flatMap((pane, index) => pane.timeline
     .filter((segment) => segment.step.new_discoveries.length)
     .map((segment) => {
-      const tick = document.createElement("i");
+      const tick = document.createElement("button");
+      tick.type = "button";
+      const label = `${pane.entry.label} · Survey ${segment.step.step} · ${segment.step.new_discoveries.length} new categories perceived · energy ${fmt(segment.end)}`;
+      tick.title = label;
+      tick.setAttribute("aria-label", label);
+      tick.addEventListener("click", () => { cancelSequence(); setPlaying(false); app.energy = segment.end; render(); });
       tick.className = index === 0 ? "top" : "bottom";
       tick.style.left = `${(100 * segment.end) / app.maxEnergy}%`;
       tick.style.setProperty("--c", pane.color);
@@ -1303,7 +1375,8 @@ async function selectWorld(worldId) {
   cancelSequence();
   exitTour();
   app.worldId = worldId;
-  const options = app.entries.filter((e) => e.world_id === worldId);
+  const options = app.entries.filter((e) => e.world_id === worldId)
+    .sort((a, b) => Number(b.planner.startsWith("abyss")) - Number(a.planner.startsWith("abyss")));
   $("panes").replaceChildren();
   $("feeds").replaceChildren();
   app.panes = [];
@@ -1337,6 +1410,7 @@ async function selectWorld(worldId) {
   if (token !== app.loadToken) return;
 
   app.panes = panes;
+  buildRobotTabs();
   // A manifest's notice can carry licence terms, so it stays up for every world.
   const single = count === 1 ? "Only one mission has been logged for this world." : "";
   showNotice([app.manifestNotice, single].filter(Boolean).join(" "));
@@ -1353,6 +1427,8 @@ async function changePlanner(pane, options) {
   setPlaying(false);
   await loadPane(pane, entry);
   if (app.revealed) await fetchReveals();
+  buildRobotTabs();
+  updateProvenance();
   app.explorer?.loadWorld();
   updateClockRange();
   updateLayerControls();
@@ -1580,6 +1656,9 @@ function exitTour() {
 }
 
 function bindControls() {
+  $("fit-robots").addEventListener("click", () => { cancelSequence(); app.explorer?.setFollow(-1); });
+  $("follow-selected").addEventListener("click", () => { cancelSequence(); app.explorer?.setFollow(selectedRobot); });
+  $("evidence-drawer").addEventListener("toggle", () => { if (app.panes.length) render(); });
   const downloadReport = async () => {
     // The range control rounds to its step, while logged energy has more decimals.
     if (app.energy + Number($("scrub").step || 0.1) < app.maxEnergy) {
@@ -1610,6 +1689,7 @@ function bindControls() {
   $("skip-intro").addEventListener("click", leaveTitle);
   $("summary-evidence").addEventListener("click", () => {
     hideSummary();
+    $("evidence-drawer").open = true;
     ($("bench").hidden ? $("lower") : $("bench")).scrollIntoView({ behavior: "smooth", block: "start" });
   });
   $("scrub").addEventListener("input", (event) => {

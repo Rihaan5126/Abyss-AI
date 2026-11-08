@@ -37,10 +37,9 @@
     <button id="tour-start" class="ghost" type="button">Step through</button>
   </header>
 
-  <p id="notice" class="notice" hidden></p>
-
   <main>
     <section class="console" id="console">
+      <p id="notice" class="notice" hidden></p>
       <section class="stage" id="stage" hidden>
         <canvas id="stage-canvas" aria-label="3D view of the seafloor and the robots' logged routes"></canvas>
         <div class="gauge" id="gauge" aria-hidden="true"></div>
@@ -52,6 +51,7 @@
           <label class="field">Camera
             <select id="stage-camera"></select>
           </label>
+          <div class="camera-actions"><button id="fit-robots" class="ghost" type="button">Fit both robots</button><button id="follow-selected" class="ghost" type="button">Follow selected robot</button></div>
           <p id="stage-legend"></p>
         </div>
 
@@ -94,43 +94,56 @@
           <p class="intro-note" id="intro-mode"></p>
         </section>
       </section>
-      <section class="panes" id="panes"></section>
+      <aside class="mission-sidebar" aria-label="Mission comparison and observations">
+        <div class="sidebar-head">
+          <p class="replay-label">Recorded replay · simulated biology</p>
+          <div id="comparison"></div>
+          <div id="robot-tabs" role="tablist" aria-label="Robot details"></div>
+        </div>
+        <section class="panes" id="panes"></section>
+      </aside>
     </section>
 
-    <p class="stage-note" id="stage-note" hidden>Visualisation of logged missions, not real footage. The descent is illustrative: missions start at the home station. Terrain is smoothed between grid cells and its height is exaggerated 3×. Sediment texture, lighting, marine snow and vehicle models are decorative, and vehicles aren't to scale. Camera feed cards show simulated encounters. Light columns mark a robot's first survey of a habitat class. Habitat classes are clustered from terrain for display only: they aren't biomes, and planners never see them.</p>
-
-    <section class="lower" id="lower">
-      <figure class="chart-card">
-        <figcaption id="chart-title">Distinct categories found against energy used</figcaption>
-        <canvas id="chart" role="img" aria-label="Line chart of distinct categories found against energy used for each mission"></canvas>
-      </figure>
-      <div class="feeds" id="feeds"></div>
-    </section>
-    <section class="bench" id="bench" hidden>
-      <div class="bench-head">
-        <h2>The evidence, across worlds</h2>
-        <label class="field">Terrain
-          <select id="bench-terrain"></select>
-        </label>
-        <label class="field">ABYSS against
-          <select id="bench-other"></select>
-        </label>
+    <details class="evidence-drawer" id="evidence-drawer">
+      <summary>Mission evidence <span>Discovery chart · survey history · method</span></summary>
+      <div class="evidence-body">
+        <section class="lower" id="lower">
+          <figure class="chart-card">
+            <figcaption id="chart-title">Distinct categories found against energy used</figcaption>
+            <canvas id="chart" role="img" aria-label="Line chart of distinct categories found against energy used for each mission"></canvas>
+          </figure>
+          <div class="feeds" id="feeds"></div>
+        </section>
+        <section class="bench" id="bench" hidden>
+          <div class="bench-head">
+            <h2>The evidence, across worlds</h2>
+            <label class="field">Terrain
+              <select id="bench-terrain"></select>
+            </label>
+            <label class="field">ABYSS against
+              <select id="bench-other"></select>
+            </label>
+          </div>
+          <p class="bench-note" id="bench-note"></p>
+          <div class="forest" id="bench-forest"></div>
+          <div class="table-wrap"><table id="bench-table"></table></div>
+          <p class="bench-note" id="bench-meta"></p>
+        </section>
+        <details class="method"><summary>Method &amp; limitations</summary>
+          <p class="stage-note" id="stage-note" hidden>Visualisation of logged missions, not real footage. The descent is illustrative: missions start at the home station. Terrain is smoothed between grid cells and its height is exaggerated 3×. Sediment texture, lighting, marine snow and vehicle models are decorative, and vehicles aren't to scale. Camera feed cards show simulated encounters. Light columns mark a robot's first survey of a habitat class. Habitat classes are clustered from terrain for display only: they aren't biomes, and planners never see them.</p>
+          <p class="provenance" id="provenance"></p>
+        </details>
       </div>
-      <p class="bench-note" id="bench-note"></p>
-      <div class="forest" id="bench-forest"></div>
-      <div class="table-wrap"><table id="bench-table"></table></div>
-      <p class="bench-note" id="bench-meta"></p>
-    </section>
-    <p class="provenance" id="provenance"></p>
+    </details>
   </main>
 
   <footer class="transport">
     <button id="prev" class="icon" type="button" title="Previous event (left arrow)" aria-label="Previous event">&#9664;&#9664;</button>
     <button id="play" class="play" type="button" title="Play or pause (space)">Play</button>
-    <button id="mission-report" type="button">Findings report</button>
+    <button id="mission-report" type="button" aria-describedby="report-hint">Findings report</button><span id="report-hint" class="report-hint">Available at mission end</span>
     <button id="next" class="icon" type="button" title="Next event (right arrow)" aria-label="Next event">&#9654;&#9654;</button>
     <div class="timeline">
-      <div class="ticks" id="ticks" aria-hidden="true"></div>
+      <div class="ticks" id="ticks" aria-label="Recorded discoveries"></div>
       <input id="scrub" type="range" min="0" max="150" step="0.1" value="0" aria-label="Energy used">
     </div>
     <output id="clock" for="scrub">0.0 / 150 energy</output>
