@@ -1,292 +1,117 @@
 # ABYSS: Adaptive Biodiversity Exploration
 
-WHACK 2026, Marshall Wace New Worlds Challenge. Team: Rihaan, Cam and Ammar.
+**An underwater robot that learns where life is as it explores, so it finds more on one battery.**
 
-ABYSS is the decision-making software for a simulated underwater exploration robot. It
-learns which environments are associated with biodiversity during a mission and uses
-that to choose where to survey next, within a fixed energy budget.
+Built in 24 hours at WHACK 2026 for the Marshall Wace New Worlds Challenge by
+Rihaan, Cam and Ammar.
 
 ![ABYSS Mission Control: the ABYSS and Frontier robots exploring real GEBCO seafloor in 3D, with live category counts](docs/images/mission-control.jpg)
 
-**Headline result:** where organisms are strongly associated with ridges, ABYSS found
-**4.70 more organism categories** on average than frontier exploration, with the same
-energy budget (95% interval +4.30 to +5.10; 50 paired seeds on the GEBCO crop, ideal
-perception). The gain shrinks as the habitat signal weakens, and a plain lawnmower survey
-beats ABYSS on flat-associated worlds. All results, including where ABYSS loses, are in
-[docs/results.md](docs/results.md).
+## The problem
 
-**This is a simulation.** The terrain is real GEBCO bathymetry, but the biology on it is
-always simulated and energy is in abstract units. It is not a validated AUV or a model
-of a real ecosystem.
+Most of the deep ocean has never been surveyed, and underwater robots run on a fixed battery.
+Most surveys follow a route planned before the dive, like mowing a lawn, and ignore what the
+robot finds on the way. ABYSS changes its route based on what it sees.
 
-**Full definition:** [docs/PROJECT_BRIEF.md](docs/PROJECT_BRIEF.md) sets out what we are
-building, the research questions, roles, evaluation rules and what we are not claiming.
+## How it works
 
-**To run the demo, follow [docs/DEMO.md](docs/DEMO.md).** It covers real-image and
-ideal-perception replays, required local data, what to say and the release checklist.
+The robot knows the seafloor map, but not where life is. After every survey it updates its
+beliefs and picks the next spot:
 
-## Quick start
+1. **Survey.** Photograph a spot; a vision model names the kinds of life in the photos.
+2. **Learn.** A Bayesian regression model links how many kinds it found to the terrain there
+   (depth, slope, ridge or valley), and tracks how sure it is.
+3. **Decide.** Score every safe, unvisited spot by
+   `(predicted life + learning value + new ground) / energy cost`, and go to the best one.
+4. **Stay safe.** The simulator only accepts targets the robot can survey and still get home from.
 
-```bash
-pip install -r requirements.txt
+```mermaid
+flowchart LR
+    T[Real seafloor<br/>GEBCO Monterey Canyon] --> S[Simulator<br/>hidden life, energy, safety rules]
+    S -- map and observations only --> P[ABYSS planner<br/>learn and decide]
+    P -- next target --> S
+    V[Vision<br/>DINOv2 on FathomNet photos] -- what the camera saw --> S
+    S -- mission logs --> U[Mission Control<br/>3D replay in the browser]
 ```
-
-```bash
-python -m pytest
-```
-
-```bash
-python -m abyss.run_mission --scenario ridge --seed 0 --planner random
-```
-
-This writes a mission log and a `.reveal.json` file to `results/missions/`.
-
-## Replay UI
-
-For input images, actual reference matches, threshold explanations, the
-observation-to-decision trace and optional fresh local inference, see
-[Observation Inspector](docs/observation-inspector.md). Regenerate a vision replay
-to capture evidence, then click an animal photo or survey-feed inspect button.
-
-When local `ui/vision-logs/index.json` exists, opening the viewer automatically
-loads that real-image replay. Otherwise it uses the bundled ideal-perception
-examples, which contain no animal photos. An explicit `?missions=logs/index.json`
-still selects the ideal examples. The side panels show the latest photographed
-encounter with per-image predicted labels or unfamiliarity flags; an empty later
-survey does not erase the previous photos. These are recorded image predictions,
-not live detections in the rendered ocean.
-
-After playback finishes, press **Findings report** in the bottom controls or
-**Download findings report** on the end-of-dive summary. This explicitly loads
-the evaluator's answer sheet and downloads `abyss-expedition-findings.html`.
-Open the file and use **Print / save as PDF** for a plain-English expedition
-sheet with actual and perceived category counts, surveys, energy, unfamiliar
-images, safe return, experiment identifiers and limitations. It contains no
-animal image crops. Reports are unavailable before the timeline reaches the end.
-
-For the integrated **3D view with real image perception**, follow
-[Watch the full system in 3D](docs/vision-3d.md). It generates a local paired
-replay using your existing expanded image dataset and model, with actual photos
-in the discovery feed. Computed missions finish before browser playback.
-
-```bash
-python -m scripts.build_ui_logs
-```
-
-```bash
-python -m http.server 8000 --directory ui
-```
-
-Then open <http://localhost:8000>. The first command runs real missions and rewrites
-`ui/logs/`; rerun it after adding a planner so that planner appears in the UI. Both panels
-share a clock in energy units, so they are always compared at equal spend. Reveal files
-are only fetched when the viewer presses Reveal.
-
-The app opens in a **3D explorer** view of the logged missions, built with a local copy of
-[Three.js](https://threejs.org/) r160 in `ui/vendor/three` (MIT licence), so it runs without
-internet. It's a visualisation: robots don't see this scene, and the vision model works on
-real photographs. Terrain is smoothed between grid cells, and its height is exaggerated 3×.
-Its descent animation is illustrative, because missions start at the home station. Fonts are
-stored in `ui/vendor/fonts` under their open licences. If WebGL isn't available, the app falls
-back to the **Charts** view.
-
-The **Habitats** layer shows five classes clustered from public depth, slope and bathymetric
-position, and the feed flags a robot's first survey of each class. This is display-only:
-planners never receive it, and all routes and results are unchanged. These are terrain-based
-classes, not biomes, because we have no temperature, oxygen or substrate data at this scale.
-
-Press **Begin dive** for the full sequence: descent, exploration with captions, then a mission
-summary. **Step through** moves through the same story one stage at a time. The benchmark section appears once
-`ui/logs/benchmark.json` exists.
 
 ## Results
 
-See [docs/results.md](docs/results.md) for findings, limitations and full tables.
-[docs/novelty-experiment.md](docs/novelty-experiment.md) records a separate experiment on
-targeting new categories, which did not improve on ABYSS.
+Every planner ran on the same 50 held-out oceans: **6,300 missions, all returned safely.**
+Settings were tuned on separate practice oceans and frozen before this run.
 
-[Experimental category-aware Discovery](docs/discovery-planner.md) adds observed-category
-habitat models, rarity weighting, initial sampling, optional route lookahead and conservative
-vision updates. It has a separate fresh-seed evaluation and replay selection; original ABYSS
-and the published benchmark stay unchanged. Its “Discovery clues” map and observation
-inspector show how model predictions enter decisions. See the linked guide to run it.
+- Where life follows ridges, ABYSS found **4.7 more kinds of life than frontier exploration**
+  (15.8 vs 11.1 out of 16; 95% interval +4.3 to +5.1).
+- With learning switched off, the same robot found **3.3 fewer** on those worlds.
+- The gain shrinks as the link between terrain and life weakens.
+- **It does not win everywhere.** A simple lawnmower sweep beats it where life favours flat
+  ground, because ABYSS predicts how much life a spot has, not whether it is new.
 
-```bash
-python -m abyss.evaluation.full_run
-```
+Full tables, confidence intervals and limitations: [docs/results.md](docs/results.md).
 
-```bash
-python -m abyss.evaluation.report
-```
+**This is a simulation.** The seafloor and the photos are real; where the organisms live is
+simulated, so every robot can be scored against a known answer. Energy is in abstract units.
 
-```bash
-python -m abyss.evaluation.plots --csv results/benchmark.csv --out results/figures
-```
-
-`full_run` uses the frozen weights in `abyss/planners/adaptive.py` on evaluation seeds (1000+).
-Tuning stays on development seeds (0-999). See
-[abyss/evaluation/README.md](abyss/evaluation/README.md) for the benchmark itself.
-
-## Status
-
-| Area | Owner | State |
-| --- | --- | --- |
-| Contract, GEBCO terrain, worlds, environment, mission runner, logs | Rihaan | Working |
-| Mission Control: dive sequence, 3D view, charts, narration, benchmark view | Rihaan, Cam | Working |
-| Learner, adaptive planner, baselines, ablations, benchmark | Cam | Working; 6,300 missions with ideal perception |
-| Findings report and photo panels | Ammar | Working |
-| Real-image missions | Ammar, Rihaan | Run through `scripts/build_vision_replay.py` on local data, and separate from the benchmark |
-| Perception pipeline | Ammar | Working; 547-image follow-up shows trade-offs, in [perception-quality.md](docs/perception-quality.md) |
-
-## Adding a planner (Cam)
-
-Subclass `Planner` from `abyss/planners/base.py`, then add it to `PLANNERS` in
-`abyss/planners/__init__.py`. It then works with `--planner <name>`.
-
-```python
-class MyPlanner(Planner):
-    name = "mine"
-
-    def reset(self, public_map, config, seed): ...
-    def choose_target(self, public_state, observation_history): ...  # (row, col) or HOME
-    def observe(self, observation): ...  # observation.richness is the model target
-    def diagnostics(self): ...  # predicted maps and utility terms for the log
-```
-
-- `public_state.feasible` marks every target the simulator will accept, and
-  `public_state.travel_cost` gives the cost of reaching each cell.
-- `public_map.features` holds standardised depth, slope and BPI.
-- A rejected target sends the robot home and is recorded as a violation in the log.
-
-To show beliefs in the UI, return these optional keys from `diagnostics()`. It is called
-after `observe()`, so `target_utility` describes the target just travelled to, and the maps
-are the updated beliefs. Each map is a `[row][col]` nested list.
-
-```python
-{
-    "predicted_richness": ...,
-    "uncertainty": ...,
-    "target_utility": {
-        "expected_richness": ..., "information_gain": ..., "coverage": ...,
-        "energy_cost": ..., "utility": ...,
-    },
-}
-```
-
-## Adding perception (Ammar)
-
-The simulator side is ready and tested with a fake model. To try it:
+## Run it
 
 ```bash
-python -m abyss.run_mission --scenario ridge --seed 0 --perception stub
+pip install -r requirements.txt
+python -m pytest -q
+python -m http.server 8000 --directory ui
 ```
 
-Implement these two interfaces from `abyss/contract.py`. `abyss/stub_perception.py` is a
-working example of both, and `run_mission()` takes them as `perception=` and `image_pool=`,
-with `perception_mode="real"` in the config.
+Open <http://localhost:8000> and press **Begin dive**. The replay works offline and needs no
+downloads. To run your own missions, regenerate the benchmark or add real vision, see the
+[developer guide](docs/DEVELOPMENT.md).
 
-- **`ImagePool`** provides `categories` (common first; the count must equal `n_categories`),
-  `withheld`, `images_for(category)` and `load(ref)`. Your categories replace the
-  `category_00` names.
-- **`Perception`** provides `name` (recorded in the log) and `predict(image)`, which returns
-  a `PerceptionResult`. The same image must always give the same result.
+## Repository layout
 
-Image refs reach the planner, so they must not reveal the category: the simulator refuses
-a path like `images/squid/001.jpg`. Use opaque IDs. Refs are also the UI's image URLs, so
-they should resolve from `ui/` for the gallery to show them.
-
-Each survey runs the model once per cell. Images flagged unknown count towards richness,
-but not towards discovered categories. True labels and the scores in `perception_summary`
-stay in the `.reveal.json` file. These scores cover only images seen on that mission, so
-they don't replace your held-out evaluation.
-
-`abyss/stub_perception.py` has no real images and made-up error rates. Never report its
-numbers as vision results.
-
-`abyss/fathomnet_perception.py` connects the `perception` package to these interfaces.
-After following the perception runbook to fit a model:
-
-```bash
-python -m abyss.run_mission --scenario ridge --seed 0 --perception fathomnet --manifest data/fathomnet/splits.json --artifact data/perception
-```
-
-This sets `n_categories` to the manifest's category count, and only held-out test images
-are used. Familiar categories come first, so withheld categories are the rarest in the
-world. A small pool means each image is seen repeatedly, with the same result each time,
-so use enough test images per category for the final run.
-
-To measure what vision errors cost the planner, compare ideal and real perception on the
-same worlds. It writes `results/perception_comparison.json`:
-
-```bash
-python -m abyss.evaluation.perception_compare --manifest data/fathomnet/splits.json --artifact data/perception
-```
+| Path | What's there |
+| --- | --- |
+| [`abyss/`](abyss) | Simulator: terrain, hidden worlds, energy and safety rules, mission runner |
+| [`abyss/learning/`](abyss/learning) | Bayesian regression model |
+| [`abyss/planners/`](abyss/planners) | ABYSS planner, baselines (frontier, lawnmower, heuristic, random) and ablations |
+| [`abyss/evaluation/`](abyss/evaluation) | Paired benchmark, bootstrap intervals, tuning and charts |
+| [`perception/`](perception) | Vision pipeline: FathomNet crops, DINOv2 embeddings, unfamiliar-organism detection |
+| [`ui/`](ui) | Mission Control: 3D and chart replay of logged missions |
+| [`scripts/`](scripts) | Build replay logs, fetch GEBCO data |
+| [`tests/`](tests) | Tests for safety, no hidden-data leaks, reproducibility and each component |
+| [`docs/`](docs) | Results, demo guide, design notes. [Index](docs/README.md) |
 
 ## Rules the code enforces
 
-- **No leakage.** Planners receive only `PublicMap`, `PublicState` and `Observation`.
-  These exclude hidden ecology, including the scenario name and rho.
+- **No cheating.** Planners only receive the public map, their own state and what the camera
+  saw. Hidden data stays in separate `.reveal.json` files, and tests check this.
 - **Safe return.** A target is accepted only if
   `E_remaining >= E_travel + E_survey + E_return + E_reserve`.
-- **Fair worlds.** Encounters are generated once per world seed and do not depend on the
-  planner. Repeat surveys return the same categories, so they cannot inflate discoveries.
-- **Separate RNG streams.** Terrain, world and planner randomness never share a stream.
-- **Separate truth.** Mission logs hold public data. Hidden maps go in `.reveal.json`.
+- **Fair comparison.** Each world is generated once per seed, independent of the planner.
+- **Separate randomness.** Terrain, world and planner never share a random stream.
 
-## Scenarios
+## Simulated worlds
 
-Each scenario keeps every category's mean prevalence the same, so scenarios change where
-organisms are, not how many exist. `rho` in `[0, 1]` scales signal strength, and `rho = 0`
-removes all signal.
+Each world keeps the same overall amount of life; only where it lives changes. A signal
+strength from 0 to 1 sets how strongly life follows terrain.
 
-| Scenario | Hidden distribution |
+| World | Where life is |
 | --- | --- |
-| `random` | Independent of terrain, location and neighbours, at any `rho` |
-| `clustered` | Spatial clusters, with linear and squared terrain trends removed |
-| `ridge` | Favours steep, ridge-like terrain, with per-category depth niches |
-| `reversed` | Favours flat terrain, with the same depth niches as `ridge` |
-| `nonlinear` | Depth-slope interaction plus a spatial field; outside the quadratic features |
+| `random` | Independent of terrain |
+| `clustered` | Patches, unrelated to terrain trends |
+| `ridge` | Steep, ridge-like terrain, with depth preferences |
+| `reversed` | Flat terrain, with the same depth preferences |
+| `nonlinear` | A depth-slope interaction the model cannot fully represent |
 
-## Data sources
+## Team
 
-**Bathymetry:** GEBCO Compilation Group (2025) GEBCO 2025 Grid
-(doi:10.5285/37c52e96-24ea-67ce-e063-7086abc05f29).
+| Who | Built |
+| --- | --- |
+| **Rihaan** | Simulator, terrain and world generation, mission contract, Mission Control UI |
+| **Cam** | Bayesian learner, ABYSS planner, baselines and ablations, benchmark and statistics, replay narration |
+| **Ammar** | Computer vision pipeline, findings report, observation inspector |
 
-- The committed crop is `data/gebco/monterey_canyon_30x30.json`, so nobody needs to
-  download anything. `python -m scripts.fetch_gebco` regenerates it from the
-  [UNH image service](https://gis.ccom.unh.edu/server/rest/services/GEBCO2025/GEBCO_2025_IS/ImageServer).
-- It is the all-ocean 30 x 30 window with the most varied slope, chosen from terrain alone.
-- Cells are about 464 m by 372 m. They are regional planning units, not camera footprints
-  or collision maps. Slope uses the true spacing, but travel costs treat the grid as square.
-- All seeds share this one crop, so repeated seeds do not show generalisation to other
-  regions. Set `terrain_source: synthetic` in `config.yaml` to vary terrain by seed.
+## Data and credits
 
-**Imagery:** the perception pipeline uses [FathomNet](https://database.fathomnet.org/)
-images. Check each image's licence before showing or redistributing it.
-
-**Stretch goal, not integrated:** [OBIS](https://obis.org/) occurrence records.
-
-## Ammar's perception pipeline
-
-For the fresh-source evaluation, error gallery, neighbour voting and matched
-old/new mission analysis, see [Perception quality](docs/perception-quality.md).
-
-The `perception/` package implements FathomNet organism cropping, frozen
-DINOv2-small embeddings, nearest-neighbour familiar-category recognition,
-validation-calibrated reference-unfamiliarity detection, and held-out evaluation.
-
-```bash
-python3.11 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[test]'
-# CPU-only PyTorch avoids downloading CUDA libraries on a laptop/server:
-python -m pip install 'torch>=2.4,<3' --index-url https://download.pytorch.org/whl/cpu
-python -m pip install -e '.[vision]'
-python -m perception --help
-python -m pytest -q
-```
-
-See [the perception runbook](docs/perception.md) for data preparation, offline
-inference, evaluation, image licensing and the simulator integration interface.
-For eight familiar categories plus a withheld dumbo-octopus category, see
-[the expanded dataset and Mac demo instructions](docs/expanded-perception.md).
+- **Bathymetry:** GEBCO Compilation Group (2025) GEBCO 2025 Grid
+  (doi:10.5285/37c52e96-24ea-67ce-e063-7086abc05f29). A 30 x 30 crop of Monterey Canyon is
+  committed in `data/gebco/`.
+- **Imagery:** [FathomNet](https://database.fathomnet.org/). Images are not redistributed
+  here; check each image's licence before showing it.
+- **3D:** [Three.js](https://threejs.org/) r160 (MIT), bundled in `ui/vendor/three`.
