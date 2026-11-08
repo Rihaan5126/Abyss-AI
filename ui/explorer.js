@@ -184,7 +184,7 @@ function labelSprite(text, color) {
     fog: false,
     sizeAttenuation: false, // labels stay readable at every camera distance
   }));
-  sprite.scale.set(0.115, 0.026, 1);
+  sprite.scale.set(0.078, 0.019, 1);
   sprite.position.y = 0.75;
   sprite.renderOrder = 10;
   return sprite;
@@ -830,7 +830,7 @@ export function createExplorer(api) {
   function tube(cells, material) {
     const points = densify(cells);
     if (points.length < 2) return null;
-    return new THREE.Mesh(new THREE.TubeGeometry(new Polyline(points), Math.min(points.length * 2, 1500), 0.024, 5, false), material);
+    return new THREE.Mesh(new THREE.TubeGeometry(new Polyline(points), Math.min(points.length * 2, 1500), 0.04, 6, false), material);
   }
 
   function buildView(pane, index) {
@@ -840,7 +840,7 @@ export function createExplorer(api) {
       index,
       color,
       vehicle: (pane === abyssPane() ? buildRobot : buildSubmarine)(color, pane.entry.label, index),
-      trailMaterial: new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.72 }),
+      trailMaterial: new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.95 }),
       completed: new THREE.Group(),
       markers: new THREE.Group(),
       current: null,
@@ -854,7 +854,7 @@ export function createExplorer(api) {
       ),
       targetLine: new THREE.Line(
         new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]),
-        new THREE.LineDashedMaterial({ color, dashSize: 0.3, gapSize: 0.22, transparent: true, opacity: 0.85 }),
+        new THREE.LineDashedMaterial({ color, dashSize: 0.3, gapSize: 0.22, transparent: true, opacity: 1, depthTest: false }),
       ),
     };
     view.targetRing.rotation.x = Math.PI / 2;
@@ -949,9 +949,11 @@ export function createExplorer(api) {
         image.src = ref;
         image.alt = "Marine image used as a simulated camera encounter";
         image.tabIndex = 0;
+        image.setAttribute("role", "button");
+        image.setAttribute("aria-label", `Inspect ${obs.unknown_flags[index] ? "unfamiliar image" : obs.image_labels[index] || "organism image"}`);
         image.style.cursor = "pointer";
         image.onclick = () => app.inspector?.open(pane, last.step, index);
-        image.onkeydown = event => { if (event.key === "Enter") image.click(); };
+        image.onkeydown = event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); image.click(); } };
         image.addEventListener("error", () => image.remove());
         const figure = document.createElement("figure");
         const caption = document.createElement("figcaption");
@@ -1153,9 +1155,8 @@ export function createExplorer(api) {
     if (!width || !height) return;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    // Keep the seafloor centred in the space left of the instrument column.
-    if (width > 900) camera.setViewOffset(width, height, 130, 0, width, height);
-    else camera.clearViewOffset();
+    // The stage already excludes the sidebar; centre the scene in its own viewport.
+    camera.clearViewOffset();
     camera.updateProjectionMatrix();
   }
 
