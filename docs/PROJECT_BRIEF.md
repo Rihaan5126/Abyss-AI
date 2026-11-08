@@ -3,13 +3,13 @@
 >
 > - **3D explorer:** the brief's default interface is HTML, Canvas and logs. We added a 3D
 >   visualisation of the logged missions using Three.js. It is not a physics simulation, and
->   the robots don't see that scene. This is on the `explorer-3d` branch.
-> - **Habitat or biome detection:** proposed as a display-only addition, not built, and not part
->   of this brief. At this grid scale it would mean terrain-based habitat classes, not true biomes.
+>   the robots don't see that scene. It is now the default view of the replay UI.
+> - **Habitat classes:** added as a display-only map layer of five terrain-based classes. Planners
+>   never receive it. At this grid scale these are terrain classes, not true biomes.
 > - **Results and seeds:** see [results.md](results.md) for measured results. They use ideal
 >   perception. Development seeds are 0-999, and evaluation seeds are 1000 and above.
-> - **Real perception:** connected through an adapter, but the real model has not yet run inside
->   missions.
+> - **Real perception:** the real vision model now runs inside missions in a separate, smaller
+>   matched comparison; see [perception-quality.md](perception-quality.md).
 
 # ABYSS — FINAL MASTER PROJECT BRIEF
 **WHACK 2026 | Marshall Wace — New Worlds Challenge**
