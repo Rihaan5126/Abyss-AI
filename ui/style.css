@@ -331,6 +331,10 @@ main { padding: 16px 22px; max-width: 1560px; margin: 0 auto; }
 /* Hide the instruments during the title and the descent */
 .pre-dive .topbar, .pre-dive .panes, .pre-dive .transport, .pre-dive .gauge, .pre-dive .inset, .pre-dive .stage-foot,
 .diving .topbar, .diving .panes, .diving .inset, .diving .stage-foot, .diving .transport { opacity: 0; pointer-events: none; }
+/* Each panel turns clicks back on for itself, so switch them off too, or the invisible
+   panels sit on top of Skip descent and swallow the click. */
+.pre-dive .pane, .diving .pane { pointer-events: none; }
+.diving .skip { z-index: 9; }
 .pre-dive.view-3d, .diving.view-3d { overflow: hidden; height: 100vh; }
 
 /* Evidence below */

@@ -175,7 +175,7 @@ def write_results(path, data):
     metadata = {key: value for key, value in data.items() if key != "rows"}
     header = json.dumps(metadata, indent=2).rstrip()[:-1]
     records = ",\n".join("    " + json.dumps(row, separators=(",", ":")) for row in data["rows"])
-    Path(path).write_text(header.rstrip() + ',\n  "rows": [\n' + records + '\n  ]\n}\n')
+    Path(path).write_text(header.rstrip() + ',\n  "rows": [\n' + records + '\n  ]\n}\n', encoding="utf-8")
 
 
 def main():
@@ -193,7 +193,7 @@ def main():
     if args.command == "report":
         if args.out is None:
             parser.error("report requires --out pointing at an existing results JSON")
-        data = json.loads(out.read_text())
+        data = json.loads(out.read_text(encoding="utf-8"))
     elif args.command == "tune":
         data = tune(base, args.workers)
         print(f'Selected {data["selected"]}', flush=True)
@@ -238,7 +238,7 @@ def main():
         data["simulation"] = base.to_dict()
         write_results(out, data)
     if args.command != "tune":
-        out.with_suffix(".md").write_text(render(data))
+        out.with_suffix(".md").write_text(render(data), encoding="utf-8")
     print(f"Wrote {out}", flush=True)
 
 
