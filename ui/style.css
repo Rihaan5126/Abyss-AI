@@ -590,3 +590,52 @@ summary { cursor: pointer; }
 /* Keep decisions readable throughout the update animation. */
 @keyframes story-in { from { opacity: .8; transform: translateY(3px); } to { opacity: 1; transform: none; } }
 .transport { background: #04121b; }
+
+/* Phone layout: the 3D view stays pinned while the mission panel scrolls beneath it. */
+@media (max-width: 760px) {
+  :root { --stage-h: 46svh; }
+  html { -webkit-text-size-adjust: 100%; }
+  body, .view-3d { padding-bottom: calc(112px + env(safe-area-inset-bottom)); }
+  .topbar, .view-3d .topbar { gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; }
+  .brand { display: flex; align-items: center; gap: 10px; width: 100%; }
+  .brand h1 { font-size: 30px; }
+  .topbar .field { display: flex; flex: 1 1 0; min-width: 0; gap: 8px; align-items: center; }
+  .topbar .field select { width: 100%; max-width: none; min-width: 0; min-height: 36px; }
+  .new-ocean { min-height: 36px; white-space: nowrap; }
+  .topbar .layers { flex-wrap: nowrap; overflow-x: auto; width: 100%; min-width: 0; box-sizing: border-box; position: relative; border-left: 0; padding: 0; margin: 0; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .topbar .layers::-webkit-scrollbar { display: none; }
+  .topbar .layers label, .layers legend { flex: none; }
+  .layers span { display: inline-block; padding: 7px 10px; }
+  #tour-start { min-height: 36px; }
+  body.view-3d:not(.pre-dive):not(.diving) .stage { position: sticky; top: 0; z-index: 6; height: var(--stage-h); min-height: 250px; box-shadow: 0 8px 18px #000a; }
+  .gauge { top: 12px; bottom: 56px; width: 6px; }
+  .gauge .mark { font-size: 10px; left: 12px; }
+  .gauge .bot b { font-size: 11px; left: 18px; }
+  .inset { width: 104px; right: 8px; bottom: 8px; padding: 4px; }
+  .stage-foot { left: 10px; bottom: 10px; max-width: calc(100% - 128px); }
+  .camera-actions .ghost { padding: 6px 8px; font-size: 12px; }
+  .mission-sidebar { max-height: none; overflow: visible; border-left: 0; border-right: 0; }
+  .sidebar-head { position: static; padding: 14px 14px 0; }
+  .view-3d .pane, .pane { padding: 16px 14px; }
+  .story .story-headline { font-size: 22px; }
+  .observation-photos img { height: 110px; }
+  .evidence-drawer > summary { padding: 14px; }
+  .evidence-body { padding: 0 14px 18px; }
+  .evidence-drawer > summary span { display: block; margin: 4px 0 0; }
+  .transport { padding: 6px 10px calc(6px + env(safe-area-inset-bottom)); gap: 2px 8px; min-height: 0; }
+  .transport button { min-height: 40px; }
+  .transport .icon { min-width: 40px; }
+  .transport .ticks button { min-height: 10px; height: 10px; min-width: 0; }
+  #mission-report { padding: 6px 10px; font-size: 12px; }
+  .transport .timeline, .transport #scrub { height: 40px; }
+  #clock { order: 6; font-size: 11px; }
+  .transport .speed { order: 7; margin-left: auto; font-size: 12px; }
+  .summary { inset: auto 8px calc(120px + env(safe-area-inset-bottom)) 8px; width: auto; max-height: calc(100svh - 140px); transform: none; padding: 18px; z-index: 12; }
+  .summary-actions { flex-direction: column; align-items: stretch; }
+  #observation-inspector { top: 12svh; bottom: 0; padding: 16px 14px calc(16px + env(safe-area-inset-bottom)); border-radius: 14px 14px 0 0; }
+  .pre-dive .topbar, .diving .topbar { display: none; }
+  body.pre-dive, body.diving { padding-bottom: 0; }
+  .pre-dive .evidence-drawer, .diving .evidence-drawer, .diving .mission-sidebar { display: none; }
+  .pre-dive.view-3d .console, .diving.view-3d .console { height: 100svh; }
+  .diving .skip { bottom: calc(18px + env(safe-area-inset-bottom)); }
+}

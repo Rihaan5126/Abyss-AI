@@ -91,3 +91,14 @@ def test_3d_view_never_loads_reveal_files_itself():
     code = (UI / "explorer.js").read_text(encoding="utf-8")
     for forbidden in ("fetch(", "XMLHttpRequest", ".reveal", "encounter_richness_map", "expected_richness_map"):
         assert forbidden not in code, forbidden
+
+
+def test_phone_layout_fits_the_screen():
+    html = (UI / "index.html").read_text(encoding="utf-8")
+    css = (UI / "style.css").read_text(encoding="utf-8")
+    assert "viewport-fit=cover" in html
+    phone = css[css.index("/* Phone layout"):]
+    # Hidden radios must stay inside the scrolling chip row, or the page grows sideways.
+    assert "position: relative" in phone.split(".topbar .layers {", 1)[1].split("}", 1)[0]
+    assert ".pre-dive .topbar, .diving .topbar { display: none; }" in phone
+    assert "env(safe-area-inset-bottom)" in phone
