@@ -2,6 +2,8 @@
 
 **An underwater robot that learns where life is as it explores, so it finds more on one battery.**
 
+**▶ Try it live: [abyss-ai-ui.vercel.app](https://abyss-ai-ui.vercel.app/)**. Runs in any browser, phones included.
+
 Built in 24 hours at WHACK 2026 for the Marshall Wace New Worlds Challenge by
 Rihaan, Cam and Ammar.
 
